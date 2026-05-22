@@ -1,0 +1,51 @@
+{
+  "modulo": "VIII",
+  "nome": "Reports e Comunicação Interna",
+  "descricao": "1:1 prep, atividade semanal, win story, handoff CS",
+  "skills": [
+    {
+      "id": 47,
+      "nome": "Resumo de Deals para 1:1",
+      "descricao": "Sumário de deals para reunião com gestor",
+      "gatilhos": [
+        "write a deal summary for my 1:1 with [manager name]",
+        "prep my 1:1 deck for this week",
+        "summarise my pipeline for my manager"
+      ],
+      "publico_alvo": "AEs"
+    },
+    {
+      "id": 48,
+      "nome": "Relatório de Atividade Semanal",
+      "descricao": "Converte notas em relatório semanal de atividade",
+      "gatilhos": [
+        "write my weekly sales update",
+        "turn my notes into a sales update for leadership",
+        "draft my weekly pipeline report"
+      ],
+      "publico_alvo": "Reps reportando atividade"
+    },
+    {
+      "id": 49,
+      "nome": "Caso de Negócio Interno",
+      "descricao": "Transforma deal fechado em win story compartilhável",
+      "gatilhos": [
+        "build a win story from my [empresa] close",
+        "turn my [deal name] win into an internal case study",
+        "write a win story for the team about [empresa]"
+      ],
+      "publico_alvo": "AEs e gestores"
+    },
+    {
+      "id": 50,
+      "nome": "Plano de Território",
+      "descricao": "Documento de handoff de Vendas para CS",
+      "gatilhos": [
+        "create a handoff brief for [empresa] — I'm passing to CS",
+        "build a Sales to CS handoff for [deal name]",
+        "write an onboarding handoff document for [customer name]"
+      ],
+      "publico_alvo": "AEs e CSMs"
+    }
+  ]
+}
