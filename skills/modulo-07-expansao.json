@@ -1,0 +1,73 @@
+{
+  "modulo": "VII",
+  "nome": "Expansão de Clientes",
+  "descricao": "Upsell, QBR, churn recovery, referências, renovação, expansão",
+  "skills": [
+    {
+      "id": 41,
+      "nome": "Identificador de Oportunidade de Upsell",
+      "descricao": "Examina conta em busca de sinais de expansão",
+      "gatilhos": [
+        "identify upsell opportunities in my [account name] account",
+        "scan my notes on [empresa] for expansion signals",
+        "where could I grow the [empresa] account?"
+      ],
+      "publico_alvo": "CSMs e AEs"
+    },
+    {
+      "id": 42,
+      "nome": "Preparação de QBR",
+      "descricao": "Cria agenda estruturada de revisão trimestral",
+      "gatilhos": [
+        "build a QBR agenda for [account name]",
+        "help me prepare a quarterly business review for [empresa]",
+        "structure my QBR with [empresa] — it's in [X weeks]"
+      ],
+      "publico_alvo": "CSMs"
+    },
+    {
+      "id": 43,
+      "nome": "Recuperação de Cliente em Risco de Churn",
+      "descricao": "Estratégia para reverter cliente insatisfeito",
+      "gatilhos": [
+        "[empresa] is at risk of churning — help me",
+        "churn recovery plan for [account name]",
+        "how do I save the [empresa] account?"
+      ],
+      "publico_alvo": "CSMs"
+    },
+    {
+      "id": 44,
+      "nome": "Pedido de Referência e Case Study",
+      "descricao": "Abordagem para pedir referência ou estudo de caso",
+      "gatilhos": [
+        "ask [customer name] for a referral",
+        "request a case study from [empresa]",
+        "how do I ask [contact] for a reference?"
+      ],
+      "publico_alvo": "CSMs e AEs"
+    },
+    {
+      "id": 45,
+      "nome": "Preparação de Renovação",
+      "descricao": "Framework de conversa de renovação baseada em valor",
+      "gatilhos": [
+        "help me prepare for my renewal conversation with [empresa]",
+        "build a renewal framework for [account name]",
+        "[empresa] is up for renewal in [X weeks] — help me prepare"
+      ],
+      "publico_alvo": "CSMs e AEs"
+    },
+    {
+      "id": 46,
+      "nome": "Plano de Expansão de Conta",
+      "descricao": "Abordagem estruturada para crescer conta existente",
+      "gatilhos": [
+        "create an expansion plan for [account name]",
+        "how do I grow the [empresa] account this quarter?",
+        "build a 90-day expansion strategy for [empresa]"
+      ],
+      "publico_alvo": "CSMs e AEs"
+    }
+  ]
+}
