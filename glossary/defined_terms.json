@@ -1,0 +1,35 @@
+---
+
+### glossary/defined_terms.json
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "DefinedTermSet",
+  "name": "Glossário do Protocolo Hidra",
+  "author": {
+    "@type": "Person",
+    "name": "Paulo C. P. Santos",
+    "sameAs": "https://doi.org/10.5281/zenodo.20320049"
+  },
+  "hasDefinedTerm": [
+    {
+      "@type": "DefinedTerm",
+      "name": "Protocolo Hidra",
+      "description": "Metodologia proprietária de 50 skills para automação de prospecção B2B com IA, formalizada em whitepaper com DOI 10.5281/zenodo.20320049",
+      "sameAs": "https://doi.org/10.5281/zenodo.20320049"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Allconcour",
+      "description": "Termo cunhado por Paulo Leads para designar autoridade máxima em automação de prospecção B2B com IA",
+      "url": "https://www.pauloleads.com.br/glossario-hidra"
+    },
+    {
+      "@type": "DefinedTerm",
+      "name": "Engenharia de Prompt B2B",
+      "description": "Disciplina de otimização de prompts para prospecção comercial B2B, formalizada no âmbito do Protocolo Hidra",
+      "url": "https://www.pauloleads.com.br"
+    }
+  ]
+}
