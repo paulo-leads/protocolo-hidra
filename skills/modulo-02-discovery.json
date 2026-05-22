@@ -1,0 +1,95 @@
+{
+  "modulo": "II",
+  "nome": "Discovery e Qualificação",
+  "descricao": "Call prep, MEDDIC, pain hypotheses, budget framing, decision mapping, champion ID, business case, call debrief",
+  "skills": [
+    {
+      "id": 9,
+      "nome": "Prep para Call de Discovery",
+      "descricao": "Gera conjunto de perguntas e estrutura de call para primeira reunião",
+      "gatilhos": [
+        "prep me for my discovery call with [empresa]",
+        "generate discovery questions for [prospect] at [empresa]",
+        "I have a first call with [empresa] — help me prepare"
+      ],
+      "publico_alvo": "AEs preparando primeiras reuniões"
+    },
+    {
+      "id": 10,
+      "nome": "Mapeador MEDDIC",
+      "descricao": "Mapeia notas de deal para framework MEDDIC com nível de confiança",
+      "gatilhos": [
+        "map this deal to MEDDIC",
+        "MEDDIC qualification for [deal name or company]",
+        "run MEDDIC on my notes from [empresa]"
+      ],
+      "publico_alvo": "AEs e gestores revisando qualificação de deals"
+    },
+    {
+      "id": 11,
+      "nome": "Hipóteses de Dor do Prospect",
+      "descricao": "Gera 5-7 hipóteses de dor específicas para o prospect",
+      "gatilhos": [
+        "what pain points might [role] at [company type] have?",
+        "build pain hypotheses for [empresa]",
+        "what are the likely challenges for a [title] at a [stage] SaaS company?"
+      ],
+      "publico_alvo": "AEs antes de calls de discovery"
+    },
+    {
+      "id": 12,
+      "nome": "Enquadrador da Conversa de Budget",
+      "descricao": "Sugere linguagem para introduzir orçamento naturalmente na conversa",
+      "gatilhos": [
+        "how do I bring up budget with [prospect or persona]",
+        "frame the budget conversation for [deal name]",
+        "give me language for introducing pricing in my next call"
+      ],
+      "publico_alvo": "AEs em conversas comerciais sensíveis"
+    },
+    {
+      "id": 13,
+      "nome": "Mapeamento de Decisores",
+      "descricao": "Identifica o comitê de compras para um deal",
+      "gatilhos": [
+        "map the buying committee for [empresa]",
+        "who else is involved in buying decisions at [company type]",
+        "decision maker map for my deal at [empresa]"
+      ],
+      "publico_alvo": "AEs e SDRs mapeando contas enterprise"
+    },
+    {
+      "id": 14,
+      "nome": "Identificação de Champion",
+      "descricao": "Ajuda a identificar, qualificar e desenvolver champion interno",
+      "gatilhos": [
+        "help me identify a champion at [empresa]",
+        "is [contact name] a real champion?",
+        "how do I develop my champion at [empresa]?"
+      ],
+      "publico_alvo": "AEs trabalhando deals com múltiplos stakeholders"
+    },
+    {
+      "id": 15,
+      "nome": "Hipótese de Business Case",
+      "descricao": "Elabora hipótese de business case pré-discovery",
+      "gatilhos": [
+        "draft a business case hypothesis for [empresa]",
+        "build a pre-discovery value narrative for [prospect]",
+        "what business case would work for [company type] buying [product category]?"
+      ],
+      "publico_alvo": "AEs antes da primeira conversa com prospect"
+    },
+    {
+      "id": 16,
+      "nome": "Debrief de Call de Qualificação",
+      "descricao": "Converte notas brutas em debrief estruturado",
+      "gatilhos": [
+        "debrief my discovery call with [empresa]",
+        "structure my call notes from [empresa]",
+        "post-call debrief for [deal name]"
+      ],
+      "publico_alvo": "AEs e gestores após calls de discovery"
+    }
+  ]
+}
