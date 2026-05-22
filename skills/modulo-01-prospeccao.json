@@ -1,15 +1,96 @@
 {
   "modulo": "I",
   "nome": "Prospecção",
+  "descricao": "Cold outreach, LinkedIn, pesquisa de conta, ICP scoring, trigger events, multi-touch sequences, lookalike accounts, stakeholder profiling",
   "skills": [
     {
       "id": 1,
       "nome": "Cold Outreach Personalizado",
+      "descricao": "Escreve e-mail de primeiro contato personalizado com base em sinal do prospecto",
       "gatilhos": [
         "write a cold email to [nome] at [empresa]",
-        "draft outreach for [prospect]"
+        "draft outreach for [prospect name]",
+        "personalise an email to [nome] — they just [signal]"
       ],
-      "publico_alvo": "SDRs, AEs, BDRs"
+      "publico_alvo": "SDRs, AEs, BDRs em prospecção outbound",
+      "instrucoes": "Passo 1: Coletar inputs. Passo 2: Identificar gancho. Passo 3: Escrever email (assunto < 8 palavras, corpo < 120 palavras). Passo 4: Validar qualidade."
+    },
+    {
+      "id": 2,
+      "nome": "Nota de Convite LinkedIn",
+      "descricao": "Cria nota de conexão LinkedIn com menos de 300 caracteres",
+      "gatilhos": [
+        "write a LinkedIn connection request to [nome]",
+        "draft a connect note for [prospect]",
+        "LinkedIn note to [nome] at [empresa]"
+      ],
+      "publico_alvo": "SDRs e BDRs construindo rede no LinkedIn"
+    },
+    {
+      "id": 3,
+      "nome": "Resumo de Pesquisa de Conta",
+      "descricao": "Converte dados brutos da empresa em brief de conta estruturado",
+      "gatilhos": [
+        "summarise research on [empresa]",
+        "build an account brief for [empresa]",
+        "turn my notes on [empresa] into a brief"
+      ],
+      "publico_alvo": "AEs e BDRs antes de abordar uma conta"
+    },
+    {
+      "id": 4,
+      "nome": "Pontuador de Qualificação ICP",
+      "descricao": "Pontua lead contra critérios de ICP definidos",
+      "gatilhos": [
+        "score this lead against our ICP",
+        "qualify [company or contact] against our ICP criteria",
+        "ICP score for [lead name or company]"
+      ],
+      "publico_alvo": "SDRs e Ops triando leads inbound"
+    },
+    {
+      "id": 5,
+      "nome": "Outreach por Evento de Gatilho",
+      "descricao": "Escreve outreach ancorado em evento específico (funding, contratação, notícia)",
+      "gatilhos": [
+        "write outreach based on [company]'s [funding / hiring / news]",
+        "trigger event email for [company] — they just [event]",
+        "write outreach based on this news: [paste article or post]"
+      ],
+      "publico_alvo": "SDRs e AEs monitorando contas-alvo"
+    },
+    {
+      "id": 6,
+      "nome": "Sequência Multi-Touch",
+      "descricao": "Cria sequência de 5 passos em email e LinkedIn",
+      "gatilhos": [
+        "build an outreach sequence for [company or prospect]",
+        "create a 5-step sequence targeting [persona]",
+        "multi-touch sequence for [campaign or account name]"
+      ],
+      "publico_alvo": "SDRs e AEs em campanhas multi-canal"
+    },
+    {
+      "id": 7,
+      "nome": "Briefing de Contas Lookalike",
+      "descricao": "Gera brief de pesquisa para encontrar contas similares aos melhores clientes",
+      "gatilhos": [
+        "find me accounts that look like [customer name]",
+        "build a lookalike account brief based on our best customers",
+        "generate a TAM research brief based on [company] profile"
+      ],
+      "publico_alvo": "BDRs e AEs expandindo o TAM"
+    },
+    {
+      "id": 8,
+      "nome": "Perfilador de Stakeholder Executivo",
+      "descricao": "Constrói perfil pré-reunião de contato C-level ou VP",
+      "gatilhos": [
+        "profile [nome] at [empresa] before my call",
+        "executive profile for [contact name]",
+        "research [nome] — I have a call with them on [date]"
+      ],
+      "publico_alvo": "AEs antes de reuniões com C-level ou VP"
     }
   ]
 }
