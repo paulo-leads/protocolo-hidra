@@ -1,0 +1,73 @@
+{
+  "modulo": "IV",
+  "nome": "Gestão de Objeções",
+  "descricao": "Concorrente, preço, timing, build vs. buy, status quo, jurídico/segurança",
+  "skills": [
+    {
+      "id": 23,
+      "nome": "Resposta a Concorrente",
+      "descricao": "Resposta diferenciada quando prospect menciona concorrente",
+      "gatilhos": [
+        "how do I respond when [prospect] mentions [competitor]?",
+        "competitor objection — they're looking at [competitor name]",
+        "[competitor] objection response for [deal name]"
+      ],
+      "publico_alvo": "AEs em deals com múltiplos fornecedores"
+    },
+    {
+      "id": 24,
+      "nome": "Resposta a Objeção de Preço",
+      "descricao": "Reframa valor sem descontar, distinguindo objeção de preço vs. orçamento",
+      "gatilhos": [
+        "they said the price is too high",
+        "price objection response for [deal name]",
+        "how do I hold my price when [prospect] pushes back?"
+      ],
+      "publico_alvo": "AEs e gestores"
+    },
+    {
+      "id": 25,
+      "nome": "Resposta a Objeção de Timing",
+      "descricao": "Responde 'não é o momento' com urgência sem pressão artificial",
+      "gatilhos": [
+        "they said it's not the right time",
+        "timing objection for [deal name]",
+        "how do I respond to 'let's revisit in Q3'?"
+      ],
+      "publico_alvo": "AEs"
+    },
+    {
+      "id": 26,
+      "nome": "Resposta ao 'Podemos Construir Internamente'",
+      "descricao": "Lida com objeção de construção interna com análise de custo real",
+      "gatilhos": [
+        "they said they can build it themselves",
+        "internal build objection for [deal name]",
+        "how do I respond to 'our engineering team could build this'?"
+      ],
+      "publico_alvo": "AEs"
+    },
+    {
+      "id": 27,
+      "nome": "Resposta ao Status Quo",
+      "descricao": "Cria respostas para 'estamos satisfeitos com o atual'",
+      "gatilhos": [
+        "they said they're happy with their current setup",
+        "status quo objection for [deal name]",
+        "how do I respond to 'we already have a solution for this'?"
+      ],
+      "publico_alvo": "AEs"
+    },
+    {
+      "id": 28,
+      "nome": "Resposta a Objeções Jurídicas e de Segurança",
+      "descricao": "Respostas para procurement e InfoSec",
+      "gatilhos": [
+        "draft a response to a security concern from [empresa]",
+        "legal objection response for [deal name]",
+        "how do I respond to procurement questions about [security topic]?"
+      ],
+      "publico_alvo": "AEs em revisões de segurança"
+    }
+  ]
+}
