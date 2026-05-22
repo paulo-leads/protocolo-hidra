@@ -1,0 +1,73 @@
+{
+  "modulo": "V",
+  "nome": "Gestão de Pipeline",
+  "descricao": "Deal health, CRM updates, re-engagement, multithreading, close plan, forecast narrative",
+  "skills": [
+    {
+      "id": 29,
+      "nome": "Verificador de Saúde do Deal",
+      "descricao": "Avalia deal e sinaliza riscos contra padrões de perda",
+      "gatilhos": [
+        "check the health of my deal with [empresa]",
+        "deal health assessment for [deal name]",
+        "flag the risks in my [empresa] opportunity"
+      ],
+      "publico_alvo": "AEs e gestores"
+    },
+    {
+      "id": 30,
+      "nome": "Formatador de Atualização de Pipeline",
+      "descricao": "Converte notas brutas em update limpo de CRM",
+      "gatilhos": [
+        "format my pipeline update for [empresa]",
+        "write a CRM note for my [deal name] deal",
+        "turn my notes on [empresa] into a pipeline update"
+      ],
+      "publico_alvo": "AEs"
+    },
+    {
+      "id": 31,
+      "nome": "Reengajamento de Deal Travado",
+      "descricao": "Escreve mensagens para deals que silenciaram",
+      "gatilhos": [
+        "[empresa] has gone quiet — help me re-engage",
+        "stalled deal re-engagement for [deal name]",
+        "write a message to restart the conversation with [empresa]"
+      ],
+      "publico_alvo": "AEs e BDRs"
+    },
+    {
+      "id": 32,
+      "nome": "Outreach de Multithreading",
+      "descricao": "Aborda novo stakeholder sem atrapalhar o deal",
+      "gatilhos": [
+        "help me reach out to [new contact] at [empresa] without disrupting the deal",
+        "multithread my deal at [empresa] — I need to reach [role]",
+        "draft outreach to the [title] at [empresa] where I'm already in a deal"
+      ],
+      "publico_alvo": "AEs expandindo contatos"
+    },
+    {
+      "id": 33,
+      "nome": "Construtor de Close Plan",
+      "descricao": "Cria plano de ação mútua para fechamento",
+      "gatilhos": [
+        "build a close plan for [deal name]",
+        "create a mutual action plan for [empresa]",
+        "what are the steps to close the [empresa] deal?"
+      ],
+      "publico_alvo": "AEs em deals próximos do fechamento"
+    },
+    {
+      "id": 34,
+      "nome": "Narrativa de Forecast",
+      "descricao": "Escreve comentário de forecast para deal ou território",
+      "gatilhos": [
+        "write a forecast narrative for [deal name]",
+        "build my forecast commentary for [empresa]",
+        "prepare my deal commentary for the forecast call"
+      ],
+      "publico_alvo": "AEs e gestores"
+    }
+  ]
+}
