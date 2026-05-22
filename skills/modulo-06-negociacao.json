@@ -1,0 +1,73 @@
+{
+  "modulo": "VI",
+  "nome": "Negociação e Fechamento",
+  "descricao": "Prep, proposta, desconto, redlining, fechamento, win/loss analysis",
+  "skills": [
+    {
+      "id": 35,
+      "nome": "Prep para Negociação",
+      "descricao": "Documento de estratégia com posição de saída, ideal, concessões",
+      "gatilhos": [
+        "prep me for my negotiation with [empresa]",
+        "build a negotiation brief for [deal name]",
+        "I have a commercial conversation with [empresa] — help me prepare"
+      ],
+      "publico_alvo": "AEs antes de negociações"
+    },
+    {
+      "id": 36,
+      "nome": "Proposta Comercial",
+      "descricao": "Estrutura solicitação interna de desconto com justificativa",
+      "gatilhos": [
+        "help me justify a discount on [deal name]",
+        "build a discount approval case for [empresa]",
+        "how do I frame a 15% discount request for my manager?"
+      ],
+      "publico_alvo": "AEs"
+    },
+    {
+      "id": 37,
+      "nome": "E-mail de Fechamento",
+      "descricao": "Email pós-fechamento verbal confirmando compromisso",
+      "gatilhos": [
+        "[empresa] just said yes — write the confirmation email",
+        "win confirmation email for [deal name]",
+        "draft a follow-up after a verbal close with [empresa]"
+      ],
+      "publico_alvo": "AEs"
+    },
+    {
+      "id": 38,
+      "nome": "Resposta a Redlining de Contrato",
+      "descricao": "Linguagem para pedir negócio, calibrada por estágio e perfil",
+      "gatilhos": [
+        "help me close [empresa] on the call today",
+        "write a close script for [deal name]",
+        "how do I ask for the business with [prospect name]?"
+      ],
+      "publico_alvo": "AEs"
+    },
+    {
+      "id": 39,
+      "nome": "Gerenciamento de Extensão de Deal",
+      "descricao": "Gerencia prazos de extensão mantendo pressão positiva",
+      "gatilhos": [
+        "[empresa] is asking for more time — help me respond",
+        "extension request from [deal name]",
+        "how do I handle a deadline extension request?"
+      ],
+      "publico_alvo": "AEs"
+    },
+    {
+      "id": 40,
+      "nome": "Análise de Win/Loss",
+      "descricao": "Debrief pós-perda com causa raiz e lições",
+      "gatilhos": [
+        "debrief the loss at [empresa]",
+        "run a loss analysis on [deal name]",
+        "I lost [empresa] — help me understand why"
+      ],
+      "publico_alvo": "AEs e gestores"
+    }
+  ]
+}
