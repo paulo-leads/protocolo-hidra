@@ -1,0 +1,15 @@
+{
+  "modulo": "I",
+  "nome": "Prospecção",
+  "skills": [
+    {
+      "id": 1,
+      "nome": "Cold Outreach Personalizado",
+      "gatilhos": [
+        "write a cold email to [nome] at [empresa]",
+        "draft outreach for [prospect]"
+      ],
+      "publico_alvo": "SDRs, AEs, BDRs"
+    }
+  ]
+}
