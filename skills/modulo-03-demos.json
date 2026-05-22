@@ -1,0 +1,73 @@
+{
+  "modulo": "III",
+  "nome": "Demos e Apresentações",
+  "descricao": "Personalização de demo, apresentação executiva, ROI builder, objeções, prova social, follow-up",
+  "skills": [
+    {
+      "id": 17,
+      "nome": "Personalização de Demo",
+      "descricao": "Customiza fluxo de demo para prospect específico",
+      "gatilhos": [
+        "personalise my demo for [empresa]",
+        "customise the demo flow for [prospect name]",
+        "build a demo narrative for [empresa] — their pain points are [X]"
+      ],
+      "publico_alvo": "AEs e SEs preparando demos"
+    },
+    {
+      "id": 18,
+      "nome": "Apresentação Executiva",
+      "descricao": "Estrutura apresentação para C-level",
+      "gatilhos": [
+        "build an executive presentation for [empresa]",
+        "structure a C-suite deck for [deal name]",
+        "help me build a board-level presentation for [empresa]"
+      ],
+      "publico_alvo": "AEs em deals enterprise"
+    },
+    {
+      "id": 19,
+      "nome": "Construtor de ROI",
+      "descricao": "Cria narrativa de ROI antes/depois com métricas do prospect",
+      "gatilhos": [
+        "build an ROI story for [empresa]",
+        "quantify the value for [prospect]",
+        "create a business case with numbers for [deal name]"
+      ],
+      "publico_alvo": "AEs e RevOps"
+    },
+    {
+      "id": 20,
+      "nome": "Antecipação de Objeções",
+      "descricao": "Identifica 3-5 objeções prováveis para demo",
+      "gatilhos": [
+        "what objections might [empresa] raise in my demo?",
+        "pre-empt objections for [deal name]",
+        "prepare responses to objections before my [empresa] presentation"
+      ],
+      "publico_alvo": "AEs antes de demos"
+    },
+    {
+      "id": 21,
+      "nome": "Seletor de Prova Social",
+      "descricao": "Seleciona case study mais relevante para apresentação",
+      "gatilhos": [
+        "what customer story should I use for [empresa]?",
+        "find the best case study for my [empresa] presentation",
+        "which reference customer matches [prospect profile]?"
+      ],
+      "publico_alvo": "AEs em apresentações"
+    },
+    {
+      "id": 22,
+      "nome": "Follow-Up Pós-Demo",
+      "descricao": "Escreve email de follow-up pós-demo personalizado",
+      "gatilhos": [
+        "write a follow-up email after my demo with [empresa]",
+        "post-demo email for [prospect name]",
+        "draft a follow-up to my [empresa] presentation"
+      ],
+      "publico_alvo": "AEs após demos"
+    }
+  ]
+}
