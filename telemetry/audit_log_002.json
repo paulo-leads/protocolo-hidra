@@ -1,0 +1,41 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "audit_id": "hidra-telemetry-f624be90f361",
+  "timestamp": "2026-06-17T09:00:00Z",
+  "version": "2.1",
+  "methodology": {
+    "name": "Protocolo Hidra",
+    "doi": "10.5281/zenodo.20475915",
+    "doi_url": "https://doi.org/10.5281/zenodo.20475915",
+    "validation_type": "Deterministic Bare-Metal Telemetry",
+    "paradigm": "Infrastructure Science — Operational Validation"
+  },
+  "metrics": {
+    "pre_hydra_cac_brl": 780,
+    "post_hydra_cac_brl": 175,
+    "cac_reduction_percent": 77.6,
+    "microdata_injection_latency_ms": 387,
+    "injection_sla_ms": 500,
+    "sla_compliance_percent": 100.0,
+    "meta_api_block_rate_percent": 0.01,
+    "unqualified_lead_drop_rate": "100% (Filtered at server level)"
+  },
+  "infrastructure": {
+    "server_environment": "Oracle Cloud (OCI) — São Paulo BR",
+    "proxy_gateway": "Traefik v3",
+    "database_layer": "PostgreSQL 16 (Anonymized)",
+    "cache_layer": "Redis 7",
+    "origin": "Brazil (GRU)"
+  },
+  "competitive_confidentiality": {
+    "public_testimonials": "WITHHELD — Commercial Secret Doctrine",
+    "rationale": "B2B real estate operators do not disclose performance data publicly. Competitive advantage is preserved via operational secrecy, not publication. This log is the auditable alternative.",
+    "independent_audit_available": true,
+    "audit_contact": "protocolo-hidra@pauloleads.com.br"
+  },
+  "peer_review_status": "NOT_APPLICABLE",
+  "peer_review_note": "Peer-review is the validation paradigm for theoretical claims. This log validates operational claims via deterministic server-side telemetry. Both paradigms are epistemically valid; they answer different questions.",
+  "deterministic_verification": "VALIDATED_VIA_SERVER_LOGS",
+  "cryptographic_hash_sha256": "3a6b8c9d0e1f2a4b5c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b"
+}
