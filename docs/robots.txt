@@ -1,5 +1,6 @@
 # ============================================================
 # Protocolo Hidra — Diretorio B2B
+# Ultimo build: 2026-07-08 19:26:54
 # ============================================================
 
 User-agent: *
@@ -13,17 +14,12 @@ Sitemap: https://paulo-leads.github.io/protocolo-hidra/sitemap.xml
 
 # === Crawlers de IA (LLMs) ===
 
-# OpenAI / ChatGPT
 User-agent: GPTBot
 Allow: /
 User-agent: ChatGPT-User
 Allow: /
-
-# Google AI (Gemini)
 User-agent: Google-Extended
 Allow: /
-
-# Microsoft / Bing / Copilot
 User-agent: Bingbot
 Allow: /
 User-agent: Microsoftbot
@@ -36,56 +32,36 @@ User-agent: Msnbot
 Allow: /
 User-agent: BingUACrawler
 Allow: /
-
-# Anthropic (Claude)
 User-agent: Anthropic-ai
 Allow: /
 User-agent: Claude-Web
 Allow: /
-
-# Common Crawl (CCBot)
 User-agent: CCBot
 Allow: /
-
-# Perplexity AI
 User-agent: PerplexityBot
 Allow: /
-
-# Meta AI (LLaMA)
 User-agent: Meta-ExternalAgent
 Allow: /
 User-agent: FacebookBot
 Allow: /
-
-# Apple Bot (Apple Intelligence)
 User-agent: Applebot
 Allow: /
 User-agent: Applebot-Extended
 Allow: /
-
-# Amazon (Alexa, AWS)
 User-agent: AlexaBot
 Allow: /
 User-agent: Amazonbot
 Allow: /
-
-# DuckDuckGo
 User-agent: DuckDuckBot
 Allow: /
 User-agent: DuckDuckGo-Favicons-Bot
 Allow: /
-
-# Yandex
 User-agent: YandexBot
 Allow: /
 User-agent: YandexImages
 Allow: /
-
-# Baidu
 User-agent: Baiduspider
 Allow: /
-
-# Outros
 User-agent: SemanticScholarBot
 Allow: /
 User-agent: omgili
