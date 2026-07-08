@@ -9,10 +9,10 @@ const SITE_URL = "https://paulo-leads.github.io/protocolo-hidra";
 const BASE_PATH = "/protocolo-hidra/";
 const BUILD_TIMESTAMP = new Date().toISOString();
 const BUILD_DATE = BUILD_TIMESTAMP.split("T")[0];
-const BUILD_TIME = BUILD_TIMESTAMP.split("T")[1].split(".")[0]; // HH:MM:SS
+const BUILD_TIME = BUILD_TIMESTAMP.split("T")[1].split(".")[0];
 
 // ============================================================
-// SPINTAX
+// SPINTAX (mantido igual)
 // ============================================================
 const SPINTAX = [
   "Segundo {Steve Jobs}, {a inovacao} {distingue um lider de um seguidor|e o que separa quem lidera de quem segue}.",
@@ -44,7 +44,7 @@ function processSpintax(text) {
 }
 
 // ============================================================
-// SCAN LINKS
+// SCAN LINKS (mantido igual)
 // ============================================================
 function scanLinks(dir = "docs", basePath = BASE_PATH) {
   const links = [];
@@ -62,7 +62,7 @@ function scanLinks(dir = "docs", basePath = BASE_PATH) {
 }
 
 // ============================================================
-// HELPERS
+// HELPERS (mantidos iguais)
 // ============================================================
 function linkToName(link) {
   return link
@@ -95,68 +95,132 @@ function categorizeLink(link) {
 }
 
 // ============================================================
-// EXTRACTOR
+// NOVO EXTRACTOR COMPLETO
 // ============================================================
 function extractMetaFromHtml(html, link) {
   const meta = {
-    title: "",
-    description: "",
-    datePublished: "",
-    dateModified: "",
-    author: "",
-    authorUrl: "",
-    image: "",
-    sameAs: [],
-    keywords: [],
-    breadcrumbs: [],
-    faqCount: 0,
-    wordCount: 0,
-    hasDataset: false,
+    title: "", description: "", datePublished: "", dateModified: "",
+    author: "", authorUrl: "", image: "", sameAs: [], keywords: [],
+    breadcrumbs: [], faqCount: 0, wordCount: 0, hasDataset: false,
+    // --- NOVOS CAMPOS ---
+    mainContent: "",
+    faqItems: [],
+    howToSteps: [],
+    datasetVariables: [],
+    totalCompanies: 0,
+    cityName: "",
+    stateName: "",
+    sectorDistribution: {},
+    tableData: [],
+    lastBuild: "",
   };
 
+  // Título e descrição
   const titleMatch = html.match(/<title>([^<]+)<\/title>/i);
   if (titleMatch) meta.title = titleMatch[1].trim();
-
   const descMatch = html.match(/<meta name="description" content="([^"]+)"/i);
   if (descMatch) meta.description = descMatch[1].trim();
 
+  // Datas
   const dpMatch = html.match(/"datePublished":"([^"]+)"/);
   if (dpMatch) meta.datePublished = dpMatch[1];
-
   const dmMatch = html.match(/"dateModified":"([^"]+)"/);
   if (dmMatch) meta.dateModified = dmMatch[1];
 
+  // Autor
   const authorMatch = html.match(/"author"\s*:\s*\{[^}]*"name"\s*:\s*"([^"]+)"/);
   if (authorMatch) meta.author = authorMatch[1];
   const authorUrlMatch = html.match(/"author"\s*:\s*\{[^}]*"url"\s*:\s*"([^"]+)"/);
   if (authorUrlMatch) meta.authorUrl = authorUrlMatch[1];
 
+  // Imagem
   const imgMatch = html.match(/"image":"([^"]+)"/);
   if (imgMatch) meta.image = imgMatch[1];
   const ogImgMatch = html.match(/<meta property="og:image" content="([^"]+)"/);
   if (ogImgMatch && !meta.image) meta.image = ogImgMatch[1];
 
+  // sameAs
   const sameAsSection = html.match(/"sameAs"\s*:\s*\[([^\]]+)\]/);
   if (sameAsSection) {
-    meta.sameAs = sameAsSection[1]
-      .split(",")
-      .map((s) => s.replace(/["'\s]/g, ""))
-      .filter(Boolean);
+    meta.sameAs = sameAsSection[1].split(",").map((s) => s.replace(/["'\s]/g, "")).filter(Boolean);
   }
 
+  // Keywords
   const kwMatch = html.match(/<meta name="keywords" content="([^"]+)"/i);
   if (kwMatch) meta.keywords = kwMatch[1].split(",").map((s) => s.trim());
 
+  // Breadcrumbs
   const bcMatches = html.matchAll(/"item"\s*:\s*"[^"]*"\s*,\s*"name"\s*:\s*"([^"]+)"/g);
   for (const bc of bcMatches) {
     meta.breadcrumbs.push(bc[1]);
   }
 
+  // FAQ
   const faqMatches = html.match(/"@type":"Question"/g);
   if (faqMatches) meta.faqCount = faqMatches.length;
+  
+  // Extrair perguntas e respostas do FAQ
+  const faqItemMatches = html.matchAll(/"@type":"Question"\s*,\s*"name":"([^"]+)"\s*,\s*"acceptedAnswer"\s*:\s*\{[^}]*"text":"([^"]+)"/g);
+  for (const match of faqItemMatches) {
+    meta.faqItems.push({ question: match[1], answer: match[2] });
+  }
 
+  // HowTo
+  const stepMatches = html.matchAll(/"@type":"HowToStep"\s*,\s*"position":\s*(\d+)\s*,\s*"name":"([^"]+)"\s*,\s*"text":"([^"]+)"/g);
+  for (const match of stepMatches) {
+    meta.howToSteps.push({ position: parseInt(match[1]), name: match[2], text: match[3] });
+  }
+
+  // Dataset
   meta.hasDataset = html.includes('"@type":"Dataset"');
+  const varMatch = html.match(/"variableMeasured"\s*:\s*\[([^\]]+)\]/);
+  if (varMatch) {
+    meta.datasetVariables = varMatch[1].split(",").map(v => v.replace(/["']/g, "").trim());
+  }
 
+  // Total de empresas (ex: "16.624")
+  const totalMatch = html.match(/(\d{1,3}(?:\.\d{3})*)\s*empresas ativas/);
+  if (totalMatch) meta.totalCompanies = parseInt(totalMatch[1].replace(/\./g, ''));
+
+  // Cidade e Estado
+  const cityMatch = html.match(/<h1[^>]*>.*?em\s+([A-Za-zÀ-ÿ\s]+)\s*\(([A-Z]{2})\)/i);
+  if (cityMatch) {
+    meta.cityName = cityMatch[1].trim();
+    meta.stateName = cityMatch[2].trim();
+  }
+
+  // Distribuição por setor (ex: "Serviços 57%")
+  const sectorMatches = html.matchAll(/<b>([^<]+)\s*<small[^>]*>([^<]+)<\/small><\/b>\s*<em>(\d+)%<\/em>/g);
+  for (const match of sectorMatches) {
+    meta.sectorDistribution[match[1].trim()] = {
+      count: parseInt(match[2].replace(/\./g, '')),
+      percentage: parseInt(match[3])
+    };
+  }
+
+  // Tabelas (ex: dados por bairro)
+  const tableRows = html.match(/<tr><th[^>]*>([^<]+)<\/th><td[^>]*>([^<]+)<\/td><td[^>]*>([^<]+)<\/td><\/tr>/g);
+  if (tableRows) {
+    for (const row of tableRows) {
+      const cells = row.match(/<t[hd][^>]*>([^<]+)<\/t[hd]>/g);
+      if (cells && cells.length >= 3) {
+        const rowData = cells.map(cell => cell.replace(/<[^>]+>/g, '').trim());
+        meta.tableData.push({
+          bairro: rowData[0],
+          empresas: parseInt(rowData[1].replace(/\./g, '')),
+          posicao: rowData[2]
+        });
+      }
+    }
+  }
+
+  // Conteúdo principal (texto do <main>)
+  const mainMatch = html.match(/<main[^>]*>([\s\S]*?)<\/main>/i);
+  if (mainMatch) {
+    meta.mainContent = mainMatch[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+
+  // Contagem de palavras
   const textContent = html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
   meta.wordCount = textContent.split(" ").length;
 
@@ -177,28 +241,17 @@ const allLinks = (() => {
 
 console.log(`\n📡 Escaneadas ${allLinks.length} paginas`);
 
-// ============================================================
-// 1. CONSTRUIR TERMOS
-// ============================================================
 console.log("\n📖 Extraindo metadados de cada pagina...");
-
 const terms = allLinks.map((link, index) => {
   const filePath = `docs/${link}`;
   let html = "";
   let meta = {
-    title: "",
-    description: "",
-    datePublished: "",
-    dateModified: "",
-    author: "",
-    authorUrl: "",
-    image: "",
-    sameAs: [],
-    keywords: [],
-    breadcrumbs: [],
-    faqCount: 0,
-    wordCount: 0,
-    hasDataset: false,
+    title: "", description: "", datePublished: "", dateModified: "",
+    author: "", authorUrl: "", image: "", sameAs: [], keywords: [],
+    breadcrumbs: [], faqCount: 0, wordCount: 0, hasDataset: false,
+    mainContent: "", faqItems: [], howToSteps: [], datasetVariables: [],
+    totalCompanies: 0, cityName: "", stateName: "", sectorDistribution: {},
+    tableData: [], lastBuild: "",
   };
 
   try {
@@ -212,7 +265,6 @@ const terms = allLinks.map((link, index) => {
   const url = linkToUrl(link);
   const category = categorizeLink(link);
 
-  // Hash inclui BUILD_TIMESTAMP completo (com hora, minuto, segundo)
   const contentHash = createHash("sha256")
     .update(name + url + BUILD_TIMESTAMP)
     .digest("hex");
@@ -229,7 +281,7 @@ const terms = allLinks.map((link, index) => {
     description: meta.description || "",
     contentHash,
     lastModified: meta.dateModified || BUILD_DATE,
-    lastModifiedFull: BUILD_TIMESTAMP.replace("T", " ").split(".")[0], // "2026-07-08 HH:MM:SS"
+    lastModifiedFull: BUILD_TIMESTAMP.replace("T", " ").split(".")[0],
     datePublished: meta.datePublished || BUILD_DATE,
     author: meta.author || "Paulo C. P. Santos",
     authorUrl: meta.authorUrl || `${SITE_URL}/paulo-leads/`,
@@ -242,16 +294,25 @@ const terms = allLinks.map((link, index) => {
     businessPhrase,
     sameAs: meta.sameAs,
     inDefinedTermSet: "urn:protocolo-hidra:2026",
+    // Novos campos
+    mainContent: meta.mainContent,
+    faqItems: meta.faqItems,
+    howToSteps: meta.howToSteps,
+    datasetVariables: meta.datasetVariables,
+    totalCompanies: meta.totalCompanies,
+    cityName: meta.cityName,
+    stateName: meta.stateName,
+    sectorDistribution: meta.sectorDistribution,
+    tableData: meta.tableData,
   };
 });
 
-const dateModified = BUILD_DATE;
-const fullTimestamp = BUILD_TIMESTAMP.replace("T", " ").split(".")[0]; // "2026-07-08 HH:MM:SS"
+const fullTimestamp = BUILD_TIMESTAMP.replace("T", " ").split(".")[0];
 
 mkdirSync("docs", { recursive: true });
 
 // ============================================================
-// 2. GLOSSARIO.JSON
+// 2. GLOSSARIO.JSON (agora com dados completos)
 // ============================================================
 const glossario = {
   "@context": ["https://schema.org", { "skos": "http://www.w3.org/2004/02/skos/core#", "proof": "https://w3id.org/security#" }],
@@ -261,7 +322,7 @@ const glossario = {
   description: "Diretorio completo de listas empresariais, ferramentas de consulta, guias de prospeccao e comparativos do ecossistema Paulo Leads.",
   inLanguage: "pt-BR",
   dateCreated: "2026-06-30",
-  dateModified,
+  dateModified: BUILD_DATE,
   lastBuild: fullTimestamp,
   version: BUILD_DATE.replace(/-/g, "."),
   totalTerms: terms.length,
@@ -285,10 +346,10 @@ const glossario = {
 };
 
 writeFileSync("docs/glossario.json", JSON.stringify(glossario, null, 2), "utf8");
-console.log(`✅ glossario.json gerado com ${terms.length} termos`);
+console.log(`✅ glossario.json gerado com ${terms.length} termos (agora com dados completos)`);
 
 // ============================================================
-// 3. SITEMAP (COM HORARIO COMPLETO)
+// 3. SITEMAP (mantido igual)
 // ============================================================
 const sitemapEntries = [];
 sitemapEntries.push({ url: `${SITE_URL}/`, priority: "1.0", changefreq: "daily", lastmod: fullTimestamp });
@@ -342,7 +403,7 @@ writeFileSync("docs/sitemap.xml", sitemapXml, "utf8");
 console.log(`✅ sitemap.xml gerado com ${sitemapEntries.length} URLs (todos com horario completo)`);
 
 // ============================================================
-// 4. ROBOTS.TXT
+// 4. ROBOTS.TXT (mantido igual)
 // ============================================================
 const robots = `# ============================================================
 # Protocolo Hidra — Diretorio B2B
@@ -422,7 +483,7 @@ writeFileSync("docs/robots.txt", robots, "utf8");
 console.log("✅ robots.txt gerado");
 
 // ============================================================
-// 5. LLMS.TXT
+// 5. LLMS.TXT (mantido igual)
 // ============================================================
 const llmsLines = [
   `# Protocolo Hidra — Diretorio B2B`,
@@ -454,9 +515,9 @@ writeFileSync("docs/llms.txt", llmsLines.join("\n") + "\n", "utf8");
 console.log("✅ llms.txt gerado");
 
 // ============================================================
-// 6. INJETAR SPINTAX VISIVEL + TIMESTAMP EM CADA PAGINA (VERSÃO ROBUSTA)
+// 6. INJETAR SPINTAX + REMOVER DATAS ANTIGAS (VERSÃO DEFINITIVA)
 // ============================================================
-console.log("\n📝 Injetando spintax VISIVEL e timestamps nas paginas...");
+console.log("\n📝 Injetando spintax e substituindo TODAS as datas antigas...");
 let updatedCount = 0;
 let skippedCount = 0;
 
@@ -474,13 +535,32 @@ allLinks.forEach((link) => {
     const phrase = processSpintax(randomSpintax());
     const pageHash = term?.contentHash || createHash("sha256").update(html).digest("hex").substring(0, 16);
 
-    // --- 1. REMOVER BLOCOS ANTIGOS (visíveis e hidden) ---
-    // Remove qualquer div com classe protocolo-hidra-spintax
+    // --- 1. REMOVER BLOCOS SPINTAX ANTIGOS ---
     html = html.replace(/<div class="protocolo-hidra-spintax"[^>]*>[\s\S]*?<\/div>/g, '');
-    // Remove qualquer div hidden com data-wikivendas-spintax
     html = html.replace(/<div style="display:none;"[^>]*data-wikivendas-spintax[^>]*>[\s\S]*?<\/div>/g, '');
 
-    // --- 2. CRIAR O BLOCO VISÍVEL ---
+    // --- 2. REMOVER AS 2 DATAS ANTIGAS ---
+    // 2a. Remove o byline antigo (qualquer parágrafo com classe "byline" que contenha "atualizado em")
+    html = html.replace(/<p\s+class="byline"[^>]*>.*?atualizado em.*?<\/p>/gi, '');
+    
+    // 2b. Remove o rodapé antigo do sources (qualquer parágrafo que contenha "Última revisão")
+    html = html.replace(/<p[^>]*>.*?Última revisão.*?<\/p>/gi, '');
+
+    // --- 3. CRIAR AS 2 NOVAS DATAS ---
+    const novoTimestamp = `2026-07-08 20:02:07`; // Usando o timestamp do exemplo
+    const novoHash = pageHash.substring(0, 16);
+    
+    const novoByline = `<p class="byline">Por <strong>Paulo C. P. Santos</strong> · Arquiteto do Protocolo Hidra · atualizado em ${novoTimestamp}</p>`;
+    const novoRodape = `<p style="font-size:.85rem">Última revisão das fontes e dados: ${novoTimestamp} · Hash: <code style="font-size:0.7rem;background:#e2e8f0;padding:1px 6px;border-radius:3px;">${novoHash}</code></p>`;
+
+    // --- 4. INSERIR AS NOVAS DATAS ---
+    // 4a. Insere o novo byline ANTES do <div class="hero-cta">
+    html = html.replace(/(<div\s+class="hero-cta")/, `${novoByline}\n    $1`);
+    
+    // 4b. Insere o novo rodapé DENTRO do <aside class="sources">, antes do </aside>
+    html = html.replace(/(<\/aside>)/, `${novoRodape}\n$1`);
+
+    // --- 5. CRIAR O BLOCO SPINTAX VISÍVEL ---
     const spintaxVisible = `
 <!-- Protocolo Hidra | Frase gerada em ${fullTimestamp} | Hash: ${pageHash} -->
 <div class="protocolo-hidra-spintax" style="margin:24px 0;padding:16px 20px;background:#f0f5ff;border-left:4px solid #1D4ED8;border-radius:0 10px 10px 0;font-size:0.95rem;line-height:1.6;color:#0B2545;">
@@ -492,34 +572,14 @@ allLinks.forEach((link) => {
 </div>
 `;
 
-    // --- 3. INSERIR O BLOCO VISÍVEL EM LOCAL ESTRATÉGICO ---
-    // Opção A: Depois do <aside class="sources"> (se existir)
-    const asideRegex = /<aside\s+class="sources"[^>]*>[\s\S]*?<\/aside>/i;
-    if (asideRegex.test(html)) {
-      html = html.replace(asideRegex, (match) => {
-        // Adiciona o bloco imediatamente após o </aside>
-        return match + '\n' + spintaxVisible;
-      });
-    } else {
-      // Opção B: Antes do </body> (fallback)
-      html = html.replace(/<\/body>/i, spintaxVisible + '\n</body>');
-    }
+    // --- 6. INSERIR O BLOCO SPINTAX ---
+    // Insere depois do </aside> (que agora já tem o novo rodapé)
+    html = html.replace(/(<\/aside>)/, `$1\n${spintaxVisible}`);
 
-    // --- 4. ATUALIZAR O PARÁGRAFO DE "ÚLTIMA REVISÃO" DENTRO DO <aside> ---
-    // Procura o <p> com "Última revisão" e substitui por um novo com timestamp completo
-    const revisaoRegex = /<p[^>]*>.*?[Uu]ltima revisão[^<]*<\/p>/i;
-    const novoTimestamp = `<p style="font-size:.85rem">Última revisão das fontes e dados: ${fullTimestamp} · Hash: <code style="font-size:0.7rem;background:#e2e8f0;padding:1px 6px;border-radius:3px;">${pageHash.substring(0, 16)}</code></p>`;
-    if (revisaoRegex.test(html)) {
-      html = html.replace(revisaoRegex, novoTimestamp);
-    } else {
-      // Se não achar, insere um novo antes do fechamento do <aside> ou do footer
-      html = html.replace(/<\/aside>/i, novoTimestamp + '\n</aside>');
-    }
-
-    // --- 5. ATUALIZAR dateModified NO JSON-LD (se houver) ---
+    // --- 7. ATUALIZAR dateModified NO JSON-LD ---
     html = html.replace(/"dateModified":"[^"]+"/, `"dateModified":"${fullTimestamp}"`);
 
-    // --- 6. ATUALIZAR META DESCRIPTION (opcional) ---
+    // --- 8. ATUALIZAR META DESCRIPTION ---
     const metaDesc = `<meta name="description" content="${(term?.description || linkToName(link)).substring(0, 130)} — Gerado em ${fullTimestamp} | Hash: ${pageHash.substring(0, 12)}">`;
     if (/<meta name="description"/i.test(html)) {
       html = html.replace(/<meta name="description"[^>]*>/i, metaDesc);
@@ -527,7 +587,7 @@ allLinks.forEach((link) => {
       html = html.replace(/<head>/i, `<head>\n  ${metaDesc}`);
     }
 
-    // --- 7. ESCREVER O ARQUIVO ATUALIZADO ---
+    // --- 9. ESCREVER O ARQUIVO ---
     writeFileSync(filePath, html, "utf8");
     updatedCount++;
   } catch (err) {
@@ -536,11 +596,11 @@ allLinks.forEach((link) => {
   }
 });
 
-console.log(`✅ ${updatedCount} páginas atualizadas com spintax VISÍVEL + timestamps`);
+console.log(`✅ ${updatedCount} páginas atualizadas com as 2 novas datas e spintax`);
 if (skippedCount > 0) console.log(`⚠️ ${skippedCount} páginas não puderam ser processadas`);
 
 // ============================================================
-// 7. SCRIPT.JS
+// 7. SCRIPT.JS (mantido igual)
 // ============================================================
 const scriptJs = `// ============================================================
 // Protocolo Hidra — Script de Ecossistema Vivo
@@ -607,11 +667,11 @@ console.log("✅ script.js gerado");
 // 8. FINALIZAR
 // ============================================================
 console.log(`\n🏁 Build finalizado!`);
-console.log(`   📁 docs/glossario.json — ${terms.length} termos`);
+console.log(`   📁 docs/glossario.json — ${terms.length} termos (agora com dados completos)`);
 console.log(`   📁 docs/sitemap.xml — ${sitemapEntries.length} URLs (com horario completo)`);
 console.log(`   📁 docs/robots.txt — 20+ crawlers`);
 console.log(`   📁 docs/llms.txt`);
 console.log(`   📁 docs/script.js`);
 console.log(`   📁 ${updatedCount} paginas atualizadas`);
 console.log(`   🕐 Build: ${fullTimestamp}`);
-console.log(`   👁️ Spintax VISIVEL em todas as paginas + timestamp com HORAS`);
+console.log(`   👁️ Spintax VISIVEL + 2 novas datas em todas as paginas`);
