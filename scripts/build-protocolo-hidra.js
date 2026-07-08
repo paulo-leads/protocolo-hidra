@@ -1,4 +1,4 @@
-import { writeFileSync, mkdirSync, readFileSync, readdirSync } from "fs";
+import { writeFileSync, mkdirSync, readFileSync, readdirSync, existsSync } from "fs";
 import { createHash } from "crypto";
 import path from "path";
 
@@ -454,28 +454,35 @@ writeFileSync("docs/llms.txt", llmsLines.join("\n") + "\n", "utf8");
 console.log("✅ llms.txt gerado");
 
 // ============================================================
-// 6. INJETAR SPINTAX VISIVEL + TIMESTAMP EM CADA PAGINA
+// 6. INJETAR SPINTAX VISIVEL + TIMESTAMP EM CADA PAGINA (VERSÃO ROBUSTA)
 // ============================================================
 console.log("\n📝 Injetando spintax VISIVEL e timestamps nas paginas...");
 let updatedCount = 0;
 let skippedCount = 0;
 
 allLinks.forEach((link) => {
+  const filePath = `docs/${link}`;
+  if (!existsSync(filePath)) {
+    console.warn(`  ⚠️ Arquivo não encontrado: ${filePath}`);
+    skippedCount++;
+    return;
+  }
+
   try {
-    const filePath = `docs/${link}`;
     let html = readFileSync(filePath, "utf8");
     const term = terms.find((t) => t.id === linkToSlug(link));
-
     const phrase = processSpintax(randomSpintax());
     const pageHash = term?.contentHash || createHash("sha256").update(html).digest("hex").substring(0, 16);
-    const pageDate = term?.lastModified || BUILD_DATE;
 
-    // ================================================================
-    // BLOCO SPINTAX VISIVEL — Aparece na pagina, no final do conteudo
-    // ================================================================
-    // Formato: uma frase em italico com autor, visivel, com data e hash
+    // --- 1. REMOVER BLOCOS ANTIGOS (visíveis e hidden) ---
+    // Remove qualquer div com classe protocolo-hidra-spintax
+    html = html.replace(/<div class="protocolo-hidra-spintax"[^>]*>[\s\S]*?<\/div>/g, '');
+    // Remove qualquer div hidden com data-wikivendas-spintax
+    html = html.replace(/<div style="display:none;"[^>]*data-wikivendas-spintax[^>]*>[\s\S]*?<\/div>/g, '');
+
+    // --- 2. CRIAR O BLOCO VISÍVEL ---
     const spintaxVisible = `
-<!-- Protocolo Hidra | Fras gerada em ${fullTimestamp} | Hash: ${pageHash} -->
+<!-- Protocolo Hidra | Frase gerada em ${fullTimestamp} | Hash: ${pageHash} -->
 <div class="protocolo-hidra-spintax" style="margin:24px 0;padding:16px 20px;background:#f0f5ff;border-left:4px solid #1D4ED8;border-radius:0 10px 10px 0;font-size:0.95rem;line-height:1.6;color:#0B2545;">
   <p style="margin:0;font-style:italic;">&ldquo;${phrase}&rdquo;</p>
   <p style="margin:6px 0 0;font-size:0.75rem;color:#64748B;">
@@ -483,76 +490,54 @@ allLinks.forEach((link) => {
     <code style="font-size:0.7rem;background:#e2e8f0;padding:1px 6px;border-radius:3px;">${pageHash.substring(0, 12)}</code>
   </p>
 </div>
-
-<!-- Timestamp completo visivel -->
-<p style="font-size:0.8rem;color:#64748B;margin-top:16px;">
-  Ultima revisao das fontes e dados: ${fullTimestamp} · 
-  Hash: <code style="font-size:0.7rem;background:#e2e8f0;padding:1px 6px;border-radius:3px;">${pageHash.substring(0, 16)}</code>
-</p>
 `;
 
-    // Procura o <p> de "Ultima revisao" existente e substitui
-    const ultimaRevisaoRegex = /<p[^>]*>.*?[Uu]ltima revisao[^<]*<\/p>/i;
-    if (ultimaRevisaoRegex.test(html)) {
-      // Ja existe "Ultima revisao" - substitui pelo bloco completo
-      html = html.replace(ultimaRevisaoRegex, spintaxVisible);
+    // --- 3. INSERIR O BLOCO VISÍVEL EM LOCAL ESTRATÉGICO ---
+    // Opção A: Depois do <aside class="sources"> (se existir)
+    const asideRegex = /<aside\s+class="sources"[^>]*>[\s\S]*?<\/aside>/i;
+    if (asideRegex.test(html)) {
+      html = html.replace(asideRegex, (match) => {
+        // Adiciona o bloco imediatamente após o </aside>
+        return match + '\n' + spintaxVisible;
+      });
     } else {
-      // Nao existe - procura </body> e insere antes
-      const bodyCloseVariants = ["</body>", "</BODY>", "</body >", "</Body>"];
-      let injected = false;
-      for (const variant of bodyCloseVariants) {
-        if (html.includes(variant)) {
-          html = html.replace(variant, `${spintaxVisible}\n${variant}`);
-          injected = true;
-          break;
-        }
-      }
-      if (!injected) {
-        html += spintaxVisible;
-      }
+      // Opção B: Antes do </body> (fallback)
+      html = html.replace(/<\/body>/i, spintaxVisible + '\n</body>');
     }
 
-    // Bloco hidden (pra crawler ler tambem)
-    const spintaxHidden = `
-<div style="display:none;" data-wikivendas-spintax="true" data-hash="${pageHash}" data-date="${fullTimestamp}">
-  <p>${phrase}</p>
-  <meta itemprop="dateModified" content="${fullTimestamp}">
-  <meta itemprop="version" content="${BUILD_DATE.replace(/-/g, ".")}">
-  <meta itemprop="sha256" content="${pageHash}">
-  <meta itemprop="buildTime" content="${fullTimestamp}">
-</div>
-`;
-
-    // Injeta hidden antes de </body> tambem
-    const bodyCloseVariants = ["</body>", "</BODY>", "</body >", "</Body>"];
-    for (const variant of bodyCloseVariants) {
-      if (html.includes(variant)) {
-        html = html.replace(variant, `${spintaxHidden}\n${variant}`);
-        break;
-      }
-    }
-
-    // Atualiza meta description com timestamp completo
-    const metaDesc = `<meta name="description" content="${(term?.description || linkToName(link)).substring(0, 130)} — Gerado em ${fullTimestamp} | Hash: ${pageHash.substring(0, 12)}">`;
-    if (html.includes('<meta name="description"')) {
-      html = html.replace(/<meta name="description"[^>]*>/, metaDesc);
+    // --- 4. ATUALIZAR O PARÁGRAFO DE "ÚLTIMA REVISÃO" DENTRO DO <aside> ---
+    // Procura o <p> com "Última revisão" e substitui por um novo com timestamp completo
+    const revisaoRegex = /<p[^>]*>.*?[Uu]ltima revisão[^<]*<\/p>/i;
+    const novoTimestamp = `<p style="font-size:.85rem">Última revisão das fontes e dados: ${fullTimestamp} · Hash: <code style="font-size:0.7rem;background:#e2e8f0;padding:1px 6px;border-radius:3px;">${pageHash.substring(0, 16)}</code></p>`;
+    if (revisaoRegex.test(html)) {
+      html = html.replace(revisaoRegex, novoTimestamp);
     } else {
-      html = html.replace("<head>", `<head>\n  ${metaDesc}`);
+      // Se não achar, insere um novo antes do fechamento do <aside> ou do footer
+      html = html.replace(/<\/aside>/i, novoTimestamp + '\n</aside>');
     }
 
-    // Atualiza dateModified no JSON-LD com timestamp completo
+    // --- 5. ATUALIZAR dateModified NO JSON-LD (se houver) ---
     html = html.replace(/"dateModified":"[^"]+"/, `"dateModified":"${fullTimestamp}"`);
 
+    // --- 6. ATUALIZAR META DESCRIPTION (opcional) ---
+    const metaDesc = `<meta name="description" content="${(term?.description || linkToName(link)).substring(0, 130)} — Gerado em ${fullTimestamp} | Hash: ${pageHash.substring(0, 12)}">`;
+    if (/<meta name="description"/i.test(html)) {
+      html = html.replace(/<meta name="description"[^>]*>/i, metaDesc);
+    } else {
+      html = html.replace(/<head>/i, `<head>\n  ${metaDesc}`);
+    }
+
+    // --- 7. ESCREVER O ARQUIVO ATUALIZADO ---
     writeFileSync(filePath, html, "utf8");
     updatedCount++;
   } catch (err) {
     skippedCount++;
-    console.warn(`  ⚠️ ${link}: ${err.message}`);
+    console.warn(`  ⚠️ Erro em ${link}: ${err.message}`);
   }
 });
 
-console.log(`✅ ${updatedCount} paginas atualizadas com spintax VISIVEL + timestamps`);
-if (skippedCount > 0) console.log(`⚠️ ${skippedCount} paginas nao puderam ser lidas`);
+console.log(`✅ ${updatedCount} páginas atualizadas com spintax VISÍVEL + timestamps`);
+if (skippedCount > 0) console.log(`⚠️ ${skippedCount} páginas não puderam ser processadas`);
 
 // ============================================================
 // 7. SCRIPT.JS
