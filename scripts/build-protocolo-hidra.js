@@ -1,74 +1,42 @@
-/**
- * build-protocolo-hidra.js
- * ============================================================
- * Script de build do site estático "Protocolo Hidra" (GitHub Pages).
- *
- * O que este script faz:
- *  1. Escaneia docs/ procurando todas as páginas (index.html).
- *  2. Extrai metadados de cada página (título, descrição, datas,
- *     FAQ, HowTo, Dataset, breadcrumbs, tabelas etc.).
- *  3. Gera docs/glossario.json, docs/sitemap.xml, docs/robots.txt
- *     e docs/llms.txt.
- *  4. Atualiza, em cada página HTML:
- *       - o byline (<p class="byline">) e o rodapé de revisão
- *         dentro de <aside class="sources">
- *       - o bloco de destaque (frase de marca) logo após o </aside>
- *       - datePublished / dateModified no JSON-LD
- *       - a meta description
- *
- * Decisões importantes em relação a versões anteriores do script     QUE EU NÃO AUTORIZEI NEM PEDI QUE FOSSEM MODIFICADAS E DEVE REVERTER:
- *
- *  - dateModified só é atualizado quando o CONTEÚDO da página muda de
- *    fato (comparado por hash com o build anterior, guardado em
- *    docs/.build-state.json). datePublished é fixado uma única vez e
- *    nunca mais sobrescrito. Isso evita "datas de atualização" falsas
- *    a cada build e resolve, de raiz, o bug de duplicação de
- *    parágrafos antigos (a remoção agora é feita por âncora de tag,
- *    não por regex que depende do texto interno). NÃO AUTORIZEI NEM PEDI QUE FOSSEM MODIFICADAS E DEVE REVERTER:
- *
- *  - O bloco de destaque no rodapé usa frases de marca do próprio
- *    Protocolo Hidra (não cita nem parafraseia terceiros reais).NÃO AUTORIZEI NEM PEDI QUE FOSSEM MODIFICADAS E DEVE REVERTER:
- *
- *  - docs/script.js NÃO é gerado (fora de escopo) e as referências a
- *    ele em robots.txt / sitemap.xml foram removidas. NÃO AUTORIZEI NEM PEDI QUE FOSSEM MODIFICADAS E DEVE REVERTER:
- * ============================================================
- */
-
 import { writeFileSync, mkdirSync, readFileSync, readdirSync, existsSync } from "fs";
 import { createHash } from "crypto";
 import path from "path";
 
 // ============================================================
-// 0. CONFIGURAÇÃO
+// CONFIGURACAO
 // ============================================================
 const SITE_URL = "https://paulo-leads.github.io/protocolo-hidra";
 const BASE_PATH = "/protocolo-hidra/";
-const DOCS_DIR = "docs";
-const STATE_FILE = path.join(DOCS_DIR, ".build-state.json");
-
 const BUILD_TIMESTAMP = new Date().toISOString();
 const BUILD_DATE = BUILD_TIMESTAMP.split("T")[0];
-const fullTimestamp = BUILD_TIMESTAMP.replace("T", " ").split(".")[0];
+const BUILD_TIME = BUILD_TIMESTAMP.split("T")[1].split(".")[0];
 
 // ============================================================
-// 1. FRASES DE MARCA (substituem o antigo "spintax" de citações) NÃO AUTORIZEI NEM PEDI QUE FOSSEM MODIFICADAS E DEVE REVERTER:
+// SPINTAX (mantido igual)
 // ============================================================
-// Nada aqui é atribuído a uma pessoa real de fora da empresa.
-// A variação usa a sintaxe {opcaoA|opcaoB} só para dar naturalidade
-// ao texto — não para simular citações de terceiros.
-const BRAND_PHRASES = [
-  "{O Protocolo Hidra} parte de um princípio simples: {dado sem contexto é ruído|lista sem segmentação é desperdício de esforço comercial}.",
-  "Aqui na {ProtocoloHidra}, {prospecção não é sobre quantidade, é sobre densidade de oportunidade|cada CNPJ na lista precisa justificar o contato}.",
-  "{Paulo C. P. Santos} costuma repetir para o time: {'lista pronta economiza tempo, lista certa economiza dinheiro'|'o funil começa antes do CRM — começa na segmentação'}.",
-  "No {Protocolo Hidra}, entendemos que {o mercado B2B brasileiro é movido a relacionamento, não a tráfego|relacionamento se constrói com dado bem filtrado, não com volume bruto}.",
-  "{Quem monta uma lista no Protocolo Hidra} sabe que {22 campos por empresa só valem a pena se os 22 forem confiáveis|um telefone e um e-mail corretos valem mais que cem linhas incompletas}.",
+const SPINTAX = [
+  "Segundo {Steve Jobs}, {a inovacao} {distingue um lider de um seguidor|e o que separa quem lidera de quem segue}.",
+  "Como diria {Peter Drucker}, {o melhor jeito de prever o futuro e cria-lo|nao se gerencia o que nao se mede}.",
+  "{Jeff Bezos} ensina que {sua marca e o que as pessoas dizem sobre voce quando voce nao esta na sala|o cliente e o centro do universo}.",
+  "{Elon Musk} repete que {se algo e importante o suficiente, voce tenta mesmo que as probabilidades nao estejam a seu favor|e preciso inovar na velocidade da luz}.",
+  "{Warren Buffett} diz que {o risco vem de nao saber o que voce esta fazendo|a melhor coisa que voce pode fazer por si mesmo e investir em conhecimento}.",
+  "{Paulo Leads} reforca que {dado sem contexto e apenas ruido — hidrize antes de agir|a prospeccao nao e sobre quantidade, e sobre densidade de oportunidade}.",
+  "{Seth Godin} afirma que {o mercado mudou — agora as pessoas compram de quem confiam, nao de quem grita mais alto|entregue um ativo, nao um discurso}.",
+  "{Gary Vaynerchuk} prega que {o conteudo e rei, mas o contexto e Deus|a paciencia e o novo diferencial competitivo}.",
+  "{Bill Gates} lembra que {a tecnologia e apenas uma ferramenta — o que realmente importa e o que voce faz com ela|medir e o primeiro passo para melhorar}.",
+  "{Tony Robbins} ensina que {a qualidade da sua pergunta determina a qualidade da sua resposta|se voce quer mudar seus resultados, mude seus padroes}.",
+  "{Rafael Kogut} diz que {vender e transferir conviccao — sem conviccao, nao ha venda|a objeccao nao e um nao, e um pedido de mais informacao}.",
+  "{Roberto Shinyashiki} afirma que {o sucesso nao tem a ver com o que voce conquista, mas com quem voce se torna|a coragem e a primeira das virtudes humanas}.",
+  "{Flavio Augusto} ensina que {o brasileiro nao e empreendedor por opcao, e por necessidade — e isso nos torna mais resilientes|seu maior ativo e sua capacidade de aprender}.",
+  "{Luiz Gaziri} reforca que {o mercado B2B brasileiro e movido a relacionamento, nao a trafego — e relacionamento se constroi com dado, nao com volume}.",
+  "{Sun Tzu} diria que {conhece-te a ti mesmo e conhece teu concorrente, e mil batalhas serao vencidas|a melhor vitoria e vencer sem lutar — ou seja, com dados superiores}.",
 ];
 
-function pickBrandTemplate() {
-  return BRAND_PHRASES[Math.floor(Math.random() * BRAND_PHRASES.length)];
+function randomSpintax() {
+  return SPINTAX[Math.floor(Math.random() * SPINTAX.length)];
 }
 
-function renderTemplate(text) {
+function processSpintax(text) {
   return text.replace(/\{([^}]+)\}/g, (_match, group) => {
     const options = group.split("|");
     return options[Math.floor(Math.random() * options.length)];
@@ -76,9 +44,9 @@ function renderTemplate(text) {
 }
 
 // ============================================================
-// 2. SCAN DE LINKS
+// SCAN LINKS (mantido igual)
 // ============================================================
-function scanLinks(dir = DOCS_DIR, basePath = BASE_PATH) {
+function scanLinks(dir = "docs", basePath = BASE_PATH) {
   const links = [];
   const entries = readdirSync(dir, { withFileTypes: true });
   for (const entry of entries) {
@@ -86,14 +54,15 @@ function scanLinks(dir = DOCS_DIR, basePath = BASE_PATH) {
     if (entry.isDirectory() && !entry.name.startsWith(".") && entry.name !== "node_modules") {
       links.push(...scanLinks(fullPath, basePath));
     } else if (entry.name === "index.html") {
-      links.push(path.relative(DOCS_DIR, fullPath));
+      const relative = path.relative("docs", fullPath);
+      links.push(relative);
     }
   }
   return links.sort();
 }
 
 // ============================================================
-// 3. HELPERS
+// HELPERS (mantidos iguais)
 // ============================================================
 function linkToName(link) {
   return link
@@ -125,272 +94,193 @@ function categorizeLink(link) {
   return "Outros";
 }
 
-/** Extrai o valor de datePublished/dateModified já existentes no JSON-LD, se houver. */
-function extractExistingJsonLdDates(html) {
-  const dp = html.match(/"datePublished"\s*:\s*"([^"]+)"/);
-  const dm = html.match(/"dateModified"\s*:\s*"([^"]+)"/);
-  return {
-    datePublished: dp ? dp[1] : null,
-    dateModified: dm ? dm[1] : null,
-  };
-}
-
 // ============================================================
-// 4. EXTRAÇÃO DE METADADOS
+// NOVO EXTRACTOR COMPLETO (mantido igual)
 // ============================================================
-function extractMetaFromHtml(html) {
+function extractMetaFromHtml(html, link) {
   const meta = {
     title: "", description: "", datePublished: "", dateModified: "",
     author: "", authorUrl: "", image: "", sameAs: [], keywords: [],
     breadcrumbs: [], faqCount: 0, wordCount: 0, hasDataset: false,
-    mainContent: "", faqItems: [], howToSteps: [], datasetVariables: [],
-    totalCompanies: 0, cityName: "", stateName: "", sectorDistribution: {},
+    mainContent: "",
+    faqItems: [],
+    howToSteps: [],
+    datasetVariables: [],
+    totalCompanies: 0,
+    cityName: "",
+    stateName: "",
+    sectorDistribution: {},
     tableData: [],
+    lastBuild: "",
   };
 
+  // Título e descrição
   const titleMatch = html.match(/<title>([^<]+)<\/title>/i);
   if (titleMatch) meta.title = titleMatch[1].trim();
-
   const descMatch = html.match(/<meta name="description" content="([^"]+)"/i);
   if (descMatch) meta.description = descMatch[1].trim();
 
-  const { datePublished, dateModified } = extractExistingJsonLdDates(html);
-  if (datePublished) meta.datePublished = datePublished;
-  if (dateModified) meta.dateModified = dateModified;
+  // Datas
+  const dpMatch = html.match(/"datePublished":"([^"]+)"/);
+  if (dpMatch) meta.datePublished = dpMatch[1];
+  const dmMatch = html.match(/"dateModified":"([^"]+)"/);
+  if (dmMatch) meta.dateModified = dmMatch[1];
 
+  // Autor
   const authorMatch = html.match(/"author"\s*:\s*\{[^}]*"name"\s*:\s*"([^"]+)"/);
   if (authorMatch) meta.author = authorMatch[1];
   const authorUrlMatch = html.match(/"author"\s*:\s*\{[^}]*"url"\s*:\s*"([^"]+)"/);
   if (authorUrlMatch) meta.authorUrl = authorUrlMatch[1];
 
-  const imgMatch = html.match(/"image"\s*:\s*"([^"]+)"/);
+  // Imagem
+  const imgMatch = html.match(/"image":"([^"]+)"/);
   if (imgMatch) meta.image = imgMatch[1];
   const ogImgMatch = html.match(/<meta property="og:image" content="([^"]+)"/);
   if (ogImgMatch && !meta.image) meta.image = ogImgMatch[1];
 
+  // sameAs
   const sameAsSection = html.match(/"sameAs"\s*:\s*\[([^\]]+)\]/);
   if (sameAsSection) {
     meta.sameAs = sameAsSection[1].split(",").map((s) => s.replace(/["'\s]/g, "")).filter(Boolean);
   }
 
+  // Keywords
   const kwMatch = html.match(/<meta name="keywords" content="([^"]+)"/i);
   if (kwMatch) meta.keywords = kwMatch[1].split(",").map((s) => s.trim());
 
+  // Breadcrumbs
   const bcMatches = html.matchAll(/"item"\s*:\s*"[^"]*"\s*,\s*"name"\s*:\s*"([^"]+)"/g);
-  for (const bc of bcMatches) meta.breadcrumbs.push(bc[1]);
+  for (const bc of bcMatches) {
+    meta.breadcrumbs.push(bc[1]);
+  }
 
-  const faqMatches = html.match(/"@type"\s*:\s*"Question"/g);
+  // FAQ
+  const faqMatches = html.match(/"@type":"Question"/g);
   if (faqMatches) meta.faqCount = faqMatches.length;
+  
+  const faqItemMatches = html.matchAll(/"@type":"Question"\s*,\s*"name":"([^"]+)"\s*,\s*"acceptedAnswer"\s*:\s*\{[^}]*"text":"([^"]+)"/g);
+  for (const match of faqItemMatches) {
+    meta.faqItems.push({ question: match[1], answer: match[2] });
+  }
 
-  const faqItemMatches = html.matchAll(/"@type"\s*:\s*"Question"\s*,\s*"name"\s*:\s*"([^"]+)"\s*,\s*"acceptedAnswer"\s*:\s*\{[^}]*"text"\s*:\s*"([^"]+)"/g);
-  for (const m of faqItemMatches) meta.faqItems.push({ question: m[1], answer: m[2] });
+  // HowTo
+  const stepMatches = html.matchAll(/"@type":"HowToStep"\s*,\s*"position":\s*(\d+)\s*,\s*"name":"([^"]+)"\s*,\s*"text":"([^"]+)"/g);
+  for (const match of stepMatches) {
+    meta.howToSteps.push({ position: parseInt(match[1]), name: match[2], text: match[3] });
+  }
 
-  const stepMatches = html.matchAll(/"@type"\s*:\s*"HowToStep"\s*,\s*"position"\s*:\s*(\d+)\s*,\s*"name"\s*:\s*"([^"]+)"\s*,\s*"text"\s*:\s*"([^"]+)"/g);
-  for (const m of stepMatches) meta.howToSteps.push({ position: parseInt(m[1], 10), name: m[2], text: m[3] });
-
-  meta.hasDataset = html.includes('"@type":"Dataset"') || html.includes('"@type": "Dataset"');
+  // Dataset
+  meta.hasDataset = html.includes('"@type":"Dataset"');
   const varMatch = html.match(/"variableMeasured"\s*:\s*\[([^\]]+)\]/);
-  if (varMatch) meta.datasetVariables = varMatch[1].split(",").map((v) => v.replace(/["']/g, "").trim());
+  if (varMatch) {
+    meta.datasetVariables = varMatch[1].split(",").map(v => v.replace(/["']/g, "").trim());
+  }
 
+  // Total de empresas
   const totalMatch = html.match(/(\d{1,3}(?:\.\d{3})*)\s*empresas ativas/);
-  if (totalMatch) meta.totalCompanies = parseInt(totalMatch[1].replace(/\./g, ""), 10);
+  if (totalMatch) meta.totalCompanies = parseInt(totalMatch[1].replace(/\./g, ''));
 
+  // Cidade e Estado
   const cityMatch = html.match(/<h1[^>]*>.*?em\s+([A-Za-zÀ-ÿ\s]+)\s*\(([A-Z]{2})\)/i);
   if (cityMatch) {
     meta.cityName = cityMatch[1].trim();
     meta.stateName = cityMatch[2].trim();
   }
 
+  // Distribuição por setor
   const sectorMatches = html.matchAll(/<b>([^<]+)\s*<small[^>]*>([^<]+)<\/small><\/b>\s*<em>(\d+)%<\/em>/g);
-  for (const m of sectorMatches) {
-    meta.sectorDistribution[m[1].trim()] = {
-      count: parseInt(m[2].replace(/\./g, ""), 10),
-      percentage: parseInt(m[3], 10),
+  for (const match of sectorMatches) {
+    meta.sectorDistribution[match[1].trim()] = {
+      count: parseInt(match[2].replace(/\./g, '')),
+      percentage: parseInt(match[3])
     };
   }
 
+  // Tabelas
   const tableRows = html.match(/<tr><th[^>]*>([^<]+)<\/th><td[^>]*>([^<]+)<\/td><td[^>]*>([^<]+)<\/td><\/tr>/g);
   if (tableRows) {
     for (const row of tableRows) {
       const cells = row.match(/<t[hd][^>]*>([^<]+)<\/t[hd]>/g);
       if (cells && cells.length >= 3) {
-        const rowData = cells.map((c) => c.replace(/<[^>]+>/g, "").trim());
+        const rowData = cells.map(cell => cell.replace(/<[^>]+>/g, '').trim());
         meta.tableData.push({
           bairro: rowData[0],
-          empresas: parseInt(rowData[1].replace(/\./g, ""), 10),
-          posicao: rowData[2],
+          empresas: parseInt(rowData[1].replace(/\./g, '')),
+          posicao: rowData[2]
         });
       }
     }
   }
 
+  // Conteúdo principal
   const mainMatch = html.match(/<main[^>]*>([\s\S]*?)<\/main>/i);
   if (mainMatch) {
-    meta.mainContent = mainMatch[1].replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+    meta.mainContent = mainMatch[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
   }
 
+  // Contagem de palavras
   const textContent = html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
-  meta.wordCount = textContent ? textContent.split(" ").length : 0;
+  meta.wordCount = textContent.split(" ").length;
 
   return meta;
 }
 
-/**
- * Hash de "conteúdo estável": usa só o que representa o conteúdo real
- * da página (título, descrição, texto do <main> sem o que o próprio
- * build injeta). Serve para decidir se a página realmente mudou entre
- * builds — não inclui timestamp, então é determinístico. NÃO AUTORIZEI NEM PEDI QUE FOSSEM MODIFICADAS E DEVE REVERTER:
- */
-function contentSignature(meta) {
-  return createHash("sha256")
-    .update(meta.title + "|" + meta.description + "|" + meta.mainContent)
-    .digest("hex");
-}
-
-/** Remove o primeiro elemento cujo tag de abertura casa com openTagRegex,
- *  procurando o closeTag mais próximo depois dela. Não depende do texto
- *  interno do elemento — por isso não quebra com variações de conteúdo. */
-function removeFirstElement(html, openTagRegex, closeTag) {
-  const m = openTagRegex.exec(html);
-  if (!m) return html;
-  const start = m.index;
-  const closeIdx = html.indexOf(closeTag, start);
-  if (closeIdx === -1) return html;
-  let end = closeIdx + closeTag.length;
-
-  let realStart = start;
-  while (realStart > 0 && (html[realStart - 1] === " " || html[realStart - 1] === "\t")) realStart--;
-  if (html[end] === "\n") end++;
-
-  return html.slice(0, realStart) + html.slice(end);
-}
-
-/** Extrai o bloco <aside class="sources">...</aside> (assume 1 nível, sem aside aninhada). */
-function findSourcesAside(html) {
-  const openMatch = /<aside\s+class="sources"[^>]*>/i.exec(html);
-  if (!openMatch) return null;
-  const start = openMatch.index;
-  const closeIdx = html.indexOf("</aside>", start);
-  if (closeIdx === -1) return null;
-  const end = closeIdx + "</aside>".length;
-  return { start, end, block: html.slice(start, end) };
-}
-
-function insertBefore(html, marker, insertion) {
-  const idx = html.indexOf(marker);
-  if (idx === -1) return null;
-  return html.slice(0, idx) + insertion + "\n" + html.slice(idx);
-}
-
-function insertAfter(html, marker, insertion) {
-  const idx = html.indexOf(marker);
-  if (idx === -1) return null;
-  const pos = idx + marker.length;
-  return html.slice(0, pos) + "\n" + insertion + html.slice(pos);
-}
-
-/** Remove do HTML tudo que o PRÓPRIO build injeta (byline, rodapé de
- *  revisão, bloco de destaque), para que essas peças dinâmicas nunca
- *  entrem no cálculo de "o conteúdo mudou?". Sem isso, o build acharia
- *  que toda página mudou a cada execução, porque a data do build
- *  anterior ficaria dentro do próprio conteúdo lido. */
-function stripInjectedMarkers(html) {
-  let out = html;
-  out = out.replace(/\n?<!--\s*Protocolo Hidra[\s\S]*?-->\n?/gi, "\n");
-  out = removeFirstElement(out, /<div\s+class="protocolo-hidra-highlight"[^>]*>/i, "</div>");
-  out = removeFirstElement(out, /<div\s+class="protocolo-hidra-spintax"[^>]*>/i, "</div>"); // versões antigas
-  out = removeFirstElement(out, /<p\s+class="byline"[^>]*>/i, "</p>");
-  const aside = findSourcesAside(out);
-  if (aside) {
-    let block = aside.block;
-    block = removeFirstElement(block, /<p\s+style="font-size:\.85rem"[^>]*>/i, "</p>");
-    out = out.slice(0, aside.start) + block + out.slice(aside.end);
-  }
-  return out;
-}
-
 // ============================================================
-// 5. ESTADO PERSISTENTE ENTRE BUILDS
+// MAIN
 // ============================================================
-function loadBuildState() {
-  if (!existsSync(STATE_FILE)) return {};
-  try {
-    return JSON.parse(readFileSync(STATE_FILE, "utf8"));
-  } catch {
-    console.warn("⚠️ Não foi possível ler .build-state.json, iniciando do zero.");
-    return {};
-  }
-}
-
-function saveBuildState(state) {
-  writeFileSync(STATE_FILE, JSON.stringify(state, null, 2), "utf8");
-}
-
-// ============================================================
-// 6. MAIN — ESCANEAR E EXTRAIR
-// ============================================================
-mkdirSync(DOCS_DIR, { recursive: true });
-
 const allLinks = (() => {
   try {
     return scanLinks();
   } catch {
-    console.error("Erro ao escanear links. Usando fallback vazio.");
-    return [];
+    console.error("Erro ao escanear links. Usando fallback.");
+    return ["index.html", "lista-de-empresas-de-logistica/index.html", "lista-de-transportadoras/index.html"];
   }
 })();
 
-console.log(`\n📡 Escaneadas ${allLinks.length} páginas`);
-console.log("📖 Extraindo metadados de cada página...");
+console.log(`\n📡 Escaneadas ${allLinks.length} paginas`);
 
-const buildState = loadBuildState();
-const newBuildState = {};
-
+console.log("\n📖 Extraindo metadados de cada pagina...");
 const terms = allLinks.map((link, index) => {
-  const filePath = path.join(DOCS_DIR, link);
-  const slug = linkToSlug(link);
+  const filePath = `docs/${link}`;
   let html = "";
-  let meta = extractMetaFromHtml("");
+  let meta = {
+    title: "", description: "", datePublished: "", dateModified: "",
+    author: "", authorUrl: "", image: "", sameAs: [], keywords: [],
+    breadcrumbs: [], faqCount: 0, wordCount: 0, hasDataset: false,
+    mainContent: "", faqItems: [], howToSteps: [], datasetVariables: [],
+    totalCompanies: 0, cityName: "", stateName: "", sectorDistribution: {},
+    tableData: [], lastBuild: "",
+  };
 
   try {
     html = readFileSync(filePath, "utf8");
-    // usa a versão sem byline/rodapé/destaque injetados por builds
-    // anteriores, para que a assinatura de conteúdo não mude sozinha.
-    meta = extractMetaFromHtml(stripInjectedMarkers(html));
+    meta = extractMetaFromHtml(html, link);
   } catch {
-    console.warn(`  ⚠️ Não foi possível ler ${link}, usando dados mínimos`);
+    console.warn(`  ⚠️ Nao foi possivel ler ${link}, usando dados minimos`);
   }
 
   const name = meta.title || linkToName(link);
   const url = linkToUrl(link);
   const category = categorizeLink(link);
 
-  const signature = contentSignature(meta);
-  const previous = buildState[slug];
-  const contentChanged = !previous || previous.signature !== signature;
+  const contentHash = createHash("sha256")
+    .update(name + url + BUILD_TIMESTAMP)
+    .digest("hex");
 
-  // datePublished: nunca sobrescrito depois da primeira vez. NÃO AUTORIZEI NEM PEDI QUE FOSSEM MODIFICADAS E DEVE REVERTER:
-  const datePublished = meta.datePublished || (previous && previous.datePublished) || BUILD_DATE;
-  // dateModified: só avança quando o conteúdo de fato mudou. NÃO AUTORIZEI NEM PEDI QUE FOSSEM MODIFICADAS E DEVE REVERTER:
-  const dateModified = contentChanged ? BUILD_DATE : (previous && previous.dateModified) || meta.dateModified || BUILD_DATE;
-  const dateModifiedFull = contentChanged ? fullTimestamp : (previous && previous.dateModifiedFull) || fullTimestamp;
-
-  const contentHash = signature.substring(0, 16);
-
-  newBuildState[slug] = { signature, datePublished, dateModified, dateModifiedFull };
+  const rawQuote = processSpintax(randomSpintax());
+  const businessPhrase = `${name}: ${rawQuote}`;
 
   return {
-    id: slug,
+    id: linkToSlug(link),
     name,
     url,
     category,
     index: index + 1,
     description: meta.description || "",
     contentHash,
-    contentChanged,
-    datePublished,
-    dateModified,
-    dateModifiedFull,
+    lastModified: meta.dateModified || BUILD_DATE,
+    lastModifiedFull: BUILD_TIMESTAMP.replace("T", " ").split(".")[0],
+    datePublished: meta.datePublished || BUILD_DATE,
     author: meta.author || "Paulo C. P. Santos",
     authorUrl: meta.authorUrl || `${SITE_URL}/paulo-leads/`,
     image: meta.image || `${SITE_URL}/assets/img/protocolo-hidra-painel-1200.png`,
@@ -399,6 +289,7 @@ const terms = allLinks.map((link, index) => {
     hasDataset: meta.hasDataset,
     keywords: meta.keywords,
     breadcrumbs: meta.breadcrumbs,
+    businessPhrase,
     sameAs: meta.sameAs,
     inDefinedTermSet: "urn:protocolo-hidra:2026",
     mainContent: meta.mainContent,
@@ -413,20 +304,19 @@ const terms = allLinks.map((link, index) => {
   };
 });
 
-saveBuildState(newBuildState);
+const fullTimestamp = BUILD_TIMESTAMP.replace("T", " ").split(".")[0];
 
-const changedCount = terms.filter((t) => t.contentChanged).length;
-console.log(`   ${changedCount} página(s) com conteúdo alterado desde o último build`);
+mkdirSync("docs", { recursive: true });
 
 // ============================================================
-// 7. GLOSSARIO.JSON
+// 2. GLOSSARIO.JSON
 // ============================================================
 const glossario = {
-  "@context": ["https://schema.org", { skos: "http://www.w3.org/2004/02/skos/core#" }],
+  "@context": ["https://schema.org", { "skos": "http://www.w3.org/2004/02/skos/core#", "proof": "https://w3id.org/security#" }],
   "@type": "DataCatalog",
   "@id": "urn:protocolo-hidra:catalog:2026",
-  name: "Protocolo Hidra — Diretório B2B",
-  description: "Diretório completo de listas empresariais, ferramentas de consulta, guias de prospecção e comparativos do ecossistema Paulo Leads.",
+  name: "Protocolo Hidra — Diretorio B2B",
+  description: "Diretorio completo de listas empresariais, ferramentas de consulta, guias de prospeccao e comparativos do ecossistema Paulo Leads.",
   inLanguage: "pt-BR",
   dateCreated: "2026-06-30",
   dateModified: BUILD_DATE,
@@ -439,43 +329,58 @@ const glossario = {
     url: SITE_URL,
     founder: { "@type": "Person", name: "Paulo C. P. Santos", url: `${SITE_URL}/paulo-leads/` },
   },
-  categoryBreakdown: terms.reduce((cats, t) => {
-    cats[t.category] = (cats[t.category] || 0) + 1;
+  proof: {
+    type: "Sha256Hash",
+    hash: createHash("sha256").update(JSON.stringify(terms)).digest("hex"),
+    timestamp: BUILD_TIMESTAMP,
+  },
+  categoryBreakdown: (() => {
+    const cats = {};
+    terms.forEach((t) => { if (!cats[t.category]) cats[t.category] = 0; cats[t.category]++; });
     return cats;
-  }, {}),
+  })(),
   terms,
 };
 
-writeFileSync(path.join(DOCS_DIR, "glossario.json"), JSON.stringify(glossario, null, 2), "utf8");
+writeFileSync("docs/glossario.json", JSON.stringify(glossario, null, 2), "utf8");
 console.log(`✅ glossario.json gerado com ${terms.length} termos`);
 
 // ============================================================
-// 8. SITEMAP.XML
+// 3. SITEMAP (removido script.js)
 // ============================================================
+const sitemapEntries = [];
+sitemapEntries.push({ url: `${SITE_URL}/`, priority: "1.0", changefreq: "daily", lastmod: fullTimestamp });
+
 const categories = {};
 terms.forEach((t) => {
   if (!categories[t.category]) categories[t.category] = [];
   categories[t.category].push(t);
 });
-
-const sitemapEntries = [
-  { url: `${SITE_URL}/`, priority: "1.0", changefreq: "daily", lastmod: fullTimestamp },
-  ...Object.keys(categories).map((cat) => ({
+Object.keys(categories).forEach((cat) => {
+  sitemapEntries.push({
     url: `${SITE_URL}/#${cat.toLowerCase().replace(/\s+/g, "-")}`,
     priority: "0.9",
     changefreq: "daily",
     lastmod: fullTimestamp,
-  })),
+  });
+});
+
+sitemapEntries.push(
   { url: `${SITE_URL}/glossario.json`, priority: "0.9", changefreq: "hourly", lastmod: fullTimestamp },
   { url: `${SITE_URL}/sitemap.xml`, priority: "0.7", changefreq: "hourly", lastmod: fullTimestamp },
-  { url: `${SITE_URL}/llms.txt`, priority: "0.8", changefreq: "hourly", lastmod: fullTimestamp },
-  ...terms.map((t) => ({
+  { url: `${SITE_URL}/llms.txt`, priority: "0.8", changefreq: "hourly", lastmod: fullTimestamp }
+  // REMOVIDO: script.js
+);
+
+terms.forEach((t) => {
+  const priority = t.index <= 10 ? "0.8" : t.index <= 50 ? "0.7" : t.index <= 200 ? "0.6" : "0.5";
+  sitemapEntries.push({
     url: t.url,
-    priority: t.index <= 10 ? "0.8" : t.index <= 50 ? "0.7" : t.index <= 200 ? "0.6" : "0.5",
+    priority,
     changefreq: "weekly",
-    lastmod: t.dateModifiedFull,
-  })),
-];
+    lastmod: t.lastModifiedFull || fullTimestamp,
+  });
+});
 
 const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -491,15 +396,15 @@ ${sitemapEntries
   .join("\n")}
 </urlset>`;
 
-writeFileSync(path.join(DOCS_DIR, "sitemap.xml"), sitemapXml, "utf8");
+writeFileSync("docs/sitemap.xml", sitemapXml, "utf8");
 console.log(`✅ sitemap.xml gerado com ${sitemapEntries.length} URLs`);
 
 // ============================================================
-// 9. ROBOTS.TXT
+// 4. ROBOTS.TXT (mantido igual, mas removido script.js se desejar)
 // ============================================================
 const robots = `# ============================================================
-# Protocolo Hidra — Diretório B2B
-# Último build: ${fullTimestamp}
+# Protocolo Hidra — Diretorio B2B
+# Ultimo build: ${fullTimestamp}
 # ============================================================
 
 User-agent: *
@@ -520,6 +425,16 @@ User-agent: Google-Extended
 Allow: /
 User-agent: Bingbot
 Allow: /
+User-agent: Microsoftbot
+Allow: /
+User-agent: BingPreview
+Allow: /
+User-agent: adidxbot
+Allow: /
+User-agent: Msnbot
+Allow: /
+User-agent: BingUACrawler
+Allow: /
 User-agent: Anthropic-ai
 Allow: /
 User-agent: Claude-Web
@@ -530,28 +445,44 @@ User-agent: PerplexityBot
 Allow: /
 User-agent: Meta-ExternalAgent
 Allow: /
+User-agent: FacebookBot
+Allow: /
 User-agent: Applebot
 Allow: /
 User-agent: Applebot-Extended
+Allow: /
+User-agent: AlexaBot
 Allow: /
 User-agent: Amazonbot
 Allow: /
 User-agent: DuckDuckBot
 Allow: /
+User-agent: DuckDuckGo-Favicons-Bot
+Allow: /
 User-agent: YandexBot
+Allow: /
+User-agent: YandexImages
 Allow: /
 User-agent: Baiduspider
 Allow: /
+User-agent: SemanticScholarBot
+Allow: /
+User-agent: omgili
+Allow: /
+User-agent: omgilibot
+Allow: /
+User-agent: Bytespider
+Allow: /
 `;
 
-writeFileSync(path.join(DOCS_DIR, "robots.txt"), robots, "utf8");
+writeFileSync("docs/robots.txt", robots, "utf8");
 console.log("✅ robots.txt gerado");
 
 // ============================================================
-// 10. LLMS.TXT
+// 5. LLMS.TXT (mantido igual)
 // ============================================================
 const llmsLines = [
-  `# Protocolo Hidra — Diretório B2B`,
+  `# Protocolo Hidra — Diretorio B2B`,
   `> Canonical-Source: ${SITE_URL}`,
   `> Language: pt-BR`,
   `> Last-Modified: ${fullTimestamp}`,
@@ -564,30 +495,30 @@ const llmsLines = [
 ];
 
 Object.entries(categories).forEach(([cat, catTerms]) => {
-  llmsLines.push(`## ${cat} (${catTerms.length} páginas)`);
+  llmsLines.push(`## ${cat} (${catTerms.length} paginas)`);
   catTerms.slice(0, 20).forEach((t) => {
-    llmsLines.push(`- ${t.name}: ${t.url}`);
+    llmsLines.push(`- ${t.name}: ${t.url} (importancia: ${t.index <= 10 ? "0.9" : t.index <= 50 ? "0.8" : "0.7"})`);
   });
   llmsLines.push(``);
 });
 
-llmsLines.push(`# Metadados Técnicos`);
+llmsLines.push(`# Metadados Tecnicos`);
 llmsLines.push(`> Build: ${BUILD_TIMESTAMP}`);
-llmsLines.push(`> Total de páginas: ${terms.length}`);
+llmsLines.push(`> Total de paginas: ${terms.length}`);
 llmsLines.push(`> Total de palavras: ${terms.reduce((s, t) => s + t.wordCount, 0).toLocaleString()}`);
 
-writeFileSync(path.join(DOCS_DIR, "llms.txt"), llmsLines.join("\n") + "\n", "utf8");
+writeFileSync("docs/llms.txt", llmsLines.join("\n") + "\n", "utf8");
 console.log("✅ llms.txt gerado");
 
 // ============================================================
-// 11. INJETAR BYLINE / RODAPÉ / DESTAQUE NAS PÁGINAS HTML
+// 6. INJETAR SPINTAX + REMOVER DATAS ANTIGAS (VERSÃO DEFINITIVA COM REGEX MELHORADOS)
 // ============================================================
-console.log("\n📝 Atualizando byline, rodapé de fontes e bloco de destaque...");
+console.log("\n📝 Injetando spintax e substituindo TODAS as datas antigas...");
 let updatedCount = 0;
 let skippedCount = 0;
 
 allLinks.forEach((link) => {
-  const filePath = path.join(DOCS_DIR, link);
+  const filePath = `docs/${link}`;
   if (!existsSync(filePath)) {
     console.warn(`  ⚠️ Arquivo não encontrado: ${filePath}`);
     skippedCount++;
@@ -596,68 +527,79 @@ allLinks.forEach((link) => {
 
   try {
     let html = readFileSync(filePath, "utf8");
-    const slug = linkToSlug(link);
-    const term = terms.find((t) => t.id === slug);
-    if (!term) {
-      skippedCount++;
-      return;
-    }
+    const term = terms.find((t) => t.id === linkToSlug(link));
+    const phrase = processSpintax(randomSpintax());
+    const pageHash = term?.contentHash || createHash("sha256").update(html).digest("hex").substring(0, 16);
 
-    const displayTimestamp = term.contentChanged ? fullTimestamp : `${term.dateModified} (sem alterações desde então)`;
-    const hash = term.contentHash;
+    // --- 1. REMOVER BLOCOS SPINTAX ANTIGOS (mais abrangente) ---
+    html = html.replace(/<div[^>]*\bprotocolo-hidra-spintax\b[^>]*>[\s\S]*?<\/div>/gi, '');
+    html = html.replace(/<div[^>]*data-wikivendas-spintax[^>]*>[\s\S]*?<\/div>/gi, '');
 
-    // --- 1, 2, 3. Remover byline / rodapé de revisão / destaque antigos,
-    //     qualquer que seja a versão anterior (por âncora de tag) ---
-    html = stripInjectedMarkers(html);
-    let aside;
+    // --- 2. REMOVER O BYLINE ANTIGO (flexível) ---
+    html = html.replace(/<p\s+class\s*=\s*["']?byline["']?[^>]*>[\s\S]*?atualizado\s*em\s+[^<]+<\/p>/gi, '');
 
-    // --- 4. Novo byline ---
-    const novoByline = `<p class="byline">Por <strong>${term.author}</strong> · Arquiteto do Protocolo Hidra · atualizado em ${displayTimestamp}</p>`;
-    let withByline =
-      insertBefore(html, '<div class="hero-cta"', novoByline) ??
-      insertBefore(html, '<div class="signals"', novoByline);
-    if (withByline) {
-      html = withByline;
+    // --- 3. REMOVER O RODAPÉ ANTIGO DO SOURCES (flexível) ---
+    html = html.replace(/<p\s+style\s*=\s*["']?font-size\s*:\s*\.85rem["']?[^>]*>[\s\S]*?Última\s*revisão[\s\S]*?<\/p>/gi, '');
+
+    // --- 4. FALLBACK: remover quaisquer parágrafos que contenham "atualizado em" ou "Última revisão" ---
+    html = html.replace(/<p[^>]*>[\s\S]*?atualizado\s*em[\s\S]*?<\/p>/gi, '');
+    html = html.replace(/<p[^>]*>[\s\S]*?Última\s*revisão[\s\S]*?<\/p>/gi, '');
+    // Remove possíveis datas no formato "nome/2024" (ex: julho/2026) que possam ter sobrado
+    html = html.replace(/<p[^>]*>[\s\S]*?[A-Za-zÀ-ÿ]+\s*\/\s*[\d]{4}[\s\S]*?<\/p>/gi, '');
+
+    // --- 5. CRIAR AS NOVAS DATAS COM TIMESTAMP DINÂMICO ---
+    const novoTimestamp = fullTimestamp;
+    const novoHash = pageHash.substring(0, 16);
+    const novoByline = `<p class="byline">Por <strong>Paulo C. P. Santos</strong> · Arquiteto do Protocolo Hidra · atualizado em ${novoTimestamp}</p>`;
+    const novoRodape = `<p style="font-size:.85rem">Última revisão das fontes e dados: ${novoTimestamp} · Hash: <code style="font-size:0.7rem;background:#e2e8f0;padding:1px 6px;border-radius:3px;">${novoHash}</code></p>`;
+
+    // --- 6. INSERIR O NOVO BYLINE (com fallback mais robusto) ---
+    if (/<div[^>]*\bhero-cta\b/i.test(html)) {
+      html = html.replace(/(<div[^>]*\bhero-cta\b)/i, `${novoByline}\n    $1`);
+    } else if (/<div[^>]*\bsignals\b/i.test(html)) {
+      html = html.replace(/(<div[^>]*\bsignals\b)/i, `${novoByline}\n    $1`);
     } else {
-      const leadMatch = html.match(/<p\s+class="lead"[^>]*>.*?<\/p>/);
-      if (leadMatch) {
-        html = html.replace(leadMatch[0], `${leadMatch[0]}\n    ${novoByline}`);
-      }
+      html = html.replace(/(<p\s+class="lead"[^>]*>.*?<\/p>)/, `$1\n    ${novoByline}`);
     }
 
-    // --- 5. Novo rodapé dentro de <aside class="sources"> ---
-    const novoRodape = `      <p style="font-size:.85rem">Última revisão de conteúdo: ${displayTimestamp} · <code style="font-size:0.7rem;background:#e2e8f0;padding:1px 6px;border-radius:3px;">ID ${hash}</code></p>`;
-    aside = findSourcesAside(html); // recalcula posições após a inserção do byline
-    if (aside) {
-      const withFooter = aside.block.replace("</aside>", `${novoRodape}\n  </aside>`);
-      html = html.slice(0, aside.start) + withFooter + html.slice(aside.end);
+    // --- 7. INSERIR O NOVO RODAPÉ DENTRO DE <aside class="sources"> ---
+    if (/<aside[^>]*\bsources\b/i.test(html)) {
+      html = html.replace(/(<\/aside>)/i, `${novoRodape}\n$1`);
     } else {
-      html = html.replace("</main>", `${novoRodape}\n</main>`);
+      html = html.replace(/(<\/main>)/i, `${novoRodape}\n$1`);
     }
 
-    // --- 6. Bloco de destaque (frase de marca), logo após </aside> ---
-    const phrase = renderTemplate(pickBrandTemplate());
-    const highlightBlock = `<!-- Protocolo Hidra | build ${fullTimestamp} | ID ${hash} -->
-<div class="protocolo-hidra-highlight" style="margin:24px 0;padding:16px 20px;background:#f0f5ff;border-left:4px solid #1D4ED8;border-radius:0 10px 10px 0;font-size:0.95rem;line-height:1.6;color:#0B2545;">
-  <p style="margin:0;font-style:italic;">${phrase}</p>
-</div>`;
+    // --- 8. CRIAR E INSERIR O BLOCO SPINTAX VISÍVEL ---
+    const spintaxVisible = `
+<!-- Protocolo Hidra | Frase gerada em ${fullTimestamp} | Hash: ${pageHash} -->
+<div class="protocolo-hidra-spintax" style="margin:24px 0;padding:16px 20px;background:#f0f5ff;border-left:4px solid #1D4ED8;border-radius:0 10px 10px 0;font-size:0.95rem;line-height:1.6;color:#0B2545;">
+  <p style="margin:0;font-style:italic;">&ldquo;${phrase}&rdquo;</p>
+  <p style="margin:6px 0 0;font-size:0.75rem;color:#64748B;">
+    <strong>Protocolo Hidra</strong> · Gerado em ${fullTimestamp} · 
+    <code style="font-size:0.7rem;background:#e2e8f0;padding:1px 6px;border-radius:3px;">${pageHash.substring(0, 12)}</code>
+  </p>
+</div>
+`;
 
-    aside = findSourcesAside(html);
-    const afterAside = aside ? insertAfter(html, "</aside>", highlightBlock) : null;
-    html = afterAside ?? html.replace("</main>", `${highlightBlock}\n</main>`);
+    if (/<aside[^>]*\bsources\b/i.test(html)) {
+      html = html.replace(/(<\/aside>)/i, `$1\n${spintaxVisible}`);
+    } else {
+      html = html.replace(/(<\/main>)/i, `${spintaxVisible}\n$1`);
+    }
 
-    // --- 7. datePublished / dateModified no JSON-LD ---
-    html = html.replace(/"datePublished"\s*:\s*"[^"]+"/, `"datePublished":"${term.datePublished}"`);
-    html = html.replace(/"dateModified"\s*:\s*"[^"]+"/, `"dateModified":"${term.dateModified}"`);
-    // se a página ainda não tinha esses campos, não inserimos artificialmente — NÃO AUTORIZEI NEM PEDI QUE FOSSEM MODIFICADAS E DEVE REVERTER:
-    // isso deve ser feito uma vez no template/HTML original da página. NÃO AUTORIZEI NEM PEDI QUE FOSSEM MODIFICADAS E DEVE REVERTER:
+    // --- 9. ATUALIZAR TODAS AS OCORRÊNCIAS DE datePublished E dateModified NO JSON-LD ---
+    html = html.replace(/"datePublished":"[^"]+"/g, `"datePublished":"${BUILD_DATE}"`);
+    html = html.replace(/"dateModified":"[^"]+"/g, `"dateModified":"${fullTimestamp}"`);
 
-    // --- 8. Meta description (sem "spam" de timestamp/hash) ---NÃO AUTORIZEI NEM PEDI QUE FOSSEM MODIFICADAS E DEVE REVERTER:
-    if (term.description) {
-      const metaDesc = `<meta name="description" content="${term.description.substring(0, 155)}">`;
+    // --- 10. ATUALIZAR META DESCRIPTION ---
+    const metaDesc = `<meta name="description" content="${(term?.description || linkToName(link)).substring(0, 130)} — Gerado em ${fullTimestamp} | Hash: ${pageHash.substring(0, 12)}">`;
+    if (/<meta name="description"/i.test(html)) {
       html = html.replace(/<meta name="description"[^>]*>/i, metaDesc);
+    } else {
+      html = html.replace(/<head>/i, `<head>\n  ${metaDesc}`);
     }
 
+    // --- 11. ESCREVER O ARQUIVO ---
     writeFileSync(filePath, html, "utf8");
     updatedCount++;
   } catch (err) {
@@ -666,6 +608,5 @@ allLinks.forEach((link) => {
   }
 });
 
-console.log(`✅ ${updatedCount} página(s) processadas`);
-if (skippedCount > 0) console.log(`⚠️ ${skippedCount} página(s) não puderam ser processadas`);
-console.log("\n🏁 Build concluído.\n");
+console.log(`✅ ${updatedCount} páginas atualizadas com as 2 novas datas dinâmicas e spintax`);
+if (skippedCount > 0) console.log(`⚠️ ${skippedCount} páginas não puderam ser processadas`);
