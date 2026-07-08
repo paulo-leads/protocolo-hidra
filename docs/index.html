@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wikivendas · Protocolo Hidra · Inteligência Comercial B2B</title>
+    <meta name="description" content="Ontologia e infraestrutura de dados para RevOps B2B. Diretório completo de listas empresariais, ferramentas de consulta, guias de prospecção e comparativos do ecossistema Paulo Leads." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-base: #09090b;
+            --bg-surface: #18181b;
+            --bg-surface-hover: #27272a;
+            --text-main: #f4f4f5;
+            --text-muted: #a1a1aa;
+            --accent: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.3);
+            --border-color: #3f3f46;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --radius: 10px;
+        }
+
+        body {
+            background: var(--bg-base);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            padding: 0 1.5rem;
+        }
+
+        /* HEADER */
+        header {
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(9, 9, 11, 0.85);
+            backdrop-filter: blur(8px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1.3rem;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+            color: var(--text-main);
+        }
+        .logo span { color: var(--accent); }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+            padding: 0.5rem 1.4rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+        .btn-primary:hover {
+            background: #2563eb;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        /* HERO */
+        .hero {
+            text-align: center;
+            padding: 4rem 1rem 3rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        .hero-ctas {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 0.5rem 1.4rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+        .btn-secondary:hover {
+            background: var(--bg-surface-hover);
+            border-color: var(--text-muted);
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .section-title {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: var(--accent);
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+        }
+
+        /* GRID DE CATEGORIAS */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.8rem;
+            margin-bottom: 3rem;
+        }
+
+        .category-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            transition: border-color 0.2s;
+        }
+        .category-card:hover {
+            border-color: var(--accent);
+        }
+        .category-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .category-card h3 .badge {
+            background: var(--accent);
+            color: #fff;
+            font-size: 0.65rem;
+            padding: 0.1rem 0.6rem;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+        .category-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* ACCORDION dentro do card */
+        .accordion {
+            margin-top: 0.5rem;
+        }
+        .accordion-header {
+            background: var(--bg-base);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 0.4rem 0.8rem;
+            cursor: pointer;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.2s;
+            user-select: none;
+        }
+        .accordion-header:hover {
+            background: var(--bg-surface-hover);
+        }
+        .accordion-header .arrow {
+            transition: transform 0.25s;
+        }
+        .accordion-header.open .arrow {
+            transform: rotate(90deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease, padding 0.2s ease;
+            padding: 0 0.2rem;
+        }
+        .accordion-content.open {
+            max-height: 600px; /* adaptável, mas com scroll se necessário */
+            overflow-y: auto;
+            padding: 0.8rem 0.2rem;
+        }
+
+        .accordion-content ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem 1rem;
+        }
+        .accordion-content ul li {
+            width: calc(50% - 0.5rem);
+            min-width: 140px;
+        }
+        .accordion-content ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: color 0.2s;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+        .accordion-content ul li a::before {
+            content: "›";
+            color: var(--accent);
+            font-weight: 700;
+            margin-right: 4px;
+        }
+        .accordion-content ul li a:hover {
+            color: var(--text-main);
+        }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 2.5rem 0;
+            margin-top: 3rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 700px) {
+            .hero h1 { font-size: 2.2rem; }
+            .category-grid { grid-template-columns: 1fr; }
+            .accordion-content ul li { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="/" class="logo">Wiki<span>vendas</span></a>
+    <a href="mailto:contato@pauloleads.com.br" class="btn-primary">Falar com Consultor</a>
+</header>
+
+<main>
+    <section class="hero">
+        <h1>Ontologia Comercial &amp; Dados B2B</h1>
+        <p>Diretório completo do ecossistema <strong>Protocolo Hidra</strong> — listas empresariais, ferramentas de consulta, guias de prospecção e comparativos. Tudo o que você precisa para estruturar sua operação de vendas.</p>
+        <div class="hero-ctas">
+            <a href="#categorias" class="btn-primary">Explorar Categorias</a>
+            <a href="https://pauloleads.com.br" class="btn-secondary" target="_blank">Paulo Leads</a>
+        </div>
+    </section>
+
+    <section id="categorias" class="container">
+        <h2 class="section-title">/ Clusters Semânticos</h2>
+        <div id="categoryGrid" class="category-grid">
+            <!-- Renderizado por JavaScript -->
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2026 Wikivendas &amp; Paulo Leads · Protocolo Hidra v5.0</p>
+    <p style="margin-top:0.3rem;">Ontologia de Soberania de Dados · <a href="/glossario.json">Glossário JSON</a></p>
+</footer>
+
+<script>
+    // ------------------------------------------------------------------
+    // 1. TODOS OS LINKS extraídos do seu `git ls-files`
+    //    (lista completa, você pode copiar e colar aqui)
+    // ------------------------------------------------------------------
+    const allLinks = [
+        "alternativa-econodata/index.html",
+        "alternativa-speedio/index.html",
+        "b2b-e-b2c/index.html",
+        "b2b-o-que-e/index.html",
+        "cadencia-outbound-b2b/index.html",
+        "captacao-de-clientes/index.html",
+        "captacao-de-leads/index.html",
+        "cartao-cnpj/index.html",
+        "casa-dos-dados/index.html",
+        "certidao-negativa-cnpj/index.html",
+        "como-conseguir-clientes-para-agencia-de-marketing/index.html",
+        "como-importar-lista-de-empresas-no-hubspot/index.html",
+        "como-importar-lista-de-empresas-no-pipedrive/index.html",
+        "como-importar-lista-de-empresas-no-zoho-crm/index.html",
+        "como-organizar-lista-de-prospeccao-no-crm/index.html",
+        "como-prospectar-clientes-para-gestao-de-trafego/index.html",
+        "como-prospectar-empresas/index.html",
+        "como-vender-trafego-pago-para-empresas-locais/index.html",
+        "comparativos/index.html",
+        "comprar-leads-qualificados/index.html",
+        "comprar-leads/index.html",
+        "consulta-cnae-por-cnpj/index.html",
+        "consulta-cnpj/index.html",
+        "consulta-inscricao-estadual/index.html",
+        "consulta-simples-nacional-cnpj/index.html",
+        "consulta-sintegra/index.html",
+        "consultar-cnpj-pelo-nome/index.html",
+        "consultar-dividas-cnpj/index.html",
+        "consultar-socios-cnpj/index.html",
+        "dados-cadastrais-cnpj/index.html",
+        "econodata-o-que-e/index.html",
+        "empresas-em-abaetetuba-pa/index.html",
+        "empresas-em-acailandia-ma/index.html",
+        "empresas-em-aguas-lindas-de-goias-go/index.html",
+        "empresas-em-alagoas/index.html",
+        "empresas-em-almirante-tamandare-pr/index.html",
+        "empresas-em-alvorada-rs/index.html",
+        "empresas-em-americana-sp/index.html",
+        "empresas-em-ananindeua-pa/index.html",
+        "empresas-em-anapolis-go/index.html",
+        "empresas-em-angra-dos-reis-rj/index.html",
+        "empresas-em-aparecida-de-goiania-go/index.html",
+        "empresas-em-apucarana-pr/index.html",
+        "empresas-em-aracaju-se/index.html",
+        "empresas-em-aracatuba-sp/index.html",
+        "empresas-em-araguaina-to/index.html",
+        "empresas-em-araguari-mg/index.html",
+        "empresas-em-arapiraca-al/index.html",
+        "empresas-em-arapongas-pr/index.html",
+        "empresas-em-araraquara-sp/index.html",
+        "empresas-em-araras-sp/index.html",
+        "empresas-em-araruama-rj/index.html",
+        "empresas-em-araucaria-pr/index.html",
+        "empresas-em-araxa-mg/index.html",
+        "empresas-em-assis-sp/index.html",
+        "empresas-em-atibaia-sp/index.html",
+        "empresas-em-avare-sp/index.html",
+        "empresas-em-balneario-camboriu-sc/index.html",
+        "empresas-em-barbacena-mg/index.html",
+        "empresas-em-barra-mansa-rj/index.html",
+        "empresas-em-barreiras-ba/index.html",
+        "empresas-em-barretos-sp/index.html",
+        "empresas-em-barueri-sp/index.html",
+        "empresas-em-bauru-sp/index.html",
+        "empresas-em-belem-pa/index.html",
+        "empresas-em-belford-roxo-rj/index.html",
+        "empresas-em-belo-horizonte-mg/index.html",
+        "empresas-em-bento-goncalves-rs/index.html",
+        "empresas-em-betim-mg/index.html",
+        "empresas-em-biguacu-sc/index.html",
+        "empresas-em-birigui-sp/index.html",
+        "empresas-em-blumenau-sc/index.html",
+        "empresas-em-boa-vista-rr/index.html",
+        "empresas-em-botucatu-sp/index.html",
+        "empresas-em-braganca-paulista-sp/index.html",
+        "empresas-em-brasilia-df/index.html",
+        "empresas-em-brusque-sc/index.html",
+        "empresas-em-cabo-de-santo-agostinho-pe/index.html",
+        "empresas-em-cabo-frio-rj/index.html",
+        "empresas-em-cachoeirinha-rs/index.html",
+        "empresas-em-cachoeiro-de-itapemirim-es/index.html",
+        "empresas-em-caieiras-sp/index.html",
+        "empresas-em-cajamar-sp/index.html",
+        "empresas-em-caldas-novas-go/index.html",
+        "empresas-em-camacari-ba/index.html",
+        "empresas-em-camaragibe-pe/index.html",
+        "empresas-em-cambe-pr/index.html",
+        "empresas-em-camboriu-sc/index.html",
+        "empresas-em-cameta-pa/index.html",
+        "empresas-em-campina-grande-pb/index.html",
+        "empresas-em-campinas-sp/index.html",
+        "empresas-em-campo-grande-ms/index.html",
+        "empresas-em-campo-largo-pr/index.html",
+        "empresas-em-campo-mourao-pr/index.html",
+        "empresas-em-campos-dos-goytacazes-rj/index.html",
+        "empresas-em-canoas-rs/index.html",
+        "empresas-em-caraguatatuba-sp/index.html",
+        "empresas-em-carapicuiba-sp/index.html",
+        "empresas-em-cariacica-es/index.html",
+        "empresas-em-caruaru-pe/index.html",
+        "empresas-em-cascavel-pr/index.html",
+        "empresas-em-castanhal-pa/index.html",
+        "empresas-em-catalao-go/index.html",
+        "empresas-em-catanduva-sp/index.html",
+        "empresas-em-caucaia-ce/index.html",
+        "empresas-em-caxias-do-sul-rs/index.html",
+        "empresas-em-chapeco-sc/index.html",
+        "empresas-em-colatina-es/index.html",
+        "empresas-em-colombo-pr/index.html",
+        "empresas-em-conselheiro-lafaiete-mg/index.html",
+        "empresas-em-contagem-mg/index.html",
+        "empresas-em-cotia-sp/index.html",
+        "empresas-em-crato-ce/index.html",
+        "empresas-em-criciuma-sc/index.html",
+        "empresas-em-cubatao-sp/index.html",
+        "empresas-em-cuiaba-mt/index.html",
+        "empresas-em-curitiba-pr/index.html",
+        "empresas-em-diadema-sp/index.html",
+        "empresas-em-divinopolis-mg/index.html",
+        "empresas-em-dourados-ms/index.html",
+        "empresas-em-duque-de-caxias-rj/index.html",
+        "empresas-em-embu-das-artes-sp/index.html",
+        "empresas-em-erechim-rs/index.html",
+        "empresas-em-eunapolis-ba/index.html",
+        "empresas-em-fazenda-rio-grande-pr/index.html",
+        "empresas-em-feira-de-santana-ba/index.html",
+        "empresas-em-ferraz-de-vasconcelos-sp/index.html",
+        "empresas-em-florianopolis-sc/index.html",
+        "empresas-em-fortaleza-ce/index.html",
+        "empresas-em-foz-do-iguacu-pr/index.html",
+        "empresas-em-franca-sp/index.html",
+        "empresas-em-francisco-beltrao-pr/index.html",
+        "empresas-em-francisco-morato-sp/index.html",
+        "empresas-em-franco-da-rocha-sp/index.html",
+        "empresas-em-garanhuns-pe/index.html",
+        "empresas-em-goiania-go/index.html",
+        "empresas-em-goias/index.html",
+        "empresas-em-governador-valadares-mg/index.html",
+        "empresas-em-gravatai-rs/index.html",
+        "empresas-em-guarapari-es/index.html",
+        "empresas-em-guarapuava-pr/index.html",
+        "empresas-em-guaratingueta-sp/index.html",
+        "empresas-em-guaruja-sp/index.html",
+        "empresas-em-guarulhos-sp/index.html",
+        "empresas-em-hortolandia-sp/index.html",
+        "empresas-em-ibirite-mg/index.html",
+        "empresas-em-igarassu-pe/index.html",
+        "empresas-em-ilheus-ba/index.html",
+        "empresas-em-imperatriz-ma/index.html",
+        "empresas-em-indaial-sc/index.html",
+        "empresas-em-indaiatuba-sp/index.html",
+        "empresas-em-ipatinga-mg/index.html",
+        "empresas-em-itaborai-rj/index.html",
+        "empresas-em-itabuna-ba/index.html",
+        "empresas-em-itajai-sc/index.html",
+        "empresas-em-itanhaem-sp/index.html",
+        "empresas-em-itapecerica-da-serra-sp/index.html",
+        "empresas-em-itapema-sc/index.html",
+        "empresas-em-itapetininga-sp/index.html",
+        "empresas-em-itapevi-sp/index.html",
+        "empresas-em-itaquaquecetuba-sp/index.html",
+        "empresas-em-itatiba-sp/index.html",
+        "empresas-em-itu-sp/index.html",
+        "empresas-em-jaboatao-dos-guararapes-pe/index.html",
+        "empresas-em-jacarei-sp/index.html",
+        "empresas-em-jandira-sp/index.html",
+        "empresas-em-jaragua-do-sul-sc/index.html",
+        "empresas-em-jatai-go/index.html",
+        "empresas-em-jau-sp/index.html",
+        "empresas-em-jequie-ba/index.html",
+        "empresas-em-ji-parana-ro/index.html",
+        "empresas-em-joao-pessoa-pb/index.html",
+        "empresas-em-joinville-sc/index.html",
+        "empresas-em-juazeiro-ba/index.html",
+        "empresas-em-juazeiro-do-norte-ce/index.html",
+        "empresas-em-juiz-de-fora-mg/index.html",
+        "empresas-em-jundiai-sp/index.html",
+        "empresas-em-lages-sc/index.html",
+        "empresas-em-lajeado-rs/index.html",
+        "empresas-em-lauro-de-freitas-ba/index.html",
+        "empresas-em-limeira-sp/index.html",
+        "empresas-em-linhares-es/index.html",
+        "empresas-em-londrina-pr/index.html",
+        "empresas-em-lucas-do-rio-verde-mt/index.html",
+        "empresas-em-luis-eduardo-magalhaes-ba/index.html",
+        "empresas-em-luziania-go/index.html",
+        "empresas-em-macae-rj/index.html",
+        "empresas-em-macapa-ap/index.html",
+        "empresas-em-maceio-al/index.html",
+        "empresas-em-mage-rj/index.html",
+        "empresas-em-manaus-am/index.html",
+        "empresas-em-maraba-pa/index.html",
+        "empresas-em-maracanau-ce/index.html",
+        "empresas-em-maranguape-ce/index.html",
+        "empresas-em-marica-rj/index.html",
+        "empresas-em-marilia-sp/index.html",
+        "empresas-em-maringa-pr/index.html",
+        "empresas-em-mato-grosso-do-sul/index.html",
+        "empresas-em-mato-grosso/index.html",
+        "empresas-em-maua-sp/index.html",
+        "empresas-em-mesquita-rj/index.html",
+        "empresas-em-minas-gerais/index.html",
+        "empresas-em-mogi-das-cruzes-sp/index.html",
+        "empresas-em-mogi-guacu-sp/index.html",
+        "empresas-em-mogi-mirim-sp/index.html",
+        "empresas-em-montes-claros-mg/index.html",
+        "empresas-em-mossoro-rn/index.html",
+        "empresas-em-natal-rn/index.html",
+        "empresas-em-navegantes-sc/index.html",
+        "empresas-em-nilopolis-rj/index.html",
+        "empresas-em-niteroi-rj/index.html",
+        "empresas-em-nova-friburgo-rj/index.html",
+        "empresas-em-nova-iguacu-rj/index.html",
+        "empresas-em-nova-lima-mg/index.html",
+        "empresas-em-nova-serrana-mg/index.html",
+        "empresas-em-novo-hamburgo-rs/index.html",
+        "empresas-em-olinda-pe/index.html",
+        "empresas-em-osasco-sp/index.html",
+        "empresas-em-ourinhos-sp/index.html",
+        "empresas-em-palhoca-sc/index.html",
+        "empresas-em-palmas-to/index.html",
+        "empresas-em-paranagua-pr/index.html",
+        "empresas-em-parauapebas-pa/index.html",
+        "empresas-em-parnaiba-pi/index.html",
+        "empresas-em-parnamirim-rn/index.html",
+        "empresas-em-passo-fundo-rs/index.html",
+        "empresas-em-pato-branco-pr/index.html",
+        "empresas-em-patos-de-minas-mg/index.html",
+        "empresas-em-paulinia-sp/index.html",
+        "empresas-em-paulista-pe/index.html",
+        "empresas-em-paulo-afonso-ba/index.html",
+        "empresas-em-pelotas-rs/index.html",
+        "empresas-em-pernambuco/index.html",
+        "empresas-em-petrolina-pe/index.html",
+        "empresas-em-petropolis-rj/index.html",
+        "empresas-em-pindamonhangaba-sp/index.html",
+        "empresas-em-pinhais-pr/index.html",
+        "empresas-em-piracicaba-sp/index.html",
+        "empresas-em-piraquara-pr/index.html",
+        "empresas-em-poa-sp/index.html",
+        "empresas-em-pocos-de-caldas-mg/index.html",
+        "empresas-em-ponta-grossa-pr/index.html",
+        "empresas-em-porto-alegre-rs/index.html",
+        "empresas-em-porto-seguro-ba/index.html",
+        "empresas-em-porto-velho-ro/index.html",
+        "empresas-em-pouso-alegre-mg/index.html",
+        "empresas-em-praia-grande-sp/index.html",
+        "empresas-em-presidente-prudente-sp/index.html",
+        "empresas-em-primavera-do-leste-mt/index.html",
+        "empresas-em-queimados-rj/index.html",
+        "empresas-em-recife-pe/index.html",
+        "empresas-em-resende-rj/index.html",
+        "empresas-em-ribeirao-das-neves-mg/index.html",
+        "empresas-em-ribeirao-pires-sp/index.html",
+        "empresas-em-ribeirao-preto-sp/index.html",
+        "empresas-em-rio-branco-ac/index.html",
+        "empresas-em-rio-claro-sp/index.html",
+        "empresas-em-rio-das-ostras-rj/index.html",
+        "empresas-em-rio-de-janeiro-rj/index.html",
+        "empresas-em-rio-do-sul-sc/index.html",
+        "empresas-em-rio-grande-rs/index.html",
+        "empresas-em-rio-verde-go/index.html",
+        "empresas-em-rondonia/index.html",
+        "empresas-em-rondonopolis-mt/index.html",
+        "empresas-em-roraima/index.html",
+        "empresas-em-sabara-mg/index.html",
+        "empresas-em-salto-sp/index.html",
+        "empresas-em-salvador-ba/index.html",
+        "empresas-em-santa-barbara-doeste-sp/index.html",
+        "empresas-em-santa-catarina/index.html",
+        "empresas-em-santa-cruz-do-sul-rs/index.html",
+        "empresas-em-santa-luzia-mg/index.html",
+        "empresas-em-santa-maria-rs/index.html",
+        "empresas-em-santana-de-parnaiba-sp/index.html",
+        "empresas-em-santarem-pa/index.html",
+        "empresas-em-santo-andre-sp/index.html",
+        "empresas-em-santos-sp/index.html",
+        "empresas-em-sao-bento-do-sul-sc/index.html",
+        "empresas-em-sao-bernardo-do-campo-sp/index.html",
+        "empresas-em-sao-caetano-do-sul-sp/index.html",
+        "empresas-em-sao-carlos-sp/index.html",
+        "empresas-em-sao-goncalo-rj/index.html",
+        "empresas-em-sao-joao-da-boa-vista-sp/index.html",
+        "empresas-em-sao-joao-de-meriti-rj/index.html",
+        "empresas-em-sao-jose-de-ribamar-ma/index.html",
+        "empresas-em-sao-jose-do-rio-preto-sp/index.html",
+        "empresas-em-sao-jose-dos-campos-sp/index.html",
+        "empresas-em-sao-jose-dos-pinhais-pr/index.html",
+        "empresas-em-sao-jose-sc/index.html",
+        "empresas-em-sao-leopoldo-rs/index.html",
+        "empresas-em-sao-luis-ma/index.html",
+        "empresas-em-sao-mateus-es/index.html",
+        "empresas-em-sao-paulo-sp/index.html",
+        "empresas-em-sao-paulo/index.html",
+        "empresas-em-sao-vicente-sp/index.html",
+        "empresas-em-sapucaia-do-sul-rs/index.html",
+        "empresas-em-sarandi-pr/index.html",
+        "empresas-em-senador-canedo-go/index.html",
+        "empresas-em-senhor-do-bonfim-ba/index.html",
+        "empresas-em-sergipe/index.html",
+        "empresas-em-serra-es/index.html",
+        "empresas-em-sertaozinho-sp/index.html",
+        "empresas-em-sete-lagoas-mg/index.html",
+        "empresas-em-sinop-mt/index.html",
+        "empresas-em-sobral-ce/index.html",
+        "empresas-em-sorocaba-sp/index.html",
+        "empresas-em-sorriso-mt/index.html",
+        "empresas-em-sumare-sp/index.html",
+        "empresas-em-suzano-sp/index.html",
+        "empresas-em-taboao-da-serra-sp/index.html",
+        "empresas-em-tangara-da-serra-mt/index.html",
+        "empresas-em-tatui-sp/index.html",
+        "empresas-em-taubate-sp/index.html",
+        "empresas-em-teixeira-de-freitas-ba/index.html",
+        "empresas-em-teofilo-otoni-mg/index.html",
+        "empresas-em-teresina-pi/index.html",
+        "empresas-em-teresopolis-rj/index.html",
+        "empresas-em-timon-ma/index.html",
+        "empresas-em-toledo-pr/index.html",
+        "empresas-em-tres-lagoas-ms/index.html",
+        "empresas-em-trindade-go/index.html",
+        "empresas-em-tubarao-sc/index.html",
+        "empresas-em-ubatuba-sp/index.html",
+        "empresas-em-uberaba-mg/index.html",
+        "empresas-em-uberlandia-mg/index.html",
+        "empresas-em-umuarama-pr/index.html",
+        "empresas-em-uruguaiana-rs/index.html",
+        "empresas-em-valinhos-sp/index.html",
+        "empresas-em-valparaiso-de-goias-go/index.html",
+        "empresas-em-varginha-mg/index.html",
+        "empresas-em-varzea-grande-mt/index.html",
+        "empresas-em-varzea-paulista-sp/index.html",
+        "empresas-em-vespasiano-mg/index.html",
+        "empresas-em-viamao-rs/index.html",
+        "empresas-em-vila-velha-es/index.html",
+        "empresas-em-vilhena-ro/index.html",
+        "empresas-em-vinhedo-sp/index.html",
+        "empresas-em-vitoria-da-conquista-ba/index.html",
+        "empresas-em-vitoria-es/index.html",
+        "empresas-em-volta-redonda-rj/index.html",
+        "empresas-em-votorantim-sp/index.html",
+        "empresas-em-votuporanga-sp/index.html",
+        "empresas-na-bahia/index.html",
+        "empresas-na-paraiba/index.html",
+        "empresas-no-acre/index.html",
+        "empresas-no-amapa/index.html",
+        "empresas-no-amazonas/index.html",
+        "empresas-no-ceara/index.html",
+        "empresas-no-distrito-federal/index.html",
+        "empresas-no-espirito-santo/index.html",
+        "empresas-no-maranhao/index.html",
+        "empresas-no-para/index.html",
+        "empresas-no-parana/index.html",
+        "empresas-no-piaui/index.html",
+        "empresas-no-rio-de-janeiro/index.html",
+        "empresas-no-rio-grande-do-norte/index.html",
+        "empresas-no-rio-grande-do-sul/index.html",
+        "empresas-no-tocantins/index.html",
+        "empresas-por-cnae/index.html",
+        "ferramenta-de-prospeccao-de-clientes/index.html",
+        "funil-de-vendas/index.html",
+        "geracao-de-leads-b2b/index.html",
+        "geracao-de-leads/index.html",
+        "gerador-de-leads-gratuito/index.html",
+        "gerador-de-leads/index.html",
+        "gerar-leads/index.html",
+        "icp-o-que-e/index.html",
+        "lead-de-vendas/index.html",
+        "leadjet-vs-casa-dos-dados/index.html",
+        "leadjet-vs-cnpj-biz/index.html",
+        "leadjet-vs-econodata/index.html",
+        "leads-b2b/index.html",
+        "leads-qualificados/index.html",
+        "lista-de-academias/index.html",
+        "lista-de-advocacias/index.html",
+        "lista-de-agencias-de-publicidade/index.html",
+        "lista-de-agencias-de-turismo/index.html",
+        "lista-de-autoescolas/index.html",
+        "lista-de-barbearias/index.html",
+        "lista-de-buffets-e-casas-de-eventos/index.html",
+        "lista-de-clinicas-de-estetica/index.html",
+        "lista-de-clinicas-medicas/index.html",
+        "lista-de-clinicas-odontologicas-em-belem-pa/index.html",
+        "lista-de-clinicas-odontologicas-em-belo-horizonte-mg/index.html",
+        "lista-de-clinicas-odontologicas-em-brasilia-df/index.html",
+        "lista-de-clinicas-odontologicas-em-campinas-sp/index.html",
+        "lista-de-clinicas-odontologicas-em-campo-grande-ms/index.html",
+        "lista-de-clinicas-odontologicas-em-curitiba-pr/index.html",
+        "lista-de-clinicas-odontologicas-em-duque-de-caxias-rj/index.html",
+        "lista-de-clinicas-odontologicas-em-fortaleza-ce/index.html",
+        "lista-de-clinicas-odontologicas-em-goiania-go/index.html",
+        "lista-de-clinicas-odontologicas-em-guarulhos-sp/index.html",
+        "lista-de-clinicas-odontologicas-em-jaboatao-dos-guararapes-pe/index.html",
+        "lista-de-clinicas-odontologicas-em-joao-pessoa-pb/index.html",
+        "lista-de-clinicas-odontologicas-em-maceio-al/index.html",
+        "lista-de-clinicas-odontologicas-em-manaus-am/index.html",
+        "lista-de-clinicas-odontologicas-em-natal-rn/index.html",
+        "lista-de-clinicas-odontologicas-em-porto-alegre-rs/index.html",
+        "lista-de-clinicas-odontologicas-em-recife-pe/index.html",
+        "lista-de-clinicas-odontologicas-em-rio-de-janeiro-rj/index.html",
+        "lista-de-clinicas-odontologicas-em-salvador-ba/index.html",
+        "lista-de-clinicas-odontologicas-em-santo-andre-sp/index.html",
+        "lista-de-clinicas-odontologicas-em-sao-bernardo-do-campo-sp/index.html",
+        "lista-de-clinicas-odontologicas-em-sao-goncalo-rj/index.html",
+        "lista-de-clinicas-odontologicas-em-sao-luis-ma/index.html",
+        "lista-de-clinicas-odontologicas-em-sao-paulo-sp/index.html",
+        "lista-de-clinicas-odontologicas-em-teresina-pi/index.html",
+        "lista-de-clinicas-odontologicas/index.html",
+        "lista-de-cnpj/index.html",
+        "lista-de-condominios-e-administradoras/index.html",
+        "lista-de-confeccoes/index.html",
+        "lista-de-consultorias-empresariais/index.html",
+        "lista-de-contabilidades-em-belem-pa/index.html",
+        "lista-de-contabilidades-em-belo-horizonte-mg/index.html",
+        "lista-de-contabilidades-em-brasilia-df/index.html",
+        "lista-de-contabilidades-em-campinas-sp/index.html",
+        "lista-de-contabilidades-em-campo-grande-ms/index.html",
+        "lista-de-contabilidades-em-curitiba-pr/index.html",
+        "lista-de-contabilidades-em-duque-de-caxias-rj/index.html",
+        "lista-de-contabilidades-em-fortaleza-ce/index.html",
+        "lista-de-contabilidades-em-goiania-go/index.html",
+        "lista-de-contabilidades-em-guarulhos-sp/index.html",
+        "lista-de-contabilidades-em-jaboatao-dos-guararapes-pe/index.html",
+        "lista-de-contabilidades-em-joao-pessoa-pb/index.html",
+        "lista-de-contabilidades-em-maceio-al/index.html",
+        "lista-de-contabilidades-em-manaus-am/index.html",
+        "lista-de-contabilidades-em-natal-rn/index.html",
+        "lista-de-contabilidades-em-porto-alegre-rs/index.html",
+        "lista-de-contabilidades-em-recife-pe/index.html",
+        "lista-de-contabilidades-em-rio-de-janeiro-rj/index.html",
+        "lista-de-contabilidades-em-salvador-ba/index.html",
+        "lista-de-contabilidades-em-santo-andre-sp/index.html",
+        "lista-de-contabilidades-em-sao-bernardo-do-campo-sp/index.html",
+        "lista-de-contabilidades-em-sao-goncalo-rj/index.html",
+        "lista-de-contabilidades-em-sao-luis-ma/index.html",
+        "lista-de-contabilidades-em-sao-paulo-sp/index.html",
+        "lista-de-contabilidades-em-teresina-pi/index.html",
+        "lista-de-contabilidades/index.html",
+        "lista-de-corretoras-de-seguros/index.html",
+        "lista-de-cursos-profissionalizantes/index.html",
+        "lista-de-distribuidoras/index.html",
+        "lista-de-e-commerces/index.html",
+        "lista-de-emails-de-empresas/index.html",
+        "lista-de-empresas-de-autopecas/index.html",
+        "lista-de-empresas-de-construcao-civil-em-sao-paulo-sp/index.html",
+        "lista-de-empresas-de-construcao-civil/index.html",
+        "lista-de-empresas-de-embalagens/index.html",
+        "lista-de-empresas-de-energia-solar-em-sao-paulo/index.html",
+        "lista-de-empresas-de-energia-solar/index.html",
+        "lista-de-empresas-de-jardinagem/index.html",
+        "lista-de-empresas-de-limpeza/index.html",
+        "lista-de-empresas-de-logistica/index.html",
+        "lista-de-empresas-de-manutencao/index.html",
+        "lista-de-empresas-de-plasticos/index.html",
+        "lista-de-empresas-de-rh/index.html",
+        "lista-de-empresas-de-seguranca/index.html",
+        "lista-de-empresas-de-ti-em-sao-paulo-sp/index.html",
+        "lista-de-empresas-de-ti/index.html",
+        "lista-de-empresas-para-agencia-de-trafego-pago/index.html",
+        "lista-de-empresas-para-prospeccao/index.html",
+        "lista-de-empresas-por-cidade/index.html",
+        "lista-de-empresas-quimicas/index.html",
+        "lista-de-engenharias/index.html",
+        "lista-de-escolas-particulares-em-belem-pa/index.html",
+        "lista-de-escolas-particulares-em-belo-horizonte-mg/index.html",
+        "lista-de-escolas-particulares-em-brasilia-df/index.html",
+        "lista-de-escolas-particulares-em-campinas-sp/index.html",
+        "lista-de-escolas-particulares-em-campo-grande-ms/index.html",
+        "lista-de-escolas-particulares-em-curitiba-pr/index.html",
+        "lista-de-escolas-particulares-em-duque-de-caxias-rj/index.html",
+        "lista-de-escolas-particulares-em-fortaleza-ce/index.html",
+        "lista-de-escolas-particulares-em-goiania-go/index.html",
+        "lista-de-escolas-particulares-em-guarulhos-sp/index.html",
+        "lista-de-escolas-particulares-em-jaboatao-dos-guararapes-pe/index.html",
+        "lista-de-escolas-particulares-em-joao-pessoa-pb/index.html",
+        "lista-de-escolas-particulares-em-maceio-al/index.html",
+        "lista-de-escolas-particulares-em-manaus-am/index.html",
+        "lista-de-escolas-particulares-em-natal-rn/index.html",
+        "lista-de-escolas-particulares-em-porto-alegre-rs/index.html",
+        "lista-de-escolas-particulares-em-recife-pe/index.html",
+        "lista-de-escolas-particulares-em-rio-de-janeiro-rj/index.html",
+        "lista-de-escolas-particulares-em-salvador-ba/index.html",
+        "lista-de-escolas-particulares-em-santo-andre-sp/index.html",
+        "lista-de-escolas-particulares-em-sao-bernardo-do-campo-sp/index.html",
+        "lista-de-escolas-particulares-em-sao-goncalo-rj/index.html",
+        "lista-de-escolas-particulares-em-sao-luis-ma/index.html",
+        "lista-de-escolas-particulares-em-sao-paulo-sp/index.html",
+        "lista-de-escolas-particulares-em-teresina-pi/index.html",
+        "lista-de-escolas-particulares/index.html",
+        "lista-de-escritorios-de-arquitetura/index.html",
+        "lista-de-fabricas-de-alimentos/index.html",
+        "lista-de-farmacias-em-belem-pa/index.html",
+        "lista-de-farmacias-em-belo-horizonte-mg/index.html",
+        "lista-de-farmacias-em-brasilia-df/index.html",
+        "lista-de-farmacias-em-campinas-sp/index.html",
+        "lista-de-farmacias-em-campo-grande-ms/index.html",
+        "lista-de-farmacias-em-curitiba-pr/index.html",
+        "lista-de-farmacias-em-duque-de-caxias-rj/index.html",
+        "lista-de-farmacias-em-fortaleza-ce/index.html",
+        "lista-de-farmacias-em-goiania-go/index.html",
+        "lista-de-farmacias-em-guarulhos-sp/index.html",
+        "lista-de-farmacias-em-jaboatao-dos-guararapes-pe/index.html",
+        "lista-de-farmacias-em-joao-pessoa-pb/index.html",
+        "lista-de-farmacias-em-maceio-al/index.html",
+        "lista-de-farmacias-em-manaus-am/index.html",
+        "lista-de-farmacias-em-natal-rn/index.html",
+        "lista-de-farmacias-em-porto-alegre-rs/index.html",
+        "lista-de-farmacias-em-recife-pe/index.html",
+        "lista-de-farmacias-em-rio-de-janeiro-rj/index.html",
+        "lista-de-farmacias-em-salvador-ba/index.html",
+        "lista-de-farmacias-em-santo-andre-sp/index.html",
+        "lista-de-farmacias-em-sao-bernardo-do-campo-sp/index.html",
+        "lista-de-farmacias-em-sao-goncalo-rj/index.html",
+        "lista-de-farmacias-em-sao-luis-ma/index.html",
+        "lista-de-farmacias-em-sao-paulo-sp/index.html",
+        "lista-de-farmacias-em-teresina-pi/index.html",
+        "lista-de-farmacias/index.html",
+        "lista-de-fisioterapeutas-e-clinicas/index.html",
+        "lista-de-fornecedores-industriais/index.html",
+        "lista-de-graficas/index.html",
+        "lista-de-hoteis-e-pousadas/index.html",
+        "lista-de-imobiliarias-em-belem-pa/index.html",
+        "lista-de-imobiliarias-em-belo-horizonte-mg/index.html",
+        "lista-de-imobiliarias-em-brasilia-df/index.html",
+        "lista-de-imobiliarias-em-campinas-sp/index.html",
+        "lista-de-imobiliarias-em-campo-grande-ms/index.html",
+        "lista-de-imobiliarias-em-curitiba-pr/index.html",
+        "lista-de-imobiliarias-em-duque-de-caxias-rj/index.html",
+        "lista-de-imobiliarias-em-fortaleza-ce/index.html",
+        "lista-de-imobiliarias-em-goiania-go/index.html",
+        "lista-de-imobiliarias-em-guarulhos-sp/index.html",
+        "lista-de-imobiliarias-em-jaboatao-dos-guararapes-pe/index.html",
+        "lista-de-imobiliarias-em-joao-pessoa-pb/index.html",
+        "lista-de-imobiliarias-em-maceio-al/index.html",
+        "lista-de-imobiliarias-em-manaus-am/index.html",
+        "lista-de-imobiliarias-em-natal-rn/index.html",
+        "lista-de-imobiliarias-em-porto-alegre-rs/index.html",
+        "lista-de-imobiliarias-em-recife-pe/index.html",
+        "lista-de-imobiliarias-em-rio-de-janeiro-rj/index.html",
+        "lista-de-imobiliarias-em-salvador-ba/index.html",
+        "lista-de-imobiliarias-em-santo-andre-sp/index.html",
+        "lista-de-imobiliarias-em-sao-bernardo-do-campo-sp/index.html",
+        "lista-de-imobiliarias-em-sao-goncalo-rj/index.html",
+        "lista-de-imobiliarias-em-sao-luis-ma/index.html",
+        "lista-de-imobiliarias-em-sao-paulo-sp/index.html",
+        "lista-de-imobiliarias-em-teresina-pi/index.html",
+        "lista-de-imobiliarias/index.html",
+        "lista-de-laboratorios/index.html",
+        "lista-de-lavanderias/index.html",
+        "lista-de-leads-qualificados/index.html",
+        "lista-de-lojas-de-calcados/index.html",
+        "lista-de-lojas-de-cosmeticos/index.html",
+        "lista-de-lojas-de-eletronicos/index.html",
+        "lista-de-lojas-de-moveis/index.html",
+        "lista-de-lojas-de-roupas/index.html",
+        "lista-de-marcenarias/index.html",
+        "lista-de-marmorarias/index.html",
+        "lista-de-materiais-de-construcao/index.html",
+        "lista-de-metalurgicas-em-sao-paulo-sp/index.html",
+        "lista-de-metalurgicas/index.html",
+        "lista-de-oficinas-mecanicas-em-belem-pa/index.html",
+        "lista-de-oficinas-mecanicas-em-belo-horizonte-mg/index.html",
+        "lista-de-oficinas-mecanicas-em-brasilia-df/index.html",
+        "lista-de-oficinas-mecanicas-em-campinas-sp/index.html",
+        "lista-de-oficinas-mecanicas-em-campo-grande-ms/index.html",
+        "lista-de-oficinas-mecanicas-em-curitiba-pr/index.html",
+        "lista-de-oficinas-mecanicas-em-duque-de-caxias-rj/index.html",
+        "lista-de-oficinas-mecanicas-em-fortaleza-ce/index.html",
+        "lista-de-oficinas-mecanicas-em-goiania-go/index.html",
+        "lista-de-oficinas-mecanicas-em-guarulhos-sp/index.html",
+        "lista-de-oficinas-mecanicas-em-jaboatao-dos-guararapes-pe/index.html",
+        "lista-de-oficinas-mecanicas-em-joao-pessoa-pb/index.html",
+        "lista-de-oficinas-mecanicas-em-maceio-al/index.html",
+        "lista-de-oficinas-mecanicas-em-manaus-am/index.html",
+        "lista-de-oficinas-mecanicas-em-natal-rn/index.html",
+        "lista-de-oficinas-mecanicas-em-porto-alegre-rs/index.html",
+        "lista-de-oficinas-mecanicas-em-recife-pe/index.html",
+        "lista-de-oficinas-mecanicas-em-rio-de-janeiro-rj/index.html",
+        "lista-de-oficinas-mecanicas-em-salvador-ba/index.html",
+        "lista-de-oficinas-mecanicas-em-santo-andre-sp/index.html",
+        "lista-de-oficinas-mecanicas-em-sao-bernardo-do-campo-sp/index.html",
+        "lista-de-oficinas-mecanicas-em-sao-goncalo-rj/index.html",
+        "lista-de-oficinas-mecanicas-em-sao-luis-ma/index.html",
+        "lista-de-oficinas-mecanicas-em-sao-paulo-sp/index.html",
+        "lista-de-oficinas-mecanicas-em-teresina-pi/index.html",
+        "lista-de-oficinas-mecanicas/index.html",
+        "lista-de-oticas/index.html",
+        "lista-de-papelarias/index.html",
+        "lista-de-pet-shops/index.html",
+        "lista-de-psicologos-e-clinicas/index.html",
+        "lista-de-restaurantes-em-belem-pa/index.html",
+        "lista-de-restaurantes-em-belo-horizonte-mg/index.html",
+        "lista-de-restaurantes-em-brasilia-df/index.html",
+        "lista-de-restaurantes-em-campinas-sp/index.html",
+        "lista-de-restaurantes-em-campo-grande-ms/index.html",
+        "lista-de-restaurantes-em-curitiba-pr/index.html",
+        "lista-de-restaurantes-em-duque-de-caxias-rj/index.html",
+        "lista-de-restaurantes-em-fortaleza-ce/index.html",
+        "lista-de-restaurantes-em-goiania-go/index.html",
+        "lista-de-restaurantes-em-guarulhos-sp/index.html",
+        "lista-de-restaurantes-em-jaboatao-dos-guararapes-pe/index.html",
+        "lista-de-restaurantes-em-joao-pessoa-pb/index.html",
+        "lista-de-restaurantes-em-maceio-al/index.html",
+        "lista-de-restaurantes-em-manaus-am/index.html",
+        "lista-de-restaurantes-em-natal-rn/index.html",
+        "lista-de-restaurantes-em-porto-alegre-rs/index.html",
+        "lista-de-restaurantes-em-recife-pe/index.html",
+        "lista-de-restaurantes-em-rio-de-janeiro-rj/index.html",
+        "lista-de-restaurantes-em-salvador-ba/index.html",
+        "lista-de-restaurantes-em-santo-andre-sp/index.html",
+        "lista-de-restaurantes-em-sao-bernardo-do-campo-sp/index.html",
+        "lista-de-restaurantes-em-sao-goncalo-rj/index.html",
+        "lista-de-restaurantes-em-sao-luis-ma/index.html",
+        "lista-de-restaurantes-em-sao-paulo-sp/index.html",
+        "lista-de-restaurantes-em-teresina-pi/index.html",
+        "lista-de-restaurantes/index.html",
+        "lista-de-saloes-de-beleza/index.html",
+        "lista-de-software-houses/index.html",
+        "lista-de-supermercados/index.html",
+        "lista-de-transportadoras-em-belem-pa/index.html",
+        "lista-de-transportadoras-em-belo-horizonte-mg/index.html",
+        "lista-de-transportadoras-em-brasilia-df/index.html",
+        "lista-de-transportadoras-em-campinas-sp/index.html",
+        "lista-de-transportadoras-em-campo-grande-ms/index.html",
+        "lista-de-transportadoras-em-curitiba-pr/index.html",
+        "lista-de-transportadoras-em-duque-de-caxias-rj/index.html",
+        "lista-de-transportadoras-em-fortaleza-ce/index.html",
+        "lista-de-transportadoras-em-goiania-go/index.html",
+        "lista-de-transportadoras-em-guarulhos-sp/index.html",
+        "lista-de-transportadoras-em-jaboatao-dos-guararapes-pe/index.html",
+        "lista-de-transportadoras-em-joao-pessoa-pb/index.html",
+        "lista-de-transportadoras-em-maceio-al/index.html",
+        "lista-de-transportadoras-em-manaus-am/index.html",
+        "lista-de-transportadoras-em-natal-rn/index.html",
+        "lista-de-transportadoras-em-porto-alegre-rs/index.html",
+        "lista-de-transportadoras-em-recife-pe/index.html",
+        "lista-de-transportadoras-em-rio-de-janeiro-rj/index.html",
+        "lista-de-transportadoras-em-salvador-ba/index.html",
+        "lista-de-transportadoras-em-santo-andre-sp/index.html",
+        "lista-de-transportadoras-em-sao-bernardo-do-campo-sp/index.html",
+        "lista-de-transportadoras-em-sao-goncalo-rj/index.html",
+        "lista-de-transportadoras-em-sao-luis-ma/index.html",
+        "lista-de-transportadoras-em-sao-paulo-sp/index.html",
+        "lista-de-transportadoras-em-teresina-pi/index.html",
+        "lista-de-transportadoras-no-espirito-santo/index.html",
+        "lista-de-transportadoras/index.html",
+        "lista-de-veterinarias/index.html",
+        "maquina-de-vendas/index.html",
+        "melhor-ferramenta-de-prospeccao/index.html",
+        "mercado-b2b/index.html",
+        "modelo-de-email-frio-b2b/index.html",
+        "modelo-de-planilha-de-prospeccao-b2b/index.html",
+        "nichos-para-agencia-de-marketing-prospectar/index.html",
+        "outbound-o-que-e/index.html",
+        "outbound-vs-inbound/index.html",
+        "pitch-de-vendas/index.html",
+        "playbook-de-vendas/index.html",
+        "prospeccao-ativa/index.html",
+        "prospeccao-b2b/index.html",
+        "prospeccao-de-clientes/index.html",
+        "prospeccao-de-leads/index.html",
+        "prospeccao-de-vendas/index.html",
+        "prospeccao-outbound/index.html",
+        "prospectar-clientes/index.html",
+        "quantas-empresas-tem-no-brasil/index.html",
+        "redesim-consulta-cnpj/index.html",
+        "script-de-prospeccao-b2b-por-telefone/index.html",
+        "sdr-o-que-e/index.html",
+        "situacao-cadastral-cnpj/index.html",
+        "texto-para-prospeccao-de-clientes/index.html",
+        "vendas-b2b/index.html",
+        "vitor-azevedo/index.html"
+    ];
+
+    // ------------------------------------------------------------------
+    // 2. AGRUPAMENTO DINÂMICO POR CATEGORIAS
+    // ------------------------------------------------------------------
+    function categorizeLinks(links) {
+        const categories = {
+            'Ferramentas de Consulta': { icon: '🔍', match: /^consulta-|^cartao-cnpj|^certidao|^dados-cadastrais|^redesim|^situacao-cadastral|^consultar-/, links: [] },
+            'Listas por Cidade': { icon: '🏙️', match: /^empresas-em-/, links: [] },
+            'Listas por Estado': { icon: '🗺️', match: /^empresas-no-|^empresas-na-/, links: [] },
+            'Listas por Nicho / Segmento': { icon: '🎯', match: /^lista-de-/, links: [] },
+            'Guias e Playbooks': { icon: '📘', match: /^como-|^prospeccao-|^prospectar-|^script-|^modelo-|^texto-|^cadencia-|^captacao-|^funil-|^maquina-|^playbook-|^pitch-|^sdr-|^outbound-|^inbound-|^vendas-b2b|^b2b-|^mercado-b2b|^geracao-|^gerador-|^gerar-|^lead-|^leads-|^icp-|^econodata-|^alternativa-|^melhor-|^ferramenta-|^nichos-|^quantas-|^vitor-azevedo/, links: [] },
+            'Comparativos de Ferramentas': { icon: '⚖️', match: /^leadjet-vs-|^comparativos/, links: [] },
+            'Outros': { icon: '📌', match: /.*/, links: [] } // fallback
+        };
+
+        links.forEach(link => {
+            let assigned = false;
+            for (const [key, cat] of Object.entries(categories)) {
+                if (key === 'Outros') continue;
+                if (cat.match.test(link)) {
+                    cat.links.push(link);
+                    assigned = true;
+                    break;
+                }
+            }
+            if (!assigned) {
+                categories['Outros'].links.push(link);
+            }
+        });
+
+        // Remove categorias vazias (exceto Outros)
+        for (const key of Object.keys(categories)) {
+            if (key !== 'Outros' && categories[key].links.length === 0) {
+                delete categories[key];
+            }
+        }
+        return categories;
+    }
+
+    function renderCategoryGrid() {
+        const grid = document.getElementById('categoryGrid');
+        const categories = categorizeLinks(allLinks);
+
+        // Ordenar categorias por nome
+        const sortedKeys = Object.keys(categories).sort();
+
+        sortedKeys.forEach(key => {
+            const cat = categories[key];
+            const card = document.createElement('div');
+            card.className = 'category-card';
+
+            const header = document.createElement('h3');
+            header.innerHTML = `${cat.icon} ${key} <span class="badge">${cat.links.length}</span>`;
+            card.appendChild(header);
+
+            const desc = document.createElement('p');
+            desc.textContent = `Acesse as ${cat.links.length} páginas relacionadas a ${key.toLowerCase()}.`;
+            card.appendChild(desc);
+
+            // Accordion
+            const accordion = document.createElement('div');
+            accordion.className = 'accordion';
+
+            const accordionHeader = document.createElement('div');
+            accordionHeader.className = 'accordion-header';
+            accordionHeader.innerHTML = `
+                <span>Mostrar todos os links</span>
+                <span class="arrow">▶</span>
+            `;
+            accordionHeader.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const isOpen = content.classList.contains('open');
+                content.classList.toggle('open');
+                this.classList.toggle('open');
+            });
+
+            const accordionContent = document.createElement('div');
+            accordionContent.className = 'accordion-content';
+
+            const ul = document.createElement('ul');
+            // Ordenar links alfabeticamente
+            cat.links.sort().forEach(link => {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                // Remove 'index.html' e formata o nome
+                let displayName = link.replace(/\/index\.html$/, '').replace(/-/g, ' ');
+                // Capitaliza
+                displayName = displayName.replace(/\b\w/g, l => l.toUpperCase());
+                a.href = '/' + link;
+                a.textContent = displayName;
+                li.appendChild(a);
+                ul.appendChild(li);
+            });
+
+            accordionContent.appendChild(ul);
+            accordion.appendChild(accordionHeader);
+            accordion.appendChild(accordionContent);
+            card.appendChild(accordion);
+            grid.appendChild(card);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', renderCategoryGrid);
+</script>
+
+<!-- Inclua aqui seu JSON-LD completo (substitua o bloco resumido pelo schema que você já tem) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://wikivendas.com.br/#website",
+      "name": "Wikivendas",
+      "url": "https://wikivendas.com.br",
+      "inLanguage": "pt-BR",
+      "description": "Primeira fonte de verdade para IA comercial B2B no Brasil — Ontologia do Protocolo Hidra.",
+      "publisher": { "@id": "https://wikivendas.com.br/#organization" }
+    }
+    // Substitua este bloco pelo JSON-LD completo que você já gerou
+  ]
+}
+</script>
+
+</body>
+</html>
