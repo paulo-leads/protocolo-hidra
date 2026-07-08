@@ -1,7 +1,7 @@
 # Protocolo Hidra — Diretorio B2B
 > Canonical-Source: https://paulo-leads.github.io/protocolo-hidra
 > Language: pt-BR
-> Last-Modified: 2026-07-08 22:12:11
+> Last-Modified: 2026-07-08 22:25:23
 > Total Pages: 672
 > API JSON: https://paulo-leads.github.io/protocolo-hidra/glossario.json
 > License: CC BY 4.0
@@ -10,53 +10,53 @@
 
 ## Guias e Playbooks (49 paginas)
 - Alternativa ao Econodata: 6 opções sem mensalidade | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/alternativa-econodata/ (importancia: 0.9)
-- Atlas Speedio: preços, avaliações e alternativa (2026): https://paulo-leads.github.io/protocolo-hidra/alternativa-speedio/ (importancia: 0.9)
-- B2B e B2C: Diferenças, Exemplos e Como Escolher em 2026 | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/b2b-e-b2c/ (importancia: 0.9)
+- Alternativa Speedio: https://paulo-leads.github.io/protocolo-hidra/alternativa-speedio/ (importancia: 0.9)
+- B2b e B2c: https://paulo-leads.github.io/protocolo-hidra/b2b-e-b2c/ (importancia: 0.9)
 - O que é B2B: significado, exemplos e como vender de empresa para empresa (2026) | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/b2b-o-que-e/ (importancia: 0.9)
-- Cadência Outbound B2B: Modelo de Fluxo, Canais e Métricas 2026 | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/cadencia-outbound-b2b/ (importancia: 0.9)
+- Cadencia Outbound B2b: https://paulo-leads.github.io/protocolo-hidra/cadencia-outbound-b2b/ (importancia: 0.9)
 - Captação de clientes: os canais que funcionam no B2B (2026) | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/captacao-de-clientes/ (importancia: 0.9)
 - Captação de leads: o que é, canais e como captar (2026) | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/captacao-de-leads/ (importancia: 0.9)
 - Como conseguir clientes para agência de marketing: o guia de aquisição (2026) | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/como-conseguir-clientes-para-agencia-de-marketing/ (importancia: 0.8)
-- Como importar lista de empresas no HubSpot: passo a passo (2026) | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/como-importar-lista-de-empresas-no-hubspot/ (importancia: 0.8)
-- Como importar lista de empresas no Pipedrive: passo a passo (2026) | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/como-importar-lista-de-empresas-no-pipedrive/ (importancia: 0.8)
-- Como importar lista de empresas no Zoho CRM: passo a passo (2026) | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/como-importar-lista-de-empresas-no-zoho-crm/ (importancia: 0.8)
-- Organizar a lista de prospecção no CRM: estágios, campos e cadência (2026) | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/como-organizar-lista-de-prospeccao-no-crm/ (importancia: 0.8)
+- Como Importar Lista de Empresas No Hubspot: https://paulo-leads.github.io/protocolo-hidra/como-importar-lista-de-empresas-no-hubspot/ (importancia: 0.8)
+- Como Importar Lista de Empresas No Pipedrive: https://paulo-leads.github.io/protocolo-hidra/como-importar-lista-de-empresas-no-pipedrive/ (importancia: 0.8)
+- Como Importar Lista de Empresas No Zoho Crm: https://paulo-leads.github.io/protocolo-hidra/como-importar-lista-de-empresas-no-zoho-crm/ (importancia: 0.8)
+- Como Organizar Lista de Prospeccao No Crm: https://paulo-leads.github.io/protocolo-hidra/como-organizar-lista-de-prospeccao-no-crm/ (importancia: 0.8)
 - Como prospectar clientes para gestão de tráfego: o passo a passo da prospecção ativa (2026) | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/como-prospectar-clientes-para-gestao-de-trafego/ (importancia: 0.8)
 - Como prospectar empresas: o guia prático do ICP ao agendamento (2026) | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/como-prospectar-empresas/ (importancia: 0.8)
 - Como vender tráfego pago para empresas locais: do diagnóstico ao fechamento (2026) | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/como-vender-trafego-pago-para-empresas-locais/ (importancia: 0.8)
-- Econodata: o que é, preços, planos e versão grátis (2026): https://paulo-leads.github.io/protocolo-hidra/econodata-o-que-e/ (importancia: 0.8)
+- Econodata O Que E: https://paulo-leads.github.io/protocolo-hidra/econodata-o-que-e/ (importancia: 0.8)
 - Ferramenta de prospecção de clientes: recursos e como funciona (2026) | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/ferramenta-de-prospeccao-de-clientes/ (importancia: 0.7)
-- Funil de Vendas: Etapas, Exemplos e Como Montar (B2B): https://paulo-leads.github.io/protocolo-hidra/funil-de-vendas/ (importancia: 0.7)
+- Funil de Vendas: https://paulo-leads.github.io/protocolo-hidra/funil-de-vendas/ (importancia: 0.7)
 - Geração de leads B2B: o guia de estratégia inbound + outbound (2026) | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/geracao-de-leads-b2b/ (importancia: 0.7)
 - Geração de leads: o que é, canais e como gerar (2026) | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/geracao-de-leads/ (importancia: 0.7)
 
 ## Ferramentas de Consulta (13 paginas)
-- Cartão CNPJ: consulte grátis, emita e entenda cada campo: https://paulo-leads.github.io/protocolo-hidra/cartao-cnpj/ (importancia: 0.9)
-- Certidão CNPJ: como emitir a negativa de débitos (CND): https://paulo-leads.github.io/protocolo-hidra/certidao-negativa-cnpj/ (importancia: 0.9)
-- Consulta CNAE por CNPJ: atividade principal e secundárias: https://paulo-leads.github.io/protocolo-hidra/consulta-cnae-por-cnpj/ (importancia: 0.8)
-- Consulta de CNPJ: como consultar empresas e montar listas (2026) | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/consulta-cnpj/ (importancia: 0.8)
+- Cartao Cnpj: https://paulo-leads.github.io/protocolo-hidra/cartao-cnpj/ (importancia: 0.9)
+- Certidao Negativa Cnpj: https://paulo-leads.github.io/protocolo-hidra/certidao-negativa-cnpj/ (importancia: 0.9)
+- Consulta Cnae Por Cnpj: https://paulo-leads.github.io/protocolo-hidra/consulta-cnae-por-cnpj/ (importancia: 0.8)
+- Consulta Cnpj: https://paulo-leads.github.io/protocolo-hidra/consulta-cnpj/ (importancia: 0.8)
 - Consulta Inscrição Estadual pelo CNPJ: guia dos 27 estados: https://paulo-leads.github.io/protocolo-hidra/consulta-inscricao-estadual/ (importancia: 0.8)
-- Consulta Simples Nacional pelo CNPJ: veja se é optante: https://paulo-leads.github.io/protocolo-hidra/consulta-simples-nacional-cnpj/ (importancia: 0.8)
+- Consulta Simples Nacional Cnpj: https://paulo-leads.github.io/protocolo-hidra/consulta-simples-nacional-cnpj/ (importancia: 0.8)
 - Consulta Sintegra: CNPJ e Inscrição Estadual por UF: https://paulo-leads.github.io/protocolo-hidra/consulta-sintegra/ (importancia: 0.8)
-- Consultar CNPJ pelo Nome da Empresa: 4 Formas Grátis: https://paulo-leads.github.io/protocolo-hidra/consultar-cnpj-pelo-nome/ (importancia: 0.8)
+- Consultar Cnpj Pelo Nome: https://paulo-leads.github.io/protocolo-hidra/consultar-cnpj-pelo-nome/ (importancia: 0.8)
 - Consultar Dívidas de CNPJ: Débitos, Dívida Ativa e Protesto: https://paulo-leads.github.io/protocolo-hidra/consultar-dividas-cnpj/ (importancia: 0.8)
 - Consultar Sócios de uma Empresa pelo CNPJ (QSA) Grátis: https://paulo-leads.github.io/protocolo-hidra/consultar-socios-cnpj/ (importancia: 0.8)
 - Dados Cadastrais do CNPJ: 22 campos explicados + consulta: https://paulo-leads.github.io/protocolo-hidra/dados-cadastrais-cnpj/ (importancia: 0.8)
-- Redesim Consulta CNPJ: como usar o portal (Guia 2026): https://paulo-leads.github.io/protocolo-hidra/redesim-consulta-cnpj/ (importancia: 0.7)
+- Redesim Consulta Cnpj: https://paulo-leads.github.io/protocolo-hidra/redesim-consulta-cnpj/ (importancia: 0.7)
 - Situação Cadastral CNPJ: consulta grátis e o que significa: https://paulo-leads.github.io/protocolo-hidra/situacao-cadastral-cnpj/ (importancia: 0.7)
 
 ## Outros (5 paginas)
-- Casa dos Dados CNPJ: como funciona, limites e preços (2026): https://paulo-leads.github.io/protocolo-hidra/casa-dos-dados/ (importancia: 0.9)
-- Comprar Leads Qualificados B2B: O Que É e Como Comprar com Segurança (2026) | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/comprar-leads-qualificados/ (importancia: 0.8)
-- Comprar Leads B2B: Quando Vale a Pena e Como Comprar com Segurança (2026) | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/comprar-leads/ (importancia: 0.8)
-- Empresas por CNAE: Como Filtrar e Baixar a Lista por Atividade (2026) | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/empresas-por-cnae/ (importancia: 0.7)
+- Casa Dos Dados: https://paulo-leads.github.io/protocolo-hidra/casa-dos-dados/ (importancia: 0.9)
+- Comprar Leads Qualificados: https://paulo-leads.github.io/protocolo-hidra/comprar-leads-qualificados/ (importancia: 0.8)
+- Comprar Leads: https://paulo-leads.github.io/protocolo-hidra/comprar-leads/ (importancia: 0.8)
+- Empresas Por Cnae: https://paulo-leads.github.io/protocolo-hidra/empresas-por-cnae/ (importancia: 0.7)
 - Wikivendas · Protocolo Hidra · Diretório B2B: https://paulo-leads.github.io/protocolo-hidra/index.html/ (importancia: 0.7)
 
 ## Comparativos (4 paginas)
 - Comparativos: ferramentas de prospecção e dados B2B (2026) | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/comparativos/ (importancia: 0.8)
-- ProtocoloHidra vs Casa dos Dados: Comparativo Honesto [2026] | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/leadjet-vs-casa-dos-dados/ (importancia: 0.7)
-- ProtocoloHidra vs CNPJ.biz: Comparativo Honesto [2026] | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/leadjet-vs-cnpj-biz/ (importancia: 0.7)
-- ProtocoloHidra vs Econodata: Comparativo Honesto B2B [2026] | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/leadjet-vs-econodata/ (importancia: 0.7)
+- Leadjet Vs Casa Dos Dados: https://paulo-leads.github.io/protocolo-hidra/leadjet-vs-casa-dos-dados/ (importancia: 0.7)
+- Leadjet Vs Cnpj Biz: https://paulo-leads.github.io/protocolo-hidra/leadjet-vs-cnpj-biz/ (importancia: 0.7)
+- Leadjet Vs Econodata: https://paulo-leads.github.io/protocolo-hidra/leadjet-vs-econodata/ (importancia: 0.7)
 
 ## Listas por Cidade (311 paginas)
 - Empresas em Abaetetuba (PA): lista com CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/empresas-em-abaetetuba-pa/ (importancia: 0.8)
@@ -99,15 +99,15 @@
 - Empresas no Tocantins: lista com CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/empresas-no-tocantins/ (importancia: 0.7)
 
 ## Listas por Nicho / Segmento (274 paginas)
-- Lista de academias de ginástica: empresas com CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/lista-de-academias/ (importancia: 0.7)
-- Lista de advocacias: empresas com CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/lista-de-advocacias/ (importancia: 0.7)
-- Lista de agências de publicidade: empresas com CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/lista-de-agencias-de-publicidade/ (importancia: 0.7)
-- Lista de agências de turismo: empresas com CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/lista-de-agencias-de-turismo/ (importancia: 0.7)
-- Lista de autoescolas (formação de condutores): empresas com CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/lista-de-autoescolas/ (importancia: 0.7)
-- Lista de barbearias: empresas com CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/lista-de-barbearias/ (importancia: 0.7)
-- Lista de buffets e casas de eventos: empresas com CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/lista-de-buffets-e-casas-de-eventos/ (importancia: 0.7)
-- Lista de clínicas de estética: empresas com CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/lista-de-clinicas-de-estetica/ (importancia: 0.7)
-- Lista de clínicas médicas: empresas com CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/lista-de-clinicas-medicas/ (importancia: 0.7)
+- Lista de Academias: https://paulo-leads.github.io/protocolo-hidra/lista-de-academias/ (importancia: 0.7)
+- Lista de Advocacias: https://paulo-leads.github.io/protocolo-hidra/lista-de-advocacias/ (importancia: 0.7)
+- Lista de Agencias de Publicidade: https://paulo-leads.github.io/protocolo-hidra/lista-de-agencias-de-publicidade/ (importancia: 0.7)
+- Lista de Agencias de Turismo: https://paulo-leads.github.io/protocolo-hidra/lista-de-agencias-de-turismo/ (importancia: 0.7)
+- Lista de Autoescolas: https://paulo-leads.github.io/protocolo-hidra/lista-de-autoescolas/ (importancia: 0.7)
+- Lista de Barbearias: https://paulo-leads.github.io/protocolo-hidra/lista-de-barbearias/ (importancia: 0.7)
+- Lista de Buffets e Casas de Eventos: https://paulo-leads.github.io/protocolo-hidra/lista-de-buffets-e-casas-de-eventos/ (importancia: 0.7)
+- Lista de Clinicas de Estetica: https://paulo-leads.github.io/protocolo-hidra/lista-de-clinicas-de-estetica/ (importancia: 0.7)
+- Lista de Clinicas Medicas: https://paulo-leads.github.io/protocolo-hidra/lista-de-clinicas-medicas/ (importancia: 0.7)
 - Lista de clínicas odontológicas em Belém (PA): CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/lista-de-clinicas-odontologicas-em-belem-pa/ (importancia: 0.7)
 - Lista de clínicas odontológicas em Belo Horizonte (MG): CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/lista-de-clinicas-odontologicas-em-belo-horizonte-mg/ (importancia: 0.7)
 - Lista de clínicas odontológicas em Brasília (DF): CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/lista-de-clinicas-odontologicas-em-brasilia-df/ (importancia: 0.7)
@@ -121,6 +121,6 @@
 - Lista de clínicas odontológicas em Jaboatão dos Guararapes (PE): CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/lista-de-clinicas-odontologicas-em-jaboatao-dos-guararapes-pe/ (importancia: 0.7)
 
 # Metadados Tecnicos
-> Build: 2026-07-08T22:12:11.729Z
+> Build: 2026-07-08T22:25:23.241077
 > Total de paginas: 672
-> Total de palavras: 2,539,143
+> Total de palavras: 1,060,859
