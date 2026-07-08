@@ -535,32 +535,47 @@ allLinks.forEach((link) => {
     const phrase = processSpintax(randomSpintax());
     const pageHash = term?.contentHash || createHash("sha256").update(html).digest("hex").substring(0, 16);
 
-    // --- 1. REMOVER BLOCOS SPINTAX ANTIGOS ---
-    html = html.replace(/<div class="protocolo-hidra-spintax"[^>]*>[\s\S]*?<\/div>/g, '');
-    html = html.replace(/<div style="display:none;"[^>]*data-wikivendas-spintax[^>]*>[\s\S]*?<\/div>/g, '');
+    // --- 1. REMOVER TODOS OS BLOCOS SPINTAX ANTIGOS (visíveis e hidden) ---
+    html = html.replace(/<div\s+class="protocolo-hidra-spintax"[^>]*>[\s\S]*?<\/div>/gi, '');
+    html = html.replace(/<div\s+style="display:none;"[^>]*data-wikivendas-spintax[^>]*>[\s\S]*?<\/div>/gi, '');
 
-    // --- 2. REMOVER AS 2 DATAS ANTIGAS ---
-    // 2a. Remove o byline antigo (qualquer parágrafo com classe "byline" que contenha "atualizado em")
-    html = html.replace(/<p\s+class="byline"[^>]*>.*?atualizado em.*?<\/p>/gi, '');
-    
-    // 2b. Remove o rodapé antigo do sources (qualquer parágrafo que contenha "Última revisão")
+    // --- 2. REMOVER QUALQUER PARÁGRAFO QUE CONTENHA "atualizado em" OU "Última revisão" ---
+    // Remove qualquer <p> com "atualizado em" (byline antigo)
+    html = html.replace(/<p\s+[^>]*class="byline"[^>]*>.*?atualizado em.*?<\/p>/gi, '');
+    // Remove qualquer <p> que tenha "atualizado em" sem classe (fallback)
+    html = html.replace(/<p[^>]*>.*?atualizado em\s+[^<]+<\/p>/gi, '');
+    // Remove qualquer <p> com "Última revisão" (rodapé antigo)
     html = html.replace(/<p[^>]*>.*?Última revisão.*?<\/p>/gi, '');
 
-    // --- 3. CRIAR AS 2 NOVAS DATAS ---
-    const novoTimestamp = `2026-07-08 20:02:07`; // Usando o timestamp do exemplo
+    // --- 3. CRIAR AS NOVAS DATAS COM O TIMESTAMP DINÂMICO ---
+    const novoTimestamp = fullTimestamp; // agora dinâmico!
     const novoHash = pageHash.substring(0, 16);
     
     const novoByline = `<p class="byline">Por <strong>Paulo C. P. Santos</strong> · Arquiteto do Protocolo Hidra · atualizado em ${novoTimestamp}</p>`;
     const novoRodape = `<p style="font-size:.85rem">Última revisão das fontes e dados: ${novoTimestamp} · Hash: <code style="font-size:0.7rem;background:#e2e8f0;padding:1px 6px;border-radius:3px;">${novoHash}</code></p>`;
 
-    // --- 4. INSERIR AS NOVAS DATAS ---
-    // 4a. Insere o novo byline ANTES do <div class="hero-cta">
-    html = html.replace(/(<div\s+class="hero-cta")/, `${novoByline}\n    $1`);
-    
-    // 4b. Insere o novo rodapé DENTRO do <aside class="sources">, antes do </aside>
-    html = html.replace(/(<\/aside>)/, `${novoRodape}\n$1`);
+    // --- 4. INSERIR O NOVO BYLINE ---
+    // Procura por <div class="hero-cta"> e insere antes
+    if (/<div\s+class="hero-cta"/i.test(html)) {
+      html = html.replace(/(<div\s+class="hero-cta")/, `${novoByline}\n    $1`);
+    } else {
+      // Fallback: insere antes do <div class="signals"> ou após o <p class="lead">
+      html = html.replace(/(<p\s+class="lead"[^>]*>.*?<\/p>)/, `$1\n    ${novoByline}`);
+    }
 
-    // --- 5. CRIAR O BLOCO SPINTAX VISÍVEL ---
+    // --- 5. INSERIR O NOVO RODAPÉ DENTRO DE <aside class="sources"> ---
+    // Se existir <aside class="sources">, substitui o conteúdo antigo ou insere antes do </aside>
+    if (/<aside\s+class="sources"/i.test(html)) {
+      // Remove qualquer rodapé antigo que possa ter escapado
+      html = html.replace(/<p[^>]*>.*?Última revisão.*?<\/p>/gi, '');
+      // Insere o novo rodapé antes do </aside>
+      html = html.replace(/(<\/aside>)/, `${novoRodape}\n$1`);
+    } else {
+      // Fallback: insere antes do </main> ou </body>
+      html = html.replace(/(<\/main>)/, `${novoRodape}\n$1`);
+    }
+
+    // --- 6. CRIAR O BLOCO SPINTAX VISÍVEL ---
     const spintaxVisible = `
 <!-- Protocolo Hidra | Frase gerada em ${fullTimestamp} | Hash: ${pageHash} -->
 <div class="protocolo-hidra-spintax" style="margin:24px 0;padding:16px 20px;background:#f0f5ff;border-left:4px solid #1D4ED8;border-radius:0 10px 10px 0;font-size:0.95rem;line-height:1.6;color:#0B2545;">
@@ -572,14 +587,20 @@ allLinks.forEach((link) => {
 </div>
 `;
 
-    // --- 6. INSERIR O BLOCO SPINTAX ---
-    // Insere depois do </aside> (que agora já tem o novo rodapé)
-    html = html.replace(/(<\/aside>)/, `$1\n${spintaxVisible}`);
+    // --- 7. INSERIR O BLOCO SPINTAX APÓS O </aside> OU ANTES DO </main> ---
+    if (/<aside\s+class="sources"/i.test(html)) {
+      // Insere imediatamente após o </aside>
+      html = html.replace(/(<\/aside>)/, `$1\n${spintaxVisible}`);
+    } else {
+      // Fallback: antes do </main>
+      html = html.replace(/(<\/main>)/, `${spintaxVisible}\n$1`);
+    }
 
-    // --- 7. ATUALIZAR dateModified NO JSON-LD ---
+    // --- 8. ATUALIZAR datePublished E dateModified NO JSON-LD ---
+    html = html.replace(/"datePublished":"[^"]+"/, `"datePublished":"${BUILD_DATE}"`);
     html = html.replace(/"dateModified":"[^"]+"/, `"dateModified":"${fullTimestamp}"`);
 
-    // --- 8. ATUALIZAR META DESCRIPTION ---
+    // --- 9. ATUALIZAR META DESCRIPTION (se existir) ---
     const metaDesc = `<meta name="description" content="${(term?.description || linkToName(link)).substring(0, 130)} — Gerado em ${fullTimestamp} | Hash: ${pageHash.substring(0, 12)}">`;
     if (/<meta name="description"/i.test(html)) {
       html = html.replace(/<meta name="description"[^>]*>/i, metaDesc);
@@ -587,7 +608,7 @@ allLinks.forEach((link) => {
       html = html.replace(/<head>/i, `<head>\n  ${metaDesc}`);
     }
 
-    // --- 9. ESCREVER O ARQUIVO ---
+    // --- 10. ESCREVER O ARQUIVO ---
     writeFileSync(filePath, html, "utf8");
     updatedCount++;
   } catch (err) {
@@ -596,82 +617,5 @@ allLinks.forEach((link) => {
   }
 });
 
-console.log(`✅ ${updatedCount} páginas atualizadas com as 2 novas datas e spintax`);
+console.log(`✅ ${updatedCount} páginas atualizadas com as 2 novas datas dinâmicas e spintax`);
 if (skippedCount > 0) console.log(`⚠️ ${skippedCount} páginas não puderam ser processadas`);
-
-// ============================================================
-// 7. SCRIPT.JS (mantido igual)
-// ============================================================
-const scriptJs = `// ============================================================
-// Protocolo Hidra — Script de Ecossistema Vivo
-// ============================================================
-(function() {
-  var BUILD_FULL = "${fullTimestamp}";
-  var BUILD_DATE = "${BUILD_DATE}";
-  var BUILD_TIME = "${BUILD_TIME}";
-  var TOTAL_TERMS = ${terms.length};
-  var GLOSSARIO_URL = "${SITE_URL}/glossario.json";
-
-  document.addEventListener('DOMContentLoaded', function() {
-    var footer = document.querySelector('footer, .site-footer, .pre-footer');
-    if (footer) {
-      var metaInfo = document.createElement('p');
-      metaInfo.style.cssText = 'font-size:0.7rem;color:var(--text-muted,#9fb8d6);margin-top:0.5rem;';
-      metaInfo.textContent = '🔄 Ecossistema atualizado em ' + BUILD_FULL + ' | ' + TOTAL_TERMS + ' paginas indexadas';
-      footer.appendChild(metaInfo);
-    }
-
-    fetch(GLOSSARIO_URL)
-      .then(function(r) { return r.json(); })
-      .then(function(data) {
-        if (data && data.totalTerms) {
-          TOTAL_TERMS = data.totalTerms;
-          var badges = document.querySelectorAll('[data-eco-count]');
-          for (var i = 0; i < badges.length; i++) {
-            badges[i].textContent = data.totalTerms + ' paginas';
-          }
-        }
-      })
-      .catch(function() {});
-
-    var cards = document.querySelectorAll('[class*="card"], .signal, .tile, .step-card, .ex');
-    for (var i = 0; i < cards.length; i++) {
-      var badge = document.createElement('span');
-      badge.style.cssText = 'display:inline-block;font-size:0.55rem;background:#3b82f6;color:#fff;padding:2px 7px;border-radius:20px;margin-left:8px;vertical-align:middle;';
-      badge.textContent = BUILD_TIME;
-      var title = cards[i].querySelector('h2, h3, strong');
-      if (title) title.appendChild(badge);
-    }
-
-    var spintaxDiv = document.querySelector('[data-wikivendas-spintax]');
-    if (spintaxDiv) {
-      console.log('[Protocolo Hidra] Pagina verificada | Hash: ' + (spintaxDiv.getAttribute('data-hash') || 'N/A') + ' | Data: ' + (spintaxDiv.getAttribute('data-date') || BUILD_FULL));
-    }
-  });
-
-  window.__PROTOCOLO_HIDRA = {
-    version: "${BUILD_DATE.replace(/-/g, ".")}",
-    buildDate: BUILD_DATE,
-    buildTime: BUILD_TIME,
-    buildFull: BUILD_FULL,
-    totalTerms: TOTAL_TERMS,
-    glossarioUrl: GLOSSARIO_URL,
-  };
-})();
-`;
-
-writeFileSync("docs/script.js", scriptJs, "utf8");
-console.log("✅ script.js gerado");
-
-// ============================================================
-// 8. FINALIZAR
-// ============================================================
-console.log(`\n🏁 Build finalizado!`);
-console.log(`   📁 docs/glossario.json — ${terms.length} termos (agora com dados completos)`);
-console.log(`   📁 docs/sitemap.xml — ${sitemapEntries.length} URLs (com horario completo)`);
-console.log(`   📁 docs/robots.txt — 20+ crawlers`);
-console.log(`   📁 docs/llms.txt`);
-console.log(`   📁 docs/script.js`);
-console.log(`   📁 ${updatedCount} paginas atualizadas`);
-console.log(`   🕐 Build: ${fullTimestamp}`);
-console.log(`   👁️ Spintax VISIVEL + 2 novas datas em todas as paginas`);
