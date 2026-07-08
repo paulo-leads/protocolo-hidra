@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consulta Inscrição Estadual pelo CNPJ: guia dos 27 estados</title>
+  <meta name="description" content="Consulte a inscrição estadual pelo CNPJ: links diretos para as 27 Sefaz, o formato do número por UF e o que fazer quando a IE não aparece.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://paulo-leads.github.io/protocolo-hidra/consulta-inscricao-estadual/">
+  <link rel="icon" href="/protocolo-hidra/favicon.ico?v=20260622" sizes="any">
+  <link rel="shortcut icon" href="/protocolo-hidra/favicon.ico?v=20260622">
+  <link rel="icon" type="image/png" href="/protocolo-hidra/assets/favicon.png?v=20260622">
+  <link rel="apple-touch-icon" href="/protocolo-hidra/assets/favicon.png?v=20260622">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Consulta Inscrição Estadual pelo CNPJ: guia dos 27 estados">
+  <meta property="og:description" content="Consulte a inscrição estadual pelo CNPJ em qualquer estado: links diretos para as 27 Sefaz, formato do número por UF e o que fazer quando a IE não existe.">
+  <meta property="og:url" content="https://paulo-leads.github.io/protocolo-hidra/consulta-inscricao-estadual/">
+  <meta property="og:site_name" content="ProtocoloHidra">
+  <meta property="og:image" content="https://paulo-leads.github.io/protocolo-hidra/assets/img/protocolo-hidra-painel-1200.png">
+  <meta property="og:image:alt" content="Painel ProtocoloHidra para consultar CNPJ e montar listas de empresas">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Consulta Inscrição Estadual pelo CNPJ: guia dos 27 estados">
+  <meta name="twitter:description" content="Links diretos para as 27 Sefaz, formato da IE por estado e o que fazer quando a consulta não retorna nada.">
+  <meta name="twitter:image" content="https://paulo-leads.github.io/protocolo-hidra/assets/img/protocolo-hidra-painel-1200.png">
+  <meta name="twitter:image:alt" content="Painel ProtocoloHidra para consultar CNPJ e montar listas de empresas">
+
+  
+  
+  <style type="text/css">@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/vietnamese/wght/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/cyrillic/wght/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/greek/wght/normal.woff2);unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/cyrillic-ext/wght/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/greek-ext/wght/normal.woff2);unicode-range:U+1F00-1FFF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/vietnamese/wght/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/greek/wght/normal.woff2);unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/greek-ext/wght/normal.woff2);unicode-range:U+1F00-1FFF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/cyrillic/wght/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/cyrillic-ext/wght/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/cyrillic/wght/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/cyrillic-ext/wght/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/greek/wght/normal.woff2);unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/vietnamese/wght/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/greek-ext/wght/normal.woff2);unicode-range:U+1F00-1FFF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/greek/wght/normal.woff2);unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/vietnamese/wght/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/cyrillic-ext/wght/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/cyrillic/wght/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/greek-ext/wght/normal.woff2);unicode-range:U+1F00-1FFF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Sora;font-style:normal;font-weight:600;src:url(/cf-fonts/v/sora/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Sora;font-style:normal;font-weight:600;src:url(/cf-fonts/v/sora/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Sora;font-style:normal;font-weight:700;src:url(/cf-fonts/v/sora/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Sora;font-style:normal;font-weight:700;src:url(/cf-fonts/v/sora/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Sora;font-style:normal;font-weight:800;src:url(/cf-fonts/v/sora/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Sora;font-style:normal;font-weight:800;src:url(/cf-fonts/v/sora/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}</style>
+  <style data-mbx>.mbx{--navy:#0B2545;--navy-2:#11315c;--navy-deep:#071a33;--blue:#1D4ED8;--blue-2:#3B82F6;--emerald:#10B981;--emerald-d:#047857;--teal:#4CD1A6;--ink:#0F172A;--body:#334155;--muted:#64748B;--line:#E2E8F0;--line-2:#EAEFF6;--surf:#F7F9FC;--surf-2:#EEF3FB;--white:#fff;--r:14px;--r-sm:10px;--r-lg:18px;--sh:0 10px 30px rgba(15,23,42,.06);--sh-lg:0 24px 60px rgba(15,23,42,.10);--wrap:1120px;--read:700px;margin:0;font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;color:var(--body);line-height:1.7;background:var(--surf);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}.mbx *,.mbx *::before,.mbx *::after{box-sizing:border-box}.mbx h1,.mbx h2,.mbx h3,.mbx h4{font-family:'Sora',Inter,sans-serif;color:var(--ink);line-height:1.16;margin:0;letter-spacing:-.02em}.mbx p{margin:0 0 1rem}.mbx a{color:var(--blue);text-decoration:none}.mbx a:hover{text-decoration:underline}.mbx img{max-width:100%;height:auto}.mbx strong{color:var(--ink)}.mbx .wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}.mbx .col{max-width:var(--read);margin-inline:auto}.mbx .num{font-variant-numeric:tabular-nums}.mbx .eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}.mbx .eyebrow i{font-size:1rem}.mbx .site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line-2)}.mbx .header-inner{max-width:var(--wrap);margin:0 auto;padding:0 24px;height:68px;display:flex;align-items:center;justify-content:space-between;gap:1rem}.mbx .header-inner .logo{display:inline-flex;align-items:center}.mbx .header-inner .logo img{height:34px;width:auto;display:block}.mbx .header-nav{display:flex;align-items:center;gap:1.5rem;font-size:.95rem;font-weight:500}.mbx .header-nav a{color:var(--body)}.mbx .header-nav a:hover{color:var(--ink);text-decoration:none}.mbx .btn-header{background:var(--surf-2);color:var(--blue);border:1px solid #dbe6fb;border-radius:11px;padding:.55rem 1.05rem;font-weight:600}.mbx .btn-header:hover{background:#e2ecfb;text-decoration:none}.mbx .menu-toggle{display:none;background:none;border:0;font-size:1.5rem;color:var(--ink);cursor:pointer;line-height:1;padding:4px 8px}.mbx .breadcrumb{margin-bottom:26px;font-size:.82rem}.mbx .breadcrumb ol{list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin:0;padding:0;color:#9fb6d6}.mbx .breadcrumb li{display:flex;align-items:center;gap:.5rem}.mbx .breadcrumb li+li::before{content:"\203A";color:#5f7da6;font-size:1.1em;line-height:1}.mbx .breadcrumb a{color:#9fb6d6}.mbx .breadcrumb a:hover{color:#fff;text-decoration:none}.mbx .breadcrumb [aria-current="page"] span{color:#dbe7f7;font-weight:600}.mbx .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:600;border-radius:11px;padding:.75rem 1.25rem;font-size:.97rem;cursor:pointer;border:1px solid transparent;transition:.18s;text-decoration:none;line-height:1.2}.mbx .btn:hover{text-decoration:none}.mbx .btn-primary{background:var(--navy);color:#fff}.mbx .btn-primary:hover{background:var(--blue);color:#fff}.mbx .btn-ghost{background:var(--surf-2);color:var(--blue);border-color:#dbe6fb}.mbx .btn-ghost:hover{background:#e2ecfb}.mbx .hero{position:relative;overflow:hidden;color:#dbe7f7;background:radial-gradient(1200px 500px at 80% -10%,#16407a 0%,transparent 60%),linear-gradient(160deg,#0B2545 0%,#11315c 100%)}.mbx .hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(700px 300px at 15% 110%,rgba(76,209,166,.18),transparent 60%)}.mbx .hero .wrap{position:relative;z-index:2;padding:40px 24px 92px}.mbx .hero .eyebrow{color:#7fd9bd}.mbx .hero h1{color:#fff;font-size:clamp(34px,5vw,54px);font-weight:800;margin:18px 0 0;max-width:20ch}.mbx .hero .lead{font-size:1.18rem;color:#c3d4ea;max-width:60ch;margin:18px 0 22px}.mbx .hero .byline{font-size:.85rem;color:#9fb6d6;margin:0 0 26px}.mbx .hero .byline strong{color:#fff;font-weight:600}.mbx .hero-cta{display:flex;gap:.8rem;flex-wrap:wrap}.mbx .hero .btn-primary{background:#fff;color:var(--navy)}.mbx .hero .btn-primary:hover{background:var(--teal);color:var(--navy)}.mbx .hero .btn-ghost{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.22)}.mbx .hero .btn-ghost:hover{background:rgba(255,255,255,.16)}.mbx .signals{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:46px}.mbx .signal{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:18px 20px}.mbx .signal strong{display:block;font-family:'Sora';font-size:1.7rem;font-weight:800;color:#fff}.mbx .signal.up strong{color:#7fe7c4}.mbx .signal span{font-size:.9rem;color:#aec5e2}.mbx .band{padding:68px 0}.mbx .band--alt{background:var(--white)}.mbx .kicker{margin-bottom:28px}.mbx .kicker h2{font-size:clamp(26px,3.4vw,36px);font-weight:800;margin:10px 0 8px}.mbx .kicker p{font-size:1.08rem;color:var(--body);max-width:64ch}.mbx .lead-p{font-size:1.12rem;max-width:72ch}.mbx .body-p{max-width:72ch}.mbx .band h3{font-size:1.15rem;margin:18px 0 8px}.mbx .answer{display:flex;gap:18px;align-items:flex-start;background:linear-gradient(135deg,#f4f8fd,#eaf1fb);border:1px solid #d7e3f2;border-left:4px solid var(--blue);border-radius:0 var(--r) var(--r) 0;padding:24px 26px;max-width:var(--read)}.mbx .answer .ic{flex:0 0 auto;width:44px;height:44px;border-radius:12px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:1.4rem}.mbx .answer p{margin:0;font-size:1.08rem}.mbx .answer b{color:var(--navy)}.mbx .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:26px}.mbx .card{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:24px;box-shadow:var(--sh);transition:.2s}.mbx .card:hover{transform:translateY(-3px);box-shadow:var(--sh-lg);border-color:#cfe0f5}.mbx .card .ic{width:46px;height:46px;border-radius:12px;background:var(--surf-2);color:var(--blue);display:grid;place-items:center;font-size:1.45rem;margin-bottom:14px}.mbx .card h3{font-size:1.12rem;margin:0 0 6px}.mbx .card p{margin:0;font-size:.98rem;color:var(--muted)}.mbx .steps{list-style:none;counter-reset:step;margin:26px auto 0;padding:0;display:grid;gap:14px;max-width:var(--read)}.mbx .steps li{counter-increment:step;display:flex;gap:16px;background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;box-shadow:var(--sh)}.mbx .steps li::before{content:counter(step);flex:0 0 auto;width:34px;height:34px;border-radius:9px;background:var(--navy);color:#fff;font-family:'Sora';font-weight:800;display:grid;place-items:center;font-size:1rem}.mbx .steps b{display:block;color:var(--ink);font-family:'Sora';font-size:1.02rem;margin-bottom:2px}.mbx .steps span{color:var(--muted);font-size:.96rem}.mbx .data{background:var(--navy);color:#cdddf0;border-radius:var(--r-lg);padding:38px;position:relative;overflow:hidden}.mbx .data::after{content:"";position:absolute;right:-80px;top:-80px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(76,209,166,.16),transparent 70%);pointer-events:none}.mbx .data .eyebrow{color:#7fe7c4}.mbx .data h2{color:#fff;font-size:1.7rem;margin:10px 0 6px;position:relative}.mbx .data>p{color:#a9c1de;max-width:62ch;position:relative}.mbx .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:26px 0 28px;position:relative}.mbx .tile{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:18px}.mbx .tile strong{display:block;font-family:'Sora';font-size:1.55rem;font-weight:800;color:#fff}.mbx .tile.up strong{color:#7fe7c4}.mbx .tile span{font-size:.82rem;color:#9fb8d6}.mbx .bars{position:relative;display:grid;gap:15px}.mbx .bar-h{display:flex;justify-content:space-between;align-items:baseline;font-size:.95rem;margin-bottom:6px}.mbx .bar-h b{color:#fff;font-weight:600}.mbx .bar-h em{color:#7fe7c4;font-style:normal;font-weight:800}.mbx .bar-h small{color:#90a8c6;margin-left:8px;font-weight:400}.mbx .track{height:7px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden}.mbx .fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#4cd1a6,#74a4ef)}.mbx .data .grow{color:#a9c1de;margin:24px 0 0;position:relative;font-size:.98rem}.mbx .data .grow b{color:#fff}.mbx .infographic{margin:26px 0 0;text-align:center}.mbx .infographic svg,.mbx .infographic img{width:100%;max-width:720px;height:auto;border-radius:var(--r);box-shadow:var(--sh)}.mbx .infographic figcaption{font-size:.85rem;color:var(--muted);max-width:64ch;margin:14px auto 0}.mbx .embed{max-width:640px;margin:14px auto 0;text-align:left}.mbx .embed summary{cursor:pointer;color:var(--blue);font-weight:600;font-size:.92rem}.mbx .embed textarea{width:100%;margin-top:10px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.78rem;line-height:1.5;border:1px solid var(--line);border-radius:var(--r-sm);padding:12px;background:var(--white);color:var(--body);resize:vertical}.mbx .table-wrap{margin-top:26px;overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--r)}.mbx .cmp-table{width:100%;min-width:560px;border-collapse:separate;border-spacing:0;background:var(--white);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);font-size:.96rem}.mbx .cmp-table caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);border:0}.mbx .cmp-table thead th{font-family:'Sora';font-weight:700;color:#fff;text-align:left;padding:15px 18px;font-size:1rem;vertical-align:middle}.mbx .cmp-table thead th i{margin-right:.4rem;vertical-align:-2px}.mbx .cmp-table thead th:first-child{background:#334155}.mbx .cmp-table thead .th-b2b{background:linear-gradient(120deg,var(--navy),var(--blue))}.mbx .cmp-table thead .th-b2c{background:linear-gradient(120deg,#475569,#64748b)}.mbx .cmp-table th[scope=row]{font-family:'Sora';font-weight:700;color:var(--ink);background:var(--surf);text-align:left;white-space:nowrap}.mbx .cmp-table td,.mbx .cmp-table th[scope=row]{padding:13px 18px;border-top:1px solid var(--line-2);vertical-align:top}.mbx .cmp-table tbody tr:first-child>*{border-top:0}.mbx .cmp-table td{color:var(--body)}.mbx .cmp-table td:nth-child(2){color:var(--ink)}.mbx .pc{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:26px}.mbx .pc-col{border-radius:var(--r);padding:24px;border:1px solid var(--line);background:var(--white)}.mbx .pc-col h3{display:flex;align-items:center;gap:.6rem;font-size:1.08rem;margin:0 0 14px}.mbx .tag{font-size:.68rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:.25rem .55rem;border-radius:7px}.mbx .pc-pos .tag{color:var(--emerald-d);background:#e7f6ee}.mbx .pc-neg .tag{color:#9a5b00;background:#fcf1df}.mbx .pc-col ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}.mbx .pc-col li{display:flex;gap:11px;font-size:.97rem}.mbx .pc-col li i{flex:0 0 auto;font-size:1.15rem}.mbx .pc-pos li i{color:var(--emerald)}.mbx .pc-neg li i{color:#c87f12}.mbx .pc-col li b{color:var(--ink)}.mbx .examples{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:26px}.mbx .ex{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;box-shadow:var(--sh)}.mbx .ex .k{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}.mbx .ex h3{font-size:1.1rem;margin:0 0 6px}.mbx .ex p{margin:0;font-size:.96rem;color:var(--muted)}.mbx .quote{margin:0;background:var(--navy);color:#fff;border-radius:var(--r-lg);padding:46px 52px;position:relative;overflow:hidden}.mbx .quote::before{content:"\201C";position:absolute;left:26px;top:-6px;font-family:Georgia,serif;font-size:130px;line-height:1;color:rgba(127,231,196,.18)}.mbx .quote p{font-family:'Sora';font-weight:700;font-size:1.55rem;line-height:1.4;margin:0;max-width:34ch;position:relative}.mbx .quote cite{display:block;margin-top:16px;font-style:normal;font-size:.92rem;color:#9fb8d6}.mbx .gloss{background:var(--surf-2);border:1px solid var(--line-2);border-radius:var(--r);padding:24px 26px;margin:26px 0 0;max-width:var(--read)}.mbx .gloss>strong{display:block;font-family:'Sora';color:var(--ink);font-size:1.05rem;margin-bottom:12px}.mbx .gloss dl{margin:0;display:grid;gap:10px}.mbx .gloss dt{font-weight:700;color:var(--ink);font-size:.96rem}.mbx .gloss dd{margin:2px 0 0;color:var(--muted);font-size:.94rem}.mbx .faq{display:grid;gap:12px;margin-top:26px;max-width:var(--read)}.mbx .faq details{background:var(--white);border:1px solid var(--line);border-radius:var(--r-sm);padding:2px 6px;transition:.2s}.mbx .faq details[open]{border-color:#cfe0f5;box-shadow:var(--sh)}.mbx .faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 18px;font-family:'Sora';font-weight:600;color:var(--ink);font-size:1.02rem}.mbx .faq summary::-webkit-details-marker{display:none}.mbx .faq summary i{transition:.2s;color:var(--blue);flex:0 0 auto}.mbx .faq details[open] summary i{transform:rotate(180deg)}.mbx .faq details p{margin:0;padding:0 18px 18px;color:var(--body);font-size:.98rem}.mbx .cta{background:linear-gradient(135deg,var(--navy),var(--blue));border-radius:var(--r-lg);padding:40px 44px;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}.mbx .cta>div{flex:1 1 320px}.mbx .cta h2{color:#fff;font-size:1.5rem;margin:0;max-width:24ch}.mbx .cta p{color:#c3d4ea;margin:8px 0 0;max-width:50ch}.mbx .cta .btn-primary{background:#fff;color:var(--navy)}.mbx .cta .btn-primary:hover{background:var(--teal);color:var(--navy)}.mbx .col + .cta,.mbx .steps + .cta{margin-top:44px}.mbx .sources{background:var(--surf-2);border-top:1px solid var(--line-2);padding:48px 0}.mbx .sources h2{font-size:1.2rem;margin-bottom:10px}.mbx .sources p{font-size:.92rem;color:var(--muted);max-width:84ch}.mbx .sources .links{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}.mbx .sources .links a{font-size:.85rem;background:var(--white);border:1px solid var(--line);border-radius:99px;padding:6px 14px;color:var(--blue)}.mbx .sources .links a:hover{border-color:#cfe0f5;text-decoration:none}.mbx .pre-footer{background:linear-gradient(160deg,#0B2545,#11315c);color:#fff;text-align:center;padding:64px 24px}.mbx .pre-footer-inner{max-width:680px;margin:0 auto}.mbx .pre-footer h2{color:#fff;font-size:1.7rem;margin-bottom:10px}.mbx .pre-footer p{color:#c3d4ea;margin:0 auto 22px;max-width:52ch}.mbx .btn-prefooter{display:inline-block;background:#fff;color:var(--navy);font-weight:600;border-radius:11px;padding:.85rem 1.6rem}.mbx .btn-prefooter:hover{background:var(--teal);text-decoration:none}.mbx .site-footer{background:var(--navy-deep);color:#9fb8d6;padding:34px 0;font-size:.9rem}.mbx .footer-inner{max-width:var(--wrap);margin:0 auto;padding:0 24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px}.mbx .footer-inner p{margin:0}.mbx .footer-inner a{color:#bcd2ec}.mbx .footer-inner strong{color:#fff}@media(max-width:860px){.mbx .header-nav{position:absolute;left:0;right:0;top:68px;flex-direction:column;align-items:stretch;gap:0;background:#fff;border-bottom:1px solid var(--line-2);box-shadow:var(--sh);padding:6px 0;display:none}.mbx .header-nav.open{display:flex}.mbx .header-nav a{padding:12px 24px}.mbx .btn-header{margin:8px 24px}.mbx .menu-toggle{display:block}.mbx .hero .wrap{padding:28px 24px 60px}.mbx .band{padding:50px 0}.mbx .signals,.mbx .tiles{grid-template-columns:1fr 1fr}.mbx .cards,.mbx .cmp,.mbx .pc,.mbx .examples{grid-template-columns:1fr}.mbx .data,.mbx .quote{padding:30px}.mbx .cta{padding:30px;flex-direction:column;align-items:flex-start}.mbx .quote p{font-size:1.3rem}}@media(max-width:480px){.mbx .signals,.mbx .tiles{grid-template-columns:1fr}.mbx .data{padding:24px}}.mbx svg.i{flex:0 0 auto;width:1.25em;height:1.25em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.18em}.mbx .card .ic svg.i,.mbx .answer .ic svg.i{width:1.5rem;height:1.5rem;vertical-align:0}.mbx .eyebrow svg.i{width:1rem;height:1rem}.mbx .faq summary svg.i{color:var(--blue);transition:transform .2s}.mbx .faq details[open] summary svg.i{transform:rotate(180deg)}.mbx .rich-table{width:100%;min-width:560px;border-collapse:separate;border-spacing:0;background:var(--white);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);font-size:.96rem}.mbx .rich-table caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);border:0}.mbx .rich-table thead th{background:var(--navy);color:#fff;font-family:'Sora';font-weight:700;text-align:left;padding:14px 18px;font-size:.95rem}.mbx .rich-table th[scope=row]{font-family:'Sora';font-weight:700;color:var(--ink);background:var(--surf);text-align:left;vertical-align:top;white-space:nowrap}.mbx .rich-table td,.mbx .rich-table th[scope=row]{padding:13px 18px;border-top:1px solid var(--line-2);vertical-align:top}.mbx .rich-table tbody tr:first-child>*{border-top:0}.mbx .rich-table td{color:var(--body)}.mbx .approach{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:26px}.mbx .approach .step{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;box-shadow:var(--sh)}.mbx .approach .step .lbl{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}.mbx .approach .step blockquote{margin:0 0 10px;padding:12px 16px;background:var(--surf-2);border-left:3px solid var(--blue);border-radius:0 var(--rsm) var(--rsm) 0;font-style:italic;color:var(--ink)}.mbx .approach .step p{margin:0;font-size:.94rem;color:var(--muted)}@media(max-width:860px){.mbx .approach{grid-template-columns:1fr}}</style>
+
+  
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": "https://paulo-leads.github.io/protocolo-hidra/consulta-inscricao-estadual/#article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://paulo-leads.github.io/protocolo-hidra/consulta-inscricao-estadual/"
+  },
+  "headline": "Consulta de Inscrição Estadual pelo CNPJ: o guia completo dos 27 estados",
+  "description": "Guia completo da consulta de inscrição estadual pelo CNPJ: tabela com os portais oficiais das 27 Sefaz, formato do número por estado, o que significa isento e o que fazer quando a consulta não retorna nada.",
+  "url": "https://paulo-leads.github.io/protocolo-hidra/consulta-inscricao-estadual/",
+  "inLanguage": "pt-BR",
+  "image": [
+    "https://paulo-leads.github.io/protocolo-hidra/assets/img/protocolo-hidra-painel-1200.png"
+  ],
+  "datePublished": "2026-07-03",
+  "dateModified": "2026-07-03",
+  "author": {
+    "@type": "Person",
+    "name": "Paulo C. P. Santos",
+    "jobTitle": "Arquiteto do Protocolo Hidra",
+    "url": "https://paulo-leads.github.io/protocolo-hidra/paulo-leads/",
+    "worksFor": {
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/#organization"
+    },
+    "knowsAbout": [
+      "inscrição estadual",
+      "consulta de CNPJ",
+      "ICMS",
+      "Sintegra",
+      "prospecção B2B"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://paulo-leads.github.io/protocolo-hidra/#organization",
+    "name": "ProtocoloHidra",
+    "alternateName": "ProtocoloHidra",
+    "url": "https://paulo-leads.github.io/protocolo-hidra/",
+    "logo": {
+      "@type": "ImageObject",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/#logo",
+      "url": "https://paulo-leads.github.io/protocolo-hidra/assets/img/protocolo-hidra-logo.png"
+    },
+    "sameAs": [
+      "https://www.instagram.com/protocolohidra/"
+    ]
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "inscrição estadual"
+    },
+    {
+      "@type": "Thing",
+      "name": "ICMS"
+    },
+    {
+      "@type": "Thing",
+      "name": "Sefaz"
+    },
+    {
+      "@type": "Thing",
+      "name": "Sintegra"
+    },
+    {
+      "@type": "Thing",
+      "name": "CNPJ"
+    }
+  ],
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": ["#resposta-rapida p", "#o-que-e p", ".mbx-answer p"]
+  }
+}
+</script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": "https://paulo-leads.github.io/protocolo-hidra/consulta-inscricao-estadual/#diretorio",
+    "name": "Consulta de inscrição estadual nos 27 estados — portais oficiais das Sefaz",
+    "description": "Diretório dos portais oficiais de consulta de inscrição estadual (IE) pelo CNPJ em cada unidade federativa do Brasil.",
+    "numberOfItems": 27,
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Acre (AC) — Sefaz AC, consulta pública", "url": "https://www.sefaz.ac.gov.br/"},
+      {"@type": "ListItem", "position": 2, "name": "Alagoas (AL) — Sefaz AL, consulta de contribuinte", "url": "https://www.sefaz.al.gov.br/"},
+      {"@type": "ListItem", "position": 3, "name": "Amapá (AP) — Sefaz AP, Sintegra", "url": "https://www.sefaz.ap.gov.br/"},
+      {"@type": "ListItem", "position": 4, "name": "Amazonas (AM) — Sefaz AM, Sintegra", "url": "https://www.sefaz.am.gov.br/"},
+      {"@type": "ListItem", "position": 5, "name": "Bahia (BA) — Sefaz BA, Sintegra", "url": "https://www.sefaz.ba.gov.br/"},
+      {"@type": "ListItem", "position": 6, "name": "Ceará (CE) — Sefaz CE, Sintegra", "url": "https://www.sefaz.ce.gov.br/"},
+      {"@type": "ListItem", "position": 7, "name": "Distrito Federal (DF) — Receita DF, consulta de contribuinte", "url": "https://www.receita.fazenda.df.gov.br/"},
+      {"@type": "ListItem", "position": 8, "name": "Espírito Santo (ES) — Sefaz ES, Sintegra", "url": "https://www.sefaz.es.gov.br/"},
+      {"@type": "ListItem", "position": 9, "name": "Goiás (GO) — Economia GO, Sintegra Goiás", "url": "https://www.economia.go.gov.br/"},
+      {"@type": "ListItem", "position": 10, "name": "Maranhão (MA) — Sefaz MA, Sintegra", "url": "https://sefaz.ma.gov.br/"},
+      {"@type": "ListItem", "position": 11, "name": "Mato Grosso (MT) — Sefaz MT, consulta de contribuinte", "url": "https://www.sefaz.mt.gov.br/"},
+      {"@type": "ListItem", "position": 12, "name": "Mato Grosso do Sul (MS) — Sefaz MS, ICMS Transparente", "url": "https://www.sefaz.ms.gov.br/"},
+      {"@type": "ListItem", "position": 13, "name": "Minas Gerais (MG) — Sefaz MG, SIARE", "url": "https://www.fazenda.mg.gov.br/"},
+      {"@type": "ListItem", "position": 14, "name": "Pará (PA) — SEFA PA, consulta de contribuinte", "url": "https://www.sefa.pa.gov.br/"},
+      {"@type": "ListItem", "position": 15, "name": "Paraíba (PB) — Sefaz PB, Sintegra", "url": "https://www.sefaz.pb.gov.br/"},
+      {"@type": "ListItem", "position": 16, "name": "Paraná (PR) — Fazenda PR, consulta de contribuinte", "url": "https://www.fazenda.pr.gov.br/"},
+      {"@type": "ListItem", "position": 17, "name": "Pernambuco (PE) — Sefaz PE, e-Fisco", "url": "https://www.sefaz.pe.gov.br/"},
+      {"@type": "ListItem", "position": 18, "name": "Piauí (PI) — Sefaz PI, Sintegra", "url": "https://www.sefaz.pi.gov.br/"},
+      {"@type": "ListItem", "position": 19, "name": "Rio de Janeiro (RJ) — Sefaz RJ, consulta de contribuinte", "url": "https://portal.fazenda.rj.gov.br/"},
+      {"@type": "ListItem", "position": 20, "name": "Rio Grande do Norte (RN) — SET RN, UVT", "url": "https://www.set.rn.gov.br/"},
+      {"@type": "ListItem", "position": 21, "name": "Rio Grande do Sul (RS) — Sefaz RS, consulta pública", "url": "https://www.sefaz.rs.gov.br/"},
+      {"@type": "ListItem", "position": 22, "name": "Rondônia (RO) — SEFIN RO, portal do contribuinte", "url": "https://www.sefin.ro.gov.br/"},
+      {"@type": "ListItem", "position": 23, "name": "Roraima (RR) — Sefaz RR, Sintegra", "url": "https://www.sefaz.rr.gov.br/"},
+      {"@type": "ListItem", "position": 24, "name": "Santa Catarina (SC) — SEF SC, SAT", "url": "https://www.sef.sc.gov.br/"},
+      {"@type": "ListItem", "position": 25, "name": "São Paulo (SP) — Sefaz SP, Cadesp", "url": "https://portal.fazenda.sp.gov.br/"},
+      {"@type": "ListItem", "position": 26, "name": "Sergipe (SE) — Sefaz SE, Sintegra", "url": "https://www.sefaz.se.gov.br/"},
+      {"@type": "ListItem", "position": 27, "name": "Tocantins (TO) — Sefaz TO, Sintegra", "url": "https://www.sefaz.to.gov.br/"}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Como consultar a inscrição estadual pelo CNPJ",
+    "description": "Cinco passos para consultar a inscrição estadual (IE) de uma empresa a partir do CNPJ, no portal oficial da Sefaz do estado correto.",
+    "step": [
+      {"@type": "HowToStep", "position": 1, "name": "Identifique a UF do CNPJ", "text": "A inscrição estadual é emitida pelo estado, então você precisa saber onde o CNPJ está registrado. Se não souber, use o verificador de CNPJ desta página: ele mostra a cidade e a UF da empresa."},
+      {"@type": "HowToStep", "position": 2, "name": "Confirme os dados cadastrais", "text": "Confira razão social e situação cadastral do CNPJ antes de ir ao portal estadual. CNPJ baixado ou inapto costuma aparecer na Sefaz com inscrição suspensa, baixada ou cassada."},
+      {"@type": "HowToStep", "position": 3, "name": "Abra o portal da Sefaz do estado", "text": "Na tabela dos 27 estados, clique no sistema de consulta da UF da empresa — Cadesp em São Paulo, SIARE em Minas Gerais, SAT em Santa Catarina, e assim por diante."},
+      {"@type": "HowToStep", "position": 4, "name": "Informe o CNPJ na consulta pública", "text": "Digite os 14 dígitos do CNPJ no campo de consulta (alguns portais pedem captcha). O resultado traz a inscrição estadual, a situação cadastral na Sefaz e, em vários estados, o regime de apuração."},
+      {"@type": "HowToStep", "position": 5, "name": "Interprete o resultado", "text": "Habilitada ou ativa: contribuinte regular de ICMS. Isento ou não encontrado: provavelmente empresa só de serviços, sem IE — o que é normal. Suspensa, baixada ou cassada: não use essa inscrição em nota fiscal."}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type": "Question", "name": "Como consultar a inscrição estadual pelo CNPJ grátis?",
+        "acceptedAnswer": {"@type": "Answer", "text": "A consulta é gratuita e feita nos portais oficiais: acesse a Sefaz do estado onde o CNPJ está registrado (a tabela desta página traz os 27 links) ou o Sintegra, informe o número do CNPJ e veja a inscrição estadual e a situação cadastral. Não é preciso pagar nada nem criar cadastro — desconfie de sites que cobram por essa informação."}},
+      {"@type": "Question", "name": "Todo CNPJ tem inscrição estadual?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Não. A inscrição estadual é obrigatória apenas para contribuintes de ICMS: comércio, indústria, transporte intermunicipal e interestadual, energia e comunicação. Empresas exclusivamente de serviços — 12,4 milhões dos 21,7 milhões de CNPJs ativos na base ProtocoloHidra, cerca de 57% — pagam ISS ao município e normalmente não têm IE. Nesse caso, resultado 'não encontrado' não é irregularidade."}},
+      {"@type": "Question", "name": "MEI precisa de inscrição estadual?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Depende da atividade. MEI de comércio, indústria ou transporte intermunicipal precisa de IE — em regra ela é gerada automaticamente na formalização, feita no portal oficial do Governo Federal. MEI que só presta serviços não tem inscrição estadual. Sem a IE, o MEI comerciante não consegue emitir nota fiscal de produto (NF-e)."}},
+      {"@type": "Question", "name": "Quantos dígitos tem a inscrição estadual?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Varia de 8 a 14 dígitos conforme o estado: São Paulo usa 12, Minas Gerais 13, Rio de Janeiro 8, Paraná e Rio Grande do Sul 10. Não existe um formato nacional único — por isso a tabela desta página traz a coluna de dígitos por UF. Guias que afirmam um número só para o país inteiro estão errados."}},
+      {"@type": "Question", "name": "O que significa 'isento' na inscrição estadual?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Significa que a empresa não é contribuinte de ICMS naquele estado — situação comum em prestadoras de serviço. Em cadastros e notas fiscais, o campo IE pode ser preenchido como ISENTO. Não confunda com situação irregular: isento é diferente de inscrição baixada, suspensa ou cassada."}},
+      {"@type": "Question", "name": "Inscrição estadual é o mesmo que Sintegra?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Não. A inscrição estadual é o número de registro da empresa na Sefaz do estado; o Sintegra é o sistema integrado que permite consultar esse registro entre os estados. Em resumo: a IE é o dado, o Sintegra é um dos meios de consultá-lo."}},
+      {"@type": "Question", "name": "Dá para consultar inscrição estadual pelo CPF?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Em regra, não — a inscrição estadual é vinculada ao CNPJ. A exceção é o produtor rural pessoa física: em vários estados ele tem IE ligada ao CPF e pode consultá-la diretamente no portal da Sefaz do seu estado."}},
+      {"@type": "Question", "name": "Qual a diferença entre inscrição estadual e inscrição municipal?",
+        "acceptedAnswer": {"@type": "Answer", "text": "A inscrição estadual é o registro na Sefaz do estado e habilita o recolhimento de ICMS (mercadorias); a inscrição municipal é o registro na prefeitura e habilita o ISS (serviços) e a emissão de NFS-e. Uma empresa pode ter as duas, só uma ou nenhuma, conforme as atividades que exerce."}},
+      {"@type": "Question", "name": "A consulta de inscrição estadual mostra se a empresa está ativa?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Sim — o resultado traz a situação cadastral da inscrição na Sefaz: habilitada/ativa, suspensa, baixada ou cassada. Vale lembrar que essa é a situação estadual; a situação federal do CNPJ é outra consulta, que você faz em um clique no verificador de CNPJ desta página."}}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Início",
+          "item": "https://paulo-leads.github.io/protocolo-hidra/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Consulta de CNPJ",
+          "item": "https://paulo-leads.github.io/protocolo-hidra/consulta-cnpj/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Consulta de Inscrição Estadual",
+          "item": "https://paulo-leads.github.io/protocolo-hidra/consulta-inscricao-estadual/"
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/#website",
+      "name": "Protocolo Hidra",
+      "url": "https://paulo-leads.github.io/protocolo-hidra/",
+      "inLanguage": "pt-BR",
+      "description": "Protocolo Hidra — Metodologia de vendas B2B e soberania de dados.",
+      "publisher": {
+        "@id": "https://paulo-leads.github.io/protocolo-hidra/#organization"
+      },
+      "dateModified": "2026-07-08",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://paulo-leads.github.io/protocolo-hidra/busca?q={term}"
+        },
+        "query-input": "required name=term"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/#organization",
+      "name": "Protocolo Hidra",
+      "url": "https://paulo-leads.github.io/protocolo-hidra/",
+      "description": "Protocolo Hidra — Metodologia de soberania de dados e Zero Trust Sales.",
+      "founder": {
+        "@id": "https://paulo-leads.github.io/protocolo-hidra/#paulo-leads"
+      },
+      "foundingDate": "2025-01-01",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://paulo-leads.github.io/protocolo-hidra/assets/img/protocolo-hidra-logo.png"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+55-19-98264-2481",
+        "contactType": "sales",
+        "email": "contato@pauloleads.com.br"
+      },
+      "sameAs": [
+        "https://www.instagram.com/protocolohidra/"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/#paulo-leads",
+      "name": "Paulo C. P. Santos",
+      "alternateName": "Paulo Leads",
+      "url": "https://paulo-leads.github.io/protocolo-hidra/paulo-leads/",
+      "jobTitle": "Arquiteto do Protocolo Hidra",
+      "email": "mailto:contato@pauloleads.com.br",
+      "telephone": "+55-19-98264-2481",
+      "affiliation": {
+        "@id": "https://paulo-leads.github.io/protocolo-hidra/#organization"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/consulta-inscricao-estadual#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Início",
+          "item": "https://paulo-leads.github.io/protocolo-hidra/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Consulta Inscrição Estadual pelo CNPJ: guia dos 27 estados",
+          "item": "https://paulo-leads.github.io/protocolo-hidra/consulta-inscricao-estadual"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/consulta-inscricao-estadual#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "O que é Consulta Inscrição Estadual pelo CNPJ: guia dos 27 estados?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Consulte a inscrição estadual pelo CNPJ: links diretos para as 27 Sefaz, o formato do número por UF e o que fazer quando a IE não aparece...."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "DefinedTermSet",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/glossario.json#set",
+      "name": "Glossário Protocolo Hidra",
+      "description": "Ontologia oficial do Protocolo Hidra com definições canônicas.",
+      "url": "https://paulo-leads.github.io/protocolo-hidra/glossario.json",
+      "publisher": {
+        "@id": "https://paulo-leads.github.io/protocolo-hidra/#organization"
+      },
+      "version": "5.0.0-wkgs",
+      "dateModified": "2026-07-08",
+      "hasDefinedTerm": [
+        {
+          "@id": "https://paulo-leads.github.io/protocolo-hidra/def/comprar-leads"
+        },
+        {
+          "@id": "https://paulo-leads.github.io/protocolo-hidra/def/generative-lead-spoofing"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/consulta-inscricao-estadual#howto",
+      "name": "Como utilizar Consulta Inscrição Estadual pelo CNPJ: guia dos 27 estados",
+      "description": "Guia prático para aproveitar ao máximo este conteúdo do Protocolo Hidra.",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Leia e entenda",
+          "text": "Leia o conteúdo completo para compreender os fundamentos."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Aplique no seu contexto",
+          "text": "Adapte as recomendações ao seu ICP e processo comercial."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Meça e otimize",
+          "text": "Acompanhe métricas e refine a abordagem continuamente."
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="mbx">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-arrow-down" viewBox="0 0 24 24"> <path d="M12 5l0 14" /> <path d="M18 13l-6 6" /> <path d="M6 13l6 6" /> </symbol>
+<symbol id="i-bolt" viewBox="0 0 24 24"> <path d="M13 3l0 7l6 0l-8 11l0 -7l-6 0l8 -11" /> </symbol>
+<symbol id="i-building" viewBox="0 0 24 24"> <path d="M3 21l18 0" /> <path d="M9 8l1 0" /> <path d="M9 12l1 0" /> <path d="M9 16l1 0" /> <path d="M14 8l1 0" /> <path d="M14 12l1 0" /> <path d="M14 16l1 0" /> <path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16" /> </symbol>
+<symbol id="i-bulb" viewBox="0 0 24 24"> <path d="M3 12h1m8 -9v1m8 8h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7" /> <path d="M9 16a5 5 0 1 1 6 0a3.5 3.5 0 0 0 -1 3a2 2 0 0 1 -4 0a3.5 3.5 0 0 0 -1 -3" /> <path d="M9.7 17l4.6 0" /> </symbol>
+<symbol id="i-chart-bar" viewBox="0 0 24 24"> <path d="M3 13a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /> <path d="M15 9a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /> <path d="M9 5a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /> <path d="M4 20h14" /> </symbol>
+<symbol id="i-check" viewBox="0 0 24 24"> <path d="M5 12l5 5l10 -10" /> </symbol>
+<symbol id="i-chevron-down" viewBox="0 0 24 24"> <path d="M6 9l6 6l6 -6" /> </symbol>
+<symbol id="i-database" viewBox="0 0 24 24"> <path d="M12 6m-8 0a8 3 0 1 0 16 0a8 3 0 1 0 -16 0" /> <path d="M4 6v6a8 3 0 0 0 16 0v-6" /> <path d="M4 12v6a8 3 0 0 0 16 0v-6" /> </symbol>
+<symbol id="i-download" viewBox="0 0 24 24"> <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" /> <path d="M7 11l5 5l5 -5" /> <path d="M12 4l0 12" /> </symbol>
+<symbol id="i-filter" viewBox="0 0 24 24"> <path d="M4 4h16v2.172a2 2 0 0 1 -.586 1.414l-4.414 4.414v7l-6 2v-8.5l-4.48 -4.928a2 2 0 0 1 -.52 -1.345v-2.241z" /> </symbol>
+<symbol id="i-flag" viewBox="0 0 24 24"> <path d="M5 5a5 5 0 0 1 7 0a5 5 0 0 0 7 0v9a5 5 0 0 1 -7 0a5 5 0 0 0 -7 0v-9z" /> <path d="M5 21v-7" /> </symbol>
+<symbol id="i-help-circle" viewBox="0 0 24 24"> <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /> <path d="M12 16v.01" /> <path d="M12 13a2 2 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483" /> </symbol>
+<symbol id="i-map-pin" viewBox="0 0 24 24"> <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /> <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" /> </symbol>
+<symbol id="i-message-question" viewBox="0 0 24 24"> <path d="M8 9h8" /> <path d="M8 13h6" /> <path d="M14 18h-1l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v4.5" /> <path d="M19 22v.01" /> <path d="M19 19a2.003 2.003 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483" /> </symbol>
+<symbol id="i-rocket" viewBox="0 0 24 24"> <path d="M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3" /> <path d="M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3" /> <path d="M15 9m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> </symbol>
+<symbol id="i-shield-check" viewBox="0 0 24 24"> <path d="M11.46 20.846a12 12 0 0 1 -7.96 -14.846a12 12 0 0 0 8.5 -3a12 12 0 0 0 8.5 3a12 12 0 0 1 -.09 7.06" /> <path d="M15 19l2 2l4 -4" /> </symbol>
+<symbol id="i-stack-2" viewBox="0 0 24 24"> <path d="M12 4l-8 4l8 4l8 -4l-8 -4" /> <path d="M4 12l8 4l8 -4" /> <path d="M4 16l8 4l8 -4" /> </symbol>
+<symbol id="i-target" viewBox="0 0 24 24"> <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M12 12m-5 0a5 5 0 1 0 10 0a5 5 0 1 0 -10 0" /> <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /> </symbol>
+</defs></svg>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/protocolo-hidra/" class="logo"><img src="/protocolo-hidra/assets/img/protocolo-hidra-logo.png" alt="ProtocoloHidra" width="140" height="40"></a>
+    <button class="menu-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Abrir menu"><span aria-hidden="true">☰</span></button>
+    <nav class="header-nav" id="primary-nav" aria-label="Principal">
+      <a href="https://paulo-leads.github.io/protocolo-hidra/#video">Como funciona</a>
+      <a href="https://paulo-leads.github.io/protocolo-hidra/#quem-utiliza">Casos de Uso</a>
+      <a href="https://paulo-leads.github.io/protocolo-hidra/#premium">Planos</a>
+      <a href="https://paulo-leads.github.io/protocolo-hidra/#duvidas">Dúvidas</a>
+      <a href="/protocolo-hidra/teste-gratis-lista-de-empresas/" class="btn-header">Testar grátis</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="page-title">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="https://paulo-leads.github.io/protocolo-hidra/">Início</a></li><li><a href="https://paulo-leads.github.io/protocolo-hidra/consulta-cnpj/">Consulta de CNPJ</a></li><li aria-current="page"><span>Inscrição Estadual</span></li></ol></nav>
+      <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-map-pin"/></svg> Guia de consulta · 2026</span>
+      <h1 id="page-title">Consulta de Inscrição Estadual pelo CNPJ: o guia completo dos 27 estados</h1>
+      <p class="lead">A inscrição estadual (IE) é o registro da empresa na Sefaz do estado — e cada uma das 27 unidades federativas tem seu próprio portal de consulta. Este guia reúne <strong style="color:#fff">os links oficiais dos 27 estados</strong>, o formato do número em cada UF e o que fazer quando a consulta não retorna nada.</p>
+      <p class="byline">Por <strong>Paulo C. P. Santos</strong> · Arquiteto do Protocolo Hidra · atualizado em 3 de julho de 2026</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="https://paulo-leads.github.io/protocolo-hidra/#premium"><svg class="i" aria-hidden="true"><use href="#i-download"/></svg> Montar lista de empresas</a>
+        <a class="btn btn-ghost" href="#tabela-27-estados">Ir direto à tabela dos 27 estados <svg class="i" aria-hidden="true"><use href="#i-arrow-down"/></svg></a>
+      </div>
+      <div class="signals">
+        <div class="signal"><strong class="num">27</strong><span>portais oficiais de consulta num só guia</span></div>
+        <div class="signal up"><strong class="num">8–14</strong><span>dígitos: o formato da IE varia por estado</span></div>
+        <div class="signal"><strong class="num">21,7 mi</strong><span>empresas ativas na base ProtocoloHidra</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap col" id="resposta-rapida">
+      <div class="answer mbx-answer">
+        <span class="ic" aria-hidden="true"><svg class="i"><use href="#i-bulb"/></svg></span>
+        <p><b>A consulta da inscrição estadual é gratuita e feita no portal da Sefaz do estado onde o CNPJ está registrado</b> — ou pelo Sintegra, que reúne os sistemas estaduais. Basta informar o número do CNPJ para ver a IE, a situação cadastral e se a empresa é contribuinte de ICMS. Empresas que só prestam serviços geralmente não têm inscrição estadual — nesse caso, resultado &ldquo;não encontrado&rdquo; ou &ldquo;isento&rdquo; é normal, não irregularidade.</p>
+      </div>
+    </div>
+  </section>
+
+  <style>
+  .cnpj-tool{background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh);padding:26px 28px}
+  .cnpj-tool .eyebrow{margin-bottom:10px}
+  .cnpj-tool h2{font-size:1.4rem;margin:0 0 6px}
+  .cnpj-tool .sub{color:var(--muted);margin:0 0 18px}
+  .cnpj-tool-form{display:flex;gap:12px;flex-wrap:wrap}
+  .cnpj-tool-form input{flex:1 1 240px;min-height:50px;border:1px solid var(--line);border-radius:11px;padding:12px 16px;font-size:1.05rem;color:var(--ink);font-family:inherit;background:#fff}
+  .cnpj-tool-form input:focus{outline:2px solid #bcd3f7;border-color:var(--blue)}
+  .cnpj-tool-form .btn{min-height:50px}
+  #consulta-status{min-height:20px;margin:12px 0 0;font-size:.94rem;color:var(--muted)}
+  #consulta-status.error{color:#c0392b;font-weight:600}
+  #consulta-status.loading{color:var(--blue)}
+  .cnpj-tool .note{margin:16px 0 0;font-size:.82rem;color:var(--muted);line-height:1.55}
+  .cnpj-tool .result-card{background:var(--surf);border:1px solid var(--line);border-radius:var(--r);padding:22px;margin-top:18px}
+  .cnpj-tool .result-title{font-family:'Sora',sans-serif;font-size:1.2rem;font-weight:800;color:var(--ink);margin-bottom:2px}
+  .cnpj-tool .result-subtitle{color:var(--muted);font-size:.9rem;margin-bottom:14px}
+  .cnpj-tool .result-list{display:grid;grid-template-columns:1fr;gap:0;margin:0 0 18px;padding:0}
+  .cnpj-tool .result-list div{display:flex;justify-content:space-between;gap:18px;padding:11px 0;border-bottom:1px solid var(--line-2)}
+  .cnpj-tool .result-list dt{color:var(--muted);font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin:0;flex:0 0 auto}
+  .cnpj-tool .result-list dd{color:var(--ink);font-weight:600;margin:0;text-align:right}
+  .cnpj-tool .tool-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .cnpj-tool .tool-actions a{display:inline-flex;align-items:center;justify-content:center;text-align:center;font-weight:600;border-radius:11px;padding:.8rem 1rem;font-size:.94rem;text-decoration:none;border:1px solid transparent;line-height:1.2}
+  .cnpj-tool .tool-actions .btn-primary{background:var(--navy);color:#fff}
+  .cnpj-tool .tool-actions .btn-primary:hover{background:var(--blue)}
+  .cnpj-tool .tool-actions .btn-secondary{background:var(--surf-2);color:var(--blue);border-color:#dbe6fb}
+  .cnpj-tool .tool-actions .btn-secondary:hover{background:#e2ecfb}
+  @media(min-width:640px){.cnpj-tool .result-list{grid-template-columns:1fr 1fr;column-gap:30px}}
+  @media(max-width:520px){.cnpj-tool .tool-actions{grid-template-columns:1fr}}
+  </style>
+  <section class="band band--alt" id="verificar-cnpj" aria-labelledby="ferramenta-title">
+    <div class="wrap col">
+      <div class="cnpj-tool">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-database"/></svg> Etapa 0 · verificação gratuita</span>
+        <h2 id="ferramenta-title">Antes de ir à Sefaz, confirme os dados do CNPJ</h2>
+        <p class="sub">Digite o CNPJ e veja razão social, situação cadastral e cidade/UF — assim você escolhe o portal estadual certo na tabela abaixo. Esta verificação <strong>não retorna a inscrição estadual</strong>: a IE é consultada na Sefaz de cada estado.</p>
+        <form id="consulta-cnpj-form" class="cnpj-tool-form" autocomplete="off" novalidate>
+          <input id="cnpj" name="cnpj" type="text" inputmode="numeric" placeholder="00.000.000/0000-00" maxlength="18" aria-label="Digite o CNPJ">
+          <button type="submit" class="btn btn-primary">Verificar CNPJ</button>
+        </form>
+        <p id="consulta-status" role="status" aria-live="polite"></p>
+        <div id="consulta-result"></div>
+        <p class="note">Dados cadastrais públicos do CNPJ (âmbito federal). A ProtocoloHidra não tem vínculo com órgãos públicos; para fins oficiais, consulte o órgão competente. O telefone e o e-mail comercial não aparecem na consulta avulsa — eles vêm na <a href="https://paulo-leads.github.io/protocolo-hidra/#premium">lista completa</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="tabela-27-estados">
+    <div class="wrap">
+      <div class="kicker col">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-map-pin"/></svg> Diretório oficial</span>
+        <h2>Consulta de inscrição estadual nos 27 estados: links oficiais</h2>
+        <p>Não existe um portal único: a IE é consultada estado a estado, no sistema da Sefaz de cada UF. A tabela traz o sistema oficial de consulta, o número de dígitos da inscrição e a página de empresas de cada estado na base ProtocoloHidra.</p>
+      </div>
+      <div class="col">
+        <p class="body-p">Para dimensionar o universo por trás dessa consulta: a base ProtocoloHidra reúne <strong class="num">21.702.134 empresas ativas</strong> no Brasil. Só São Paulo concentra <strong class="num">6.519.160</strong> delas (cerca de 30% do total), seguido de Minas Gerais (10%), Rio de Janeiro (8%), Paraná (7%), Rio Grande do Sul e Santa Catarina (6% cada). Por isso Cadesp (SP), SIARE (MG) e SAT (SC) estão entre os sistemas estaduais mais movimentados — são justamente os estados que concentram mais empresas.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="rich-table">
+          <caption>Portais oficiais de consulta de inscrição estadual por estado, com formato do número e página de empresas da UF</caption>
+          <thead><tr><th scope="col">Estado</th><th scope="col">Sistema oficial de consulta</th><th scope="col">Dígitos da IE</th><th scope="col">Empresas na base ProtocoloHidra</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Acre (AC)</th><td><a href="https://www.sefaz.ac.gov.br/" target="_blank" rel="noopener">Sefaz AC — consulta pública</a></td><td class="num">13</td><td><a href="/protocolo-hidra/empresas-no-acre/">empresas no Acre</a></td></tr>
+            <tr><th scope="row">Alagoas (AL)</th><td><a href="https://www.sefaz.al.gov.br/" target="_blank" rel="noopener">Sefaz AL — consulta de contribuinte</a></td><td class="num">9</td><td><a href="/protocolo-hidra/empresas-em-alagoas/">empresas em Alagoas</a></td></tr>
+            <tr><th scope="row">Amapá (AP)</th><td><a href="https://www.sefaz.ap.gov.br/" target="_blank" rel="noopener">Sefaz AP — Sintegra</a></td><td class="num">9</td><td><a href="/protocolo-hidra/empresas-no-amapa/">empresas no Amapá</a></td></tr>
+            <tr><th scope="row">Amazonas (AM)</th><td><a href="https://www.sefaz.am.gov.br/" target="_blank" rel="noopener">Sefaz AM — Sintegra</a></td><td class="num">9</td><td><a href="/protocolo-hidra/empresas-no-amazonas/">empresas no Amazonas</a></td></tr>
+            <tr><th scope="row">Bahia (BA)</th><td><a href="https://www.sefaz.ba.gov.br/" target="_blank" rel="noopener">Sefaz BA — Sintegra</a></td><td class="num">8 ou 9</td><td><a href="/protocolo-hidra/empresas-na-bahia/">empresas na Bahia</a></td></tr>
+            <tr><th scope="row">Ceará (CE)</th><td><a href="https://www.sefaz.ce.gov.br/" target="_blank" rel="noopener">Sefaz CE — Sintegra</a></td><td class="num">9</td><td><a href="/protocolo-hidra/empresas-no-ceara/">empresas no Ceará</a></td></tr>
+            <tr><th scope="row">Distrito Federal (DF)</th><td><a href="https://www.receita.fazenda.df.gov.br/" target="_blank" rel="noopener">Receita DF — consulta de contribuinte</a></td><td class="num">13</td><td><a href="/protocolo-hidra/empresas-no-distrito-federal/">empresas no Distrito Federal</a></td></tr>
+            <tr><th scope="row">Espírito Santo (ES)</th><td><a href="https://www.sefaz.es.gov.br/" target="_blank" rel="noopener">Sefaz ES — Sintegra</a></td><td class="num">9</td><td><a href="/protocolo-hidra/empresas-no-espirito-santo/">empresas no Espírito Santo</a></td></tr>
+            <tr><th scope="row">Goiás (GO)</th><td><a href="https://www.economia.go.gov.br/" target="_blank" rel="noopener">Economia GO — Sintegra Goiás</a></td><td class="num">9</td><td><a href="/protocolo-hidra/empresas-em-goias/">empresas em Goiás</a></td></tr>
+            <tr><th scope="row">Maranhão (MA)</th><td><a href="https://sefaz.ma.gov.br/" target="_blank" rel="noopener">Sefaz MA — Sintegra</a></td><td class="num">9</td><td><a href="/protocolo-hidra/empresas-no-maranhao/">empresas no Maranhão</a></td></tr>
+            <tr><th scope="row">Mato Grosso (MT)</th><td><a href="https://www.sefaz.mt.gov.br/" target="_blank" rel="noopener">Sefaz MT — consulta de contribuinte</a></td><td class="num">11</td><td><a href="/protocolo-hidra/empresas-em-mato-grosso/">empresas em Mato Grosso</a></td></tr>
+            <tr><th scope="row">Mato Grosso do Sul (MS)</th><td><a href="https://www.sefaz.ms.gov.br/" target="_blank" rel="noopener">Sefaz MS — ICMS Transparente</a></td><td class="num">9</td><td><a href="/protocolo-hidra/empresas-em-mato-grosso-do-sul/">empresas em Mato Grosso do Sul</a></td></tr>
+            <tr><th scope="row">Minas Gerais (MG)</th><td><a href="https://www.fazenda.mg.gov.br/" target="_blank" rel="noopener">Sefaz MG — SIARE</a></td><td class="num">13</td><td><a href="/protocolo-hidra/empresas-em-minas-gerais/">empresas em Minas Gerais</a></td></tr>
+            <tr><th scope="row">Pará (PA)</th><td><a href="https://www.sefa.pa.gov.br/" target="_blank" rel="noopener">SEFA PA — consulta de contribuinte</a></td><td class="num">9</td><td><a href="/protocolo-hidra/empresas-no-para/">empresas no Pará</a></td></tr>
+            <tr><th scope="row">Paraíba (PB)</th><td><a href="https://www.sefaz.pb.gov.br/" target="_blank" rel="noopener">Sefaz PB — Sintegra</a></td><td class="num">9</td><td><a href="/protocolo-hidra/empresas-na-paraiba/">empresas na Paraíba</a></td></tr>
+            <tr><th scope="row">Paraná (PR)</th><td><a href="https://www.fazenda.pr.gov.br/" target="_blank" rel="noopener">Fazenda PR — consulta de contribuinte</a></td><td class="num">10</td><td><a href="/protocolo-hidra/empresas-no-parana/">empresas no Paraná</a></td></tr>
+            <tr><th scope="row">Pernambuco (PE)</th><td><a href="https://www.sefaz.pe.gov.br/" target="_blank" rel="noopener">Sefaz PE — e-Fisco</a></td><td class="num">9 <small>(14 no modelo antigo)</small></td><td><a href="/protocolo-hidra/empresas-em-pernambuco/">empresas em Pernambuco</a></td></tr>
+            <tr><th scope="row">Piauí (PI)</th><td><a href="https://www.sefaz.pi.gov.br/" target="_blank" rel="noopener">Sefaz PI — Sintegra</a></td><td class="num">9</td><td><a href="/protocolo-hidra/empresas-no-piaui/">empresas no Piauí</a></td></tr>
+            <tr><th scope="row">Rio de Janeiro (RJ)</th><td><a href="https://portal.fazenda.rj.gov.br/" target="_blank" rel="noopener">Sefaz RJ — consulta de contribuinte</a></td><td class="num">8</td><td><a href="/protocolo-hidra/empresas-no-rio-de-janeiro/">empresas no Rio de Janeiro</a></td></tr>
+            <tr><th scope="row">Rio Grande do Norte (RN)</th><td><a href="https://www.set.rn.gov.br/" target="_blank" rel="noopener">SET RN — UVT</a></td><td class="num">9 ou 10</td><td><a href="/protocolo-hidra/empresas-no-rio-grande-do-norte/">empresas no Rio Grande do Norte</a></td></tr>
+            <tr><th scope="row">Rio Grande do Sul (RS)</th><td><a href="https://www.sefaz.rs.gov.br/" target="_blank" rel="noopener">Sefaz RS — consulta pública</a></td><td class="num">10</td><td><a href="/protocolo-hidra/empresas-no-rio-grande-do-sul/">empresas no Rio Grande do Sul</a></td></tr>
+            <tr><th scope="row">Rondônia (RO)</th><td><a href="https://www.sefin.ro.gov.br/" target="_blank" rel="noopener">SEFIN RO — portal do contribuinte</a></td><td class="num">14 <small>(9 no modelo antigo)</small></td><td><a href="/protocolo-hidra/empresas-em-rondonia/">empresas em Rondônia</a></td></tr>
+            <tr><th scope="row">Roraima (RR)</th><td><a href="https://www.sefaz.rr.gov.br/" target="_blank" rel="noopener">Sefaz RR — Sintegra</a></td><td class="num">9</td><td><a href="/protocolo-hidra/empresas-em-roraima/">empresas em Roraima</a></td></tr>
+            <tr><th scope="row">Santa Catarina (SC)</th><td><a href="https://www.sef.sc.gov.br/" target="_blank" rel="noopener">SEF SC — SAT</a></td><td class="num">9</td><td><a href="/protocolo-hidra/empresas-em-santa-catarina/">empresas em Santa Catarina</a></td></tr>
+            <tr><th scope="row">São Paulo (SP)</th><td><a href="https://portal.fazenda.sp.gov.br/" target="_blank" rel="noopener">Sefaz SP — Cadesp</a></td><td class="num">12</td><td><a href="/protocolo-hidra/empresas-em-sao-paulo/">empresas em São Paulo</a></td></tr>
+            <tr><th scope="row">Sergipe (SE)</th><td><a href="https://www.sefaz.se.gov.br/" target="_blank" rel="noopener">Sefaz SE — Sintegra</a></td><td class="num">9</td><td><a href="/protocolo-hidra/empresas-em-sergipe/">empresas em Sergipe</a></td></tr>
+            <tr><th scope="row">Tocantins (TO)</th><td><a href="https://www.sefaz.to.gov.br/" target="_blank" rel="noopener">Sefaz TO — Sintegra</a></td><td class="num">9 ou 11</td><td><a href="/protocolo-hidra/empresas-no-tocantins/">empresas no Tocantins</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col">
+        <p class="body-p" style="margin-top:18px;font-size:.9rem;color:var(--muted)">Os links levam ao portal oficial da administração tributária de cada estado — os endereços das páginas internas de consulta mudam com frequência, por isso apontamos para a porta de entrada estável de cada Sefaz. Um exemplo do porquê a coluna de dígitos importa: São Paulo usa <strong>12 dígitos</strong> na IE — guias que afirmam 9 dígitos para SP estão desatualizados.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--alt" id="o-que-e">
+    <div class="wrap">
+      <div class="kicker col">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-help-circle"/></svg> Conceito</span>
+        <h2>O que é inscrição estadual e para que serve</h2>
+      </div>
+      <div class="col">
+        <p class="lead-p">A inscrição estadual é o número de registro de uma empresa no cadastro de contribuintes da Sefaz (Secretaria da Fazenda) do seu estado. Ela identifica a empresa perante o fisco estadual e a habilita a recolher <strong>ICMS</strong> — o imposto sobre circulação de mercadorias e alguns serviços, como transporte intermunicipal e comunicação.</p>
+        <p class="body-p">Na prática, a IE é o que permite à empresa comprar e vender mercadorias com nota fiscal eletrônica (NF-e). Sem ela, um comércio não emite NF-e de produto, não participa da cadeia de crédito do ICMS e não consegue operar regularmente com fornecedores e distribuidores. Diferentemente do CNPJ, que é nacional e tem sempre 14 dígitos, a inscrição estadual varia de <strong>8 a 14 dígitos</strong> conforme o estado — cada Sefaz define seu próprio formato e dígito verificador.</p>
+        <p class="body-p">Quem consulta a IE de terceiros geralmente quer responder a uma destas perguntas: a empresa é contribuinte de ICMS? A inscrição está habilitada? Os dados que ela me passou para faturamento estão corretos? A consulta pública da Sefaz responde às três de graça.</p>
+      </div>
+      <div class="cards">
+        <article class="card"><span class="ic" aria-hidden="true"><svg class="i"><use href="#i-shield-check"/></svg></span><h3>Conferir antes de faturar</h3><p>Validar a IE do cliente antes de emitir NF-e evita rejeição da nota e retrabalho fiscal.</p></article>
+        <article class="card"><span class="ic" aria-hidden="true"><svg class="i"><use href="#i-building"/></svg></span><h3>Homologar fornecedor</h3><p>Confirmar que o fornecedor é contribuinte habilitado no estado dele, com inscrição regular.</p></article>
+        <article class="card"><span class="ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span><h3>Checar a própria empresa</h3><p>Ver como a sua inscrição aparece na Sefaz: habilitada, suspensa ou pendente de atualização.</p></article>
+        <article class="card"><span class="ic" aria-hidden="true"><svg class="i"><use href="#i-target"/></svg></span><h3>Qualificar lead B2B</h3><p>Saber se o prospect movimenta mercadorias (contribuinte de ICMS) muda o discurso de venda.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="como-consultar">
+    <div class="wrap">
+      <div class="kicker col">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-filter"/></svg> Passo a passo</span>
+        <h2>Como consultar a inscrição estadual pelo CNPJ</h2>
+        <p>O caminho é sempre o mesmo, mude apenas o portal: identifique o estado, abra a Sefaz correta e informe o CNPJ. Cinco passos.</p>
+      </div>
+      <ol class="steps">
+        <li><div><b>Identifique a UF do CNPJ</b><span>A IE é emitida pelo estado. Se não souber onde a empresa está registrada, use o <a href="#verificar-cnpj">verificador de CNPJ</a> desta página: ele mostra a cidade e a UF.</span></div></li>
+        <li><div><b>Confirme os dados cadastrais</b><span>Confira razão social e situação cadastral antes de ir ao portal estadual. CNPJ baixado ou inapto costuma aparecer na Sefaz com IE suspensa, baixada ou cassada.</span></div></li>
+        <li><div><b>Abra o portal da Sefaz do estado</b><span>Na <a href="#tabela-27-estados">tabela dos 27 estados</a>, clique no sistema da UF da empresa — Cadesp em SP, SIARE em MG, SAT em SC.</span></div></li>
+        <li><div><b>Informe o CNPJ na consulta pública</b><span>Digite os 14 dígitos (alguns portais pedem captcha). O resultado traz a IE, a situação na Sefaz e, em vários estados, o regime de apuração.</span></div></li>
+        <li><div><b>Interprete o resultado</b><span>Habilitada/ativa: contribuinte regular. Isento ou não encontrado: provavelmente empresa só de serviços — normal. Suspensa, baixada ou cassada: não use em nota fiscal.</span></div></li>
+      </ol>
+      <div class="cta">
+        <div><h2>De uma consulta para um mercado inteiro</h2><p>Depois de validar uma empresa, encontre todas as parecidas com ela: filtre por CNAE, cidade e porte e baixe a lista com os contatos.</p></div>
+        <a class="btn btn-primary" href="https://paulo-leads.github.io/protocolo-hidra/#premium"><svg class="i" aria-hidden="true"><use href="#i-download"/></svg> Montar minha lista</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--alt" id="quem-precisa">
+    <div class="wrap">
+      <div class="kicker col">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-shield-check"/></svg> Quem precisa de IE</span>
+        <h2>Todo CNPJ tem inscrição estadual? Isento, MEI e serviços</h2>
+      </div>
+      <div class="col">
+        <p class="lead-p">Não — e essa é a dúvida que mais gera falso alarme. A inscrição estadual é obrigatória apenas para <strong>contribuintes de ICMS</strong>. Quem só presta serviços recolhe ISS ao município e, em regra, não tem IE nenhuma: o resultado &ldquo;não encontrado&rdquo; na Sefaz, nesse caso, é o esperado.</p>
+        <p class="body-p">O tamanho desse recorte é maior do que parece: dos <strong class="num">21.702.134 CNPJs ativos</strong> na base ProtocoloHidra, <strong class="num">12.403.761</strong> são empresas de serviços — cerca de 57% do total. Ou seja, mais da metade das empresas do país tipicamente opera sem inscrição estadual. No outro grupo estão <strong class="num">5.357.736</strong> empresas de comércio e <strong class="num">3.417.404</strong> de indústria e construção, universo onde a IE é a regra. E como cerca de <strong>86% da base é de microempresas</strong>, boa parte das consultas envolve MEI e Simples Nacional — onde a resposta é &ldquo;depende da atividade&rdquo;.</p>
+      </div>
+      <div class="pc col" style="max-width:var(--wrap)">
+        <div class="pc-col pc-pos">
+          <h3><span class="tag">Precisa de IE</span> Contribuintes de ICMS</h3>
+          <ul>
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>Comércio</b> — atacado, varejo e e-commerce que vende produto físico.</span></li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>Indústria</b> — fabricação e transformação de mercadorias.</span></li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>Transporte intermunicipal e interestadual</b> — de cargas ou passageiros.</span></li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>Energia e comunicação</b> — serviços tributados pelo ICMS.</span></li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>MEI de comércio, indústria ou transporte intermunicipal</b> — a IE em regra é gerada na formalização.</span></li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>Produtor rural</b> — em vários estados, com IE vinculada ao CPF.</span></li>
+          </ul>
+        </div>
+        <div class="pc-col pc-neg">
+          <h3><span class="tag">Normalmente não</span> Não contribuintes</h3>
+          <ul>
+            <li><svg class="i" aria-hidden="true"><use href="#i-flag"/></svg><span><b>Empresas exclusivamente de serviços</b> — consultorias, agências, TI, clínicas: pagam ISS, não ICMS.</span></li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-flag"/></svg><span><b>MEI só de serviços</b> — sem operação com mercadorias, sem IE.</span></li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-flag"/></svg><span><b>Profissionais liberais PJ</b> — advogados, contadores, médicos.</span></li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-flag"/></svg><span><b>Holdings e participações</b> — sem circulação de mercadorias.</span></li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-flag"/></svg><span><b>Nesses casos</b>, o campo IE em cadastros e notas é preenchido como <b>ISENTO</b> — e isso não é pendência.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="diferencas">
+    <div class="wrap">
+      <div class="kicker col">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-stack-2"/></svg> Sem confusão</span>
+        <h2>IE, inscrição municipal, CNPJ e Sintegra: qual a diferença</h2>
+        <p>Quatro nomes que se misturam o tempo todo. Três são registros em esferas diferentes; o quarto é um sistema de consulta.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="rich-table">
+          <caption>Comparativo entre CNPJ, inscrição estadual e inscrição municipal</caption>
+          <thead><tr><th scope="col">Critério</th><th scope="col">CNPJ</th><th scope="col">Inscrição estadual (IE)</th><th scope="col">Inscrição municipal (IM)</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Esfera</th><td>Nacional (cadastro federal)</td><td>Estadual — Sefaz de cada UF</td><td>Municipal — prefeitura</td></tr>
+            <tr><th scope="row">Imposto vinculado</th><td>Tributos federais</td><td>ICMS (mercadorias, transporte intermunicipal, comunicação)</td><td>ISS (serviços)</td></tr>
+            <tr><th scope="row">Quem precisa</th><td>Toda empresa</td><td>Contribuintes de ICMS</td><td>Prestadores de serviço, na maioria dos municípios</td></tr>
+            <tr><th scope="row">Formato</th><td>14 dígitos, padrão único</td><td>8 a 14 dígitos, varia por estado</td><td>Varia por município</td></tr>
+            <tr><th scope="row">Onde consultar</th><td><a href="/protocolo-hidra/consulta-cnpj/">Consulta de CNPJ grátis</a></td><td>Sefaz da UF (<a href="#tabela-27-estados">tabela acima</a>) ou Sintegra</td><td>Portal da prefeitura da cidade</td></tr>
+            <tr><th scope="row">Nota fiscal que habilita</th><td>—</td><td>NF-e (produto)</td><td>NFS-e (serviço)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col">
+        <p class="body-p" style="margin-top:22px">E o Sintegra? Ele não é um registro: é o <strong>Sistema Integrado de Informações sobre Operações Interestaduais</strong>, que conecta os cadastros de contribuintes das Sefaz e permite consultar a IE de empresas de outros estados. A IE é o dado; o Sintegra é um dos meios de chegar até ele. Entenda em detalhe <a href="/protocolo-hidra/consulta-sintegra/">como funciona o Sintegra</a> — e por que ele vive fora do ar. Uma empresa pode, aliás, ter as duas inscrições ao mesmo tempo: um distribuidor que também presta serviço de instalação tem IE (para o ICMS) e IM (para o ISS).</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--alt" id="sem-resultado">
+    <div class="wrap">
+      <div class="kicker col">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-bolt"/></svg> Solução de problemas</span>
+        <h2>Consulta não retornou nada ou portal fora do ar?</h2>
+        <p>Antes de concluir que a empresa é irregular, passe por este checklist — na maioria das vezes a explicação é simples.</p>
+      </div>
+      <div class="cards">
+        <article class="card"><span class="ic" aria-hidden="true"><svg class="i"><use href="#i-help-circle"/></svg></span><h3>A empresa é isenta</h3><p>Prestadoras de serviço não têm IE. &ldquo;Não encontrado&rdquo; ou &ldquo;isento&rdquo; é o resultado esperado — não é pendência nem irregularidade.</p></article>
+        <article class="card"><span class="ic" aria-hidden="true"><svg class="i"><use href="#i-shield-check"/></svg></span><h3>A IE foi baixada ou cassada</h3><p>Empresa que encerrou ou perdeu a condição de contribuinte some da consulta ativa. Confira também a <a href="/protocolo-hidra/situacao-cadastral-cnpj/">situação cadastral do CNPJ</a> — os dois status andam juntos.</p></article>
+        <article class="card"><span class="ic" aria-hidden="true"><svg class="i"><use href="#i-map-pin"/></svg></span><h3>Estado errado (ou filial)</h3><p>A IE vale por estado: a filial de outra UF tem inscrição própria. Confirme a UF do CNPJ no <a href="#verificar-cnpj">verificador</a> e refaça a consulta na Sefaz certa.</p></article>
+        <article class="card"><span class="ic" aria-hidden="true"><svg class="i"><use href="#i-bolt"/></svg></span><h3>CNPJ digitado errado ou portal instável</h3><p>Um dígito trocado zera a busca — copie e cole os 14 números. Sintegra e Sefaz saem do ar com frequência; tente em outro horário.</p></article>
+      </div>
+      <div class="col">
+        <p class="body-p" style="margin-top:22px">Enquanto o portal estadual não volta, o <a href="#verificar-cnpj">verificador desta página</a> serve de plano B para conferir os dados federais do CNPJ — razão social, situação e cidade. Um detalhe que poupa tempo: nenhum portal de Sefaz busca IE por razão social ou nome fantasia na consulta pública; tenha sempre o número do CNPJ em mãos.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="prospeccao">
+    <div class="wrap">
+      <div class="data">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-chart-bar"/></svg> Dados reais da base ProtocoloHidra</span>
+        <h2>Para quem prospecta: contribuintes de ICMS por estado</h2>
+        <p>Quem consulta a IE de terceiros está qualificando cliente ou fornecedor. A base ProtocoloHidra mostra o tamanho do universo típico de contribuintes — comércio, indústria e transporte — entre os 21.702.134 CNPJs ativos do país.</p>
+        <div class="tiles">
+          <div class="tile"><strong class="num">5,36 mi</strong><span>empresas de comércio</span></div>
+          <div class="tile up"><strong class="num">3,42 mi</strong><span>indústria e construção</span></div>
+          <div class="tile"><strong class="num">848,5 mil</strong><span>transportadoras de carga (CNAE 4930-2)</span></div>
+          <div class="tile"><strong class="num">352,7 mil</strong><span>supermercados e afins</span></div>
+        </div>
+        <div class="bars">
+          <div><div class="bar-h"><b>São Paulo</b><small>6.519.160 empresas ativas</small><em>30%</em></div><div class="track"><div class="fill" style="width:90%"></div></div></div>
+          <div><div class="bar-h"><b>Minas Gerais</b><em>10%</em></div><div class="track"><div class="fill" style="width:30%"></div></div></div>
+          <div><div class="bar-h"><b>Rio de Janeiro</b><em>8%</em></div><div class="track"><div class="fill" style="width:24%"></div></div></div>
+          <div><div class="bar-h"><b>Paraná</b><em>7%</em></div><div class="track"><div class="fill" style="width:21%"></div></div></div>
+          <div><div class="bar-h"><b>Rio Grande do Sul</b><em>6%</em></div><div class="track"><div class="fill" style="width:18%"></div></div></div>
+        </div>
+        <p class="grow"><b>Leitura para o comercial:</b> se o seu cliente é contribuinte de ICMS, o seu mercado são esses milhões de comércios, indústrias e transportadoras — só de transporte de carga são 848.512 empresas no país, das quais 20.211 no Espírito Santo, por exemplo. Filtre por <a href="/protocolo-hidra/empresas-por-cnae/" style="color:#7fe7c4">CNAE</a> e por estado — como <a href="/protocolo-hidra/empresas-em-sao-paulo/" style="color:#7fe7c4">empresas em São Paulo</a> ou <a href="/protocolo-hidra/empresas-em-minas-gerais/" style="color:#7fe7c4">empresas em Minas Gerais</a> — e monte a <a href="/protocolo-hidra/lista-de-empresas-para-prospeccao/" style="color:#7fe7c4">lista de empresas para prospecção</a> com CNPJ, telefone e e-mail comercial. Importante: a lista ProtocoloHidra entrega dados cadastrais e de contato; o número da inscrição estadual, quando você precisar dele, é confirmado na Sefaz da UF.</p>
+      </div>
+      <div class="cta" style="margin-top:44px">
+        <div><h2>Monte sua lista de contribuintes típicos de ICMS</h2><p>Comércio, indústria e transporte, filtrados por CNAE, cidade e porte. Você paga pela lista, sem mensalidade.</p></div>
+        <a class="btn btn-primary" href="https://paulo-leads.github.io/protocolo-hidra/#premium"><svg class="i" aria-hidden="true"><use href="#i-rocket"/></svg> Acessar os planos</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--alt" id="perguntas-frequentes">
+    <div class="wrap col">
+      <div class="col">
+        <div class="kicker">
+          <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-message-question"/></svg> Dúvidas frequentes</span>
+          <h2>Perguntas frequentes sobre consulta de inscrição estadual</h2>
+        </div>
+        <div class="faq">
+          <details open><summary>Como consultar a inscrição estadual pelo CNPJ grátis? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>A consulta é gratuita e feita nos portais oficiais: acesse a Sefaz do estado onde o CNPJ está registrado (a tabela desta página traz os 27 links) ou o Sintegra, informe o número do CNPJ e veja a inscrição estadual e a situação cadastral. Não é preciso pagar nada nem criar cadastro — desconfie de sites que cobram por essa informação.</p></details>
+          <details><summary>Todo CNPJ tem inscrição estadual? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Não. A inscrição estadual é obrigatória apenas para contribuintes de ICMS: comércio, indústria, transporte intermunicipal e interestadual, energia e comunicação. Empresas exclusivamente de serviços — 12,4 milhões dos 21,7 milhões de CNPJs ativos na base ProtocoloHidra, cerca de 57% — pagam ISS ao município e normalmente não têm IE. Nesse caso, resultado 'não encontrado' não é irregularidade.</p></details>
+          <details><summary>MEI precisa de inscrição estadual? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Depende da atividade. MEI de comércio, indústria ou transporte intermunicipal precisa de IE — em regra ela é gerada automaticamente na formalização, feita no portal oficial do Governo Federal. MEI que só presta serviços não tem inscrição estadual. Sem a IE, o MEI comerciante não consegue emitir nota fiscal de produto (NF-e).</p></details>
+          <details><summary>Quantos dígitos tem a inscrição estadual? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Varia de 8 a 14 dígitos conforme o estado: São Paulo usa 12, Minas Gerais 13, Rio de Janeiro 8, Paraná e Rio Grande do Sul 10. Não existe um formato nacional único — por isso a tabela desta página traz a coluna de dígitos por UF. Guias que afirmam um número só para o país inteiro estão errados.</p></details>
+          <details><summary>O que significa 'isento' na inscrição estadual? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Significa que a empresa não é contribuinte de ICMS naquele estado — situação comum em prestadoras de serviço. Em cadastros e notas fiscais, o campo IE pode ser preenchido como ISENTO. Não confunda com situação irregular: isento é diferente de inscrição baixada, suspensa ou cassada.</p></details>
+          <details><summary>Inscrição estadual é o mesmo que Sintegra? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Não. A inscrição estadual é o número de registro da empresa na Sefaz do estado; o Sintegra é o sistema integrado que permite consultar esse registro entre os estados. Em resumo: a IE é o dado, o Sintegra é um dos meios de consultá-lo.</p></details>
+          <details><summary>Dá para consultar inscrição estadual pelo CPF? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Em regra, não — a inscrição estadual é vinculada ao CNPJ. A exceção é o produtor rural pessoa física: em vários estados ele tem IE ligada ao CPF e pode consultá-la diretamente no portal da Sefaz do seu estado.</p></details>
+          <details><summary>Qual a diferença entre inscrição estadual e inscrição municipal? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>A inscrição estadual é o registro na Sefaz do estado e habilita o recolhimento de ICMS (mercadorias); a inscrição municipal é o registro na prefeitura e habilita o ISS (serviços) e a emissão de NFS-e. Uma empresa pode ter as duas, só uma ou nenhuma, conforme as atividades que exerce.</p></details>
+          <details><summary>A consulta de inscrição estadual mostra se a empresa está ativa? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Sim — o resultado traz a situação cadastral da inscrição na Sefaz: habilitada/ativa, suspensa, baixada ou cassada. Vale lembrar que essa é a situação estadual; a situação federal do CNPJ é outra consulta, que você faz em um clique no verificador de CNPJ desta página.</p></details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="conclusao">
+    <div class="wrap">
+      <div class="col">
+        <div class="kicker">
+          <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-flag"/></svg> Conclusão</span>
+          <h2>Conclusão</h2>
+        </div>
+        <p class="body-p">A consulta de inscrição estadual tem uma dificuldade única: são 27 portais diferentes, cada um com seu sistema, seu formato de número e suas instabilidades. Resolvido o roteamento — saber a UF do CNPJ e abrir a Sefaz certa —, a consulta em si leva menos de um minuto e responde o essencial: se a empresa é contribuinte de ICMS e se a inscrição está habilitada.</p>
+        <p class="body-p">A segunda lição deste guia é interpretativa: &ldquo;não encontrado&rdquo; e &ldquo;isento&rdquo; não são sinais de problema. Mais da metade dos CNPJs ativos do país é de empresas de serviços, que operam sem IE por definição. Reserve a desconfiança para os status suspensa, baixada e cassada — esses sim travam nota fiscal e negócio.</p>
+        <p class="body-p">E se a consulta faz parte da sua rotina comercial, inverta a lógica: em vez de validar uma empresa por vez, comece por uma <a href="/protocolo-hidra/consulta-cnpj/">consulta de CNPJ grátis</a> para ler o CNAE e a cidade do seu cliente ideal — e use esses filtros para montar a lista inteira do seu mercado de uma vez.</p>
+      </div>
+    </div>
+  </section>
+
+  <aside class="sources">
+    <div class="wrap">
+      <h2>Fontes, dados e metodologia</h2>
+      <p><strong>Por <a href="/protocolo-hidra/paulo-leads/">Paulo C. P. Santos</a>, Arquiteto do Protocolo Hidra</strong>, com a Curadoria do Protocolo Hidra — responsável pela base de empresas ativas usada neste guia, atualizada mensalmente pela própria ProtocoloHidra.</p>
+      <p>Os números citados (21.702.134 empresas ativas; 6.519.160 em São Paulo; 12.403.761 em serviços; 5.357.736 em comércio; 3.417.404 em indústria e construção; 848.512 transportadoras de carga; cerca de 86% de microempresas) referem-se às empresas com situação cadastral ativa na base ProtocoloHidra, edição de junho de 2026. As informações sobre inscrição estadual têm como fonte a Sefaz de cada estado e o Sintegra; os links da tabela apontam para os portais oficiais das administrações tributárias estaduais e são revisados periodicamente. A ProtocoloHidra não exibe contatos reais de empresas na página, apenas amostras mascaradas, por compliance.</p>
+      <div class="links" aria-label="Guias relacionados">
+        <a href="/protocolo-hidra/consulta-cnpj/">Consulta de CNPJ</a>
+        <a href="/protocolo-hidra/empresas-por-cnae/">Empresas por CNAE</a>
+        <a href="/protocolo-hidra/consulta-sintegra/">Consulta Sintegra</a>
+        <a href="/protocolo-hidra/situacao-cadastral-cnpj/">Situação cadastral do CNPJ</a>
+        <a href="/protocolo-hidra/lista-de-empresas-para-prospeccao/">Lista de empresas para prospecção</a>
+      
+        <a href="/protocolo-hidra/cartao-cnpj/">Cartão CNPJ</a>
+        <a href="/protocolo-hidra/consultar-socios-cnpj/">Consultar sócios pelo CNPJ</a>
+        <a href="/protocolo-hidra/certidao-negativa-cnpj/">Certidão negativa do CNPJ</a>
+        <a href="/protocolo-hidra/consulta-cnae-por-cnpj/">Consultar CNAE pelo CNPJ</a>
+        <a href="/protocolo-hidra/consultar-cnpj-pelo-nome/">Consultar CNPJ pelo nome</a>
+        <a href="/protocolo-hidra/consulta-simples-nacional-cnpj/">Consultar Simples Nacional</a>
+      </div>
+      <p style="font-size:.85rem">Última revisão das fontes, dados e links estaduais: julho/2026.</p>
+    </div>
+  </aside>
+</main>
+
+<section class="pre-footer">
+  <div class="pre-footer-inner">
+    <h2>Do número da inscrição à lista de clientes</h2>
+    <p>Escolha um plano da ProtocoloHidra para filtrar comércios, indústrias e transportadoras por CNAE, cidade e porte — e baixar os contatos para prospectar.</p>
+    <a class="btn-prefooter" href="https://paulo-leads.github.io/protocolo-hidra/#premium">Ver planos disponíveis</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p>© 2026 <strong>ProtocoloHidra</strong> · Todos os direitos reservados.</p>
+    <p><a href="/protocolo-hidra/politica-de-privacidade/">Política de Privacidade</a> · <a href="https://paulo-leads.github.io/protocolo-hidra/#premium">Planos</a></p>
+  </div>
+</footer>
+
+<script src="/protocolo-hidra/assets/tools.js?v=20260630" defer></script>
+</body>
+</html>

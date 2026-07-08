@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consultar Sócios de uma Empresa pelo CNPJ (QSA) Grátis</title>
+  <meta name="description" content="Veja como consultar os sócios de qualquer empresa pelo CNPJ: QSA grátis no portal oficial, o que cada qualificação significa e o que fazer com QSA vazio.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://paulo-leads.github.io/protocolo-hidra/consultar-socios-cnpj/">
+  <link rel="icon" href="/protocolo-hidra/favicon.ico?v=20260622" sizes="any">
+  <link rel="shortcut icon" href="/protocolo-hidra/favicon.ico?v=20260622">
+  <link rel="icon" type="image/png" href="/protocolo-hidra/assets/favicon.png?v=20260622">
+  <link rel="apple-touch-icon" href="/protocolo-hidra/assets/favicon.png?v=20260622">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Consultar Sócios de uma Empresa pelo CNPJ (QSA) Grátis">
+  <meta property="og:description" content="Veja como consultar os sócios de qualquer empresa pelo CNPJ: QSA grátis no portal oficial, busca pelo nome e o que fazer quando o CNPJ não mostra sócios.">
+  <meta property="og:url" content="https://paulo-leads.github.io/protocolo-hidra/consultar-socios-cnpj/">
+  <meta property="og:site_name" content="ProtocoloHidra">
+  <meta property="og:image" content="https://paulo-leads.github.io/protocolo-hidra/assets/img/protocolo-hidra-painel-1200.png">
+  <meta property="og:image:alt" content="Painel ProtocoloHidra para consultar CNPJ e montar listas de empresas">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Consultar Sócios de uma Empresa pelo CNPJ (QSA) Grátis">
+  <meta name="twitter:description" content="QSA grátis no portal oficial, o que significa cada qualificação do sócio e o que fazer quando o CNPJ não mostra sócios.">
+  <meta name="twitter:image" content="https://paulo-leads.github.io/protocolo-hidra/assets/img/protocolo-hidra-painel-1200.png">
+  <meta name="twitter:image:alt" content="Painel ProtocoloHidra para consultar CNPJ e montar listas de empresas">
+
+  
+  
+  <style type="text/css">@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/cyrillic/wght/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/vietnamese/wght/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/greek-ext/wght/normal.woff2);unicode-range:U+1F00-1FFF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/greek/wght/normal.woff2);unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/cyrillic-ext/wght/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/vietnamese/wght/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/greek/wght/normal.woff2);unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/greek-ext/wght/normal.woff2);unicode-range:U+1F00-1FFF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/cyrillic-ext/wght/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/cyrillic/wght/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/greek/wght/normal.woff2);unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/cyrillic/wght/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/vietnamese/wght/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/cyrillic-ext/wght/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/greek-ext/wght/normal.woff2);unicode-range:U+1F00-1FFF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/cyrillic/wght/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/vietnamese/wght/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/cyrillic-ext/wght/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/greek-ext/wght/normal.woff2);unicode-range:U+1F00-1FFF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/greek/wght/normal.woff2);unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Sora;font-style:normal;font-weight:600;src:url(/cf-fonts/v/sora/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Sora;font-style:normal;font-weight:600;src:url(/cf-fonts/v/sora/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Sora;font-style:normal;font-weight:700;src:url(/cf-fonts/v/sora/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Sora;font-style:normal;font-weight:700;src:url(/cf-fonts/v/sora/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Sora;font-style:normal;font-weight:800;src:url(/cf-fonts/v/sora/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Sora;font-style:normal;font-weight:800;src:url(/cf-fonts/v/sora/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}</style>
+  <style data-mbx>.mbx{--navy:#0B2545;--navy-2:#11315c;--navy-deep:#071a33;--blue:#1D4ED8;--blue-2:#3B82F6;--emerald:#10B981;--emerald-d:#047857;--teal:#4CD1A6;--ink:#0F172A;--body:#334155;--muted:#64748B;--line:#E2E8F0;--line-2:#EAEFF6;--surf:#F7F9FC;--surf-2:#EEF3FB;--white:#fff;--r:14px;--r-sm:10px;--r-lg:18px;--sh:0 10px 30px rgba(15,23,42,.06);--sh-lg:0 24px 60px rgba(15,23,42,.10);--wrap:1120px;--read:700px;margin:0;font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;color:var(--body);line-height:1.7;background:var(--surf);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}.mbx *,.mbx *::before,.mbx *::after{box-sizing:border-box}.mbx h1,.mbx h2,.mbx h3,.mbx h4{font-family:'Sora',Inter,sans-serif;color:var(--ink);line-height:1.16;margin:0;letter-spacing:-.02em}.mbx p{margin:0 0 1rem}.mbx a{color:var(--blue);text-decoration:none}.mbx a:hover{text-decoration:underline}.mbx img{max-width:100%;height:auto}.mbx strong{color:var(--ink)}.mbx .wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}.mbx .col{max-width:var(--read);margin-inline:auto}.mbx .num{font-variant-numeric:tabular-nums}.mbx .eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}.mbx .eyebrow i{font-size:1rem}.mbx .site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line-2)}.mbx .header-inner{max-width:var(--wrap);margin:0 auto;padding:0 24px;height:68px;display:flex;align-items:center;justify-content:space-between;gap:1rem}.mbx .header-inner .logo{display:inline-flex;align-items:center}.mbx .header-inner .logo img{height:34px;width:auto;display:block}.mbx .header-nav{display:flex;align-items:center;gap:1.5rem;font-size:.95rem;font-weight:500}.mbx .header-nav a{color:var(--body)}.mbx .header-nav a:hover{color:var(--ink);text-decoration:none}.mbx .btn-header{background:var(--surf-2);color:var(--blue);border:1px solid #dbe6fb;border-radius:11px;padding:.55rem 1.05rem;font-weight:600}.mbx .btn-header:hover{background:#e2ecfb;text-decoration:none}.mbx .menu-toggle{display:none;background:none;border:0;font-size:1.5rem;color:var(--ink);cursor:pointer;line-height:1;padding:4px 8px}.mbx .breadcrumb{margin-bottom:26px;font-size:.82rem}.mbx .breadcrumb ol{list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin:0;padding:0;color:#9fb6d6}.mbx .breadcrumb li{display:flex;align-items:center;gap:.5rem}.mbx .breadcrumb li+li::before{content:"\203A";color:#5f7da6;font-size:1.1em;line-height:1}.mbx .breadcrumb a{color:#9fb6d6}.mbx .breadcrumb a:hover{color:#fff;text-decoration:none}.mbx .breadcrumb [aria-current="page"] span{color:#dbe7f7;font-weight:600}.mbx .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:600;border-radius:11px;padding:.75rem 1.25rem;font-size:.97rem;cursor:pointer;border:1px solid transparent;transition:.18s;text-decoration:none;line-height:1.2}.mbx .btn:hover{text-decoration:none}.mbx .btn-primary{background:var(--navy);color:#fff}.mbx .btn-primary:hover{background:var(--blue);color:#fff}.mbx .btn-ghost{background:var(--surf-2);color:var(--blue);border-color:#dbe6fb}.mbx .btn-ghost:hover{background:#e2ecfb}.mbx .hero{position:relative;overflow:hidden;color:#dbe7f7;background:radial-gradient(1200px 500px at 80% -10%,#16407a 0%,transparent 60%),linear-gradient(160deg,#0B2545 0%,#11315c 100%)}.mbx .hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(700px 300px at 15% 110%,rgba(76,209,166,.18),transparent 60%)}.mbx .hero .wrap{position:relative;z-index:2;padding:40px 24px 92px}.mbx .hero .eyebrow{color:#7fd9bd}.mbx .hero h1{color:#fff;font-size:clamp(34px,5vw,54px);font-weight:800;margin:18px 0 0;max-width:20ch}.mbx .hero .lead{font-size:1.18rem;color:#c3d4ea;max-width:60ch;margin:18px 0 22px}.mbx .hero .byline{font-size:.85rem;color:#9fb6d6;margin:0 0 26px}.mbx .hero .byline strong{color:#fff;font-weight:600}.mbx .hero-cta{display:flex;gap:.8rem;flex-wrap:wrap}.mbx .hero .btn-primary{background:#fff;color:var(--navy)}.mbx .hero .btn-primary:hover{background:var(--teal);color:var(--navy)}.mbx .hero .btn-ghost{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.22)}.mbx .hero .btn-ghost:hover{background:rgba(255,255,255,.16)}.mbx .signals{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:46px}.mbx .signal{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:18px 20px}.mbx .signal strong{display:block;font-family:'Sora';font-size:1.7rem;font-weight:800;color:#fff}.mbx .signal.up strong{color:#7fe7c4}.mbx .signal span{font-size:.9rem;color:#aec5e2}.mbx .band{padding:68px 0}.mbx .band--alt{background:var(--white)}.mbx .kicker{margin-bottom:28px}.mbx .kicker h2{font-size:clamp(26px,3.4vw,36px);font-weight:800;margin:10px 0 8px}.mbx .kicker p{font-size:1.08rem;color:var(--body);max-width:64ch}.mbx .lead-p{font-size:1.12rem;max-width:72ch}.mbx .body-p{max-width:72ch}.mbx .band h3{font-size:1.15rem;margin:18px 0 8px}.mbx .answer{display:flex;gap:18px;align-items:flex-start;background:linear-gradient(135deg,#f4f8fd,#eaf1fb);border:1px solid #d7e3f2;border-left:4px solid var(--blue);border-radius:0 var(--r) var(--r) 0;padding:24px 26px;max-width:var(--read)}.mbx .answer .ic{flex:0 0 auto;width:44px;height:44px;border-radius:12px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:1.4rem}.mbx .answer p{margin:0;font-size:1.08rem}.mbx .answer b{color:var(--navy)}.mbx .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:26px}.mbx .card{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:24px;box-shadow:var(--sh);transition:.2s}.mbx .card:hover{transform:translateY(-3px);box-shadow:var(--sh-lg);border-color:#cfe0f5}.mbx .card .ic{width:46px;height:46px;border-radius:12px;background:var(--surf-2);color:var(--blue);display:grid;place-items:center;font-size:1.45rem;margin-bottom:14px}.mbx .card h3{font-size:1.12rem;margin:0 0 6px}.mbx .card p{margin:0;font-size:.98rem;color:var(--muted)}.mbx .steps{list-style:none;counter-reset:step;margin:26px auto 0;padding:0;display:grid;gap:14px;max-width:var(--read)}.mbx .steps li{counter-increment:step;display:flex;gap:16px;background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;box-shadow:var(--sh)}.mbx .steps li::before{content:counter(step);flex:0 0 auto;width:34px;height:34px;border-radius:9px;background:var(--navy);color:#fff;font-family:'Sora';font-weight:800;display:grid;place-items:center;font-size:1rem}.mbx .steps b{display:block;color:var(--ink);font-family:'Sora';font-size:1.02rem;margin-bottom:2px}.mbx .steps span{color:var(--muted);font-size:.96rem}.mbx .data{background:var(--navy);color:#cdddf0;border-radius:var(--r-lg);padding:38px;position:relative;overflow:hidden}.mbx .data::after{content:"";position:absolute;right:-80px;top:-80px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(76,209,166,.16),transparent 70%);pointer-events:none}.mbx .data .eyebrow{color:#7fe7c4}.mbx .data h2{color:#fff;font-size:1.7rem;margin:10px 0 6px;position:relative}.mbx .data>p{color:#a9c1de;max-width:62ch;position:relative}.mbx .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:26px 0 28px;position:relative}.mbx .tile{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:18px}.mbx .tile strong{display:block;font-family:'Sora';font-size:1.55rem;font-weight:800;color:#fff}.mbx .tile.up strong{color:#7fe7c4}.mbx .tile span{font-size:.82rem;color:#9fb8d6}.mbx .bars{position:relative;display:grid;gap:15px}.mbx .bar-h{display:flex;justify-content:space-between;align-items:baseline;font-size:.95rem;margin-bottom:6px}.mbx .bar-h b{color:#fff;font-weight:600}.mbx .bar-h em{color:#7fe7c4;font-style:normal;font-weight:800}.mbx .bar-h small{color:#90a8c6;margin-left:8px;font-weight:400}.mbx .track{height:7px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden}.mbx .fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#4cd1a6,#74a4ef)}.mbx .data .grow{color:#a9c1de;margin:24px 0 0;position:relative;font-size:.98rem}.mbx .data .grow b{color:#fff}.mbx .infographic{margin:26px 0 0;text-align:center}.mbx .infographic svg,.mbx .infographic img{width:100%;max-width:720px;height:auto;border-radius:var(--r);box-shadow:var(--sh)}.mbx .infographic figcaption{font-size:.85rem;color:var(--muted);max-width:64ch;margin:14px auto 0}.mbx .embed{max-width:640px;margin:14px auto 0;text-align:left}.mbx .embed summary{cursor:pointer;color:var(--blue);font-weight:600;font-size:.92rem}.mbx .embed textarea{width:100%;margin-top:10px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.78rem;line-height:1.5;border:1px solid var(--line);border-radius:var(--r-sm);padding:12px;background:var(--white);color:var(--body);resize:vertical}.mbx .table-wrap{margin-top:26px;overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--r)}.mbx .cmp-table{width:100%;min-width:560px;border-collapse:separate;border-spacing:0;background:var(--white);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);font-size:.96rem}.mbx .cmp-table caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);border:0}.mbx .cmp-table thead th{font-family:'Sora';font-weight:700;color:#fff;text-align:left;padding:15px 18px;font-size:1rem;vertical-align:middle}.mbx .cmp-table thead th i{margin-right:.4rem;vertical-align:-2px}.mbx .cmp-table thead th:first-child{background:#334155}.mbx .cmp-table thead .th-b2b{background:linear-gradient(120deg,var(--navy),var(--blue))}.mbx .cmp-table thead .th-b2c{background:linear-gradient(120deg,#475569,#64748b)}.mbx .cmp-table th[scope=row]{font-family:'Sora';font-weight:700;color:var(--ink);background:var(--surf);text-align:left;white-space:nowrap}.mbx .cmp-table td,.mbx .cmp-table th[scope=row]{padding:13px 18px;border-top:1px solid var(--line-2);vertical-align:top}.mbx .cmp-table tbody tr:first-child>*{border-top:0}.mbx .cmp-table td{color:var(--body)}.mbx .cmp-table td:nth-child(2){color:var(--ink)}.mbx .pc{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:26px}.mbx .pc-col{border-radius:var(--r);padding:24px;border:1px solid var(--line);background:var(--white)}.mbx .pc-col h3{display:flex;align-items:center;gap:.6rem;font-size:1.08rem;margin:0 0 14px}.mbx .tag{font-size:.68rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:.25rem .55rem;border-radius:7px}.mbx .pc-pos .tag{color:var(--emerald-d);background:#e7f6ee}.mbx .pc-neg .tag{color:#9a5b00;background:#fcf1df}.mbx .pc-col ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}.mbx .pc-col li{display:flex;gap:11px;font-size:.97rem}.mbx .pc-col li i{flex:0 0 auto;font-size:1.15rem}.mbx .pc-pos li i{color:var(--emerald)}.mbx .pc-neg li i{color:#c87f12}.mbx .pc-col li b{color:var(--ink)}.mbx .examples{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:26px}.mbx .ex{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;box-shadow:var(--sh)}.mbx .ex .k{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}.mbx .ex h3{font-size:1.1rem;margin:0 0 6px}.mbx .ex p{margin:0;font-size:.96rem;color:var(--muted)}.mbx .quote{margin:0;background:var(--navy);color:#fff;border-radius:var(--r-lg);padding:46px 52px;position:relative;overflow:hidden}.mbx .quote::before{content:"\201C";position:absolute;left:26px;top:-6px;font-family:Georgia,serif;font-size:130px;line-height:1;color:rgba(127,231,196,.18)}.mbx .quote p{font-family:'Sora';font-weight:700;font-size:1.55rem;line-height:1.4;margin:0;max-width:34ch;position:relative}.mbx .quote cite{display:block;margin-top:16px;font-style:normal;font-size:.92rem;color:#9fb8d6}.mbx .gloss{background:var(--surf-2);border:1px solid var(--line-2);border-radius:var(--r);padding:24px 26px;margin:26px 0 0;max-width:var(--read)}.mbx .gloss>strong{display:block;font-family:'Sora';color:var(--ink);font-size:1.05rem;margin-bottom:12px}.mbx .gloss dl{margin:0;display:grid;gap:10px}.mbx .gloss dt{font-weight:700;color:var(--ink);font-size:.96rem}.mbx .gloss dd{margin:2px 0 0;color:var(--muted);font-size:.94rem}.mbx .faq{display:grid;gap:12px;margin-top:26px;max-width:var(--read)}.mbx .faq details{background:var(--white);border:1px solid var(--line);border-radius:var(--r-sm);padding:2px 6px;transition:.2s}.mbx .faq details[open]{border-color:#cfe0f5;box-shadow:var(--sh)}.mbx .faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 18px;font-family:'Sora';font-weight:600;color:var(--ink);font-size:1.02rem}.mbx .faq summary::-webkit-details-marker{display:none}.mbx .faq summary i{transition:.2s;color:var(--blue);flex:0 0 auto}.mbx .faq details[open] summary i{transform:rotate(180deg)}.mbx .faq details p{margin:0;padding:0 18px 18px;color:var(--body);font-size:.98rem}.mbx .cta{background:linear-gradient(135deg,var(--navy),var(--blue));border-radius:var(--r-lg);padding:40px 44px;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}.mbx .cta>div{flex:1 1 320px}.mbx .cta h2{color:#fff;font-size:1.5rem;margin:0;max-width:24ch}.mbx .cta p{color:#c3d4ea;margin:8px 0 0;max-width:50ch}.mbx .cta .btn-primary{background:#fff;color:var(--navy)}.mbx .cta .btn-primary:hover{background:var(--teal);color:var(--navy)}.mbx .col + .cta,.mbx .steps + .cta{margin-top:44px}.mbx .sources{background:var(--surf-2);border-top:1px solid var(--line-2);padding:48px 0}.mbx .sources h2{font-size:1.2rem;margin-bottom:10px}.mbx .sources p{font-size:.92rem;color:var(--muted);max-width:84ch}.mbx .sources .links{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}.mbx .sources .links a{font-size:.85rem;background:var(--white);border:1px solid var(--line);border-radius:99px;padding:6px 14px;color:var(--blue)}.mbx .sources .links a:hover{border-color:#cfe0f5;text-decoration:none}.mbx .pre-footer{background:linear-gradient(160deg,#0B2545,#11315c);color:#fff;text-align:center;padding:64px 24px}.mbx .pre-footer-inner{max-width:680px;margin:0 auto}.mbx .pre-footer h2{color:#fff;font-size:1.7rem;margin-bottom:10px}.mbx .pre-footer p{color:#c3d4ea;margin:0 auto 22px;max-width:52ch}.mbx .btn-prefooter{display:inline-block;background:#fff;color:var(--navy);font-weight:600;border-radius:11px;padding:.85rem 1.6rem}.mbx .btn-prefooter:hover{background:var(--teal);text-decoration:none}.mbx .site-footer{background:var(--navy-deep);color:#9fb8d6;padding:34px 0;font-size:.9rem}.mbx .footer-inner{max-width:var(--wrap);margin:0 auto;padding:0 24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px}.mbx .footer-inner p{margin:0}.mbx .footer-inner a{color:#bcd2ec}.mbx .footer-inner strong{color:#fff}@media(max-width:860px){.mbx .header-nav{position:absolute;left:0;right:0;top:68px;flex-direction:column;align-items:stretch;gap:0;background:#fff;border-bottom:1px solid var(--line-2);box-shadow:var(--sh);padding:6px 0;display:none}.mbx .header-nav.open{display:flex}.mbx .header-nav a{padding:12px 24px}.mbx .btn-header{margin:8px 24px}.mbx .menu-toggle{display:block}.mbx .hero .wrap{padding:28px 24px 60px}.mbx .band{padding:50px 0}.mbx .signals,.mbx .tiles{grid-template-columns:1fr 1fr}.mbx .cards,.mbx .cmp,.mbx .pc,.mbx .examples{grid-template-columns:1fr}.mbx .data,.mbx .quote{padding:30px}.mbx .cta{padding:30px;flex-direction:column;align-items:flex-start}.mbx .quote p{font-size:1.3rem}}@media(max-width:480px){.mbx .signals,.mbx .tiles{grid-template-columns:1fr}.mbx .data{padding:24px}}.mbx svg.i{flex:0 0 auto;width:1.25em;height:1.25em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.18em}.mbx .card .ic svg.i,.mbx .answer .ic svg.i{width:1.5rem;height:1.5rem;vertical-align:0}.mbx .eyebrow svg.i{width:1rem;height:1rem}.mbx .faq summary svg.i{color:var(--blue);transition:transform .2s}.mbx .faq details[open] summary svg.i{transform:rotate(180deg)}.mbx .rich-table{width:100%;min-width:560px;border-collapse:separate;border-spacing:0;background:var(--white);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);font-size:.96rem}.mbx .rich-table caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);border:0}.mbx .rich-table thead th{background:var(--navy);color:#fff;font-family:'Sora';font-weight:700;text-align:left;padding:14px 18px;font-size:.95rem}.mbx .rich-table th[scope=row]{font-family:'Sora';font-weight:700;color:var(--ink);background:var(--surf);text-align:left;vertical-align:top;white-space:nowrap}.mbx .rich-table td,.mbx .rich-table th[scope=row]{padding:13px 18px;border-top:1px solid var(--line-2);vertical-align:top}.mbx .rich-table tbody tr:first-child>*{border-top:0}.mbx .rich-table td{color:var(--body)}.mbx .approach{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:26px}.mbx .approach .step{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;box-shadow:var(--sh)}.mbx .approach .step .lbl{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}.mbx .approach .step blockquote{margin:0 0 10px;padding:12px 16px;background:var(--surf-2);border-left:3px solid var(--blue);border-radius:0 var(--rsm) var(--rsm) 0;font-style:italic;color:var(--ink)}.mbx .approach .step p{margin:0;font-size:.94rem;color:var(--muted)}@media(max-width:860px){.mbx .approach{grid-template-columns:1fr}}</style>
+
+  
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": "https://paulo-leads.github.io/protocolo-hidra/consultar-socios-cnpj/#article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://paulo-leads.github.io/protocolo-hidra/consultar-socios-cnpj/"
+  },
+  "headline": "Como consultar os sócios de uma empresa pelo CNPJ (QSA)",
+  "description": "Guia completo para consultar os sócios de qualquer empresa pelo CNPJ: o passo a passo oficial do QSA, o que significa cada qualificação do sócio, por que MEI e empresário individual não mostram sócios e como usar o QSA na prospecção B2B.",
+  "url": "https://paulo-leads.github.io/protocolo-hidra/consultar-socios-cnpj/",
+  "inLanguage": "pt-BR",
+  "image": [
+    "https://paulo-leads.github.io/protocolo-hidra/assets/img/protocolo-hidra-painel-1200.png"
+  ],
+  "datePublished": "2026-07-03",
+  "dateModified": "2026-07-03",
+  "author": {
+    "@type": "Person",
+    "name": "Paulo C. P. Santos",
+    "jobTitle": "Arquiteto do Protocolo Hidra",
+    "url": "https://paulo-leads.github.io/protocolo-hidra/paulo-leads/",
+    "worksFor": {
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/#organization"
+    },
+    "knowsAbout": [
+      "consulta de sócios",
+      "QSA",
+      "quadro societário",
+      "consulta de CNPJ",
+      "prospecção B2B"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://paulo-leads.github.io/protocolo-hidra/#organization",
+    "name": "ProtocoloHidra",
+    "alternateName": "ProtocoloHidra",
+    "url": "https://paulo-leads.github.io/protocolo-hidra/",
+    "logo": {
+      "@type": "ImageObject",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/#logo",
+      "url": "https://paulo-leads.github.io/protocolo-hidra/assets/img/protocolo-hidra-logo.png"
+    },
+    "sameAs": [
+      "https://www.instagram.com/protocolohidra/"
+    ]
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "QSA (Quadro de Sócios e Administradores)"
+    },
+    {
+      "@type": "Thing",
+      "name": "consulta de sócios pelo CNPJ"
+    },
+    {
+      "@type": "Thing",
+      "name": "qualificação do sócio"
+    },
+    {
+      "@type": "Thing",
+      "name": "prospecção B2B"
+    }
+  ]
+}
+</script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://paulo-leads.github.io/protocolo-hidra/consultar-socios-cnpj/",
+    "url": "https://paulo-leads.github.io/protocolo-hidra/consultar-socios-cnpj/",
+    "name": "Consultar Sócios de uma Empresa pelo CNPJ (QSA) Grátis",
+    "inLanguage": "pt-BR",
+    "isPartOf": { "@type": "WebSite", "url": "https://paulo-leads.github.io/protocolo-hidra", "name": "ProtocoloHidra" },
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": ["#resposta-rapida p", ".mbx-answer p"]
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Como consultar os sócios de uma empresa pelo CNPJ (QSA)",
+    "description": "Quatro passos para ver grátis o Quadro de Sócios e Administradores (QSA) de qualquer CNPJ no portal oficial do Governo Federal, sem login e sem cadastro.",
+    "totalTime": "PT3M",
+    "step": [
+      {"@type": "HowToStep", "position": 1, "name": "Acesse o serviço oficial", "text": "No portal oficial do Governo Federal, abra o serviço de emissão do comprovante de inscrição cadastral do CNPJ — o documento conhecido como cartão CNPJ."},
+      {"@type": "HowToStep", "position": 2, "name": "Digite o CNPJ", "text": "Informe os 14 números do CNPJ da empresa, com ou sem pontuação, e resolva a verificação de segurança (hCaptcha)."},
+      {"@type": "HowToStep", "position": 3, "name": "Emita o comprovante", "text": "Confirme a consulta para abrir o comprovante de inscrição, com razão social, situação cadastral, CNAE e endereço da empresa."},
+      {"@type": "HowToStep", "position": 4, "name": "Clique em Consultar QSA", "text": "Role até o fim do comprovante e clique no botão Consultar QSA: a lista de sócios e administradores aparece na hora, com o nome e a qualificação de cada um."}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type": "Question", "name": "Como consultar os sócios de uma empresa gratuitamente?",
+        "acceptedAnswer": {"@type": "Answer", "text": "No portal oficial do Governo Federal: acesse o serviço de emissão do comprovante de inscrição do CNPJ, digite os 14 números da empresa, resolva a verificação de segurança e clique em “Consultar QSA”. A lista de sócios e administradores aparece na hora, de graça e sem login."}},
+      {"@type": "Question", "name": "O que é o QSA de um CNPJ?",
+        "acceptedAnswer": {"@type": "Answer", "text": "QSA é o Quadro de Sócios e Administradores: o registro público de quem compõe a sociedade e de quem tem poder de administrar a empresa, com o nome e a qualificação de cada pessoa. Na prática, funciona como a certidão de comando do CNPJ — mostra quem manda na empresa, mas não mostra CPF completo nem percentual de participação."}},
+      {"@type": "Question", "name": "É possível consultar sócios pelo CPF ou pelo nome da pessoa?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Não pelo portal oficial — ele só aceita busca pelo número do CNPJ. Para o caminho inverso (do nome da pessoa para as empresas), as opções são a certidão na Junta Comercial do estado, que é paga, e plataformas agregadoras privadas, que em geral exigem cadastro. Antes de confiar no resultado, verifique a data de atualização dos dados."}},
+      {"@type": "Question", "name": "Por que o CNPJ que consultei não mostra nenhum sócio?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Porque nem todo CNPJ tem sócios. MEI e empresário individual não têm QSA — juridicamente não existe sociedade, a empresa é a própria pessoa física. Na base ProtocoloHidra, cerca de 11,9 milhões dos 21,7 milhões de CNPJs ativos são MEI, e 86% do total são microempresas. A SLU mostra apenas o titular, e a S/A não expõe acionistas no cadastro."}},
+      {"@type": "Question", "name": "O QSA mostra o percentual de participação de cada sócio?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Não. O QSA público mostra o nome e a qualificação de cada sócio, mas não informa quanto do capital social cada um detém. O percentual de participação consta no contrato social, que pode ser obtido por certidão paga na Junta Comercial do estado onde a empresa está registrada."}},
+      {"@type": "Question", "name": "Consultar os sócios de uma empresa é legal?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Sim. O QSA é dado cadastral público por determinação legal e pode ser consultado por qualquer pessoa — é a base de processos legítimos de due diligence, análise de crédito e prospecção B2B. O uso responsável é o padrão: os dados servem para verificar e contatar empresas com finalidade comercial legítima."}},
+      {"@type": "Question", "name": "Como descobrir se uma pessoa tem outras empresas no nome?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Esse caminho exige busca reversa por nome ou CPF, que o portal oficial não oferece. As alternativas são pedir certidão específica na Junta Comercial (paga, estado a estado) ou usar plataformas agregadoras com cadastro. A ferramenta da ProtocoloHidra não faz busca por nome — ela consulta dados cadastrais a partir do número do CNPJ."}},
+      {"@type": "Question", "name": "O que significa “sócio-administrador” na consulta?",
+        "acceptedAnswer": {"@type": "Answer", "text": "É o sócio registrado com a qualificação 49 no QSA: além de participar da sociedade, ele tem poder de gerir e assinar pela empresa. Para quem prospecta, é o decisor mais provável — em micro e pequenas empresas, o sócio-administrador costuma ser quem aprova compras e contratos."}},
+      {"@type": "Question", "name": "Como falar com o sócio depois de descobrir quem ele é?",
+        "acceptedAnswer": {"@type": "Answer", "text": "O QSA entrega o nome de quem decide, mas não traz telefone nem e-mail. Quem prospecta em escala resolve isso com uma lista segmentada: a base ProtocoloHidra reúne 21,7 milhões de CNPJs ativos com telefone e e-mail comercial em 22 campos, filtrados por CNAE, estado e porte, a partir de R$97 em pagamento único."}}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Início",
+          "item": "https://paulo-leads.github.io/protocolo-hidra/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Consulta CNPJ",
+          "item": "https://paulo-leads.github.io/protocolo-hidra/consulta-cnpj/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Consultar sócios pelo CNPJ (QSA)",
+          "item": "https://paulo-leads.github.io/protocolo-hidra/consultar-socios-cnpj/"
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/#website",
+      "name": "Protocolo Hidra",
+      "url": "https://paulo-leads.github.io/protocolo-hidra/",
+      "inLanguage": "pt-BR",
+      "description": "Protocolo Hidra — Metodologia de vendas B2B e soberania de dados.",
+      "publisher": {
+        "@id": "https://paulo-leads.github.io/protocolo-hidra/#organization"
+      },
+      "dateModified": "2026-07-08",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://paulo-leads.github.io/protocolo-hidra/busca?q={term}"
+        },
+        "query-input": "required name=term"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/#organization",
+      "name": "Protocolo Hidra",
+      "url": "https://paulo-leads.github.io/protocolo-hidra/",
+      "description": "Protocolo Hidra — Metodologia de soberania de dados e Zero Trust Sales.",
+      "founder": {
+        "@id": "https://paulo-leads.github.io/protocolo-hidra/#paulo-leads"
+      },
+      "foundingDate": "2025-01-01",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://paulo-leads.github.io/protocolo-hidra/assets/img/protocolo-hidra-logo.png"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+55-19-98264-2481",
+        "contactType": "sales",
+        "email": "contato@pauloleads.com.br"
+      },
+      "sameAs": [
+        "https://www.instagram.com/protocolohidra/"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/#paulo-leads",
+      "name": "Paulo C. P. Santos",
+      "alternateName": "Paulo Leads",
+      "url": "https://paulo-leads.github.io/protocolo-hidra/paulo-leads/",
+      "jobTitle": "Arquiteto do Protocolo Hidra",
+      "email": "mailto:contato@pauloleads.com.br",
+      "telephone": "+55-19-98264-2481",
+      "affiliation": {
+        "@id": "https://paulo-leads.github.io/protocolo-hidra/#organization"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/consultar-socios-cnpj#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Início",
+          "item": "https://paulo-leads.github.io/protocolo-hidra/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Consultar Sócios de uma Empresa pelo CNPJ (QSA) Grátis",
+          "item": "https://paulo-leads.github.io/protocolo-hidra/consultar-socios-cnpj"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/consultar-socios-cnpj#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "O que é Consultar Sócios de uma Empresa pelo CNPJ (QSA) Grátis?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Veja como consultar os sócios de qualquer empresa pelo CNPJ: QSA grátis no portal oficial, o que cada qualificação significa e o que fazer com QSA vazio...."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "DefinedTermSet",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/glossario.json#set",
+      "name": "Glossário Protocolo Hidra",
+      "description": "Ontologia oficial do Protocolo Hidra com definições canônicas.",
+      "url": "https://paulo-leads.github.io/protocolo-hidra/glossario.json",
+      "publisher": {
+        "@id": "https://paulo-leads.github.io/protocolo-hidra/#organization"
+      },
+      "version": "5.0.0-wkgs",
+      "dateModified": "2026-07-08",
+      "hasDefinedTerm": [
+        {
+          "@id": "https://paulo-leads.github.io/protocolo-hidra/def/comprar-leads"
+        },
+        {
+          "@id": "https://paulo-leads.github.io/protocolo-hidra/def/generative-lead-spoofing"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/consultar-socios-cnpj#howto",
+      "name": "Como utilizar Consultar Sócios de uma Empresa pelo CNPJ (QSA) Grátis",
+      "description": "Guia prático para aproveitar ao máximo este conteúdo do Protocolo Hidra.",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Leia e entenda",
+          "text": "Leia o conteúdo completo para compreender os fundamentos."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Aplique no seu contexto",
+          "text": "Adapte as recomendações ao seu ICP e processo comercial."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Meça e otimize",
+          "text": "Acompanhe métricas e refine a abordagem continuamente."
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="mbx">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-arrow-down" viewBox="0 0 24 24"> <path d="M12 5l0 14" /> <path d="M18 13l-6 6" /> <path d="M6 13l6 6" /> </symbol>
+<symbol id="i-building" viewBox="0 0 24 24"> <path d="M3 21l18 0" /> <path d="M9 8l1 0" /> <path d="M9 12l1 0" /> <path d="M9 16l1 0" /> <path d="M14 8l1 0" /> <path d="M14 12l1 0" /> <path d="M14 16l1 0" /> <path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16" /> </symbol>
+<symbol id="i-building-skyscraper" viewBox="0 0 24 24"> <path d="M3 21l18 0" /> <path d="M5 21v-14l8 -4v18" /> <path d="M19 21v-10l-6 -4" /> <path d="M9 9l0 .01" /> <path d="M9 12l0 .01" /> <path d="M9 15l0 .01" /> <path d="M9 18l0 .01" /> </symbol>
+<symbol id="i-bulb" viewBox="0 0 24 24"> <path d="M3 12h1m8 -9v1m8 8h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7" /> <path d="M9 16a5 5 0 1 1 6 0a3.5 3.5 0 0 0 -1 3a2 2 0 0 1 -4 0a3.5 3.5 0 0 0 -1 -3" /> <path d="M9.7 17l4.6 0" /> </symbol>
+<symbol id="i-chart-bar" viewBox="0 0 24 24"> <path d="M3 13a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /> <path d="M15 9a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /> <path d="M9 5a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /> <path d="M4 20h14" /> </symbol>
+<symbol id="i-check" viewBox="0 0 24 24"> <path d="M5 12l5 5l10 -10" /> </symbol>
+<symbol id="i-chevron-down" viewBox="0 0 24 24"> <path d="M6 9l6 6l6 -6" /> </symbol>
+<symbol id="i-database" viewBox="0 0 24 24"> <path d="M12 6m-8 0a8 3 0 1 0 16 0a8 3 0 1 0 -16 0" /> <path d="M4 6v6a8 3 0 0 0 16 0v-6" /> <path d="M4 12v6a8 3 0 0 0 16 0v-6" /> </symbol>
+<symbol id="i-download" viewBox="0 0 24 24"> <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" /> <path d="M7 11l5 5l5 -5" /> <path d="M12 4l0 12" /> </symbol>
+<symbol id="i-filter" viewBox="0 0 24 24"> <path d="M4 4h16v2.172a2 2 0 0 1 -.586 1.414l-4.414 4.414v7l-6 2v-8.5l-4.48 -4.928a2 2 0 0 1 -.52 -1.345v-2.241z" /> </symbol>
+<symbol id="i-flag" viewBox="0 0 24 24"> <path d="M5 5a5 5 0 0 1 7 0a5 5 0 0 0 7 0v9a5 5 0 0 1 -7 0a5 5 0 0 0 -7 0v-9z" /> <path d="M5 21v-7" /> </symbol>
+<symbol id="i-help-circle" viewBox="0 0 24 24"> <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /> <path d="M12 16v.01" /> <path d="M12 13a2 2 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483" /> </symbol>
+<symbol id="i-message-question" viewBox="0 0 24 24"> <path d="M8 9h8" /> <path d="M8 13h6" /> <path d="M14 18h-1l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v4.5" /> <path d="M19 22v.01" /> <path d="M19 19a2.003 2.003 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483" /> </symbol>
+<symbol id="i-rocket" viewBox="0 0 24 24"> <path d="M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3" /> <path d="M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3" /> <path d="M15 9m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> </symbol>
+<symbol id="i-shield-check" viewBox="0 0 24 24"> <path d="M11.46 20.846a12 12 0 0 1 -7.96 -14.846a12 12 0 0 0 8.5 -3a12 12 0 0 0 8.5 3a12 12 0 0 1 -.09 7.06" /> <path d="M15 19l2 2l4 -4" /> </symbol>
+<symbol id="i-stack-2" viewBox="0 0 24 24"> <path d="M12 4l-8 4l8 4l8 -4l-8 -4" /> <path d="M4 12l8 4l8 -4" /> <path d="M4 16l8 4l8 -4" /> </symbol>
+<symbol id="i-target" viewBox="0 0 24 24"> <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M12 12m-5 0a5 5 0 1 0 10 0a5 5 0 1 0 -10 0" /> <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /> </symbol>
+<symbol id="i-users" viewBox="0 0 24 24"> <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /> <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /> <path d="M16 3.13a4 4 0 0 1 0 7.75" /> <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" /> </symbol>
+</defs></svg>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/protocolo-hidra/" class="logo"><img src="/protocolo-hidra/assets/img/protocolo-hidra-logo.png" alt="ProtocoloHidra" width="140" height="40"></a>
+    <button class="menu-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Abrir menu"><span aria-hidden="true">☰</span></button>
+    <nav class="header-nav" id="primary-nav" aria-label="Principal">
+      <a href="https://paulo-leads.github.io/protocolo-hidra/#video">Como funciona</a>
+      <a href="https://paulo-leads.github.io/protocolo-hidra/#quem-utiliza">Casos de Uso</a>
+      <a href="https://paulo-leads.github.io/protocolo-hidra/#premium">Planos</a>
+      <a href="https://paulo-leads.github.io/protocolo-hidra/#duvidas">Dúvidas</a>
+      <a href="/protocolo-hidra/teste-gratis-lista-de-empresas/" class="btn-header">Testar grátis</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="page-title">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="https://paulo-leads.github.io/protocolo-hidra/">Início</a></li><li><a href="https://paulo-leads.github.io/protocolo-hidra/consulta-cnpj/">Consulta CNPJ</a></li><li aria-current="page"><span>Consultar sócios pelo CNPJ (QSA)</span></li></ol></nav>
+      <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-users"/></svg> Consulta de sócios · QSA · 2026</span>
+      <h1 id="page-title">Como consultar os sócios de uma empresa pelo CNPJ (QSA)</h1>
+      <p class="lead">O QSA — Quadro de Sócios e Administradores — é público e gratuito: mostra quem compõe e quem administra qualquer empresa do Brasil. Aqui você vê o passo a passo oficial, o significado de cada qualificação do sócio e o que fazer quando o CNPJ <strong style="color:#fff">não mostra sócio nenhum</strong>.</p>
+      <p class="byline">Por <strong>Paulo C. P. Santos</strong> · Arquiteto do Protocolo Hidra · atualizado em 3 de julho de 2026</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="https://paulo-leads.github.io/protocolo-hidra/#premium"><svg class="i" aria-hidden="true"><use href="#i-download"/></svg> Baixar lista com contatos</a>
+        <a class="btn btn-ghost" href="#passo-a-passo">Ver o passo a passo do QSA <svg class="i" aria-hidden="true"><use href="#i-arrow-down"/></svg></a>
+      </div>
+      <div class="signals">
+        <div class="signal up"><strong>Grátis</strong><span>QSA oficial, sem login e sem cadastro</span></div>
+        <div class="signal"><strong class="num">21,7 mi</strong><span>CNPJs ativos na base ProtocoloHidra</span></div>
+        <div class="signal"><strong class="num">49 · 22 · 05</strong><span>cada qualificação do sócio, decodificada</span></div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+  .tldr{margin:18px 0 0;padding-left:1.3rem;max-width:var(--read)}
+  .tldr li{margin:0 0 8px;color:var(--body)}
+  .tldr li b{color:var(--ink)}
+  .cnpj-tool{background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh);padding:26px 28px}
+  .cnpj-tool .eyebrow{margin-bottom:10px}
+  .cnpj-tool h2{font-size:1.4rem;margin:0 0 6px}
+  .cnpj-tool .sub{color:var(--muted);margin:0 0 18px}
+  .cnpj-tool-form{display:flex;gap:12px;flex-wrap:wrap}
+  .cnpj-tool-form input{flex:1 1 240px;min-height:50px;border:1px solid var(--line);border-radius:11px;padding:12px 16px;font-size:1.05rem;color:var(--ink);font-family:inherit;background:#fff}
+  .cnpj-tool-form input:focus{outline:2px solid #bcd3f7;border-color:var(--blue)}
+  .cnpj-tool-form .btn{min-height:50px}
+  #consulta-status{min-height:20px;margin:12px 0 0;font-size:.94rem;color:var(--muted)}
+  #consulta-status.error{color:#c0392b;font-weight:600}
+  #consulta-status.loading{color:var(--blue)}
+  .cnpj-tool .note{margin:16px 0 0;font-size:.82rem;color:var(--muted);line-height:1.55}
+  .cnpj-tool .result-card{background:var(--surf);border:1px solid var(--line);border-radius:var(--r);padding:22px;margin-top:18px}
+  .cnpj-tool .result-title{font-family:'Sora',sans-serif;font-size:1.2rem;font-weight:800;color:var(--ink);margin-bottom:2px}
+  .cnpj-tool .result-subtitle{color:var(--muted);font-size:.9rem;margin-bottom:14px}
+  .cnpj-tool .result-list{display:grid;grid-template-columns:1fr;gap:0;margin:0 0 18px;padding:0}
+  .cnpj-tool .result-list div{display:flex;justify-content:space-between;gap:18px;padding:11px 0;border-bottom:1px solid var(--line-2)}
+  .cnpj-tool .result-list dt{color:var(--muted);font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin:0;flex:0 0 auto}
+  .cnpj-tool .result-list dd{color:var(--ink);font-weight:600;margin:0;text-align:right}
+  .cnpj-tool .tool-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .cnpj-tool .tool-actions a{display:inline-flex;align-items:center;justify-content:center;text-align:center;font-weight:600;border-radius:11px;padding:.8rem 1rem;font-size:.94rem;text-decoration:none;border:1px solid transparent;line-height:1.2}
+  .cnpj-tool .tool-actions .btn-primary{background:var(--navy);color:#fff}
+  .cnpj-tool .tool-actions .btn-primary:hover{background:var(--blue)}
+  .cnpj-tool .tool-actions .btn-secondary{background:var(--surf-2);color:var(--blue);border-color:#dbe6fb}
+  .cnpj-tool .tool-actions .btn-secondary:hover{background:#e2ecfb}
+  @media(min-width:640px){.cnpj-tool .result-list{grid-template-columns:1fr 1fr;column-gap:30px}}
+  @media(max-width:520px){.cnpj-tool .tool-actions{grid-template-columns:1fr}}
+  </style>
+
+  <section class="band">
+    <div class="wrap col" id="resposta-rapida">
+      <div class="answer mbx-answer">
+        <span class="ic" aria-hidden="true"><svg class="i"><use href="#i-bulb"/></svg></span>
+        <p><b>Para consultar os sócios de uma empresa, acesse a emissão do comprovante de inscrição no portal oficial do Governo Federal, digite o CNPJ e clique em &ldquo;Consultar QSA&rdquo;</b> — a lista de sócios e administradores aparece na hora, de graça. O QSA mostra o nome e a qualificação de cada sócio, mas não exibe CPF completo nem percentual de participação. MEI e empresário individual não têm QSA, porque juridicamente não possuem sócios.</p>
+      </div>
+      <ol class="tldr" aria-label="Resumo do caminho oficial em 4 passos">
+        <li><b>Acesse o portal oficial do Governo Federal</b> e abra a emissão do comprovante de inscrição do CNPJ.</li>
+        <li><b>Digite os 14 números do CNPJ</b> e resolva a verificação de segurança (hCaptcha).</li>
+        <li><b>Emita o comprovante de inscrição</b> com os dados cadastrais da empresa.</li>
+        <li><b>Clique em &ldquo;Consultar QSA&rdquo;</b> no fim do comprovante para ver os sócios e administradores.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band band--alt" id="ferramenta" aria-labelledby="ferramenta-title">
+    <div class="wrap col">
+      <div class="cnpj-tool">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-database"/></svg> Ferramenta gratuita</span>
+        <h2 id="ferramenta-title">Consulte os dados cadastrais do CNPJ agora</h2>
+        <p class="sub">Digite um CNPJ e veja grátis a razão social, a situação cadastral, o CNAE, a cidade e a data de abertura — sem cadastro. O quadro de sócios não aparece nesta consulta: para o QSA, siga o <a href="#passo-a-passo">passo a passo oficial</a> logo abaixo.</p>
+        <form id="consulta-cnpj-form" class="cnpj-tool-form" autocomplete="off" novalidate>
+          <input id="cnpj" name="cnpj" type="text" inputmode="numeric" placeholder="00.000.000/0000-00" maxlength="18" aria-label="Digite o CNPJ">
+          <button type="submit" class="btn btn-primary">Consultar CNPJ</button>
+        </form>
+        <p id="consulta-status" role="status" aria-live="polite"></p>
+        <div id="consulta-result"></div>
+        <p class="note">Dados de fontes públicas oficiais. A ProtocoloHidra não tem vínculo com órgãos públicos; para fins oficiais, consulte o órgão competente. Esta consulta não faz busca por nome de pessoa. Veja também o guia completo de <a href="/protocolo-hidra/consulta-cnpj/">consulta de CNPJ grátis</a> e o que significa cada <a href="/protocolo-hidra/situacao-cadastral-cnpj/">situação cadastral do CNPJ</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="o-que-e-qsa">
+    <div class="wrap">
+      <div class="kicker col">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-help-circle"/></svg> O conceito</span>
+        <h2>O que é o QSA (Quadro de Sócios e Administradores)</h2>
+      </div>
+      <div class="col">
+        <p class="lead-p">O QSA é o registro público de quem compõe a sociedade e de quem tem poder de administrá-la. Para cada pessoa do quadro, ele informa o nome e a qualificação — o papel formal dela na empresa. É, na prática, a certidão de comando de um CNPJ: quem assina, quem gere e quem participa.</p>
+        <p class="body-p">O quadro é uma das seções do comprovante de inscrição — o mesmo documento que reúne todos os <a href="/protocolo-hidra/dados-cadastrais-cnpj/">dados cadastrais de um CNPJ</a>, como razão social, situação, CNAE e endereço. Por determinação legal, essas informações são públicas: qualquer pessoa pode consultá-las para conferir um fornecedor, analisar um cliente ou preparar uma prospecção. O que o QSA <strong>não</strong> entrega é tão importante quanto o que ele mostra — e é aí que a maioria dos guias falha.</p>
+      </div>
+      <div class="pc">
+        <div class="pc-col pc-pos">
+          <h3><span class="tag">Mostra</span> O que aparece no QSA</h3>
+          <ul>
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>Nome completo</b> de cada sócio e administrador registrado.</span></li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>Qualificação</b> de cada um (código + descrição, como 49 – Sócio-Administrador).</span></li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>Data de entrada</b> na sociedade, quando informada no cadastro.</span></li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>Representante legal</b> do sócio, quando houver (ex.: sócio no exterior).</span></li>
+          </ul>
+        </div>
+        <div class="pc-col pc-neg">
+          <h3><span class="tag">Não mostra</span> O que fica de fora</h3>
+          <ul>
+            <li><svg class="i" aria-hidden="true"><use href="#i-flag"/></svg><span><b>CPF completo</b> dos sócios — aparece truncado, por proteção de dados.</span></li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-flag"/></svg><span><b>Percentual de participação</b> de cada sócio no capital — só no contrato social.</span></li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-flag"/></svg><span><b>Telefone e e-mail</b> dos sócios — o QSA não traz nenhum contato.</span></li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-flag"/></svg><span><b>Acionistas de S/A</b> — o cadastro exibe só administradores e diretores.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--alt" id="passo-a-passo">
+    <div class="wrap">
+      <div class="kicker col">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg> Passo a passo oficial</span>
+        <h2>Consultar os sócios grátis no portal oficial do Governo Federal</h2>
+        <p>O caminho oficial é gratuito, não pede login e leva menos de três minutos. O detalhe que confunde a maioria: o botão do QSA fica <strong>escondido no fim do comprovante</strong>, não na tela inicial.</p>
+      </div>
+      <ol class="steps">
+        <li><div><b>Acesse o serviço oficial</b><span>No portal oficial do Governo Federal, abra a emissão do comprovante de inscrição cadastral do CNPJ — o documento conhecido como <a href="/protocolo-hidra/cartao-cnpj/">cartão CNPJ</a>.</span></div></li>
+        <li><div><b>Digite o CNPJ</b><span>Informe os 14 números da empresa, com ou sem pontuação, e resolva a verificação de segurança (hCaptcha).</span></div></li>
+        <li><div><b>Emita o comprovante</b><span>Confirme a consulta para abrir o comprovante de inscrição, com razão social, situação cadastral, CNAE e endereço.</span></div></li>
+        <li><div><b>Clique em &ldquo;Consultar QSA&rdquo;</b><span>Role até o fim do comprovante e clique no botão: a lista de sócios e administradores aparece na hora, com nome e qualificação.</span></div></li>
+      </ol>
+      <figure class="infographic" role="img" aria-label="Exemplo ilustrativo de um resultado de consulta de QSA, com empresa fictícia e dados mascarados">
+        <svg viewBox="0 0 720 330" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+          <rect x="0" y="0" width="720" height="330" rx="14" fill="#ffffff" stroke="#E2E8F0"/>
+          <rect x="0" y="0" width="720" height="54" rx="14" fill="#0B2545"/>
+          <rect x="0" y="27" width="720" height="27" fill="#0B2545"/>
+          <text x="28" y="34" fill="#7fe7c4" font-size="13" font-weight="700" letter-spacing="1.5">EXEMPLO ILUSTRATIVO · DADOS FICTÍCIOS E MASCARADOS</text>
+          <text x="28" y="92" fill="#64748B" font-size="13" font-weight="700">CNPJ</text>
+          <text x="28" y="114" fill="#0F172A" font-size="17" font-weight="700">12.***.***/0001-90</text>
+          <text x="360" y="92" fill="#64748B" font-size="13" font-weight="700">RAZÃO SOCIAL</text>
+          <text x="360" y="114" fill="#0F172A" font-size="17" font-weight="700">EXEMPLO COMÉRCIO DE ALIMENTOS LTDA</text>
+          <line x1="28" y1="140" x2="692" y2="140" stroke="#EAEFF6" stroke-width="2"/>
+          <text x="28" y="172" fill="#1D4ED8" font-size="14" font-weight="800" letter-spacing="1">QUADRO DE SÓCIOS E ADMINISTRADORES (QSA)</text>
+          <rect x="28" y="190" width="664" height="52" rx="10" fill="#F7F9FC" stroke="#E2E8F0"/>
+          <text x="48" y="212" fill="#0F172A" font-size="15" font-weight="700">R****** A. DE S******</text>
+          <text x="48" y="232" fill="#64748B" font-size="13">Qualificação: 49 – Sócio-Administrador</text>
+          <rect x="28" y="252" width="664" height="52" rx="10" fill="#F7F9FC" stroke="#E2E8F0"/>
+          <text x="48" y="274" fill="#0F172A" font-size="15" font-weight="700">M***** C. P*****</text>
+          <text x="48" y="294" fill="#64748B" font-size="13">Qualificação: 22 – Sócio</text>
+        </svg>
+        <figcaption>Exemplo ilustrativo, com empresa fictícia e nomes mascarados: é assim que o QSA aparece ao fim do comprovante de inscrição do CNPJ.</figcaption>
+      </figure>
+      <div class="col">
+        <p class="body-p" style="margin-top:26px">Dois avisos práticos: o portal passa por instabilidades com frequência — se a consulta falhar, tente de novo em outro horário — e a verificação hCaptcha pode pedir mais de uma rodada. Se o que você precisa é só confirmar se a empresa está ativa, a <a href="/protocolo-hidra/situacao-cadastral-cnpj/">situação cadastral do CNPJ</a> resolve sem passar pelo QSA.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="pelo-nome">
+    <div class="wrap">
+      <div class="kicker col">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-shield-check"/></svg> Caminho inverso</span>
+        <h2>Como consultar sócios pelo nome da pessoa</h2>
+      </div>
+      <div class="col">
+        <p class="body-p">Aqui vale a honestidade que falta em boa parte da internet: <strong>o portal oficial não faz busca reversa</strong>. Ele só aceita o número do CNPJ — não há como digitar o nome ou o CPF de alguém e descobrir as empresas em que essa pessoa é sócia.</p>
+        <p class="body-p">Para o caminho inverso, existem duas rotas. A primeira é a <strong>Junta Comercial do estado</strong>, que emite certidões específicas mediante taxa — é o caminho com validade jurídica, usado em processos e due diligence formal. A segunda são as <strong>plataformas agregadoras privadas</strong>, que indexam quadros societários e permitem busca por nome, quase sempre mediante cadastro ou assinatura; antes de confiar nelas, verifique se informam a data de atualização dos dados. Detalhamos as duas rotas, com custos e limitações, no guia de <a href="/protocolo-hidra/consultar-cnpj-pelo-nome/">consulta de CNPJ pelo nome</a>. A ferramenta da ProtocoloHidra não faz busca por nome — ela parte sempre do número do CNPJ.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--alt" id="qualificacoes">
+    <div class="wrap">
+      <div class="kicker col">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-stack-2"/></svg> A lacuna que ninguém explica</span>
+        <h2>O que significa cada qualificação do sócio</h2>
+        <p>Todo resultado de QSA traz um código de qualificação ao lado de cada nome — e quase nenhum guia explica o que ele significa. A tabela abaixo decodifica os mais comuns e mostra o que cada um sinaliza para quem prospecta.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="rich-table">
+          <caption>Códigos de qualificação do sócio no QSA e o que sinalizam para prospecção</caption>
+          <thead><tr><th scope="col">Código</th><th scope="col">Qualificação</th><th scope="col">O que significa</th><th scope="col">Sinal para prospecção</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">49</th><td>Sócio-Administrador</td><td>Participa da sociedade e tem poder de gerir e assinar pela empresa.</td><td><strong>Decisor mais provável</strong> em micro e pequenas empresas.</td></tr>
+            <tr><th scope="row">22</th><td>Sócio</td><td>Participa do capital, sem poder formal de administração.</td><td>Influenciador; nem sempre é quem aprova a compra.</td></tr>
+            <tr><th scope="row">05</th><td>Administrador</td><td>Administra a empresa sem ser sócio (nomeado ou contratado).</td><td>Decisor operacional, comum em empresas maiores.</td></tr>
+            <tr><th scope="row">10</th><td>Diretor</td><td>Cargo estatutário de direção, típico de S/A.</td><td>Decisor por área em estruturas maiores.</td></tr>
+            <tr><th scope="row">16</th><td>Presidente</td><td>Preside a companhia.</td><td>Decisor final em empresas com conselho.</td></tr>
+            <tr><th scope="row">08</th><td>Conselheiro de Administração</td><td>Integra o conselho de administração (S/A).</td><td>Aprova estratégia, não compras do dia a dia.</td></tr>
+            <tr><th scope="row">17</th><td>Procurador</td><td>Representa a empresa por procuração.</td><td>Contato jurídico ou formal, não comercial.</td></tr>
+            <tr><th scope="row">28</th><td>Sócio-Gerente</td><td>Figura de registros mais antigos, equivalente ao sócio que gere o negócio.</td><td>Trate como decisor — comum em empresas antigas.</td></tr>
+            <tr><th scope="row">65</th><td>Titular pessoa física</td><td>Titular de empresa de sócio único (como a SLU).</td><td>É o próprio decisor: empresa de uma pessoa só.</td></tr>
+            <tr><th scope="row">54</th><td>Fundador</td><td>Fundador da entidade, comum em associações e fundações.</td><td>Peso institucional; a decisão costuma ser da diretoria.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col">
+        <p class="body-p" style="margin-top:26px">Regra de bolso para o comercial: em empresas de menor porte, procure primeiro o <strong>49 (sócio-administrador)</strong>; se não houver, o <strong>65 (titular)</strong> ou o <strong>05 (administrador)</strong>. O <strong>22 (sócio)</strong> sem poder de administração raramente é quem assina o contrato.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="sem-socios">
+    <div class="wrap">
+      <div class="data">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-chart-bar"/></svg> Dados reais da base ProtocoloHidra</span>
+        <h2>Quando o CNPJ não mostra sócios: MEI, EI, SLU e S/A</h2>
+        <p>A frustração mais comum da consulta é o QSA vazio — e ela tem explicação estatística. Na base ProtocoloHidra, de 21.702.134 CNPJs ativos, cerca de 11,9 milhões são MEI: empresas de uma pessoa só, que juridicamente não têm sócios. E 86% do total são microempresas, em que o quadro, quando existe, costuma ter uma única pessoa.</p>
+        <div class="tiles">
+          <div class="tile"><strong class="num">21,7 mi</strong><span>CNPJs ativos na base ProtocoloHidra</span></div>
+          <div class="tile up"><strong class="num">≈11,9 mi</strong><span>são MEI — CNPJs sem QSA</span></div>
+          <div class="tile"><strong class="num">86%</strong><span>do total são microempresas</span></div>
+          <div class="tile"><strong class="num">18,7 mi</strong><span>microempresas ativas na base</span></div>
+        </div>
+        <p class="grow"><b>Leitura para o comercial:</b> se a sua prospecção mira o pequeno negócio, o &ldquo;decisor&rdquo; não está escondido num quadro societário — ele é o próprio titular do CNPJ. O QSA importa de verdade quando o alvo é a empresa de médio porte para cima, em que a qualificação separa quem participa de quem decide.</p>
+      </div>
+      <div class="cards">
+        <article class="card"><span class="ic" aria-hidden="true"><svg class="i"><use href="#i-users"/></svg></span><h3>MEI</h3><p>Não tem QSA: o microempreendedor individual é a própria empresa. A consulta mostra os dados do CNPJ, mas nenhum quadro de sócios.</p></article>
+        <article class="card"><span class="ic" aria-hidden="true"><svg class="i"><use href="#i-building"/></svg></span><h3>Empresário individual (EI)</h3><p>Também não tem sócios — a atividade é exercida em nome da pessoa física. QSA vazio é o comportamento esperado.</p></article>
+        <article class="card"><span class="ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span><h3>SLU</h3><p>A Sociedade Limitada Unipessoal tem quadro, mas com uma única pessoa: o titular, geralmente com a qualificação 65 ou 49.</p></article>
+        <article class="card"><span class="ic" aria-hidden="true"><svg class="i"><use href="#i-building-skyscraper"/></svg></span><h3>S/A</h3><p>O cadastro não expõe acionistas. O QSA de uma S/A mostra administradores, diretores e conselheiros (códigos 05, 10, 16 e 08).</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--alt" id="comparativo">
+    <div class="wrap">
+      <div class="kicker col">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-stack-2"/></svg> Comparativo transparente</span>
+        <h2>Os 4 caminhos para consultar sócios: custo, limite e quando usar</h2>
+        <p>Sem &ldquo;fale com um especialista&rdquo; para descobrir o preço: o que cada caminho entrega, quanto custa e onde ele para.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="rich-table">
+          <caption>Comparativo dos caminhos para consultar sócios de empresas</caption>
+          <thead><tr><th scope="col">Caminho</th><th scope="col">O que entrega</th><th scope="col">Custo</th><th scope="col">Limitação</th><th scope="col">Quando usar</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Portal oficial (QSA)</th><td>Nome e qualificação dos sócios e administradores de um CNPJ.</td><td>Grátis</td><td>1 CNPJ por vez; sem busca por nome; sem % de participação.</td><td>Verificar quem compõe e administra uma empresa específica.</td></tr>
+            <tr><th scope="row">Junta Comercial</th><td>Contrato social e certidões: percentual de cada sócio e histórico societário.</td><td>Taxa por certidão (varia por estado)</td><td>Pedido caso a caso, com prazo de dias.</td><td>Quando você precisa do % de participação ou de valor jurídico.</td></tr>
+            <tr><th scope="row">Agregadores privados</th><td>Busca por nome da pessoa e relatórios societários.</td><td>Cadastro e, em geral, assinatura</td><td>Limites de consulta vagos; data dos dados nem sempre informada.</td><td>Busca reversa (pessoa → empresas) e background check.</td></tr>
+            <tr><th scope="row">Lista ProtocoloHidra</th><td>Até 150 mil empresas com telefone, e-mail e mais 20 campos, filtradas por CNAE, estado e porte.</td><td>R$97, pagamento único</td><td>Não inclui QSA nem busca por nome — entrega o contato da empresa.</td><td>Prospecção em escala, depois que você já sabe o perfil de quem decide.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cta" style="margin-top:44px">
+        <div><h2>Já sabe quem decide? Falta o contato</h2><p>Filtre 21,7 milhões de CNPJs ativos por CNAE, estado e porte e baixe a lista com telefone e e-mail comercial das empresas.</p></div>
+        <a class="btn btn-primary" href="https://paulo-leads.github.io/protocolo-hidra/#premium"><svg class="i" aria-hidden="true"><use href="#i-download"/></svg> Montar minha lista</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="decisor">
+    <div class="wrap">
+      <div class="kicker col">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-target"/></svg> Do sócio ao decisor</span>
+        <h2>Como usar o QSA na prospecção B2B</h2>
+        <p>O QSA é uma arma subestimada de prospecção: ele diz quem manda antes do primeiro contato. O método em três passos, aberto — sem paywall.</p>
+      </div>
+      <ol class="steps">
+        <li><div><b>Identifique quem decide no QSA</b><span>Procure as qualificações com poder de gestão: 49 (sócio-administrador), 65 (titular) e 05 (administrador). É esse nome que você vai citar na abordagem — e não &ldquo;o responsável pelo setor&rdquo;.</span></div></li>
+        <li><div><b>Valide o fit da empresa</b><span>Confira porte, CNAE e cidade no comprovante (ou na ferramenta desta página) para confirmar que a empresa cabe no seu perfil de cliente ideal antes de gastar energia com ela.</span></div></li>
+        <li><div><b>Busque o contato em escala</b><span>O QSA não traz telefone nem e-mail. Para chegar às empresas do mesmo perfil, veja <a href="/protocolo-hidra/empresas-por-cnae/">quantas empresas existem em cada CNAE</a> e monte uma <a href="/protocolo-hidra/lista-de-empresas-para-prospeccao/">lista de empresas para prospecção com telefone e e-mail</a>.</span></div></li>
+      </ol>
+      <div class="col">
+        <p class="body-p" style="margin-top:26px">Um exemplo de uso: abrir a ligação ou o e-mail citando o nome do sócio-administrador (&ldquo;procuro o R******, que consta como administrador da empresa&rdquo;) muda o tom da conversa com a recepção — você deixa de ser mais um telemarketing e vira alguém que fez a lição de casa. Esse tipo de personalização é o que separa cadências que respondem das que caem no vazio.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--alt" id="lista">
+    <div class="wrap">
+      <div class="kicker col">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-filter"/></svg> O próximo passo</span>
+        <h2>Você já sabe quem decide — falta o contato</h2>
+        <p>O QSA entrega o nome; a lista entrega o alcance. Cada empresa da lista ProtocoloHidra vem com 22 campos — amostra abaixo com dados fictícios e mascarados, como manda o compliance.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="rich-table">
+          <caption>Amostra mascarada dos campos entregues na lista ProtocoloHidra</caption>
+          <thead><tr><th scope="col">Campo</th><th scope="col">Exemplo (mascarado)</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">CNPJ</th><td class="num">12.***.***/0001-90</td></tr>
+            <tr><th scope="row">Razão social</th><td>EXEMPLO COMÉRCIO DE ALIMENTOS LTDA (fictícia)</td></tr>
+            <tr><th scope="row">Telefone</th><td class="num">(11) *****-1183</td></tr>
+            <tr><th scope="row">E-mail</th><td>co****@***a.com.br</td></tr>
+            <tr><th scope="row">CNAE principal e secundários</th><td>4711-3/02 + CNAEs secundários</td></tr>
+            <tr><th scope="row">Cidade / UF</th><td>São Paulo / SP</td></tr>
+            <tr><th scope="row">Porte</th><td>Microempresa</td></tr>
+            <tr><th scope="row">Data de abertura · Capital social</th><td class="num">14/03/2019 · R$ 50.000</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col">
+        <p class="body-p" style="margin-top:26px">São 22 campos por empresa no CSV — dos dados cadastrais (data de abertura, capital social, CNAEs secundários) ao contato comercial (telefone e e-mail). A lista não inclui o QSA: ela entrega o contato da empresa cujo decisor você identificou pelo caminho oficial. Até 150 mil empresas por R$97, em pagamento único, filtradas por CNAE, estado e porte.</p>
+      </div>
+      <div class="cta" style="margin-top:18px">
+        <div><h2>Do nome do decisor ao telefone da empresa</h2><p>21,7 milhões de CNPJs ativos com telefone e e-mail comercial, filtrados do seu jeito. Sem mensalidade e sem &ldquo;fale com um especialista&rdquo;.</p></div>
+        <a class="btn btn-primary" href="https://paulo-leads.github.io/protocolo-hidra/#premium"><svg class="i" aria-hidden="true"><use href="#i-rocket"/></svg> Ver planos e preços</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="perguntas-frequentes">
+    <div class="wrap col">
+      <div class="col">
+        <div class="kicker">
+          <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-message-question"/></svg> Dúvidas frequentes</span>
+          <h2>Perguntas frequentes sobre consulta de sócios</h2>
+        </div>
+        <div class="faq">
+          <details open><summary>Como consultar os sócios de uma empresa gratuitamente? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>No portal oficial do Governo Federal: acesse o serviço de emissão do comprovante de inscrição do CNPJ, digite os 14 números da empresa, resolva a verificação de segurança e clique em &ldquo;Consultar QSA&rdquo;. A lista de sócios e administradores aparece na hora, de graça e sem login.</p></details>
+          <details><summary>O que é o QSA de um CNPJ? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>QSA é o Quadro de Sócios e Administradores: o registro público de quem compõe a sociedade e de quem tem poder de administrar a empresa, com o nome e a qualificação de cada pessoa. Na prática, funciona como a certidão de comando do CNPJ — mostra quem manda na empresa, mas não mostra CPF completo nem percentual de participação.</p></details>
+          <details><summary>É possível consultar sócios pelo CPF ou pelo nome da pessoa? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Não pelo portal oficial — ele só aceita busca pelo número do CNPJ. Para o caminho inverso (do nome da pessoa para as empresas), as opções são a certidão na Junta Comercial do estado, que é paga, e plataformas agregadoras privadas, que em geral exigem cadastro. Antes de confiar no resultado, verifique a data de atualização dos dados.</p></details>
+          <details><summary>Por que o CNPJ que consultei não mostra nenhum sócio? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Porque nem todo CNPJ tem sócios. MEI e empresário individual não têm QSA — juridicamente não existe sociedade, a empresa é a própria pessoa física. Na base ProtocoloHidra, cerca de 11,9 milhões dos 21,7 milhões de CNPJs ativos são MEI, e 86% do total são microempresas. A SLU mostra apenas o titular, e a S/A não expõe acionistas no cadastro.</p></details>
+          <details><summary>O QSA mostra o percentual de participação de cada sócio? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Não. O QSA público mostra o nome e a qualificação de cada sócio, mas não informa quanto do capital social cada um detém. O percentual de participação consta no contrato social, que pode ser obtido por certidão paga na Junta Comercial do estado onde a empresa está registrada.</p></details>
+          <details><summary>Consultar os sócios de uma empresa é legal? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Sim. O QSA é dado cadastral público por determinação legal e pode ser consultado por qualquer pessoa — é a base de processos legítimos de due diligence, análise de crédito e prospecção B2B. O uso responsável é o padrão: os dados servem para verificar e contatar empresas com finalidade comercial legítima.</p></details>
+          <details><summary>Como descobrir se uma pessoa tem outras empresas no nome? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Esse caminho exige busca reversa por nome ou CPF, que o portal oficial não oferece. As alternativas são pedir certidão específica na Junta Comercial (paga, estado a estado) ou usar plataformas agregadoras com cadastro. A ferramenta da ProtocoloHidra não faz busca por nome — ela consulta dados cadastrais a partir do número do CNPJ.</p></details>
+          <details><summary>O que significa &ldquo;sócio-administrador&rdquo; na consulta? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>É o sócio registrado com a qualificação 49 no QSA: além de participar da sociedade, ele tem poder de gerir e assinar pela empresa. Para quem prospecta, é o decisor mais provável — em micro e pequenas empresas, o sócio-administrador costuma ser quem aprova compras e contratos.</p></details>
+          <details><summary>Como falar com o sócio depois de descobrir quem ele é? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>O QSA entrega o nome de quem decide, mas não traz telefone nem e-mail. Quem prospecta em escala resolve isso com uma lista segmentada: a base ProtocoloHidra reúne 21,7 milhões de CNPJs ativos com telefone e e-mail comercial em 22 campos, filtrados por CNAE, estado e porte, a partir de R$97 em pagamento único.</p></details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--alt" id="conclusao">
+    <div class="wrap">
+      <div class="col">
+        <div class="kicker">
+          <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-flag"/></svg> Conclusão</span>
+          <h2>Conclusão</h2>
+        </div>
+        <p class="body-p">Consultar os sócios de uma empresa é grátis e leva minutos: o QSA está no fim do comprovante de inscrição do CNPJ, no portal oficial do Governo Federal. O que faz diferença é saber ler o resultado — a qualificação diz quem decide, e um quadro vazio não é erro: MEI e empresário individual simplesmente não têm sócios, o que vale para a maior parte dos 21,7 milhões de CNPJs ativos do Brasil.</p>
+        <p class="body-p">Para quem prospecta, o QSA é o começo da conversa, não o fim. Ele entrega o nome de quem manda; o que ele nunca vai entregar é o telefone e o e-mail para chegar até essa pessoa. É aí que a consulta unitária dá lugar à lista: filtrar as empresas do mesmo CNAE, estado e porte e falar com todas — já sabendo, pelo quadro societário, com quem pedir para falar.</p>
+        <p class="body-p">Para continuar: veja o guia completo de <a href="/protocolo-hidra/consulta-cnpj/">consulta de CNPJ</a>, entenda os <a href="/protocolo-hidra/dados-cadastrais-cnpj/">dados cadastrais de um CNPJ</a> campo a campo e monte sua <a href="/protocolo-hidra/lista-de-empresas-para-prospeccao/">lista de empresas para prospecção</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <aside class="sources">
+    <div class="wrap">
+      <h2>Fontes, dados e metodologia</h2>
+      <p><strong>Por <a href="/protocolo-hidra/paulo-leads/">Paulo C. P. Santos</a>, Arquiteto do Protocolo Hidra</strong>, com a Curadoria do Protocolo Hidra — responsável pela base de empresas ativas usada neste guia, compilada de fontes públicas oficiais e atualizada mensalmente pela própria ProtocoloHidra.</p>
+      <p>Os números citados (21.702.134 CNPJs ativos, cerca de 11,9 milhões de MEI, 18,7 milhões de microempresas — 86% do total) referem-se às empresas com situação cadastral ativa na base ProtocoloHidra, em consultas de junho de 2026. O passo a passo do QSA descreve o serviço público de consulta do portal oficial do Governo Federal; os exemplos de resultado usam empresa fictícia e dados mascarados, por compliance — a ProtocoloHidra não exibe contato real de empresas na página. A tabela de qualificações segue os códigos usados no cadastro público de CNPJ.</p>
+      <div class="links" aria-label="Guias relacionados">
+        <a href="/protocolo-hidra/prospeccao-b2b/">Prospecção B2B</a>
+        <a href="/protocolo-hidra/sdr-o-que-e/">O que faz um SDR</a>
+        <a href="/protocolo-hidra/modelo-de-email-frio-b2b/">Modelo de e-mail frio B2B</a>
+        <a href="/protocolo-hidra/script-de-prospeccao-b2b-por-telefone/">Script de prospecção por telefone</a>
+        <a href="/protocolo-hidra/protocolohidra-vs-econodata/">ProtocoloHidra vs Econodata</a>
+      
+        <a href="/protocolo-hidra/certidao-negativa-cnpj/">Certidão negativa do CNPJ</a>
+        <a href="/protocolo-hidra/consulta-cnae-por-cnpj/">Consultar CNAE pelo CNPJ</a>
+        <a href="/protocolo-hidra/consulta-simples-nacional-cnpj/">Consultar Simples Nacional</a>
+        <a href="/protocolo-hidra/redesim-consulta-cnpj/">Consulta CNPJ na Redesim</a>
+        <a href="/protocolo-hidra/consulta-sintegra/">Consulta Sintegra</a>
+        <a href="/protocolo-hidra/consultar-dividas-cnpj/">Consultar dívidas do CNPJ</a>
+      </div>
+      <p style="font-size:.85rem">Última revisão das fontes e dados: julho/2026.</p>
+    </div>
+  </aside>
+</main>
+
+<section class="pre-footer">
+  <div class="pre-footer-inner">
+    <h2>Do quadro societário à prospecção</h2>
+    <p>O QSA diz quem decide. Escolha um plano da ProtocoloHidra para filtrar 21,7 milhões de CNPJs ativos por CNAE, estado e porte — e baixar a lista com telefone e e-mail comercial.</p>
+    <a class="btn-prefooter" href="https://paulo-leads.github.io/protocolo-hidra/#premium">Ver planos disponíveis</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p>© 2026 <strong>ProtocoloHidra</strong> · Todos os direitos reservados.</p>
+    <p><a href="/protocolo-hidra/politica-de-privacidade/">Política de Privacidade</a> · <a href="https://paulo-leads.github.io/protocolo-hidra/#premium">Planos</a></p>
+  </div>
+</footer>
+
+<script src="/protocolo-hidra/assets/tools.js?v=20260630" defer></script>
+</body>
+</html>

@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de CNPJ: baixe CNPJs ativos por segmento e estado</title>
+  <meta name="description" content="Lista de CNPJ com 21,7 milhões de empresas ativas, com telefone e e-mail. Filtre por CNAE e estado e baixe em CSV com 22 campos por R$97, pagamento único.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://paulo-leads.github.io/protocolo-hidra/lista-de-cnpj/">
+  <link rel="icon" href="/protocolo-hidra/favicon.ico?v=20260622" sizes="any">
+  <link rel="shortcut icon" href="/protocolo-hidra/favicon.ico?v=20260622">
+  <link rel="icon" type="image/png" href="/protocolo-hidra/assets/favicon.png?v=20260622">
+  <link rel="apple-touch-icon" href="/protocolo-hidra/assets/favicon.png?v=20260622">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lista de CNPJ: baixe CNPJs ativos por segmento e estado">
+  <meta property="og:description" content="Lista de CNPJ com 21,7 milhões de empresas ativas, com telefone e e-mail. Filtre por CNAE e estado e baixe em CSV por R$97, pagamento único.">
+  <meta property="og:url" content="https://paulo-leads.github.io/protocolo-hidra/lista-de-cnpj/">
+  <meta property="og:site_name" content="ProtocoloHidra">
+  <meta property="og:image" content="https://paulo-leads.github.io/protocolo-hidra/assets/img/protocolo-hidra-painel-1200.png">
+  <meta property="og:image:alt" content="Painel ProtocoloHidra para montar listas de CNPJ por segmento e estado">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lista de CNPJ: baixe CNPJs ativos por segmento e estado">
+  <meta name="twitter:description" content="21,7 milhões de CNPJs ativos filtráveis por CNAE e estado. Baixe em CSV com 22 campos por R$97, pagamento único.">
+  <meta name="twitter:image" content="https://paulo-leads.github.io/protocolo-hidra/assets/img/protocolo-hidra-painel-1200.png">
+  <meta name="twitter:image:alt" content="Painel ProtocoloHidra para montar listas de CNPJ por segmento e estado">
+
+  
+  
+  <style type="text/css">@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/greek/wght/normal.woff2);unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/greek-ext/wght/normal.woff2);unicode-range:U+1F00-1FFF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/cyrillic-ext/wght/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/vietnamese/wght/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/cyrillic/wght/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/greek-ext/wght/normal.woff2);unicode-range:U+1F00-1FFF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/vietnamese/wght/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/cyrillic/wght/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/cyrillic-ext/wght/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/greek/wght/normal.woff2);unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/cyrillic/wght/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/greek-ext/wght/normal.woff2);unicode-range:U+1F00-1FFF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/cyrillic-ext/wght/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/greek/wght/normal.woff2);unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/vietnamese/wght/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/vietnamese/wght/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/cyrillic/wght/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/greek-ext/wght/normal.woff2);unicode-range:U+1F00-1FFF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/cyrillic-ext/wght/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/greek/wght/normal.woff2);unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;font-display:swap;}@font-face {font-family:Sora;font-style:normal;font-weight:600;src:url(/cf-fonts/v/sora/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Sora;font-style:normal;font-weight:600;src:url(/cf-fonts/v/sora/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Sora;font-style:normal;font-weight:700;src:url(/cf-fonts/v/sora/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Sora;font-style:normal;font-weight:700;src:url(/cf-fonts/v/sora/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Sora;font-style:normal;font-weight:800;src:url(/cf-fonts/v/sora/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Sora;font-style:normal;font-weight:800;src:url(/cf-fonts/v/sora/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}</style>
+  <style data-mbx>.mbx{--navy:#0B2545;--navy-2:#11315c;--navy-deep:#071a33;--blue:#1D4ED8;--blue-2:#3B82F6;--emerald:#10B981;--emerald-d:#047857;--teal:#4CD1A6;--ink:#0F172A;--body:#334155;--muted:#64748B;--line:#E2E8F0;--line-2:#EAEFF6;--surf:#F7F9FC;--surf-2:#EEF3FB;--white:#fff;--r:14px;--r-sm:10px;--r-lg:18px;--sh:0 10px 30px rgba(15,23,42,.06);--sh-lg:0 24px 60px rgba(15,23,42,.10);--wrap:1120px;--read:700px;margin:0;font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;color:var(--body);line-height:1.7;background:var(--surf);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}.mbx *,.mbx *::before,.mbx *::after{box-sizing:border-box}.mbx h1,.mbx h2,.mbx h3,.mbx h4{font-family:'Sora',Inter,sans-serif;color:var(--ink);line-height:1.16;margin:0;letter-spacing:-.02em}.mbx p{margin:0 0 1rem}.mbx a{color:var(--blue);text-decoration:none}.mbx a:hover{text-decoration:underline}.mbx img{max-width:100%;height:auto}.mbx strong{color:var(--ink)}.mbx .wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}.mbx .col{max-width:var(--read);margin-inline:auto}.mbx .num{font-variant-numeric:tabular-nums}.mbx .eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}.mbx .eyebrow i{font-size:1rem}.mbx .site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line-2)}.mbx .header-inner{max-width:var(--wrap);margin:0 auto;padding:0 24px;height:68px;display:flex;align-items:center;justify-content:space-between;gap:1rem}.mbx .header-inner .logo{display:inline-flex;align-items:center}.mbx .header-inner .logo img{height:34px;width:auto;display:block}.mbx .header-nav{display:flex;align-items:center;gap:1.5rem;font-size:.95rem;font-weight:500}.mbx .header-nav a{color:var(--body)}.mbx .header-nav a:hover{color:var(--ink);text-decoration:none}.mbx .btn-header{background:var(--surf-2);color:var(--blue);border:1px solid #dbe6fb;border-radius:11px;padding:.55rem 1.05rem;font-weight:600}.mbx .btn-header:hover{background:#e2ecfb;text-decoration:none}.mbx .menu-toggle{display:none;background:none;border:0;font-size:1.5rem;color:var(--ink);cursor:pointer;line-height:1;padding:4px 8px}.mbx .breadcrumb{margin-bottom:26px;font-size:.82rem}.mbx .breadcrumb ol{list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin:0;padding:0;color:#9fb6d6}.mbx .breadcrumb li{display:flex;align-items:center;gap:.5rem}.mbx .breadcrumb li+li::before{content:"\203A";color:#5f7da6;font-size:1.1em;line-height:1}.mbx .breadcrumb a{color:#9fb6d6}.mbx .breadcrumb a:hover{color:#fff;text-decoration:none}.mbx .breadcrumb [aria-current="page"] span{color:#dbe7f7;font-weight:600}.mbx .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:600;border-radius:11px;padding:.75rem 1.25rem;font-size:.97rem;cursor:pointer;border:1px solid transparent;transition:.18s;text-decoration:none;line-height:1.2}.mbx .btn:hover{text-decoration:none}.mbx .btn-primary{background:var(--navy);color:#fff}.mbx .btn-primary:hover{background:var(--blue);color:#fff}.mbx .btn-ghost{background:var(--surf-2);color:var(--blue);border-color:#dbe6fb}.mbx .btn-ghost:hover{background:#e2ecfb}.mbx .hero{position:relative;overflow:hidden;color:#dbe7f7;background:radial-gradient(1200px 500px at 80% -10%,#16407a 0%,transparent 60%),linear-gradient(160deg,#0B2545 0%,#11315c 100%)}.mbx .hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(700px 300px at 15% 110%,rgba(76,209,166,.18),transparent 60%)}.mbx .hero .wrap{position:relative;z-index:2;padding:40px 24px 92px}.mbx .hero .eyebrow{color:#7fd9bd}.mbx .hero h1{color:#fff;font-size:clamp(34px,5vw,54px);font-weight:800;margin:18px 0 0;max-width:20ch}.mbx .hero .lead{font-size:1.18rem;color:#c3d4ea;max-width:60ch;margin:18px 0 22px}.mbx .hero .byline{font-size:.85rem;color:#9fb6d6;margin:0 0 26px}.mbx .hero .byline strong{color:#fff;font-weight:600}.mbx .hero-cta{display:flex;gap:.8rem;flex-wrap:wrap}.mbx .hero .btn-primary{background:#fff;color:var(--navy)}.mbx .hero .btn-primary:hover{background:var(--teal);color:var(--navy)}.mbx .hero .btn-ghost{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.22)}.mbx .hero .btn-ghost:hover{background:rgba(255,255,255,.16)}.mbx .signals{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:46px}.mbx .signal{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:18px 20px}.mbx .signal strong{display:block;font-family:'Sora';font-size:1.7rem;font-weight:800;color:#fff}.mbx .signal.up strong{color:#7fe7c4}.mbx .signal span{font-size:.9rem;color:#aec5e2}.mbx .band{padding:68px 0}.mbx .band--alt{background:var(--white)}.mbx .kicker{margin-bottom:28px}.mbx .kicker h2{font-size:clamp(26px,3.4vw,36px);font-weight:800;margin:10px 0 8px}.mbx .kicker p{font-size:1.08rem;color:var(--body);max-width:64ch}.mbx .lead-p{font-size:1.12rem;max-width:72ch}.mbx .body-p{max-width:72ch}.mbx .band h3{font-size:1.15rem;margin:18px 0 8px}.mbx .answer{display:flex;gap:18px;align-items:flex-start;background:linear-gradient(135deg,#f4f8fd,#eaf1fb);border:1px solid #d7e3f2;border-left:4px solid var(--blue);border-radius:0 var(--r) var(--r) 0;padding:24px 26px;max-width:var(--read)}.mbx .answer .ic{flex:0 0 auto;width:44px;height:44px;border-radius:12px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:1.4rem}.mbx .answer p{margin:0;font-size:1.08rem}.mbx .answer b{color:var(--navy)}.mbx .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:26px}.mbx .card{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:24px;box-shadow:var(--sh);transition:.2s}.mbx .card:hover{transform:translateY(-3px);box-shadow:var(--sh-lg);border-color:#cfe0f5}.mbx .card .ic{width:46px;height:46px;border-radius:12px;background:var(--surf-2);color:var(--blue);display:grid;place-items:center;font-size:1.45rem;margin-bottom:14px}.mbx .card h3{font-size:1.12rem;margin:0 0 6px}.mbx .card p{margin:0;font-size:.98rem;color:var(--muted)}.mbx .steps{list-style:none;counter-reset:step;margin:26px auto 0;padding:0;display:grid;gap:14px;max-width:var(--read)}.mbx .steps li{counter-increment:step;display:flex;gap:16px;background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;box-shadow:var(--sh)}.mbx .steps li::before{content:counter(step);flex:0 0 auto;width:34px;height:34px;border-radius:9px;background:var(--navy);color:#fff;font-family:'Sora';font-weight:800;display:grid;place-items:center;font-size:1rem}.mbx .steps b{display:block;color:var(--ink);font-family:'Sora';font-size:1.02rem;margin-bottom:2px}.mbx .steps span{color:var(--muted);font-size:.96rem}.mbx .data{background:var(--navy);color:#cdddf0;border-radius:var(--r-lg);padding:38px;position:relative;overflow:hidden}.mbx .data::after{content:"";position:absolute;right:-80px;top:-80px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(76,209,166,.16),transparent 70%);pointer-events:none}.mbx .data .eyebrow{color:#7fe7c4}.mbx .data h2{color:#fff;font-size:1.7rem;margin:10px 0 6px;position:relative}.mbx .data>p{color:#a9c1de;max-width:62ch;position:relative}.mbx .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:26px 0 28px;position:relative}.mbx .tile{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:18px}.mbx .tile strong{display:block;font-family:'Sora';font-size:1.55rem;font-weight:800;color:#fff}.mbx .tile.up strong{color:#7fe7c4}.mbx .tile span{font-size:.82rem;color:#9fb8d6}.mbx .bars{position:relative;display:grid;gap:15px}.mbx .bar-h{display:flex;justify-content:space-between;align-items:baseline;font-size:.95rem;margin-bottom:6px}.mbx .bar-h b{color:#fff;font-weight:600}.mbx .bar-h em{color:#7fe7c4;font-style:normal;font-weight:800}.mbx .bar-h small{color:#90a8c6;margin-left:8px;font-weight:400}.mbx .track{height:7px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden}.mbx .fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#4cd1a6,#74a4ef)}.mbx .data .grow{color:#a9c1de;margin:24px 0 0;position:relative;font-size:.98rem}.mbx .data .grow b{color:#fff}.mbx .infographic{margin:26px 0 0;text-align:center}.mbx .infographic svg,.mbx .infographic img{width:100%;max-width:720px;height:auto;border-radius:var(--r);box-shadow:var(--sh)}.mbx .infographic figcaption{font-size:.85rem;color:var(--muted);max-width:64ch;margin:14px auto 0}.mbx .embed{max-width:640px;margin:14px auto 0;text-align:left}.mbx .embed summary{cursor:pointer;color:var(--blue);font-weight:600;font-size:.92rem}.mbx .embed textarea{width:100%;margin-top:10px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.78rem;line-height:1.5;border:1px solid var(--line);border-radius:var(--r-sm);padding:12px;background:var(--white);color:var(--body);resize:vertical}.mbx .table-wrap{margin-top:26px;overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--r)}.mbx .cmp-table{width:100%;min-width:560px;border-collapse:separate;border-spacing:0;background:var(--white);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);font-size:.96rem}.mbx .cmp-table caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);border:0}.mbx .cmp-table thead th{font-family:'Sora';font-weight:700;color:#fff;text-align:left;padding:15px 18px;font-size:1rem;vertical-align:middle}.mbx .cmp-table thead th i{margin-right:.4rem;vertical-align:-2px}.mbx .cmp-table thead th:first-child{background:#334155}.mbx .cmp-table thead .th-b2b{background:linear-gradient(120deg,var(--navy),var(--blue))}.mbx .cmp-table thead .th-b2c{background:linear-gradient(120deg,#475569,#64748b)}.mbx .cmp-table th[scope=row]{font-family:'Sora';font-weight:700;color:var(--ink);background:var(--surf);text-align:left;white-space:nowrap}.mbx .cmp-table td,.mbx .cmp-table th[scope=row]{padding:13px 18px;border-top:1px solid var(--line-2);vertical-align:top}.mbx .cmp-table tbody tr:first-child>*{border-top:0}.mbx .cmp-table td{color:var(--body)}.mbx .cmp-table td:nth-child(2){color:var(--ink)}.mbx .pc{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:26px}.mbx .pc-col{border-radius:var(--r);padding:24px;border:1px solid var(--line);background:var(--white)}.mbx .pc-col h3{display:flex;align-items:center;gap:.6rem;font-size:1.08rem;margin:0 0 14px}.mbx .tag{font-size:.68rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:.25rem .55rem;border-radius:7px}.mbx .pc-pos .tag{color:var(--emerald-d);background:#e7f6ee}.mbx .pc-neg .tag{color:#9a5b00;background:#fcf1df}.mbx .pc-col ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}.mbx .pc-col li{display:flex;gap:11px;font-size:.97rem}.mbx .pc-col li i{flex:0 0 auto;font-size:1.15rem}.mbx .pc-pos li i{color:var(--emerald)}.mbx .pc-neg li i{color:#c87f12}.mbx .pc-col li b{color:var(--ink)}.mbx .examples{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:26px}.mbx .ex{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;box-shadow:var(--sh)}.mbx .ex .k{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}.mbx .ex h3{font-size:1.1rem;margin:0 0 6px}.mbx .ex p{margin:0;font-size:.96rem;color:var(--muted)}.mbx .quote{margin:0;background:var(--navy);color:#fff;border-radius:var(--r-lg);padding:46px 52px;position:relative;overflow:hidden}.mbx .quote::before{content:"\201C";position:absolute;left:26px;top:-6px;font-family:Georgia,serif;font-size:130px;line-height:1;color:rgba(127,231,196,.18)}.mbx .quote p{font-family:'Sora';font-weight:700;font-size:1.55rem;line-height:1.4;margin:0;max-width:34ch;position:relative}.mbx .quote cite{display:block;margin-top:16px;font-style:normal;font-size:.92rem;color:#9fb8d6}.mbx .gloss{background:var(--surf-2);border:1px solid var(--line-2);border-radius:var(--r);padding:24px 26px;margin:26px 0 0;max-width:var(--read)}.mbx .gloss>strong{display:block;font-family:'Sora';color:var(--ink);font-size:1.05rem;margin-bottom:12px}.mbx .gloss dl{margin:0;display:grid;gap:10px}.mbx .gloss dt{font-weight:700;color:var(--ink);font-size:.96rem}.mbx .gloss dd{margin:2px 0 0;color:var(--muted);font-size:.94rem}.mbx .faq{display:grid;gap:12px;margin-top:26px;max-width:var(--read)}.mbx .faq details{background:var(--white);border:1px solid var(--line);border-radius:var(--r-sm);padding:2px 6px;transition:.2s}.mbx .faq details[open]{border-color:#cfe0f5;box-shadow:var(--sh)}.mbx .faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 18px;font-family:'Sora';font-weight:600;color:var(--ink);font-size:1.02rem}.mbx .faq summary::-webkit-details-marker{display:none}.mbx .faq summary i{transition:.2s;color:var(--blue);flex:0 0 auto}.mbx .faq details[open] summary i{transform:rotate(180deg)}.mbx .faq details p{margin:0;padding:0 18px 18px;color:var(--body);font-size:.98rem}.mbx .cta{background:linear-gradient(135deg,var(--navy),var(--blue));border-radius:var(--r-lg);padding:40px 44px;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}.mbx .cta>div{flex:1 1 320px}.mbx .cta h2{color:#fff;font-size:1.5rem;margin:0;max-width:24ch}.mbx .cta p{color:#c3d4ea;margin:8px 0 0;max-width:50ch}.mbx .cta .btn-primary{background:#fff;color:var(--navy)}.mbx .cta .btn-primary:hover{background:var(--teal);color:var(--navy)}.mbx .col + .cta,.mbx .steps + .cta{margin-top:44px}.mbx .sources{background:var(--surf-2);border-top:1px solid var(--line-2);padding:48px 0}.mbx .sources h2{font-size:1.2rem;margin-bottom:10px}.mbx .sources p{font-size:.92rem;color:var(--muted);max-width:84ch}.mbx .sources .links{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}.mbx .sources .links a{font-size:.85rem;background:var(--white);border:1px solid var(--line);border-radius:99px;padding:6px 14px;color:var(--blue)}.mbx .sources .links a:hover{border-color:#cfe0f5;text-decoration:none}.mbx .pre-footer{background:linear-gradient(160deg,#0B2545,#11315c);color:#fff;text-align:center;padding:64px 24px}.mbx .pre-footer-inner{max-width:680px;margin:0 auto}.mbx .pre-footer h2{color:#fff;font-size:1.7rem;margin-bottom:10px}.mbx .pre-footer p{color:#c3d4ea;margin:0 auto 22px;max-width:52ch}.mbx .btn-prefooter{display:inline-block;background:#fff;color:var(--navy);font-weight:600;border-radius:11px;padding:.85rem 1.6rem}.mbx .btn-prefooter:hover{background:var(--teal);text-decoration:none}.mbx .site-footer{background:var(--navy-deep);color:#9fb8d6;padding:34px 0;font-size:.9rem}.mbx .footer-inner{max-width:var(--wrap);margin:0 auto;padding:0 24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px}.mbx .footer-inner p{margin:0}.mbx .footer-inner a{color:#bcd2ec}.mbx .footer-inner strong{color:#fff}@media(max-width:860px){.mbx .header-nav{position:absolute;left:0;right:0;top:68px;flex-direction:column;align-items:stretch;gap:0;background:#fff;border-bottom:1px solid var(--line-2);box-shadow:var(--sh);padding:6px 0;display:none}.mbx .header-nav.open{display:flex}.mbx .header-nav a{padding:12px 24px}.mbx .btn-header{margin:8px 24px}.mbx .menu-toggle{display:block}.mbx .hero .wrap{padding:28px 24px 60px}.mbx .band{padding:50px 0}.mbx .signals,.mbx .tiles{grid-template-columns:1fr 1fr}.mbx .cards,.mbx .cmp,.mbx .pc,.mbx .examples{grid-template-columns:1fr}.mbx .data,.mbx .quote{padding:30px}.mbx .cta{padding:30px;flex-direction:column;align-items:flex-start}.mbx .quote p{font-size:1.3rem}}@media(max-width:480px){.mbx .signals,.mbx .tiles{grid-template-columns:1fr}.mbx .data{padding:24px}}.mbx svg.i{flex:0 0 auto;width:1.25em;height:1.25em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.18em}.mbx .card .ic svg.i,.mbx .answer .ic svg.i{width:1.5rem;height:1.5rem;vertical-align:0}.mbx .eyebrow svg.i{width:1rem;height:1rem}.mbx .faq summary svg.i{color:var(--blue);transition:transform .2s}.mbx .faq details[open] summary svg.i{transform:rotate(180deg)}.mbx .rich-table{width:100%;min-width:560px;border-collapse:separate;border-spacing:0;background:var(--white);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);font-size:.96rem}.mbx .rich-table caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);border:0}.mbx .rich-table thead th{background:var(--navy);color:#fff;font-family:'Sora';font-weight:700;text-align:left;padding:14px 18px;font-size:.95rem}.mbx .rich-table th[scope=row]{font-family:'Sora';font-weight:700;color:var(--ink);background:var(--surf);text-align:left;vertical-align:top;white-space:nowrap}.mbx .rich-table td,.mbx .rich-table th[scope=row]{padding:13px 18px;border-top:1px solid var(--line-2);vertical-align:top}.mbx .rich-table tbody tr:first-child>*{border-top:0}.mbx .rich-table td{color:var(--body)}.mbx .approach{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:26px}.mbx .approach .step{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;box-shadow:var(--sh)}.mbx .approach .step .lbl{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}.mbx .approach .step blockquote{margin:0 0 10px;padding:12px 16px;background:var(--surf-2);border-left:3px solid var(--blue);border-radius:0 var(--rsm) var(--rsm) 0;font-style:italic;color:var(--ink)}.mbx .approach .step p{margin:0;font-size:.94rem;color:var(--muted)}@media(max-width:860px){.mbx .approach{grid-template-columns:1fr}}</style>
+
+  
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","@id":"https://paulo-leads.github.io/protocolo-hidra/lista-de-cnpj/#article","headline":"Lista de CNPJ: 21,7 milhões de empresas ativas por segmento e estado","description":"O que vem numa lista de CNPJ (22 campos, com amostra mascarada), contagens reais por segmento e estado, o que o caminho gratuito entrega e a lista pronta por R$97, em pagamento único.","inLanguage":"pt-BR","datePublished":"2026-07-03","dateModified":"2026-07-03","author":{"@type":"Person","name":"Paulo C. P. Santos","jobTitle":"Arquiteto do Protocolo Hidra","url":"https://paulo-leads.github.io/protocolo-hidra/paulo-leads/"},"publisher":{"@type":"Organization","@id":"https://paulo-leads.github.io/protocolo-hidra/#organization","name":"ProtocoloHidra","alternateName":"ProtocoloHidra","url":"https://paulo-leads.github.io/protocolo-hidra/","logo":{"@type":"ImageObject","@id":"https://paulo-leads.github.io/protocolo-hidra/#logo","url":"https://paulo-leads.github.io/protocolo-hidra/assets/img/protocolo-hidra-logo.png"},"sameAs":["https://www.instagram.com/protocolohidra/"]},"image":"https://paulo-leads.github.io/protocolo-hidra/assets/img/protocolo-hidra-painel-1200.png","mainEntityOfPage":"https://paulo-leads.github.io/protocolo-hidra/lista-de-cnpj/","speakable":{"@type":"SpeakableSpecification","cssSelector": ["#resposta-rapida p", ".mbx-answer p"]}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","@id":"https://paulo-leads.github.io/protocolo-hidra/lista-de-cnpj/#dataset","name":"CNPJs ativos no Brasil — base ProtocoloHidra","description":"21.702.134 CNPJs com situação cadastral ativa no Brasil, em apuração de junho de 2026, com distribuição por porte, setor, Simples Nacional, segmento (CNAE) e estado. Base própria da ProtocoloHidra, compilada de fontes públicas oficiais; o registro mais novo é de uma empresa aberta em 10 de maio de 2026.","creator":{"@id":"https://paulo-leads.github.io/protocolo-hidra/#organization"},"publisher":{"@id":"https://paulo-leads.github.io/protocolo-hidra/#organization"},"spatialCoverage":{"@type":"Place","name":"Brasil","address":{"@type":"PostalAddress","addressCountry":"BR"}},"temporalCoverage":"2026","isAccessibleForFree":false,"variableMeasured":["CNPJs ativos","distribuição por porte","distribuição por setor","Simples Nacional","empresas abertas em 12 meses","contagens por CNAE e por UF"],"measurementTechnique":"Contagem de CNPJs com situação cadastral ativa, pelo CNAE principal, na base ProtocoloHidra — apuração de junho de 2026","license":"https://paulo-leads.github.io/protocolo-hidra/politica-de-privacidade/"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","@id":"https://paulo-leads.github.io/protocolo-hidra/lista-de-cnpj/#produto","name":"Lista de CNPJ com 22 campos — ProtocoloHidra","description":"Arquivo CSV/Excel com até 150 mil empresas ativas, filtradas por CNAE, estado, cidade e porte, com 22 campos por empresa — incluindo telefone e e-mail comercial nos registros entregues.","image":"https://paulo-leads.github.io/protocolo-hidra/assets/img/protocolo-hidra-painel-1200.png","brand":{"@type":"Brand","name":"ProtocoloHidra"},"offers":{"@type":"Offer","price":"97.00","priceCurrency":"BRL","url":"https://paulo-leads.github.io/protocolo-hidra/#premium","availability":"https://schema.org/InStock"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","@id":"https://paulo-leads.github.io/protocolo-hidra/lista-de-cnpj/#howto","name":"Como baixar uma lista de CNPJ pronta para prospecção","step":[{"@type":"HowToStep","position":1,"name":"Defina o recorte","text":"Escolha o CNAE (segmento), o estado ou a cidade e o porte que descrevem o seu cliente ideal."},{"@type":"HowToStep","position":2,"name":"Confira a contagem grátis","text":"Veja no hub de empresas por CNAE quantas empresas ativas existem no recorte antes de pagar."},{"@type":"HowToStep","position":3,"name":"Baixe o arquivo","text":"CSV ou Excel com 22 campos por empresa, incluindo telefone e e-mail comercial — R$97 por até 150 mil empresas, em pagamento único."},{"@type":"HowToStep","position":4,"name":"Importe no CRM e rode a cadência","text":"Use os layouts prontos de HubSpot, Pipedrive e Zoho, importe a lista e comece a prospectar."}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","@id":"https://paulo-leads.github.io/protocolo-hidra/lista-de-cnpj/#segmentos","name":"Lista de CNPJ por segmento — contagens da base ProtocoloHidra (junho de 2026)","itemListOrder":"https://schema.org/ItemListOrderDescending","numberOfItems":13,"itemListElement":[{"@type":"ListItem","position":1,"name":"Transportadoras — 848.512 CNPJs ativos","url":"https://paulo-leads.github.io/protocolo-hidra/lista-de-transportadoras/"},{"@type":"ListItem","position":2,"name":"Comércio de vestuário — 839.532 CNPJs ativos","url":"https://paulo-leads.github.io/protocolo-hidra/lista-de-lojas-de-roupas/"},{"@type":"ListItem","position":3,"name":"Salões de beleza e cabeleireiros — 816.692 CNPJs ativos","url":"https://paulo-leads.github.io/protocolo-hidra/lista-de-saloes-de-beleza/"},{"@type":"ListItem","position":4,"name":"Construção civil — 646.672 CNPJs ativos","url":"https://paulo-leads.github.io/protocolo-hidra/lista-de-empresas-de-construcao-civil/"},{"@type":"ListItem","position":5,"name":"Supermercados — 352.659 CNPJs ativos","url":"https://paulo-leads.github.io/protocolo-hidra/lista-de-supermercados/"},{"@type":"ListItem","position":6,"name":"Restaurantes — 333.064 CNPJs ativos","url":"https://paulo-leads.github.io/protocolo-hidra/lista-de-restaurantes/"},{"@type":"ListItem","position":7,"name":"Metalúrgicas — 229.452 CNPJs ativos","url":"https://paulo-leads.github.io/protocolo-hidra/lista-de-metalurgicas/"},{"@type":"ListItem","position":8,"name":"Oficinas mecânicas — 224.753 CNPJs ativos","url":"https://paulo-leads.github.io/protocolo-hidra/lista-de-oficinas-mecanicas/"},{"@type":"ListItem","position":9,"name":"Clínicas médicas — 213.355 CNPJs ativos","url":"https://paulo-leads.github.io/protocolo-hidra/lista-de-clinicas-medicas/"},{"@type":"ListItem","position":10,"name":"Empresas de TI — 197.091 CNPJs ativos","url":"https://paulo-leads.github.io/protocolo-hidra/lista-de-empresas-de-ti/"},{"@type":"ListItem","position":11,"name":"Advocacias — 128.900 CNPJs ativos","url":"https://paulo-leads.github.io/protocolo-hidra/lista-de-advocacias/"},{"@type":"ListItem","position":12,"name":"Contabilidades — 56.197 CNPJs ativos","url":"https://paulo-leads.github.io/protocolo-hidra/lista-de-contabilidades/"},{"@type":"ListItem","position":13,"name":"Energia solar — 24.521 CNPJs ativos","url":"https://paulo-leads.github.io/protocolo-hidra/lista-de-empresas-de-energia-solar/"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","@id":"https://paulo-leads.github.io/protocolo-hidra/lista-de-cnpj/#estados","name":"Lista de CNPJ por estado — páginas estaduais da ProtocoloHidra","numberOfItems":27,"itemListElement":[{"@type":"ListItem","position":1,"name":"Empresas em São Paulo","url":"https://paulo-leads.github.io/protocolo-hidra/empresas-em-sao-paulo/"},{"@type":"ListItem","position":2,"name":"Empresas em Minas Gerais","url":"https://paulo-leads.github.io/protocolo-hidra/empresas-em-minas-gerais/"},{"@type":"ListItem","position":3,"name":"Empresas no Rio de Janeiro","url":"https://paulo-leads.github.io/protocolo-hidra/empresas-no-rio-de-janeiro/"},{"@type":"ListItem","position":4,"name":"Empresas no Paraná","url":"https://paulo-leads.github.io/protocolo-hidra/empresas-no-parana/"},{"@type":"ListItem","position":5,"name":"Empresas no Rio Grande do Sul","url":"https://paulo-leads.github.io/protocolo-hidra/empresas-no-rio-grande-do-sul/"},{"@type":"ListItem","position":6,"name":"Empresas em Santa Catarina","url":"https://paulo-leads.github.io/protocolo-hidra/empresas-em-santa-catarina/"},{"@type":"ListItem","position":7,"name":"Empresas na Bahia","url":"https://paulo-leads.github.io/protocolo-hidra/empresas-na-bahia/"},{"@type":"ListItem","position":8,"name":"Empresas em Goiás","url":"https://paulo-leads.github.io/protocolo-hidra/empresas-em-goias/"},{"@type":"ListItem","position":9,"name":"Empresas em Pernambuco","url":"https://paulo-leads.github.io/protocolo-hidra/empresas-em-pernambuco/"},{"@type":"ListItem","position":10,"name":"Empresas no Ceará","url":"https://paulo-leads.github.io/protocolo-hidra/empresas-no-ceara/"},{"@type":"ListItem","position":11,"name":"Empresas no Espírito Santo","url":"https://paulo-leads.github.io/protocolo-hidra/empresas-no-espirito-santo/"},{"@type":"ListItem","position":12,"name":"Empresas no Distrito Federal","url":"https://paulo-leads.github.io/protocolo-hidra/empresas-no-distrito-federal/"},{"@type":"ListItem","position":13,"name":"Empresas em Mato Grosso","url":"https://paulo-leads.github.io/protocolo-hidra/empresas-em-mato-grosso/"},{"@type":"ListItem","position":14,"name":"Empresas em Mato Grosso do Sul","url":"https://paulo-leads.github.io/protocolo-hidra/empresas-em-mato-grosso-do-sul/"},{"@type":"ListItem","position":15,"name":"Empresas no Pará","url":"https://paulo-leads.github.io/protocolo-hidra/empresas-no-para/"},{"@type":"ListItem","position":16,"name":"Empresas no Amazonas","url":"https://paulo-leads.github.io/protocolo-hidra/empresas-no-amazonas/"},{"@type":"ListItem","position":17,"name":"Empresas no Maranhão","url":"https://paulo-leads.github.io/protocolo-hidra/empresas-no-maranhao/"},{"@type":"ListItem","position":18,"name":"Empresas na Paraíba","url":"https://paulo-leads.github.io/protocolo-hidra/empresas-na-paraiba/"},{"@type":"ListItem","position":19,"name":"Empresas no Rio Grande do Norte","url":"https://paulo-leads.github.io/protocolo-hidra/empresas-no-rio-grande-do-norte/"},{"@type":"ListItem","position":20,"name":"Empresas em Alagoas","url":"https://paulo-leads.github.io/protocolo-hidra/empresas-em-alagoas/"},{"@type":"ListItem","position":21,"name":"Empresas no Piauí","url":"https://paulo-leads.github.io/protocolo-hidra/empresas-no-piaui/"},{"@type":"ListItem","position":22,"name":"Empresas em Sergipe","url":"https://paulo-leads.github.io/protocolo-hidra/empresas-em-sergipe/"},{"@type":"ListItem","position":23,"name":"Empresas em Rondônia","url":"https://paulo-leads.github.io/protocolo-hidra/empresas-em-rondonia/"},{"@type":"ListItem","position":24,"name":"Empresas no Tocantins","url":"https://paulo-leads.github.io/protocolo-hidra/empresas-no-tocantins/"},{"@type":"ListItem","position":25,"name":"Empresas no Acre","url":"https://paulo-leads.github.io/protocolo-hidra/empresas-no-acre/"},{"@type":"ListItem","position":26,"name":"Empresas no Amapá","url":"https://paulo-leads.github.io/protocolo-hidra/empresas-no-amapa/"},{"@type":"ListItem","position":27,"name":"Empresas em Roraima","url":"https://paulo-leads.github.io/protocolo-hidra/empresas-em-roraima/"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","@id":"https://paulo-leads.github.io/protocolo-hidra/lista-de-cnpj/#faq","mainEntity":[{"@type":"Question","name":"Como conseguir uma lista de CNPJ grátis?","acceptedAnswer":{"@type":"Answer","text":"Os dados cadastrais de CNPJ são públicos e a consulta unitária é gratuita — você pode conferir empresa por empresa na ferramenta desta página. O que não existe de graça é a lista pronta: milhares de CNPJs já filtrados por segmento e estado, com telefone e e-mail tratados. Montar isso por conta própria significa consultar e transcrever um CNPJ por vez, um trabalho de dias. Na ProtocoloHidra, 150 mil empresas com 22 campos saem por R$97, em pagamento único."}},{"@type":"Question","name":"Quantas empresas ativas existem no Brasil?","acceptedAnswer":{"@type":"Answer","text":"A base ProtocoloHidra registra 21.702.134 CNPJs com situação cadastral ativa, em apuração de junho de 2026. O critério conta somente empresas ativas: sites que anunciam 40 milhões ou mais somam CNPJs baixados e inativos, que não servem para prospecção."}},{"@type":"Question","name":"É legal comprar lista de CNPJ?","acceptedAnswer":{"@type":"Answer","text":"Sim. Dados cadastrais de empresa — razão social, CNPJ, endereço, CNAE, porte e situação — são públicos por força de lei e podem ser usados para prospecção B2B com finalidade comercial legítima. O cuidado é distinguir o dado cadastral da empresa do dado pessoal de pessoas físicas e manter abordagem responsável: identifique-se, seja relevante e ofereça descadastro a quem não quiser ser contatado."}},{"@type":"Question","name":"A lista de CNPJ vem com telefone e e-mail?","acceptedAnswer":{"@type":"Answer","text":"Sim. Os registros entregues na lista ProtocoloHidra trazem telefone e e-mail comercial entre os 22 campos de cada empresa. Na página, os contatos aparecem sempre mascarados — por exemplo, (11) *****-1183 — e o arquivo completo é liberado após a compra."}},{"@type":"Question","name":"Dá para baixar lista de CNPJ em PDF?","acceptedAnswer":{"@type":"Answer","text":"PDF é formato de leitura, não de trabalho: ele não importa em CRM, discador nem ferramenta de e-mail. Por isso a ProtocoloHidra entrega a lista em CSV e Excel, prontos para importar no HubSpot, no Pipedrive e no Zoho CRM. Se você recebeu uma lista em PDF, terá de convertê-la antes de usar — exija CSV desde o início."}},{"@type":"Question","name":"Como filtrar a lista por segmento e estado?","acceptedAnswer":{"@type":"Answer","text":"O filtro combina CNAE (atividade econômica), estado ou cidade e porte. No hub de empresas por CNAE você confere gratuitamente quantas empresas ativas existem em cada recorte antes de comprar. O pacote de R$97 já vem filtrado no recorte escolhido, com até 150 mil empresas, em pagamento único."}},{"@type":"Question","name":"Com que frequência a lista é atualizada?","acceptedAnswer":{"@type":"Answer","text":"A base é construída a partir de fontes públicas oficiais e passa por atualizações recorrentes. Em vez de prometer uma cadência fixa, a ProtocoloHidra publica a data da apuração: os números desta página são de junho de 2026, e o registro mais novo da base é de uma empresa aberta em 10 de maio de 2026."}},{"@type":"Question","name":"Qual a diferença entre lista de CNPJ e consulta de CNPJ?","acceptedAnswer":{"@type":"Answer","text":"A consulta é o lookup de uma empresa por vez: você digita o CNPJ e vê os dados cadastrais na hora, como na ferramenta desta página. A lista é o arquivo em massa, com milhares de empresas filtradas por segmento e estado para prospecção. Quem precisa de volume usa a lista; quem quer conferir um fornecedor específico usa a consulta."}},{"@type":"Question","name":"A lista traz só empresas ativas?","acceptedAnswer":{"@type":"Answer","text":"Sim. O critério da base ProtocoloHidra é situação cadastral ativa: os 21.702.134 CNPJs contados excluem empresas baixadas, inaptas e suspensas, que só gerariam contato morto na cadência. Os demais status e o que cada um significa estão no guia de situação cadastral do CNPJ."}}]}</script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/lista-de-cnpj/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Início",
+          "item": "https://paulo-leads.github.io/protocolo-hidra/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Lista de empresas para prospecção",
+          "item": "https://paulo-leads.github.io/protocolo-hidra/lista-de-empresas-para-prospeccao/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Lista de CNPJ",
+          "item": "https://paulo-leads.github.io/protocolo-hidra/lista-de-cnpj/"
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/#website",
+      "name": "Protocolo Hidra",
+      "url": "https://paulo-leads.github.io/protocolo-hidra/",
+      "inLanguage": "pt-BR",
+      "description": "Protocolo Hidra — Metodologia de vendas B2B e soberania de dados.",
+      "publisher": {
+        "@id": "https://paulo-leads.github.io/protocolo-hidra/#organization"
+      },
+      "dateModified": "2026-07-08",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://paulo-leads.github.io/protocolo-hidra/busca?q={term}"
+        },
+        "query-input": "required name=term"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/#organization",
+      "name": "Protocolo Hidra",
+      "url": "https://paulo-leads.github.io/protocolo-hidra/",
+      "description": "Protocolo Hidra — Metodologia de soberania de dados e Zero Trust Sales.",
+      "founder": {
+        "@id": "https://paulo-leads.github.io/protocolo-hidra/#paulo-leads"
+      },
+      "foundingDate": "2025-01-01",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://paulo-leads.github.io/protocolo-hidra/assets/img/protocolo-hidra-logo.png"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+55-19-98264-2481",
+        "contactType": "sales",
+        "email": "contato@pauloleads.com.br"
+      },
+      "sameAs": [
+        "https://www.instagram.com/protocolohidra/"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/#paulo-leads",
+      "name": "Paulo C. P. Santos",
+      "alternateName": "Paulo Leads",
+      "url": "https://paulo-leads.github.io/protocolo-hidra/paulo-leads/",
+      "jobTitle": "Arquiteto do Protocolo Hidra",
+      "email": "mailto:contato@pauloleads.com.br",
+      "telephone": "+55-19-98264-2481",
+      "affiliation": {
+        "@id": "https://paulo-leads.github.io/protocolo-hidra/#organization"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/lista-de-cnpj#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Início",
+          "item": "https://paulo-leads.github.io/protocolo-hidra/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Lista de CNPJ: baixe CNPJs ativos por segmento e estado",
+          "item": "https://paulo-leads.github.io/protocolo-hidra/lista-de-cnpj"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/lista-de-cnpj#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "O que é Lista de CNPJ: baixe CNPJs ativos por segmento e estado?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Lista de CNPJ com 21,7 milhões de empresas ativas, com telefone e e-mail. Filtre por CNAE e estado e baixe em CSV com 22 campos por R$97, pagamento único...."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "DefinedTermSet",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/glossario.json#set",
+      "name": "Glossário Protocolo Hidra",
+      "description": "Ontologia oficial do Protocolo Hidra com definições canônicas.",
+      "url": "https://paulo-leads.github.io/protocolo-hidra/glossario.json",
+      "publisher": {
+        "@id": "https://paulo-leads.github.io/protocolo-hidra/#organization"
+      },
+      "version": "5.0.0-wkgs",
+      "dateModified": "2026-07-08",
+      "hasDefinedTerm": [
+        {
+          "@id": "https://paulo-leads.github.io/protocolo-hidra/def/comprar-leads"
+        },
+        {
+          "@id": "https://paulo-leads.github.io/protocolo-hidra/def/generative-lead-spoofing"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/lista-de-cnpj#howto",
+      "name": "Como utilizar Lista de CNPJ: baixe CNPJs ativos por segmento e estado",
+      "description": "Guia prático para aproveitar ao máximo este conteúdo do Protocolo Hidra.",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Leia e entenda",
+          "text": "Leia o conteúdo completo para compreender os fundamentos."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Aplique no seu contexto",
+          "text": "Adapte as recomendações ao seu ICP e processo comercial."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Meça e otimize",
+          "text": "Acompanhe métricas e refine a abordagem continuamente."
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+</head>
+<body class="mbx">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-arrow-down" viewBox="0 0 24 24"> <path d="M12 5l0 14" /> <path d="M18 13l-6 6" /> <path d="M6 13l6 6" /> </symbol>
+<symbol id="i-bulb" viewBox="0 0 24 24"> <path d="M3 12h1m8 -9v1m8 8h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7" /> <path d="M9 16a5 5 0 1 1 6 0a3.5 3.5 0 0 0 -1 3a2 2 0 0 1 -4 0a3.5 3.5 0 0 0 -1 -3" /> <path d="M9.7 17l4.6 0" /> </symbol>
+<symbol id="i-chart-bar" viewBox="0 0 24 24"> <path d="M3 13a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /> <path d="M15 9a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /> <path d="M9 5a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /> <path d="M4 20h14" /> </symbol>
+<symbol id="i-check" viewBox="0 0 24 24"> <path d="M5 12l5 5l10 -10" /> </symbol>
+<symbol id="i-chevron-down" viewBox="0 0 24 24"> <path d="M6 9l6 6l6 -6" /> </symbol>
+<symbol id="i-database" viewBox="0 0 24 24"> <path d="M12 6m-8 0a8 3 0 1 0 16 0a8 3 0 1 0 -16 0" /> <path d="M4 6v6a8 3 0 0 0 16 0v-6" /> <path d="M4 12v6a8 3 0 0 0 16 0v-6" /> </symbol>
+<symbol id="i-download" viewBox="0 0 24 24"> <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" /> <path d="M7 11l5 5l5 -5" /> <path d="M12 4l0 12" /> </symbol>
+<symbol id="i-filter" viewBox="0 0 24 24"> <path d="M4 4h16v2.172a2 2 0 0 1 -.586 1.414l-4.414 4.414v7l-6 2v-8.5l-4.48 -4.928a2 2 0 0 1 -.52 -1.345v-2.241z" /> </symbol>
+<symbol id="i-flag" viewBox="0 0 24 24"> <path d="M5 5a5 5 0 0 1 7 0a5 5 0 0 0 7 0v9a5 5 0 0 1 -7 0a5 5 0 0 0 -7 0v-9z" /> <path d="M5 21v-7" /> </symbol>
+<symbol id="i-help-circle" viewBox="0 0 24 24"> <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /> <path d="M12 16v.01" /> <path d="M12 13a2 2 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483" /> </symbol>
+<symbol id="i-map-pin" viewBox="0 0 24 24"> <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /> <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" /> </symbol>
+<symbol id="i-message-question" viewBox="0 0 24 24"> <path d="M8 9h8" /> <path d="M8 13h6" /> <path d="M14 18h-1l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v4.5" /> <path d="M19 22v.01" /> <path d="M19 19a2.003 2.003 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483" /> </symbol>
+<symbol id="i-rocket" viewBox="0 0 24 24"> <path d="M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3" /> <path d="M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3" /> <path d="M15 9m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> </symbol>
+<symbol id="i-shield-check" viewBox="0 0 24 24"> <path d="M11.46 20.846a12 12 0 0 1 -7.96 -14.846a12 12 0 0 0 8.5 -3a12 12 0 0 0 8.5 3a12 12 0 0 1 -.09 7.06" /> <path d="M15 19l2 2l4 -4" /> </symbol>
+<symbol id="i-stack-2" viewBox="0 0 24 24"> <path d="M12 4l-8 4l8 4l8 -4l-8 -4" /> <path d="M4 12l8 4l8 -4" /> <path d="M4 16l8 4l8 -4" /> </symbol>
+<symbol id="i-target" viewBox="0 0 24 24"> <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M12 12m-5 0a5 5 0 1 0 10 0a5 5 0 1 0 -10 0" /> <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /> </symbol>
+<symbol id="i-users" viewBox="0 0 24 24"> <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /> <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /> <path d="M16 3.13a4 4 0 0 1 0 7.75" /> <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" /> </symbol>
+</defs></svg>
+
+<style>
+.cnpj-tool{background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh);padding:26px 28px}
+.cnpj-tool .eyebrow{margin-bottom:10px}
+.cnpj-tool h2{font-size:1.4rem;margin:0 0 6px}
+.cnpj-tool .sub{color:var(--muted);margin:0 0 18px}
+.cnpj-tool-form{display:flex;gap:12px;flex-wrap:wrap}
+.cnpj-tool-form input{flex:1 1 240px;min-height:50px;border:1px solid var(--line);border-radius:11px;padding:12px 16px;font-size:1.05rem;color:var(--ink);font-family:inherit;background:#fff}
+.cnpj-tool-form input:focus{outline:2px solid #bcd3f7;border-color:var(--blue)}
+.cnpj-tool-form .btn{min-height:50px}
+#consulta-status{min-height:20px;margin:12px 0 0;font-size:.94rem;color:var(--muted)}
+#consulta-status.error{color:#c0392b;font-weight:600}
+#consulta-status.loading{color:var(--blue)}
+.cnpj-tool .note{margin:16px 0 0;font-size:.82rem;color:var(--muted);line-height:1.55}
+.cnpj-tool .result-card{background:var(--surf);border:1px solid var(--line);border-radius:var(--r);padding:22px;margin-top:18px}
+.cnpj-tool .result-title{font-family:'Sora',sans-serif;font-size:1.2rem;font-weight:800;color:var(--ink);margin-bottom:2px}
+.cnpj-tool .result-subtitle{color:var(--muted);font-size:.9rem;margin-bottom:14px}
+.cnpj-tool .result-list{display:grid;grid-template-columns:1fr;gap:0;margin:0 0 18px;padding:0}
+.cnpj-tool .result-list div{display:flex;justify-content:space-between;gap:18px;padding:11px 0;border-bottom:1px solid var(--line-2)}
+.cnpj-tool .result-list dt{color:var(--muted);font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin:0;flex:0 0 auto}
+.cnpj-tool .result-list dd{color:var(--ink);font-weight:600;margin:0;text-align:right}
+.cnpj-tool .tool-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cnpj-tool .tool-actions a{display:inline-flex;align-items:center;justify-content:center;text-align:center;font-weight:600;border-radius:11px;padding:.8rem 1rem;font-size:.94rem;text-decoration:none;border:1px solid transparent;line-height:1.2}
+.cnpj-tool .tool-actions .btn-primary{background:var(--navy);color:#fff}
+.cnpj-tool .tool-actions .btn-primary:hover{background:var(--blue)}
+.cnpj-tool .tool-actions .btn-secondary{background:var(--surf-2);color:var(--blue);border-color:#dbe6fb}
+.cnpj-tool .tool-actions .btn-secondary:hover{background:#e2ecfb}
+@media(min-width:640px){.cnpj-tool .result-list{grid-template-columns:1fr 1fr;column-gap:30px}}
+@media(max-width:520px){.cnpj-tool .tool-actions{grid-template-columns:1fr}}
+.uf-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.uf-links a{font-size:.85rem;background:var(--white);border:1px solid var(--line);border-radius:99px;padding:6px 14px;color:var(--blue)}
+.uf-links a:hover{border-color:#cfe0f5;text-decoration:none}
+</style>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/protocolo-hidra/" class="logo"><img src="/protocolo-hidra/assets/img/protocolo-hidra-logo.png" alt="ProtocoloHidra" width="140" height="40"></a>
+    <button class="menu-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Abrir menu"><span aria-hidden="true">☰</span></button>
+    <nav class="header-nav" id="primary-nav" aria-label="Principal">
+      <a href="https://paulo-leads.github.io/protocolo-hidra/#video">Como funciona</a>
+      <a href="https://paulo-leads.github.io/protocolo-hidra/#quem-utiliza">Casos de Uso</a>
+      <a href="https://paulo-leads.github.io/protocolo-hidra/#premium">Planos</a>
+      <a href="https://paulo-leads.github.io/protocolo-hidra/#duvidas">Dúvidas</a>
+      <a href="/protocolo-hidra/teste-gratis-lista-de-empresas/" class="btn-header">Testar grátis</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero" aria-labelledby="page-title">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="https://paulo-leads.github.io/protocolo-hidra/">Início</a></li><li><a href="/protocolo-hidra/lista-de-empresas-para-prospeccao/">Lista de empresas para prospecção</a></li><li aria-current="page"><span>Lista de CNPJ</span></li></ol></nav>
+      <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-stack-2"/></svg> Lista de CNPJ · Brasil · 2026</span>
+      <h1 id="page-title">Lista de CNPJ: 21,7 milhões de empresas ativas por segmento e estado</h1>
+      <p class="lead">A base ProtocoloHidra tem <strong style="color:#fff">21.702.134 CNPJs com situação cadastral ativa</strong>, em apuração de junho de 2026. Filtre por CNAE, estado e porte e baixe o arquivo em CSV ou Excel com 22 campos por empresa — incluindo telefone e e-mail comercial. Preço na primeira dobra, sem &ldquo;fale com especialista&rdquo;: <strong style="color:#fff">R$97 por até 150 mil empresas, pagamento único</strong>.</p>
+      <p class="byline">Por <strong>Paulo C. P. Santos</strong> · Arquiteto do Protocolo Hidra · atualizado em 3 de julho de 2026</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="https://paulo-leads.github.io/protocolo-hidra/#premium"><svg class="i" aria-hidden="true"><use href="#i-download"/></svg> Baixar lista de CNPJ</a>
+        <a class="btn btn-ghost" href="#por-segmento">Ver contagens por segmento <svg class="i" aria-hidden="true"><use href="#i-arrow-down"/></svg></a>
+      </div>
+      <div class="signals">
+        <div class="signal"><strong class="num">21.702.134</strong><span>CNPJs ativos na base (jun/2026)</span></div>
+        <div class="signal"><strong class="num">22 campos</strong><span>por empresa, com telefone e e-mail</span></div>
+        <div class="signal up"><strong class="num">R$97</strong><span>por até 150 mil empresas, pagamento único</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap col" id="resposta-rapida">
+      <div class="answer mbx-answer">
+        <span class="ic" aria-hidden="true"><svg class="i"><use href="#i-bulb"/></svg></span>
+        <p><b>Uma lista de CNPJ é um arquivo (CSV ou Excel) com os dados cadastrais de empresas ativas:</b> razão social, CNPJ, endereço, CNAE, porte, telefone e e-mail. Dá para montá-la por conta própria, consultando CNPJ por CNPJ em fontes públicas oficiais — sem contatos tratados e num ritmo inviável para prospecção — ou baixar uma lista pronta, já filtrada por segmento e estado. Na ProtocoloHidra, 150 mil empresas com 22 campos saem por R$97, em pagamento único.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--alt" id="o-que-vem">
+    <div class="wrap">
+      <div class="kicker col">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-database"/></svg> O que você recebe</span>
+        <h2>O que vem na lista de CNPJ: os 22 campos, com amostra</h2>
+        <p>Nenhum vendedor de lista mostra o produto antes da compra. Nós mostramos: abaixo, uma amostra no formato exato da entrega, com contatos <strong>mascarados</strong> por compliance.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="rich-table">
+          <caption>Amostra do arquivo de lista de CNPJ (contatos mascarados)</caption>
+          <thead><tr><th scope="col">Razão social</th><th scope="col">CNPJ</th><th scope="col">CNAE principal</th><th scope="col">Cidade/UF</th><th scope="col">Porte</th><th scope="col">Abertura</th><th scope="col">Telefone</th><th scope="col">E-mail</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Transportadora Horizonte Ltda</th><td>12.***.***/0001-90</td><td>4930-2/02</td><td>Campinas/SP</td><td>ME</td><td>03/2019</td><td>(19) *****-4127</td><td>co****@***e.com.br</td></tr>
+            <tr><th scope="row">Confecções Aurora ME</th><td>23.***.***/0001-04</td><td>4781-4/00</td><td>Belo Horizonte/MG</td><td>ME</td><td>08/2021</td><td>(31) *****-2274</td><td>ve****@***a.com.br</td></tr>
+            <tr><th scope="row">Restaurante Sabor da Serra Ltda</th><td>34.***.***/0001-77</td><td>5611-2/01</td><td>Curitiba/PR</td><td>ME</td><td>02/2015</td><td>(41) *****-9051</td><td>at****@***a.com.br</td></tr>
+            <tr><th scope="row">Construtora Alicerce Ltda</th><td>45.***.***/0001-31</td><td>4120-4/00</td><td>Porto Alegre/RS</td><td>EPP</td><td>10/2012</td><td>(51) *****-3320</td><td>or****@***e.com.br</td></tr>
+            <tr><th scope="row">TechNorte Sistemas Ltda</th><td>56.***.***/0001-58</td><td>6201-5/01</td><td>Florianópolis/SC</td><td>ME</td><td>06/2020</td><td>(48) *****-7742</td><td>co****@***e.com.br</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col">
+        <p class="body-p" style="margin-top:22px">O arquivo completo (CSV padrão) traz <strong>22 campos por empresa</strong>: CNPJ, Razão Social, Nome Fantasia, Tipo de Estabelecimento, Porte, MEI, Simples Nacional, Data de Abertura, Capital Social, CNAE Principal, Setor, Descrição CNAE, CNAEs Secundários, Natureza Jurídica, Endereço, Bairro, Cidade, UF, CEP, E-mail, Telefone 1 e Telefone 2. Campos como <strong>data de abertura</strong> e <strong>capital social</strong> deixam você priorizar empresas novas (que ainda não têm fornecedor) ou com estrutura para o seu ticket. Esta página faz parte do hub de <a href="/protocolo-hidra/lista-de-empresas-para-prospeccao/">lista de empresas para prospecção</a> — lá está o passo a passo de como transformar o arquivo em agenda de reuniões.</p>
+      </div>
+      <div class="cards">
+        <article class="card"><span class="ic" aria-hidden="true"><svg class="i"><use href="#i-database"/></svg></span><h3>22 campos por empresa</h3><p>Do CNPJ ao capital social — cadastro completo, não só nome e telefone.</p></article>
+        <article class="card"><span class="ic" aria-hidden="true"><svg class="i"><use href="#i-users"/></svg></span><h3>Telefone e e-mail comercial</h3><p>Contato incluído nos registros entregues; na página, sempre mascarado.</p></article>
+        <article class="card"><span class="ic" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span><h3>Só CNPJs ativos</h3><p>Empresas baixadas, inaptas e suspensas ficam fora do arquivo.</p></article>
+        <article class="card"><span class="ic" aria-hidden="true"><svg class="i"><use href="#i-download"/></svg></span><h3>CSV e Excel prontos para CRM</h3><p>Layouts de HubSpot, Pipedrive e Zoho, além do CSV padrão.</p></article>
+      </div>
+      <div class="cta">
+        <div><h2>Veja o preço antes de falar com alguém</h2><p>R$97 por até 150 mil empresas do seu recorte, em pagamento único — sem mensalidade, sem créditos, sem &ldquo;fale com especialista&rdquo;.</p></div>
+        <a class="btn btn-primary" href="https://paulo-leads.github.io/protocolo-hidra/#premium"><svg class="i" aria-hidden="true"><use href="#i-download"/></svg> Baixar minha lista</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="dados">
+    <div class="wrap">
+      <div class="data">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-chart-bar"/></svg> Dados reais da base ProtocoloHidra</span>
+        <h2>Quantos CNPJs ativos existem no Brasil</h2>
+        <p>Números com data de apuração — não &ldquo;40 milhões&rdquo; redondos que somam empresa baixada. Contagem de junho de 2026, somente situação cadastral ativa; o registro mais novo da base é de uma empresa aberta em 10 de maio de 2026.</p>
+        <div class="tiles">
+          <div class="tile"><strong class="num">21.702.134</strong><span>CNPJs ativos no Brasil</span></div>
+          <div class="tile"><strong class="num">86,2%</strong><span>são microempresas</span></div>
+          <div class="tile up"><strong class="num">3.716.801</strong><span>abertos nos últimos 12 meses</span></div>
+          <div class="tile"><strong class="num">78,5%</strong><span>optantes do Simples Nacional</span></div>
+        </div>
+        <div class="bars">
+          <div><div class="bar-h"><b>Serviços <small class="num">12.403.761</small></b><em>57,2%</em></div><div class="track"><div class="fill" style="width:57.2%"></div></div></div>
+          <div><div class="bar-h"><b>Comércio <small class="num">5.357.736</small></b><em>24,7%</em></div><div class="track"><div class="fill" style="width:24.7%"></div></div></div>
+          <div><div class="bar-h"><b>Indústria e construção <small class="num">3.417.404</small></b><em>15,7%</em></div><div class="track"><div class="fill" style="width:15.7%"></div></div></div>
+          <div><div class="bar-h"><b>Agropecuária <small class="num">523.233</small></b><em>2,4%</em></div><div class="track"><div class="fill" style="width:2.4%"></div></div></div>
+        </div>
+        <p class="grow"><b>Leitura para o comercial:</b> o mercado B2B brasileiro é dominado por micro e pequenos negócios de serviços e comércio — 86,2% dos CNPJs ativos são microempresas e cerca de 11,9 milhões são MEI. Isso significa ciclo de decisão curto e dono no telefone, mas também exige filtro: prospectar &ldquo;21,7 milhões&rdquo; em bloco é queimar cadência. O valor da lista está no recorte — segmento, estado e porte certos para a sua oferta.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--alt" id="por-segmento">
+    <div class="wrap">
+      <div class="kicker col">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-stack-2"/></svg> Por segmento (CNAE)</span>
+        <h2>Lista de CNPJ por segmento</h2>
+        <p>Contagens reais da base ProtocoloHidra, apuradas em junho de 2026 pelo CNAE principal. Cada linha leva à lista pronta do nicho, com a distribuição por estado e porte.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="rich-table">
+          <caption>CNPJs ativos por segmento — base ProtocoloHidra, junho de 2026</caption>
+          <thead><tr><th scope="col">Segmento</th><th scope="col">CNPJs ativos</th><th scope="col">Lista pronta</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Transportadoras</th><td class="num">848.512</td><td><a href="/protocolo-hidra/lista-de-transportadoras/">Lista de transportadoras</a></td></tr>
+            <tr><th scope="row">Comércio de vestuário</th><td class="num">839.532</td><td><a href="/protocolo-hidra/lista-de-lojas-de-roupas/">Lista de lojas de roupas</a></td></tr>
+            <tr><th scope="row">Salões de beleza e cabeleireiros</th><td class="num">816.692</td><td><a href="/protocolo-hidra/lista-de-saloes-de-beleza/">Lista de salões de beleza</a></td></tr>
+            <tr><th scope="row">Construção civil</th><td class="num">646.672</td><td><a href="/protocolo-hidra/lista-de-empresas-de-construcao-civil/">Lista de construção civil</a></td></tr>
+            <tr><th scope="row">Supermercados</th><td class="num">352.659</td><td><a href="/protocolo-hidra/lista-de-supermercados/">Lista de supermercados</a></td></tr>
+            <tr><th scope="row">Restaurantes</th><td class="num">333.064</td><td><a href="/protocolo-hidra/lista-de-restaurantes/">Lista de restaurantes</a></td></tr>
+            <tr><th scope="row">Metalúrgicas</th><td class="num">229.452</td><td><a href="/protocolo-hidra/lista-de-metalurgicas/">Lista de metalúrgicas</a></td></tr>
+            <tr><th scope="row">Oficinas mecânicas</th><td class="num">224.753</td><td><a href="/protocolo-hidra/lista-de-oficinas-mecanicas/">Lista de oficinas mecânicas</a></td></tr>
+            <tr><th scope="row">Clínicas médicas</th><td class="num">213.355</td><td><a href="/protocolo-hidra/lista-de-clinicas-medicas/">Lista de clínicas médicas</a></td></tr>
+            <tr><th scope="row">Empresas de TI</th><td class="num">197.091</td><td><a href="/protocolo-hidra/lista-de-empresas-de-ti/">Lista de empresas de TI</a></td></tr>
+            <tr><th scope="row">Advocacias</th><td class="num">128.900</td><td><a href="/protocolo-hidra/lista-de-advocacias/">Lista de advocacias</a></td></tr>
+            <tr><th scope="row">Contabilidades</th><td class="num">56.197</td><td><a href="/protocolo-hidra/lista-de-contabilidades/">Lista de contabilidades</a></td></tr>
+            <tr><th scope="row">Energia solar</th><td class="num">24.521</td><td><a href="/protocolo-hidra/lista-de-empresas-de-energia-solar/">Lista de energia solar</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col">
+        <p class="body-p" style="margin-top:22px">Alguns recortes que essa tabela esconde: nas transportadoras, só o transporte municipal de carga (CNAE 4930-2/01) soma 449.748 CNPJs, e o interestadual (4930-2/02), 355.165 — dois públicos com dores diferentes dentro do mesmo &ldquo;segmento&rdquo;. Na construção civil, as obras de alvenaria (4399-1/03) respondem por 517.882 empresas. Para explorar qualquer outra atividade — são centenas de CNAEs — use o hub de <a href="/protocolo-hidra/empresas-por-cnae/">empresas por CNAE</a>, que mostra a contagem do seu recorte gratuitamente, antes de qualquer pagamento.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="por-estado">
+    <div class="wrap">
+      <div class="kicker col">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-map-pin"/></svg> Por estado (UF)</span>
+        <h2>Lista de CNPJ por estado</h2>
+        <p>A concentração geográfica dos CNPJs ativos na base ProtocoloHidra. Seis estados respondem por cerca de dois terços de todas as empresas ativas do país.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="rich-table">
+          <caption>Participação dos principais estados nos CNPJs ativos — base ProtocoloHidra</caption>
+          <thead><tr><th scope="col">Estado</th><th scope="col">Participação na base</th><th scope="col">Página estadual</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">São Paulo (SP)</th><td><span class="num">30%</span> — 6.519.160 CNPJs ativos</td><td><a href="/protocolo-hidra/empresas-em-sao-paulo/">Empresas em São Paulo</a></td></tr>
+            <tr><th scope="row">Minas Gerais (MG)</th><td class="num">10%</td><td><a href="/protocolo-hidra/empresas-em-minas-gerais/">Empresas em Minas Gerais</a></td></tr>
+            <tr><th scope="row">Rio de Janeiro (RJ)</th><td class="num">8%</td><td><a href="/protocolo-hidra/empresas-no-rio-de-janeiro/">Empresas no Rio de Janeiro</a></td></tr>
+            <tr><th scope="row">Paraná (PR)</th><td class="num">7%</td><td><a href="/protocolo-hidra/empresas-no-parana/">Empresas no Paraná</a></td></tr>
+            <tr><th scope="row">Rio Grande do Sul (RS)</th><td class="num">6%</td><td><a href="/protocolo-hidra/empresas-no-rio-grande-do-sul/">Empresas no Rio Grande do Sul</a></td></tr>
+            <tr><th scope="row">Santa Catarina (SC)</th><td class="num">6%</td><td><a href="/protocolo-hidra/empresas-em-santa-catarina/">Empresas em Santa Catarina</a></td></tr>
+            <tr><th scope="row">Espírito Santo (ES)</th><td><span class="num">2,3%</span> — 491.613 CNPJs ativos</td><td><a href="/protocolo-hidra/empresas-no-espirito-santo/">Empresas no Espírito Santo</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col">
+        <p class="body-p" style="margin-top:22px"><strong>Dois exemplos de leitura:</strong> São Paulo sozinho tem 6.519.160 CNPJs ativos — 1.992.848 só na capital, e o interior tem praças do tamanho de estados inteiros, como Campinas (189.593) e Guarulhos (170.295). Já no Espírito Santo, a Grande Vitória concentra cerca de 289 mil dos 491.613 CNPJs do estado (~59%). Ou seja: dentro do estado, a cidade é o filtro que separa lista boa de lista genérica — para descer ao município, use a <a href="/protocolo-hidra/lista-de-empresas-por-cidade/">lista de empresas por cidade</a>.</p>
+        <p class="body-p">Os totais absolutos e o perfil de cada estado estão nas 27 páginas estaduais:</p>
+      </div>
+      <div class="uf-links" aria-label="Listas de CNPJ por estado">
+        <a href="/protocolo-hidra/empresas-no-acre/">Acre</a>
+        <a href="/protocolo-hidra/empresas-em-alagoas/">Alagoas</a>
+        <a href="/protocolo-hidra/empresas-no-amapa/">Amapá</a>
+        <a href="/protocolo-hidra/empresas-no-amazonas/">Amazonas</a>
+        <a href="/protocolo-hidra/empresas-na-bahia/">Bahia</a>
+        <a href="/protocolo-hidra/empresas-no-ceara/">Ceará</a>
+        <a href="/protocolo-hidra/empresas-no-distrito-federal/">Distrito Federal</a>
+        <a href="/protocolo-hidra/empresas-no-espirito-santo/">Espírito Santo</a>
+        <a href="/protocolo-hidra/empresas-em-goias/">Goiás</a>
+        <a href="/protocolo-hidra/empresas-no-maranhao/">Maranhão</a>
+        <a href="/protocolo-hidra/empresas-em-mato-grosso/">Mato Grosso</a>
+        <a href="/protocolo-hidra/empresas-em-mato-grosso-do-sul/">Mato Grosso do Sul</a>
+        <a href="/protocolo-hidra/empresas-em-minas-gerais/">Minas Gerais</a>
+        <a href="/protocolo-hidra/empresas-no-para/">Pará</a>
+        <a href="/protocolo-hidra/empresas-na-paraiba/">Paraíba</a>
+        <a href="/protocolo-hidra/empresas-no-parana/">Paraná</a>
+        <a href="/protocolo-hidra/empresas-em-pernambuco/">Pernambuco</a>
+        <a href="/protocolo-hidra/empresas-no-piaui/">Piauí</a>
+        <a href="/protocolo-hidra/empresas-no-rio-de-janeiro/">Rio de Janeiro</a>
+        <a href="/protocolo-hidra/empresas-no-rio-grande-do-norte/">Rio Grande do Norte</a>
+        <a href="/protocolo-hidra/empresas-no-rio-grande-do-sul/">Rio Grande do Sul</a>
+        <a href="/protocolo-hidra/empresas-em-rondonia/">Rondônia</a>
+        <a href="/protocolo-hidra/empresas-em-roraima/">Roraima</a>
+        <a href="/protocolo-hidra/empresas-em-santa-catarina/">Santa Catarina</a>
+        <a href="/protocolo-hidra/empresas-em-sao-paulo/">São Paulo</a>
+        <a href="/protocolo-hidra/empresas-em-sergipe/">Sergipe</a>
+        <a href="/protocolo-hidra/empresas-no-tocantins/">Tocantins</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--alt" id="gratis">
+    <div class="wrap">
+      <div class="kicker col">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-help-circle"/></svg> A pergunta honesta</span>
+        <h2>Dá para conseguir lista de CNPJ grátis?</h2>
+        <p>Em parte, sim — e é justo que você saiba exatamente o que o caminho gratuito entrega antes de pagar por qualquer lista, a nossa inclusive.</p>
+      </div>
+      <div class="col">
+        <p class="lead-p">Os dados cadastrais que compõem uma lista de CNPJ são públicos por força de lei. Na prática, o que é de fato gratuito é a <strong>consulta unitária</strong>: verificar os dados de uma empresa específica pelo número do CNPJ — como na ferramenta desta página, sem cadastro. Também é gratuito conferir <strong>a contagem</strong> de empresas ativas de qualquer recorte (CNAE + estado + cidade) no hub de <a href="/protocolo-hidra/empresas-por-cnae/">empresas por CNAE</a>, antes de pagar qualquer coisa. E, se a necessidade for um documento da sua própria empresa — como o cartão CNPJ —, o portal oficial do Governo Federal emite gratuitamente.</p>
+        <p class="body-p">O que <strong>não</strong> existe de graça é a lista pronta para prospecção: centenas ou milhares de empresas já filtradas pelo seu recorte, num arquivo padronizado, com telefone e e-mail comercial tratados. Montar isso por conta própria significa consultar e transcrever registro por registro — para uma lista de mil empresas, são dias de trabalho manual, sem nenhum contato comercial ao final, porque a consulta pública não traz telefone e e-mail tratados. O caminho gratuito é excelente para <em>validar</em> empresas; é inviável para <em>gerar volume</em>.</p>
+      </div>
+      <div class="pc">
+        <div class="pc-col pc-pos">
+          <h3><span class="tag">Grátis resolve</span></h3>
+          <ul>
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>Conferir um fornecedor ou cliente</b> — situação cadastral, CNAE e cidade de um CNPJ específico, na hora.</span></li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>Dimensionar o mercado</b> — quantas empresas ativas existem no seu CNAE e estado, com contagem gratuita.</span></li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>Emitir documentos da própria empresa</b> — cartão CNPJ e comprovantes saem sem custo no portal oficial.</span></li>
+          </ul>
+        </div>
+        <div class="pc-col pc-neg">
+          <h3><span class="tag">Grátis não entrega</span></h3>
+          <ul>
+            <li><svg class="i" aria-hidden="true"><use href="#i-help-circle"/></svg><span><b>Lista filtrada e em volume</b> — a consulta é de uma empresa por vez; ninguém prospecta mil contas assim.</span></li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-help-circle"/></svg><span><b>Telefone e e-mail tratados</b> — o contato comercial pronto para cadência não vem na consulta avulsa.</span></li>
+            <li><svg class="i" aria-hidden="true"><use href="#i-help-circle"/></svg><span><b>Formato para CRM</b> — sem CSV padronizado, cada linha exige transcrição e limpeza manual.</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col">
+        <p class="body-p" style="margin-top:22px">É por isso que a lista pronta se paga em tempo: R$97 pelo recorte já filtrado equivale a menos do que uma hora de trabalho de um vendedor — contra dias de montagem manual que terminam sem contato comercial.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="ferramenta" aria-labelledby="ferramenta-title">
+    <div class="wrap col">
+      <div class="cnpj-tool">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-database"/></svg> Ferramenta gratuita</span>
+        <h2 id="ferramenta-title">Consulte qualquer CNPJ da sua lista agora</h2>
+        <p class="sub">Recebeu uma lista e quer validar? Digite um CNPJ e veja os dados cadastrais públicos — situação, CNAE, cidade e data de abertura. Sem cadastro.</p>
+        <form id="consulta-cnpj-form" class="cnpj-tool-form" autocomplete="off" novalidate>
+          <input id="cnpj" name="cnpj" type="text" inputmode="numeric" placeholder="00.000.000/0000-00" maxlength="18" aria-label="Digite o CNPJ">
+          <button type="submit" class="btn btn-primary">Consultar CNPJ</button>
+        </form>
+        <p id="consulta-status" role="status" aria-live="polite"></p>
+        <div id="consulta-result"></div>
+        <p class="note">Dados de fontes públicas oficiais. A ProtocoloHidra não tem vínculo com órgãos públicos; para fins oficiais, consulte o órgão competente. O telefone e o e-mail comercial não aparecem na consulta avulsa — eles vêm na <a href="https://paulo-leads.github.io/protocolo-hidra/#premium">lista completa</a>. Para entender tudo o que a consulta unitária revela, veja o guia de <a href="/protocolo-hidra/consulta-cnpj/">consulta de CNPJ</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--alt" id="formato">
+    <div class="wrap">
+      <div class="kicker col">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-download"/></svg> Formato do arquivo</span>
+        <h2>Lista de CNPJ em PDF ou CSV/Excel? O formato certo para prospecção</h2>
+      </div>
+      <div class="col">
+        <p class="lead-p">Muita gente procura &ldquo;lista de CNPJ ativos em PDF&rdquo; — e é uma armadilha. PDF é formato de <strong>leitura</strong>: serve para imprimir e conferir, mas nenhum CRM, discador ou ferramenta de e-mail importa PDF. Uma lista em PDF vira retrabalho no primeiro dia: alguém vai ter que copiar linha por linha para uma planilha antes de qualquer cadência começar.</p>
+        <p class="body-p">O formato de <strong>trabalho</strong> é CSV ou Excel: colunas padronizadas, um registro por linha, importação direta. É assim que a ProtocoloHidra entrega — CSV padrão com os 22 campos e layouts prontos para os CRMs mais usados. Se a sua operação já roda num deles, os guias práticos mostram o mapeamento campo a campo: <a href="/protocolo-hidra/como-importar-lista-de-empresas-no-hubspot/">como importar a lista no HubSpot</a>, <a href="/protocolo-hidra/como-importar-lista-de-empresas-no-pipedrive/">no Pipedrive</a> e <a href="/protocolo-hidra/como-importar-lista-de-empresas-no-zoho-crm/">no Zoho CRM</a>. Regra prática ao avaliar qualquer fornecedor de lista: se a entrega é em PDF, o preço real inclui as horas que você vai gastar convertendo.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="comparativo">
+    <div class="wrap">
+      <div class="kicker col">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-target"/></svg> Custo real comparado</span>
+        <h2>Lista pronta vs montar do zero</h2>
+        <p>A comparação honesta entre baixar o recorte pronto e montar a lista manualmente, consulta por consulta.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="cmp-table">
+          <caption>Comparativo: lista de CNPJ pronta (ProtocoloHidra) vs montagem manual</caption>
+          <thead><tr><th scope="col">Critério</th><th scope="col" class="th-b2b">Lista pronta (ProtocoloHidra)</th><th scope="col" class="th-b2c">Montar do zero</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Tempo até a lista</th><td>Minutos: filtrou, conferiu a contagem, baixou</td><td>Dias ou semanas consultando e transcrevendo CNPJ por CNPJ</td></tr>
+            <tr><th scope="row">Telefone e e-mail</th><td>Incluídos nos 22 campos dos registros entregues</td><td>Não vêm tratados — cada contato exige pesquisa manual</td></tr>
+            <tr><th scope="row">Filtro por CNAE, estado e porte</th><td>Pronto, com contagem prévia gratuita</td><td>Manual, registro por registro</td></tr>
+            <tr><th scope="row">Formato</th><td>CSV/Excel + layouts de HubSpot, Pipedrive e Zoho</td><td>Anotações dispersas que ainda precisam ser padronizadas</td></tr>
+            <tr><th scope="row">Custo</th><td>R$97 por até 150 mil empresas, pagamento único</td><td>&ldquo;Grátis&rdquo; no papel — caro em horas de trabalho</td></tr>
+            <tr><th scope="row">Modelo de cobrança</th><td>Sem mensalidade, sem créditos, sem contato comercial obrigatório</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col">
+        <p class="body-p" style="margin-top:22px">Vale registrar a diferença de modelo, sem citar preço de terceiros: boa parte dos concorrentes trabalha com <strong>assinatura ou créditos</strong> e só revela o valor depois de uma conversa com o time de vendas. A ProtocoloHidra publica o preço na página e cobra uma vez pelo recorte. <strong>Garantia condicional:</strong> se você pagou, acessou e a plataforma não funcionou como descrito, dá para pedir a devolução pelo suporte em até 7 dias, conforme os termos do plano. E se o que você precisa vai além do arquivo — leads já priorizados por perfil de cliente ideal —, veja o guia de <a href="/protocolo-hidra/comprar-leads-qualificados/">comprar leads qualificados</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--alt" id="como-baixar">
+    <div class="wrap">
+      <div class="kicker col">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-filter"/></svg> Passo a passo</span>
+        <h2>Como baixar sua lista de CNPJ em 4 passos</h2>
+        <p>De 21,7 milhões de CNPJs ativos para a lista do tamanho do seu funil.</p>
+      </div>
+      <ol class="steps">
+        <li><div><b>Defina o recorte</b><span>Escolha o CNAE (segmento), o estado ou a cidade e o porte que descrevem o seu cliente ideal.</span></div></li>
+        <li><div><b>Confira a contagem grátis</b><span>Veja no hub de empresas por CNAE quantas empresas ativas existem no recorte antes de pagar.</span></div></li>
+        <li><div><b>Baixe o arquivo</b><span>CSV ou Excel com 22 campos por empresa, incluindo telefone e e-mail comercial — R$97 por até 150 mil empresas, em pagamento único.</span></div></li>
+        <li><div><b>Importe no CRM e rode a cadência</b><span>Use os layouts prontos de HubSpot, Pipedrive e Zoho, importe a lista e comece a prospectar.</span></div></li>
+      </ol>
+      <div class="cta">
+        <div><h2>Monte sua lista de CNPJ agora</h2><p>Filtre por CNAE, estado e porte, veja a contagem e baixe só o recorte que interessa — R$97, pagamento único.</p></div>
+        <a class="btn btn-primary" href="https://paulo-leads.github.io/protocolo-hidra/#premium"><svg class="i" aria-hidden="true"><use href="#i-rocket"/></svg> Acessar os planos</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="legalidade">
+    <div class="wrap">
+      <div class="kicker col">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-shield-check"/></svg> Legalidade e boas práticas</span>
+        <h2>É legal usar lista de CNPJ?</h2>
+      </div>
+      <div class="col">
+        <p class="lead-p">Sim. Os dados cadastrais de uma empresa — razão social, CNPJ, endereço, CNAE, porte, natureza jurídica e situação cadastral — são <strong>públicos por força de lei</strong>. Publicidade do cadastro empresarial é uma característica do sistema brasileiro: qualquer pessoa pode verificar com quem está contratando. Usar esses dados para prospecção B2B, com finalidade comercial legítima, é uma prática regular de mercado.</p>
+        <p class="body-p">A distinção que importa é entre <strong>dado cadastral da empresa</strong> e <strong>dado pessoal</strong>. A LGPD protege dados de pessoas físicas; o cadastro da pessoa jurídica — o telefone e o e-mail comerciais informados pela própria empresa — é dado do negócio, não do indivíduo. Ainda assim, a fronteira existe (um MEI mistura as duas esferas, por exemplo), e é por isso que abordagem responsável não é opcional: identifique a sua empresa logo no primeiro contato, seja relevante para o segmento de quem recebe e ofereça descadastro simples a quem não quiser mais ser contatado. Quem trata a lista como munição de spam queima o próprio domínio e o próprio número — e desperdiça um ativo que, bem usado, é a matéria-prima de uma <a href="/protocolo-hidra/prospeccao-b2b/">prospecção B2B</a> previsível.</p>
+        <p class="body-p">Também por compliance, nenhum contato real aparece nesta página: os exemplos da amostra são fictícios e mascarados, e o arquivo com os dados completos só é liberado após a compra.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--alt" id="perguntas-frequentes">
+    <div class="wrap col">
+      <div class="col">
+        <div class="kicker">
+          <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-message-question"/></svg> Dúvidas frequentes</span>
+          <h2>Perguntas frequentes sobre lista de CNPJ</h2>
+        </div>
+        <div class="faq">
+          <details open><summary>Como conseguir uma lista de CNPJ grátis? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Os dados cadastrais de CNPJ são públicos e a consulta unitária é gratuita — você pode conferir empresa por empresa na ferramenta desta página. O que não existe de graça é a lista pronta: milhares de CNPJs já filtrados por segmento e estado, com telefone e e-mail tratados. Montar isso por conta própria significa consultar e transcrever um CNPJ por vez, um trabalho de dias. Na ProtocoloHidra, 150 mil empresas com 22 campos saem por R$97, em pagamento único.</p></details>
+          <details><summary>Quantas empresas ativas existem no Brasil? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>A base ProtocoloHidra registra 21.702.134 CNPJs com situação cadastral ativa, em apuração de junho de 2026. O critério conta somente empresas ativas: sites que anunciam 40 milhões ou mais somam CNPJs baixados e inativos, que não servem para prospecção.</p></details>
+          <details><summary>É legal comprar lista de CNPJ? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Sim. Dados cadastrais de empresa — razão social, CNPJ, endereço, CNAE, porte e situação — são públicos por força de lei e podem ser usados para prospecção B2B com finalidade comercial legítima. O cuidado é distinguir o dado cadastral da empresa do dado pessoal de pessoas físicas e manter abordagem responsável: identifique-se, seja relevante e ofereça descadastro a quem não quiser ser contatado.</p></details>
+          <details><summary>A lista de CNPJ vem com telefone e e-mail? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Sim. Os registros entregues na lista ProtocoloHidra trazem telefone e e-mail comercial entre os 22 campos de cada empresa. Na página, os contatos aparecem sempre mascarados — por exemplo, (11) *****-1183 — e o arquivo completo é liberado após a compra.</p></details>
+          <details><summary>Dá para baixar lista de CNPJ em PDF? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>PDF é formato de leitura, não de trabalho: ele não importa em CRM, discador nem ferramenta de e-mail. Por isso a ProtocoloHidra entrega a lista em CSV e Excel, prontos para importar no HubSpot, no Pipedrive e no Zoho CRM. Se você recebeu uma lista em PDF, terá de convertê-la antes de usar — exija CSV desde o início.</p></details>
+          <details><summary>Como filtrar a lista por segmento e estado? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>O filtro combina CNAE (atividade econômica), estado ou cidade e porte. No hub de <a href="/protocolo-hidra/empresas-por-cnae/">empresas por CNAE</a> você confere gratuitamente quantas empresas ativas existem em cada recorte antes de comprar. O pacote de R$97 já vem filtrado no recorte escolhido, com até 150 mil empresas, em pagamento único.</p></details>
+          <details><summary>Com que frequência a lista é atualizada? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>A base é construída a partir de fontes públicas oficiais e passa por atualizações recorrentes. Em vez de prometer uma cadência fixa, a ProtocoloHidra publica a data da apuração: os números desta página são de junho de 2026, e o registro mais novo da base é de uma empresa aberta em 10 de maio de 2026.</p></details>
+          <details><summary>Qual a diferença entre lista de CNPJ e consulta de CNPJ? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>A consulta é o lookup de uma empresa por vez: você digita o CNPJ e vê os dados cadastrais na hora, como na ferramenta desta página. A lista é o arquivo em massa, com milhares de empresas filtradas por segmento e estado para prospecção. Quem precisa de volume usa a lista; quem quer conferir um fornecedor específico usa a consulta.</p></details>
+          <details><summary>A lista traz só empresas ativas? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Sim. O critério da base ProtocoloHidra é situação cadastral ativa: os 21.702.134 CNPJs contados excluem empresas baixadas, inaptas e suspensas, que só gerariam contato morto na cadência. Os demais status e o que cada um significa estão no guia de <a href="/protocolo-hidra/situacao-cadastral-cnpj/">situação cadastral do CNPJ</a>.</p></details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="conclusao">
+    <div class="wrap">
+      <div class="col">
+        <div class="kicker">
+          <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-flag"/></svg> Conclusão</span>
+          <h2>Conclusão</h2>
+        </div>
+        <p class="body-p">Lista de CNPJ boa não é a maior — é a mais bem filtrada e a mais honesta sobre o que contém. Os números desta página têm data de apuração (junho de 2026), critério declarado (somente os 21.702.134 CNPJs com situação cadastral ativa) e amostra visível do que o arquivo entrega: 22 campos por empresa, incluindo telefone e e-mail comercial nos registros entregues.</p>
+        <p class="body-p">O caminho recomendado: valide o conceito com a consulta gratuita, dimensione o recorte no hub de <a href="/protocolo-hidra/empresas-por-cnae/">empresas por CNAE</a>, baixe a lista filtrada por R$97 em pagamento único e importe no seu CRM com os guias prontos. Se preferir começar pelo território, as páginas estaduais e a <a href="/protocolo-hidra/lista-de-empresas-por-cidade/">lista de empresas por cidade</a> mostram o tamanho de cada praça antes de qualquer decisão.</p>
+      </div>
+    </div>
+  </section>
+
+  <aside class="sources">
+    <div class="wrap">
+      <h2>Fontes, dados e metodologia</h2>
+      <p><strong>Por <a href="/protocolo-hidra/paulo-leads/">Paulo C. P. Santos</a>, Arquiteto do Protocolo Hidra</strong>, com a Curadoria do Protocolo Hidra — responsável pela base de empresas ativas usada neste guia, compilada de fontes públicas oficiais e mantida pela própria ProtocoloHidra.</p>
+      <p>Os números citados (21.702.134 CNPJs ativos; 86,2% microempresas; 3.716.801 empresas abertas em 12 meses; contagens por setor, segmento e estado) referem-se às empresas com situação cadastral ativa na base ProtocoloHidra, em apuração de junho de 2026, contadas pelo CNAE principal. O recorte de energia solar usa termos na razão social e no nome fantasia. Os CNPJs e contatos exibidos na amostra são fictícios e mascarados (somente ilustrativos); nenhum contato real de empresa é exibido nesta página, por compliance.</p>
+      <div class="links" aria-label="Guias relacionados">
+        <a href="/protocolo-hidra/empresas-por-cnae/">Empresas por CNAE</a>
+        <a href="/protocolo-hidra/consulta-cnpj/">Consulta de CNPJ</a>
+        <a href="/protocolo-hidra/comprar-leads/">Comprar leads</a>
+        <a href="/protocolo-hidra/dados-cadastrais-cnpj/">Dados cadastrais do CNPJ</a>
+        <a href="/protocolo-hidra/quantas-empresas-tem-no-brasil/">Quantas empresas tem no Brasil</a>
+      
+        <a href="/protocolo-hidra/lista-de-emails-de-empresas/">Lista de e-mails de empresas</a>
+      </div>
+      <p style="font-size:.85rem">Última revisão das fontes e dados: julho/2026.</p>
+    </div>
+  </aside>
+</main>
+
+<section class="pre-footer">
+  <div class="pre-footer-inner">
+    <h2>Comece a prospectar com sua lista de CNPJ</h2>
+    <p>Escolha um plano da ProtocoloHidra para filtrar CNPJs ativos por segmento, estado e porte, baixar os contatos em CSV e iniciar a prospecção B2B com mais clareza.</p>
+    <a class="btn-prefooter" href="https://paulo-leads.github.io/protocolo-hidra/#premium">Ver planos disponíveis</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p>© 2026 <strong>ProtocoloHidra</strong> · Todos os direitos reservados.</p>
+    <p><a href="/protocolo-hidra/politica-de-privacidade/">Política de Privacidade</a> · <a href="https://paulo-leads.github.io/protocolo-hidra/#premium">Planos</a></p>
+  </div>
+</footer>
+
+<script src="/protocolo-hidra/assets/tools.js?v=20260630" defer></script>
+</body>
+</html>
