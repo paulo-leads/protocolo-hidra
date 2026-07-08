@@ -518,6 +518,7 @@ console.log("✅ llms.txt gerado");
 // 6. INJETAR SPINTAX + REMOVER DATAS ANTIGAS (VERSÃO DEFINITIVA)
 // ============================================================
 console.log("\n📝 Injetando spintax e substituindo TODAS as datas antigas...");
+
 let updatedCount = 0;
 let skippedCount = 0;
 
@@ -538,73 +539,68 @@ allLinks.forEach((link) => {
     // --- 1. REMOVER BLOCOS SPINTAX ANTIGOS ---
     html = html.replace(/<div\s+class="protocolo-hidra-spintax"[^>]*>[\s\S]*?<\/div>/gi, '');
     html = html.replace(/<div\s+style="display:none;"[^>]*data-wikivendas-spintax[^>]*>[\s\S]*?<\/div>/gi, '');
+    html = html.replace(//gi, ''); // Remove comentários antigos do spintax
 
-    // --- 2. REMOVER O BYLINE ANTIGO ---
-    html = html.replace(/<p\s+class="byline"[^>]*>[\s\S]*?atualizado em\s+[^<]+<\/p>/gi, '');
-
-    // --- 3. REMOVER O RODAPÉ ANTIGO DO SOURCES ---
-    html = html.replace(/<p\s+style="font-size:\.85rem"[^>]*>[\s\S]*?Última revisão[\s\S]*?<\/p>/gi, '');
-
-    // --- 4. REMOVER QUALQUER OUTRO PARÁGRAFO QUE POSSA TER SOBRADO (fallback) ---
+    // --- 2. REMOÇÃO ROBUSTA DAS DATAS ANTIGAS ---
+    // Removemos qualquer parágrafo que contenha "atualizado em" ou "Última revisão", não importa a classe.
     html = html.replace(/<p[^>]*>[\s\S]*?atualizado em[\s\S]*?<\/p>/gi, '');
     html = html.replace(/<p[^>]*>[\s\S]*?Última revisão[\s\S]*?<\/p>/gi, '');
-    html = html.replace(/<p[^>]*>[\s\S]*?[A-Za-zÀ-ÿ]+\/[\d]{4}[\s\S]*?<\/p>/gi, '');
 
-    // --- 5. CRIAR AS NOVAS DATAS COM TIMESTAMP DINÂMICO ---
-    const novoTimestamp = fullTimestamp;
+    // --- 3. CRIAR AS NOVAS DATAS E SPINTAX COM TIMESTAMP DINÂMICO ---
+    const novoTimestamp = fullTimestamp; // Garante o uso da variável global gerada no topo do seu arquivo
     const novoHash = pageHash.substring(0, 16);
+    
     const novoByline = `<p class="byline">Por <strong>Paulo C. P. Santos</strong> · Arquiteto do Protocolo Hidra · atualizado em ${novoTimestamp}</p>`;
     const novoRodape = `<p style="font-size:.85rem">Última revisão das fontes e dados: ${novoTimestamp} · Hash: <code style="font-size:0.7rem;background:#e2e8f0;padding:1px 6px;border-radius:3px;">${novoHash}</code></p>`;
-
-    // --- 6. INSERIR O NOVO BYLINE ---
-    if (/<div\s+class="hero-cta"/i.test(html)) {
-      html = html.replace(/(<div\s+class="hero-cta")/, `${novoByline}\n    $1`);
-    } else if (/<div\s+class="signals"/i.test(html)) {
-      html = html.replace(/(<div\s+class="signals")/, `${novoByline}\n    $1`);
-    } else {
-      html = html.replace(/(<p\s+class="lead"[^>]*>.*?<\/p>)/, `$1\n    ${novoByline}`);
-    }
-
-    // --- 7. INSERIR O NOVO RODAPÉ DENTRO DE <aside class="sources"> ---
-    if (/<aside\s+class="sources"/i.test(html)) {
-      html = html.replace(/(<\/aside>)/, `${novoRodape}\n$1`);
-    } else {
-      html = html.replace(/(<\/main>)/, `${novoRodape}\n$1`);
-    }
-
-    // --- 8. CRIAR E INSERIR O BLOCO SPINTAX VISÍVEL ---
-    const spintaxVisible = `
-<!-- Protocolo Hidra | Frase gerada em ${fullTimestamp} | Hash: ${pageHash} -->
-<div class="protocolo-hidra-spintax" style="margin:24px 0;padding:16px 20px;background:#f0f5ff;border-left:4px solid #1D4ED8;border-radius:0 10px 10px 0;font-size:0.95rem;line-height:1.6;color:#0B2545;">
+    
+    const spintaxVisible = `\n<div class="protocolo-hidra-spintax" style="margin:24px 0;padding:16px 20px;background:#f0f5ff;border-left:4px solid #1D4ED8;border-radius:0 10px 10px 0;font-size:0.95rem;line-height:1.6;color:#0B2545;">
   <p style="margin:0;font-style:italic;">&ldquo;${phrase}&rdquo;</p>
   <p style="margin:6px 0 0;font-size:0.75rem;color:#64748B;">
-    <strong>Protocolo Hidra</strong> · Gerado em ${fullTimestamp} · 
-    <code style="font-size:0.7rem;background:#e2e8f0;padding:1px 6px;border-radius:3px;">${pageHash.substring(0, 12)}</code>
+    <strong>Protocolo Hidra</strong> · Gerado em ${novoTimestamp} · 
+    <code style="font-size:0.7rem;background:#e2e8f0;padding:1px 6px;border-radius:3px;">${novoHash.substring(0, 12)}</code>
   </p>
-</div>
-`;
+</div>`;
 
-    if (/<aside\s+class="sources"/i.test(html)) {
-      html = html.replace(/(<\/aside>)/, `$1\n${spintaxVisible}`);
+    // --- 4. INSERIR O NOVO BYLINE (Antes de hero-cta ou signals) ---
+    if (/<div\s+class="hero-cta"/i.test(html)) {
+      html = html.replace(/(<div\s+class="hero-cta")/i, `${novoByline}\n      $1`);
+    } else if (/<div\s+class="signals"/i.test(html)) {
+      html = html.replace(/(<div\s+class="signals")/i, `${novoByline}\n      $1`);
     } else {
-      html = html.replace(/(<\/main>)/, `${spintaxVisible}\n$1`);
+      html = html.replace(/(<p\s+class="lead"[^>]*>[\s\S]*?<\/p>)/i, `$1\n      ${novoByline}`);
     }
 
-    // --- 9. ATUALIZAR datePublished E dateModified NO JSON-LD ---
-    html = html.replace(/"datePublished":"[^"]+"/, `"datePublished":"${BUILD_DATE}"`);
-    html = html.replace(/"dateModified":"[^"]+"/, `"dateModified":"${fullTimestamp}"`);
+    // --- 5. INSERIR O NOVO RODAPÉ (Dentro de <aside class="sources">) ---
+    if (/<aside\s+class="sources"/i.test(html)) {
+      html = html.replace(/(<\/aside>)/i, `  ${novoRodape}\n$1`);
+    } else {
+      html = html.replace(/(<\/main>)/i, `  ${novoRodape}\n$1`);
+    }
 
-    // --- 10. ATUALIZAR META DESCRIPTION ---
-    const metaDesc = `<meta name="description" content="${(term?.description || linkToName(link)).substring(0, 130)} — Gerado em ${fullTimestamp} | Hash: ${pageHash.substring(0, 12)}">`;
+    // --- 6. INJETAR O BLOCO SPINTAX VISÍVEL (Após o </aside>) ---
+    if (html.includes('</aside>')) {
+      html = html.replace(/(<\/aside>)/i, `$1${spintaxVisible}`);
+    } else {
+      html = html.replace(/(<\/main>)/i, `${spintaxVisible}\n$1`);
+    }
+
+    // --- 7. ATUALIZAR JSON-LD (datePublished e dateModified) ---
+    html = html.replace(/"datePublished"\s*:\s*"[^"]+"/g, `"datePublished": "${BUILD_DATE}"`);
+    html = html.replace(/"dateModified"\s*:\s*"[^"]+"/g, `"dateModified": "${novoTimestamp}"`);
+
+    // --- 8. ATUALIZAR META DESCRIPTION ---
+    const descText = (term?.description || linkToName(link)).substring(0, 130);
+    const metaDesc = `<meta name="description" content="${descText} — Gerado em ${novoTimestamp} | Hash: ${novoHash.substring(0, 12)}">`;
     if (/<meta name="description"/i.test(html)) {
       html = html.replace(/<meta name="description"[^>]*>/i, metaDesc);
     } else {
       html = html.replace(/<head>/i, `<head>\n  ${metaDesc}`);
     }
 
-    // --- 11. ESCREVER O ARQUIVO ---
+    // --- 9. ESCREVER O ARQUIVO ---
     writeFileSync(filePath, html, "utf8");
     updatedCount++;
+
   } catch (err) {
     skippedCount++;
     console.warn(`  ⚠️ Erro em ${link}: ${err.message}`);
