@@ -1,7 +1,7 @@
 # Protocolo Hidra — Diretorio B2B
 > Canonical-Source: https://paulo-leads.github.io/protocolo-hidra
 > Language: pt-BR
-> Last-Modified: 2026-07-08 20:26:09
+> Last-Modified: 2026-07-08 20:54:38
 > Total Pages: 672
 > API JSON: https://paulo-leads.github.io/protocolo-hidra/glossario.json
 > License: CC BY 4.0
@@ -121,6 +121,6 @@
 - Lista de clínicas odontológicas em Jaboatão dos Guararapes (PE): CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/lista-de-clinicas-odontologicas-em-jaboatao-dos-guararapes-pe/ (importancia: 0.7)
 
 # Metadados Tecnicos
-> Build: 2026-07-08T20:26:09.197Z
+> Build: 2026-07-08T20:54:38.412Z
 > Total de paginas: 672
 > Total de palavras: 2,539,143
