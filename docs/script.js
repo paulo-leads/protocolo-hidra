@@ -2,46 +2,48 @@
 // Protocolo Hidra — Script de Ecossistema Vivo
 // ============================================================
 (function() {
-  const BUILD_DATE = "2026-07-08";
-  const BUILD_TIMESTAMP = "2026-07-08T18:35:39.249Z";
-  const TOTAL_TERMS = 673;
-  const GLOSSARIO_URL = "https://paulo-leads.github.io/protocolo-hidra/glossario.json";
+  var BUILD_DATE = "2026-07-08";
+  var BUILD_TIMESTAMP = "2026-07-08T19:08:35.273Z";
+  var TOTAL_TERMS = 672;
+  var GLOSSARIO_URL = "https://paulo-leads.github.io/protocolo-hidra/glossario.json";
 
-  // Atualiza footer com timestamp
   document.addEventListener('DOMContentLoaded', function() {
-    const footer = document.querySelector('footer');
+    var footer = document.querySelector('footer, .site-footer, .pre-footer');
     if (footer) {
-      const meta = document.createElement('p');
-      meta.style.cssText = 'font-size:0.7rem;color:var(--text-muted);margin-top:0.5rem;';
-      meta.textContent = '🔄 Ecossistema atualizado em ' + BUILD_DATE;
-      footer.appendChild(meta);
+      var metaInfo = document.createElement('p');
+      metaInfo.style.cssText = 'font-size:0.7rem;color:var(--text-muted,#9fb8d6);margin-top:0.5rem;';
+      metaInfo.textContent = '🔄 Ecossistema atualizado em ' + BUILD_DATE + ' | ' + TOTAL_TERMS + ' paginas indexadas';
+      footer.appendChild(metaInfo);
     }
 
-    // Badge "Verificado" nos cards
-    document.querySelectorAll('.wv-card, .category-card, .step-card, .plan-card').forEach(card => {
-      const badge = document.createElement('span');
-      badge.style.cssText = 'display:inline-block;font-size:0.6rem;background:var(--accent);color:#fff;padding:2px 8px;border-radius:20px;margin-left:8px;';
-      badge.textContent = '✓ ' + BUILD_DATE;
-      const title = card.querySelector('h3');
-      if (title) title.appendChild(badge);
-    });
-
-    // Carrega contagem do glossario.json
     fetch(GLOSSARIO_URL)
-      .then(r => r.json())
-      .then(data => {
-        const statsEl = document.querySelector('.stats-strip .stats-grid');
-        if (statsEl && data.terms) {
-          const newStat = document.createElement('div');
-          newStat.className = 'stat-item';
-          newStat.innerHTML = '<strong>' + data.terms.length + '</strong><span>páginas indexadas</span>';
-          statsEl.appendChild(newStat);
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data && data.totalTerms) {
+          TOTAL_TERMS = data.totalTerms;
+          var badges = document.querySelectorAll('[data-eco-count]');
+          for (var i = 0; i < badges.length; i++) {
+            badges[i].textContent = data.totalTerms + ' paginas';
+          }
         }
       })
-      .catch(() => {});
+      .catch(function() {});
+
+    var cards = document.querySelectorAll('[class*="card"], .signal, .tile, .step-card, .ex');
+    for (var i = 0; i < cards.length; i++) {
+      var badge = document.createElement('span');
+      badge.style.cssText = 'display:inline-block;font-size:0.6rem;background:#3b82f6;color:#fff;padding:2px 8px;border-radius:20px;margin-left:8px;vertical-align:middle;';
+      badge.textContent = 'v' + BUILD_DATE.replace(/-/g, '.');
+      var title = cards[i].querySelector('h2, h3, strong');
+      if (title) title.appendChild(badge);
+    }
+
+    var spintaxDiv = document.querySelector('[data-wikivendas-spintax]');
+    if (spintaxDiv) {
+      console.log('[Protocolo Hidra] Pagina verificada | Hash: ' + (spintaxDiv.getAttribute('data-hash') || 'N/A') + ' | Data: ' + (spintaxDiv.getAttribute('data-date') || BUILD_DATE));
+    }
   });
 
-  // Expõe metadados para crawlers
   window.__PROTOCOLO_HIDRA = {
     version: "2026.07.08",
     buildDate: BUILD_DATE,
