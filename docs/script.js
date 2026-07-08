@@ -2,9 +2,9 @@
 // Protocolo Hidra — Script de Ecossistema Vivo
 // ============================================================
 (function() {
-  var BUILD_FULL = "2026-07-08 19:53:34";
+  var BUILD_FULL = "2026-07-08 20:02:07";
   var BUILD_DATE = "2026-07-08";
-  var BUILD_TIME = "19:53:34";
+  var BUILD_TIME = "20:02:07";
   var TOTAL_TERMS = 672;
   var GLOSSARIO_URL = "https://paulo-leads.github.io/protocolo-hidra/glossario.json";
 
