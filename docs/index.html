@@ -4,16 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wikivendas · Protocolo Hidra · Diretório B2B</title>
-    <meta name="description" content="Ontologia e infraestrutura de dados para RevOps B2B. Diretório completo de listas empresariais, ferramentas de consulta, guias de prospecção e comparativos do ecossistema Paulo Leads." />
+    <meta name="description" content="Ontologia e infraestrutura de dados para RevOps e Salesops B2B. Diretório completo de listas empresariais, ferramentas de consulta, guias de prospecção e comparativos do ecossistema Paulo Leads." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        /* ===== RESET & VARIÁVEIS ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --bg-base: #09090b;
             --bg-surface: #18181b;
@@ -26,6 +23,8 @@
             --radius: 12px;
             --font-sans: 'Inter', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
+            --green: #22c55e;
+            --gold: #f4a313;
         }
         body {
             background: var(--bg-base);
@@ -35,6 +34,10 @@
             -webkit-font-smoothing: antialiased;
             padding: 0 1.5rem;
         }
+        a { color: inherit; text-decoration: none; }
+        .wrap { max-width: 1200px; margin: 0 auto; }
+
+        /* ===== HEADER ===== */
         header {
             border-bottom: 1px solid var(--border-color);
             padding: 1.2rem 0;
@@ -52,24 +55,59 @@
             font-weight: 700;
             font-size: 1.3rem;
             letter-spacing: -0.5px;
-            text-decoration: none;
-            color: var(--text-main);
         }
         .logo span { color: var(--accent); }
-        .btn-primary {
-            background: var(--accent);
+        .btn-whatsapp {
+            background: #25d366;
             color: #fff;
             padding: 0.5rem 1.4rem;
             border-radius: 6px;
-            text-decoration: none;
-            font-weight: 500;
+            font-weight: 700;
             font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
             transition: 0.2s;
+        }
+        .btn-whatsapp:hover {
+            background: #1ebe5a;
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.3);
+        }
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+            padding: 0.6rem 1.8rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
         .btn-primary:hover {
             background: #2563eb;
             box-shadow: 0 0 20px var(--accent-glow);
         }
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 0.6rem 1.8rem;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-secondary:hover {
+            background: var(--bg-surface-hover);
+            border-color: var(--text-muted);
+        }
+
+        /* ===== HERO ===== */
         .hero {
             text-align: center;
             padding: 4rem 1rem 3rem;
@@ -94,44 +132,276 @@
             justify-content: center;
             flex-wrap: wrap;
         }
-        .btn-secondary {
-            background: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            padding: 0.5rem 1.4rem;
-            border-radius: 6px;
-            text-decoration: none;
+        .trust-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem 1.5rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        .trust-badges span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
             font-weight: 500;
-            font-size: 0.9rem;
-            transition: 0.2s;
         }
-        .btn-secondary:hover {
-            background: var(--bg-surface-hover);
-            border-color: var(--text-muted);
-        }
-        .container {
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 2rem 0;
-        }
-        .section-title {
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            text-transform: uppercase;
+        .trust-badges span::before {
+            content: "✓";
             color: var(--accent);
-            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        /* ===== STATS (signal strip) ===== */
+        .stats-strip {
+            background: linear-gradient(100deg, #0f2b5e 0%, #1a4a8a 44%, #2a6fc4 100%);
+            border-radius: var(--radius);
+            padding: 2rem 1rem;
+            margin: 2rem 0;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            text-align: center;
+        }
+        .stats-grid .stat-item strong {
+            display: block;
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.1;
+        }
+        .stats-grid .stat-item span {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.95rem;
+        }
+        @media (max-width: 700px) {
+            .stats-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        }
+
+        /* ===== SEÇÕES GERAIS ===== */
+        .section {
+            padding: 3rem 0;
+        }
+        .section-head {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+        }
+        .section-head .kicker {
+            display: inline-block;
+            background: var(--accent);
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
             margin-bottom: 0.5rem;
         }
-        .stats {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 2rem;
+        .section-head h2 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
         }
-        .stats strong { color: var(--text-main); }
+        .section-head p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
 
-        /* Busca */
+        /* ===== COMO FUNCIONA ===== */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .step-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .step-card .num {
+            display: inline-block;
+            background: var(--accent);
+            color: #fff;
+            width: 36px;
+            height: 36px;
+            line-height: 36px;
+            border-radius: 50%;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .step-card h3 { font-size: 1.1rem; margin-bottom: 0.3rem; }
+        .step-card p { color: var(--text-muted); font-size: 0.9rem; }
+        @media (max-width: 700px) {
+            .steps-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        /* ===== VÍDEO PLACEHOLDER ===== */
+        .video-placeholder {
+            background: var(--bg-surface);
+            border: 1px dashed var(--border-color);
+            border-radius: var(--radius);
+            padding: 3rem 1rem;
+            text-align: center;
+            margin: 2rem 0;
+            color: var(--text-muted);
+        }
+        .video-placeholder .play-btn {
+            display: inline-block;
+            width: 64px;
+            height: 64px;
+            line-height: 64px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #fff;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* ===== CASOS DE USO ===== */
+        .use-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        .use-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+        }
+        .use-card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+        .use-card h3 { font-size: 1.1rem; margin-bottom: 0.3rem; }
+        .use-card p { color: var(--text-muted); font-size: 0.9rem; }
+        .use-card ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem 0.8rem;
+            margin-top: 0.8rem;
+        }
+        .use-card ul li {
+            background: var(--bg-base);
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+        }
+        @media (max-width: 700px) {
+            .use-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ===== PLANOS ===== */
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .plan-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 1.8rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+        .plan-card.featured {
+            border-color: var(--accent);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.15);
+        }
+        .plan-card .badge {
+            display: inline-block;
+            background: var(--gold);
+            color: #000;
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 0.15rem 0.8rem;
+            border-radius: 20px;
+            margin-bottom: 0.5rem;
+        }
+        .plan-card .price {
+            font-size: 2.4rem;
+            font-weight: 800;
+            margin: 0.5rem 0;
+        }
+        .plan-card .price small { font-size: 1rem; font-weight: 400; }
+        .plan-card .per-day {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.8rem;
+        }
+        .plan-card ul {
+            list-style: none;
+            text-align: left;
+            margin: 1rem 0;
+            flex-grow: 1;
+        }
+        .plan-card ul li {
+            padding: 0.3rem 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .plan-card ul li::before {
+            content: "✓";
+            color: var(--green);
+            font-weight: 700;
+        }
+        .plan-card .btn { width: 100%; justify-content: center; }
+        @media (max-width: 700px) {
+            .plans-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ===== FAQ ===== */
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .faq details {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 0.8rem 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+        .faq details summary {
+            font-weight: 600;
+            cursor: pointer;
+            list-style: none;
+        }
+        .faq details summary::-webkit-details-marker { display: none; }
+        .faq details summary::after {
+            content: "▸";
+            float: right;
+            transition: transform 0.2s;
+        }
+        .faq details[open] summary::after { transform: rotate(90deg); }
+        .faq details p {
+            margin-top: 0.8rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        @media (max-width: 700px) {
+            .faq-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ===== CLUSTERS (diretório de links) ===== */
         .search-box {
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             display: flex;
             gap: 0.5rem;
             max-width: 500px;
@@ -143,42 +413,32 @@
             border: 1px solid var(--border-color);
             background: var(--bg-surface);
             color: var(--text-main);
-            font-family: var(--font-sans);
             font-size: 0.95rem;
             outline: none;
             transition: border 0.2s;
         }
-        .search-box input:focus {
-            border-color: var(--accent);
-        }
-        .search-box input::placeholder {
-            color: var(--text-muted);
-        }
+        .search-box input:focus { border-color: var(--accent); }
+        .search-box input::placeholder { color: var(--text-muted); }
 
-        /* Grid de categorias */
         .category-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.8rem;
-            margin-bottom: 3rem;
+            gap: 1.5rem;
         }
         .category-card {
             background: var(--bg-surface);
             border: 1px solid var(--border-color);
             border-radius: var(--radius);
             padding: 1.5rem;
-            transition: border-color 0.2s, transform 0.15s;
+            transition: border-color 0.2s;
         }
-        .category-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-2px);
-        }
+        .category-card:hover { border-color: var(--accent); }
         .category-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
         }
         .category-card h3 .badge {
             background: var(--accent);
@@ -193,8 +453,6 @@
             font-size: 0.9rem;
             margin-bottom: 1rem;
         }
-
-        /* Accordion */
         .accordion {
             margin-top: 0.5rem;
         }
@@ -213,20 +471,13 @@
             transition: 0.2s;
             user-select: none;
         }
-        .accordion-header:hover {
-            background: var(--bg-surface-hover);
-        }
-        .accordion-header .arrow {
-            transition: transform 0.25s;
-        }
-        .accordion-header.open .arrow {
-            transform: rotate(90deg);
-        }
+        .accordion-header:hover { background: var(--bg-surface-hover); }
+        .accordion-header .arrow { transition: transform 0.25s; }
+        .accordion-header.open .arrow { transform: rotate(90deg); }
         .accordion-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.35s ease, padding 0.2s ease;
-            padding: 0 0.2rem;
+            transition: max-height 0.35s ease;
         }
         .accordion-content.open {
             max-height: 600px;
@@ -262,79 +513,273 @@
             font-weight: 700;
             margin-right: 4px;
         }
-        .accordion-content ul li a:hover {
-            color: var(--text-main);
-        }
+        .accordion-content ul li a:hover { color: var(--text-main); }
 
-        /* Footer */
+        /* ===== FINAL CTA ===== */
+        .final-cta {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin: 3rem 0;
+        }
+        .final-cta h2 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .final-cta p { color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem; }
+
+        /* ===== FOOTER ===== */
         footer {
             border-top: 1px solid var(--border-color);
             padding: 2.5rem 0;
-            margin-top: 3rem;
+            margin-top: 2rem;
             text-align: center;
             color: var(--text-muted);
             font-size: 0.85rem;
         }
-        footer a {
-            color: var(--accent);
-            text-decoration: none;
-        }
+        footer a { color: var(--accent); }
 
+        /* ===== RESPONSIVO ===== */
         @media (max-width: 700px) {
+            body { padding: 0 1rem; }
             .hero h1 { font-size: 2.2rem; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .steps-grid { grid-template-columns: 1fr; }
             .category-grid { grid-template-columns: 1fr; }
             .accordion-content ul li { width: 100%; }
+            .final-cta { padding: 2rem 1rem; }
         }
     </style>
 </head>
 <body>
 
-<header>
+<!-- ===== HEADER ===== -->
+<header class="wrap">
     <a href="/protocolo-hidra/" class="logo">Wiki<span>vendas</span></a>
-    <a href="mailto:contato@pauloleads.com.br" class="btn-primary">Falar com Consultor</a>
+    <a href="https://wa.me/5519982642481" target="_blank" class="btn-whatsapp">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        Fale com consultor
+    </a>
 </header>
 
 <main>
+    <!-- ===== HERO ===== -->
     <section class="hero">
-        <h1>Ontologia Comercial &amp; Dados B2B</h1>
+        <h1>Inteligência Comercial &amp; Dados B2B</h1>
         <p>Diretório completo do ecossistema <strong>Protocolo Hidra</strong> — listas empresariais, ferramentas de consulta, guias de prospecção e comparativos. Tudo o que você precisa para estruturar sua operação de vendas.</p>
         <div class="hero-ctas">
-            <a href="#categorias" class="btn-primary">Explorar Categorias</a>
-            <a href="https://pauloleads.com.br" class="btn-secondary" target="_blank">Paulo Leads</a>
+            <a href="#clusters" class="btn-primary">Explorar diretório</a>
+            <a href="https://wa.me/5519982642481" target="_blank" class="btn-secondary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                Fale no WhatsApp
+            </a>
+        </div>
+        <div class="trust-badges">
+            <span>Dados públicos oficiais</span>
+            <span>+21 milhões de empresas</span>
+            <span>Cobertura nacional</span>
+            <span>Pagamento único</span>
         </div>
     </section>
 
-    <section id="categorias" class="container">
-        <h2 class="section-title">/ Clusters Semânticos</h2>
-        <div class="stats" id="stats">Carregando...</div>
+    <!-- ===== STATS ===== -->
+    <div class="wrap stats-strip">
+        <div class="stats-grid">
+            <div class="stat-item"><strong>21,7 mi</strong><span>empresas ativas</span></div>
+            <div class="stat-item"><strong>15 k</strong><span>clientes atendidos</span></div>
+            <div class="stat-item"><strong>30 mi</strong><span>contatos comerciais</span></div>
+            <div class="stat-item"><strong>7 mi</strong><span>listas geradas</span></div>
+        </div>
+    </div>
 
-        <!-- Busca -->
+    <!-- ===== COMO FUNCIONA ===== -->
+    <section class="section wrap">
+        <div class="section-head">
+            <span class="kicker">Metodologia</span>
+            <h2>Monte sua lista e comece a vender em 4 passos</h2>
+            <p>Escolha o público, refine com filtros avançados, baixe empresas com contatos e use a lista para iniciar novas conversas comerciais.</p>
+        </div>
+        <div class="steps-grid">
+            <div class="step-card"><div class="num">01</div><h3>Defina o público-alvo</h3><p>Escolha segmento, CNAE, UF, cidade ou bairro para encontrar empresas que combinam com sua oferta.</p></div>
+            <div class="step-card"><div class="num">02</div><h3>Aplique filtros avançados</h3><p>Refine por porte, abertura, capital social, Simples Nacional, MEI, matriz ou filial e outros critérios.</p></div>
+            <div class="step-card"><div class="num">03</div><h3>Veja a prévia e baixe a lista</h3><p>Confira os dados disponíveis e exporte empresas com CNPJ, endereço, telefones e e-mails.</p></div>
+            <div class="step-card"><div class="num">04</div><h3>Comece a vender</h3><p>Leve os contatos para seu CRM, WhatsApp, e-mail ou rotina comercial e comece novas abordagens.</p></div>
+        </div>
+    </section>
+
+    <!-- ===== VÍDEO PLACEHOLDER ===== -->
+    <section class="wrap">
+        <div class="video-placeholder">
+            <div class="play-btn">▶</div>
+            <p style="font-weight: 600; margin-bottom: 0.3rem;">Vídeo demonstrativo da plataforma</p>
+            <p style="font-size: 0.9rem;">Substitua este bloco pelo seu vídeo ou imagem de apresentação.</p>
+            <div style="background: var(--bg-base); padding: 1rem; border-radius: 8px; margin-top: 0.5rem; color: var(--text-muted);">(placeholder para mídia)</div>
+        </div>
+    </section>
+
+    <!-- ===== CASOS DE USO ===== -->
+    <section class="section wrap">
+        <div class="section-head">
+            <span class="kicker">Para quem vende para empresas</span>
+            <h2>Use o diretório em diferentes estratégias de prospecção</h2>
+            <p>Empresas, times comerciais, agências e representantes usam filtros por local, segmento e perfil para montar listas que alimentam prospecção, campanhas, telemarketing, WhatsApp, CRM, visitas presenciais e novas parcerias.</p>
+        </div>
+        <div class="use-grid">
+            <div class="use-card"><div class="icon">🏢</div><h3>Empresário</h3><p>Mapeie empresas por cidade e segmento para vender diretamente, abrir novas regiões e priorizar abordagens com maior chance de interesse.</p><ul><li>Prospecção local</li><li>WhatsApp comercial</li><li>Visitas presenciais</li></ul></div>
+            <div class="use-card"><div class="icon">📊</div><h3>Gerente de vendas</h3><p>Crie listas para SDRs, vendedores e telemarketing, separando contas por região, porte e atividade antes de subir para o CRM.</p><ul><li>Abastecer CRM</li><li>Telemarketing ativo</li><li>Carteiras por praça</li></ul></div>
+            <div class="use-card"><div class="icon">📈</div><h3>Gestor de tráfego</h3><p>Monte recortes de empresas por nicho, cidade e perfil para planejar campanhas B2B, públicos personalizados e ações de geração de demanda.</p><ul><li>Campanhas locais</li><li>Públicos B2B</li><li>Segmentos por CNAE</li></ul></div>
+            <div class="use-card"><div class="icon">🎯</div><h3>Agência de publicidade</h3><p>Use a base para prospectar novos clientes, montar campanhas de e-mail marketing, WhatsApp marketing e ações segmentadas para contas atendidas.</p><ul><li>E-mail marketing</li><li>WhatsApp marketing</li><li>Campanhas para clientes</li></ul></div>
+            <div class="use-card"><div class="icon">🧑‍💼</div><h3>Empresa de RH</h3><p>Encontre empresas para oferecer recrutamento, seleção, benefícios, treinamentos, medicina ocupacional ou soluções de RH por região, setor e porte.</p><ul><li>Recrutamento B2B</li><li>Benefícios corporativos</li><li>Treinamentos</li></ul></div>
+            <div class="use-card"><div class="icon">🤝</div><h3>Representante</h3><p>Encontre empresas por região, segmento e perfil para abrir novas contas, apresentar soluções e ampliar a carteira de clientes.</p><ul><li>Novos clientes</li><li>Carteira por região</li><li>Parcerias comerciais</li></ul></div>
+        </div>
+    </section>
+
+    <!-- ===== PLANOS ===== -->
+    <section class="section wrap" id="planos">
+        <div class="section-head">
+            <span class="kicker">Planos e preços</span>
+            <h2>Escolha seu plano e comece a baixar empresas</h2>
+            <p>Todos incluem todos os filtros, exportação para CSV e CRM e os contatos das empresas. Pagamento único, sem mensalidade.</p>
+        </div>
+        <div class="plans-grid">
+            <div class="plan-card">
+                <span class="badge">Validação rápida</span>
+                <h3>30 Dias</h3>
+                <div class="price"><small>R$</small>97</div>
+                <div class="per-day">MENOS DE R$3,25 POR DIA</div>
+                <p style="font-weight:700;margin:0.5rem 0;">150.000 empresas</p>
+                <ul>
+                    <li>Acesso completo por 30 dias</li>
+                    <li>Mais de 21,7 milhões de empresas ativas</li>
+                    <li>Base atualizada continuamente</li>
+                    <li>Filtros por CNAE, localização, porte e mais</li>
+                    <li>Telefones e e-mails disponíveis</li>
+                    <li>Exportação em CSV e CRM</li>
+                    <li>Suporte por e-mail e WhatsApp</li>
+                    <li>Pagamento único, sem mensalidade</li>
+                    <li>Garantia de devolução até 7 dias</li>
+                </ul>
+                <a href="https://wa.me/5519982642481" target="_blank" class="btn-primary btn">Quero esse plano</a>
+            </div>
+            <div class="plan-card featured">
+                <span class="badge" style="background:var(--accent);color:#fff;">Mais escolhido</span>
+                <h3>180 Dias</h3>
+                <div class="price"><small>R$</small>297</div>
+                <div class="per-day">75% OFF · SÓ R$1,65 POR DIA</div>
+                <p style="font-weight:700;margin:0.5rem 0;">1.800.000 empresas</p>
+                <ul>
+                    <li>Acesso completo por 180 dias</li>
+                    <li>Mais de 21,7 milhões de empresas ativas</li>
+                    <li>Base atualizada continuamente</li>
+                    <li>Filtros por CNAE, localização, porte e mais</li>
+                    <li>Telefones e e-mails disponíveis</li>
+                    <li>Exportação em CSV e CRM</li>
+                    <li>Suporte por e-mail e WhatsApp</li>
+                    <li>Pagamento único, sem mensalidade</li>
+                    <li>Garantia de devolução até 7 dias</li>
+                </ul>
+                <a href="https://wa.me/5519982642481" target="_blank" class="btn-primary btn">Quero esse plano</a>
+            </div>
+            <div class="plan-card">
+                <span class="badge" style="background:var(--gold);color:#000;">Melhor custo-benefício</span>
+                <h3>365 Dias</h3>
+                <div class="price"><small>R$</small>497</div>
+                <div class="per-day">SEU ANO DE PROSPECÇÃO RESOLVIDO</div>
+                <p style="font-weight:700;margin:0.5rem 0;">5.475.000 empresas</p>
+                <ul>
+                    <li>Acesso completo por 365 dias</li>
+                    <li>Mais de 21,7 milhões de empresas ativas</li>
+                    <li>Base atualizada continuamente</li>
+                    <li>Filtros por CNAE, localização, porte e mais</li>
+                    <li>Telefones e e-mails disponíveis</li>
+                    <li>Exportação em CSV e CRM</li>
+                    <li>Suporte por e-mail e WhatsApp</li>
+                    <li>Pagamento único, sem mensalidade</li>
+                    <li>Garantia de devolução até 7 dias</li>
+                </ul>
+                <a href="https://wa.me/5519982642481" target="_blank" class="btn-primary btn">Quero esse plano</a>
+            </div>
+        </div>
+        <div style="text-align:center;margin-top:1rem;color:var(--text-muted);font-size:0.9rem;">
+            <span style="display:inline-flex;align-items:center;gap:0.5rem;">✔ Pagamento seguro · ✔ Acesso liberado na hora · ✔ Reembolso integral em até 7 dias</span>
+        </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="section wrap" id="faq">
+        <div class="section-head">
+            <span class="kicker">Dúvidas antes de acessar</span>
+            <h2>Tire as últimas dúvidas</h2>
+            <p>Veja respostas sobre planos, créditos, exportação, acesso e pagamento antes de escolher a melhor opção para sua prospecção.</p>
+        </div>
+        <div class="faq-grid">
+            <div class="faq">
+                <details><summary>É legal usar essas listas? E a LGPD?</summary><p>Sim. É legal usar listas de empresas para prospecção B2B quando os dados têm origem pública e o uso respeita uma finalidade comercial legítima. A base reúne dados públicos oficiais de empresas para apoiar abordagens entre empresas; como boa prática, recomendamos identificar sua empresa na abordagem e respeitar pedidos de descadastro.</p></details>
+                <details><summary>Os dados são atualizados?</summary><p>Sim. A base de dados é atualizada continuamente de forma automática a partir de fontes públicas oficiais, para manter as listas de empresas o mais úteis possível para prospecção B2B.</p></details>
+                <details><summary>Existe mensalidade?</summary><p>Não. Os planos são de pagamento único para o período escolhido, com Cartão, Pix ou Boleto, sem mensalidade e sem renovação automática.</p></details>
+                <details><summary>Quando o acesso é liberado?</summary><p>O acesso é liberado imediatamente após a confirmação do pagamento.</p></details>
+                <details><summary>Quantas empresas posso baixar por dia?</summary><p>Depende do plano: 30 dias libera até 5.000 empresas por dia, 180 dias até 10.000 por dia e 365 dias até 15.000 por dia.</p></details>
+            </div>
+            <div class="faq">
+                <details><summary>Os créditos não usados acumulam?</summary><p>Não. Os créditos de download são renovados todos os dias à meia-noite, no horário de Brasília, conforme o limite do plano. Os créditos não utilizados no dia não são cumulativos.</p></details>
+                <details><summary>CNPJ já baixado consome crédito novamente?</summary><p>Não. CNPJs que você já exportou ficam no histórico da sua conta e não consomem crédito novo quando forem baixados novamente.</p></details>
+                <details><summary>Os dados podem ser exportados?</summary><p>Sim. Você pode exportar as listas em Excel/CSV e em formatos compatíveis com HubSpot, Pipedrive e Zoho CRM. Também é possível gerar etiquetas para mala direta.</p></details>
+                <details><summary>Qual o diferencial do serviço?</summary><p>Unir volume, filtros comerciais e custo-benefício em um modelo de pagamento único. O plano de R$97 permite baixar até 150.000 empresas ao longo de 30 dias, sem mensalidade.</p></details>
+                <details><summary>Quais filtros posso usar?</summary><p>Você pode filtrar por CNAE principal e secundário, setor, UF, cidade, bairro, CNPJ, razão social ou fantasia, natureza jurídica, matriz ou filial, porte, Simples Nacional, MEI, data de abertura e capital social.</p></details>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CLUSTERS (Diretório de Links) ===== -->
+    <section class="section wrap" id="clusters">
+        <div class="section-head">
+            <span class="kicker">Diretório completo</span>
+            <h2>Clusters Semânticos do Protocolo Hidra</h2>
+            <p>Navegue por categorias e encontre todas as páginas do ecossistema Wikivendas.</p>
+        </div>
+
+        <div class="stats" id="stats">Carregando...</div>
         <div class="search-box">
             <input type="text" id="searchInput" placeholder="Filtrar links (ex: clínicas, CRM, SP...)" />
         </div>
-
         <div id="categoryGrid" class="category-grid">
             <!-- Renderizado por JavaScript -->
         </div>
     </section>
+
+    <!-- ===== FINAL CTA ===== -->
+    <div class="wrap final-cta">
+        <h2>Pronto para transformar dados em pipeline?</h2>
+        <p>Fale com um consultor e descubra como o Protocolo Hidra pode alavancar suas vendas B2B.</p>
+        <a href="https://wa.me/5519982642481" target="_blank" class="btn-whatsapp" style="padding: 0.8rem 2.5rem; font-size: 1.1rem;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            Falar no WhatsApp
+        </a>
+    </div>
 </main>
 
-<footer>
+<!-- ===== FOOTER ===== -->
+<footer class="wrap">
     <p>&copy; 2026 Wikivendas &amp; Paulo Leads · Protocolo Hidra v5.0</p>
     <p style="margin-top:0.3rem;">Ontologia de Soberania de Dados · <a href="/protocolo-hidra/glossario.json">Glossário JSON</a></p>
 </footer>
 
 <script>
-    // ------------------------------------------------------------
-    // 1. BASE URL (ajuste se o repositório tiver outro nome)
-    // ------------------------------------------------------------
+    // ============================================================
+    // BASE PATH (ajuste se o repositório tiver outro nome)
+    // ============================================================
     const BASE_PATH = '/protocolo-hidra/';
 
-    // ------------------------------------------------------------
-    // 2. LISTA COMPLETA DE LINKS (extraída do seu `git ls-files`)
-    //    Mantenha esta lista atualizada quando adicionar novas páginas.
-    // ------------------------------------------------------------
+    // ============================================================
+    // LISTA DE LINKS — COLE AQUI A SAÍDA DO `git ls-files`
+    // Exemplo:
+    // const allLinks = [
+    //   "alternativa-econodata/index.html",
+    //   "b2b-o-que-e/index.html",
+    //   ...
+    // ];
+    // ============================================================
     const allLinks = [
+        // <-- COLE AQUI TODOS OS LINKS (um por linha, entre aspas)
         "alternativa-econodata/index.html",
         "alternativa-speedio/index.html",
         "b2b-e-b2c/index.html",
@@ -1009,9 +1454,9 @@
         "vitor-azevedo/index.html"
     ];
 
-    // ------------------------------------------------------------
-    // 3. AGRUPAMENTO DINÂMICO
-    // ------------------------------------------------------------
+    // ============================================================
+    // LÓGICA DE AGRUPAMENTO E RENDERIZAÇÃO
+    // ============================================================
     function categorizeLinks(links) {
         const categories = {
             'Ferramentas de Consulta': { icon: '🔍', match: /^consulta-|^cartao-cnpj|^certidao|^dados-cadastrais|^redesim|^situacao-cadastral|^consultar-/, links: [] },
@@ -1038,7 +1483,6 @@
             }
         });
 
-        // Remove categorias vazias (exceto Outros)
         for (const key of Object.keys(categories)) {
             if (key !== 'Outros' && categories[key].links.length === 0) {
                 delete categories[key];
@@ -1047,11 +1491,7 @@
         return categories;
     }
 
-    // ------------------------------------------------------------
-    // 4. FUNÇÃO PARA CONSTRUIR URL LIMPA (sem index.html)
-    // ------------------------------------------------------------
     function cleanUrl(link) {
-        // Remove /index.html do final e adiciona barra
         let slug = link.replace(/\/index\.html$/, '');
         if (!slug.endsWith('/')) slug += '/';
         return BASE_PATH + slug;
@@ -1061,31 +1501,23 @@
         let name = link.replace(/\/index\.html$/, '')
                        .replace(/-/g, ' ')
                        .replace(/\b\w/g, l => l.toUpperCase());
-        // Trata alguns casos especiais
-        name = name.replace(/E /g, 'e '); // "B2B E B2C" vira "B2B e B2C"
+        name = name.replace(/E /g, 'e ');
         name = name.replace(/De /g, 'de ');
         name = name.replace(/Da /g, 'da ');
         name = name.replace(/Do /g, 'do ');
         return name;
     }
 
-    // ------------------------------------------------------------
-    // 5. RENDERIZAÇÃO E BUSCA
-    // ------------------------------------------------------------
     function renderCategoryGrid(filter = '') {
         const grid = document.getElementById('categoryGrid');
         const stats = document.getElementById('stats');
         const categories = categorizeLinks(allLinks);
-        let totalLinks = 0;
 
         grid.innerHTML = '';
-
-        // Ordena categorias
         const sortedKeys = Object.keys(categories).sort();
-
-        // Filtra os links dentro de cada categoria
         const filteredCategories = {};
         let totalFiltered = 0;
+
         sortedKeys.forEach(key => {
             const cat = categories[key];
             const filteredLinks = cat.links.filter(link => 
@@ -1097,11 +1529,9 @@
             }
         });
 
-        // Atualiza estatísticas
         const total = allLinks.length;
         stats.innerHTML = `📊 <strong>${total}</strong> páginas no diretório · ${filter ? `filtradas: <strong>${totalFiltered}</strong>` : ''}`;
 
-        // Renderiza cards
         Object.keys(filteredCategories).forEach(key => {
             const cat = filteredCategories[key];
             const card = document.createElement('div');
@@ -1115,7 +1545,6 @@
             desc.textContent = `Acesse as ${cat.links.length} páginas relacionadas a ${key.toLowerCase()}.`;
             card.appendChild(desc);
 
-            // Accordion
             const accordion = document.createElement('div');
             accordion.className = 'accordion';
 
@@ -1152,18 +1581,13 @@
             grid.appendChild(card);
         });
 
-        // Se nenhum resultado
         if (totalFiltered === 0 && filter) {
             grid.innerHTML = `<p style="color:var(--text-muted);text-align:center;padding:3rem 0;">Nenhum link encontrado para "<strong>${filter}</strong>".</p>`;
         }
     }
 
-    // ------------------------------------------------------------
-    // 6. INICIALIZAÇÃO
-    // ------------------------------------------------------------
     document.addEventListener('DOMContentLoaded', () => {
         renderCategoryGrid();
-
         const searchInput = document.getElementById('searchInput');
         searchInput.addEventListener('input', (e) => {
             renderCategoryGrid(e.target.value.trim());
@@ -1171,109 +1595,8 @@
     });
 </script>
 
-<!-- Substitua este bloco pelo seu JSON-LD completo -->
+<!-- ===== SCHEMA.ORG (substitua pelo seu JSON-LD completo) ===== -->
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "@id": "https://leadjet.com.br/outbound-vs-inbound/#article",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://leadjet.com.br/outbound-vs-inbound/"
-  },
-  "headline": "Outbound vs inbound: a diferença, os prós e contras e quando usar cada um",
-  "description": "Comparação entre outbound (abordagem ativa, lista, cadência) e inbound (atração, conteúdo, SEO) em vendas B2B: definição de cada, prós e contras, custo, velocidade, escala, previsibilidade e quando combinar os dois.",
-  "url": "https://leadjet.com.br/outbound-vs-inbound/",
-  "inLanguage": "pt-BR",
-  "image": [
-    "https://leadjet.com.br/assets/img/leadjet-painel-novo-1200.png"
-  ],
-  "datePublished": "2026-05-28",
-  "dateModified": "2026-06-28",
-  "author": {
-    "@type": "Person",
-    "name": "Vitor Azevedo",
-    "jobTitle": "Analista B2B",
-    "url": "https://leadjet.com.br/vitor-azevedo/",
-    "worksFor": {
-      "@id": "https://leadjet.com.br/#organization"
-    },
-    "knowsAbout": [
-      "outbound",
-      "inbound",
-      "prospecção B2B",
-      "geração de leads",
-      "cadência de vendas"
-    ]
-  },
-  "publisher": {
-    "@type": "Organization",
-    "@id": "https://leadjet.com.br/#organization",
-    "name": "Leadjet",
-    "alternateName": "LeadJet",
-    "url": "https://leadjet.com.br/",
-    "logo": {
-      "@type": "ImageObject",
-      "@id": "https://leadjet.com.br/#logo",
-      "url": "https://leadjet.com.br/assets/img/leadjet-logo-2.png"
-    },
-    "sameAs": [
-      "https://www.instagram.com/leadjet/"
-    ]
-  },
-  "about": [
-    {
-      "@type": "Thing",
-      "name": "outbound vs inbound"
-    },
-    {
-      "@type": "Thing",
-      "name": "prospecção outbound"
-    },
-    {
-      "@type": "Thing",
-      "name": "inbound marketing"
-    },
-    {
-      "@type": "Thing",
-      "name": "vendas B2B"
-    }
-  ],
-  "speakable": {
-    "@type": "SpeakableSpecification",
-    "cssSelector": [
-      "#resposta-rapida .mbx-answer p",
-      "#o-que-e p"
-    ]
-  }
-}
-</script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "name": "Critérios de comparação entre outbound e inbound",
-    "itemListElement": [
-      {"@type": "ListItem", "position": 1, "name": "Como começa o contato"},
-      {"@type": "ListItem", "position": 2, "name": "Custo"},
-      {"@type": "ListItem", "position": 3, "name": "Velocidade até o primeiro resultado"},
-      {"@type": "ListItem", "position": 4, "name": "Escala"},
-      {"@type": "ListItem", "position": 5, "name": "Previsibilidade"}
-    ]
-  }
-
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>schema do paulo leads<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-Modelo para criação dos Schemas mínimo 6 itens faltou o definedterm
-
-HowTo
-Organization
-BreadcrumbList
-WebSite
-FAQPage
-DefinedTermSet
-
-
 {
   "@context": "https://schema.org",
   "@graph": [
@@ -1935,7 +2258,8 @@ DefinedTermSet
     }
   ]
 }
+  ]
+}
 </script>
-
 </body>
 </html>
