@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Como importar lista de empresas no Pipedrive: passo a passo (2026) | ProtocoloHidra</title>
+  <meta name="description" content="Guia 2026 de como importar uma lista de empresas no Pipedrive: baixe o CSV no layout do Pipedrive na ProtocoloHidra, importe como Organizações usando o CNPJ como chave, mapeie os campos, deduplique e vincule as Pessoas. Inclui mapeamento de campos pronto e os erros comuns. Pague por lista, sem mensalidade.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://paulo-leads.github.io/protocolo-hidra/como-importar-lista-de-empresas-no-pipedrive/">
+  <link rel="icon" href="/protocolo-hidra/favicon.ico?v=20260622" sizes="any">
+  <link rel="shortcut icon" href="/protocolo-hidra/favicon.ico?v=20260622">
+  <link rel="icon" type="image/png" href="/protocolo-hidra/assets/favicon.png?v=20260622">
+  <link rel="apple-touch-icon" href="/protocolo-hidra/assets/favicon.png?v=20260622">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Como importar lista de empresas no Pipedrive: passo a passo (2026)">
+  <meta property="og:description" content="Baixe a lista no layout do Pipedrive na ProtocoloHidra e importe como Organizações usando o CNPJ como chave. Mapeamento de campos pronto, deduplicação e vínculo de Pessoas. Pague por lista, sem mensalidade.">
+  <meta property="og:url" content="https://paulo-leads.github.io/protocolo-hidra/como-importar-lista-de-empresas-no-pipedrive/">
+  <meta property="og:site_name" content="ProtocoloHidra">
+  <meta property="og:image" content="https://paulo-leads.github.io/protocolo-hidra/assets/img/protocolo-hidra-painel-1200.png">
+  <meta property="og:image:alt" content="Painel ProtocoloHidra para baixar listas de empresas no layout do Pipedrive">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Como importar lista de empresas no Pipedrive: passo a passo (2026)">
+  <meta name="twitter:description" content="Importe sua lista de empresas no Pipedrive como Organizações, com o CNPJ como chave, mapeamento pronto e deduplicação. Pague por lista, sem mensalidade.">
+  <meta name="twitter:image" content="https://paulo-leads.github.io/protocolo-hidra/assets/img/protocolo-hidra-painel-1200.png">
+  <meta name="twitter:image:alt" content="Painel ProtocoloHidra para baixar listas de empresas no layout do Pipedrive">
+
+  
+  
+  <style type="text/css">@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/cyrillic-ext/wght/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/cyrillic/wght/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/greek-ext/wght/normal.woff2);unicode-range:U+1F00-1FFF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/vietnamese/wght/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:400;src:url(/cf-fonts/v/inter/5.2.8/greek/wght/normal.woff2);unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/cyrillic/wght/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/vietnamese/wght/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/greek/wght/normal.woff2);unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/cyrillic-ext/wght/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:500;src:url(/cf-fonts/v/inter/5.2.8/greek-ext/wght/normal.woff2);unicode-range:U+1F00-1FFF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/cyrillic/wght/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/cyrillic-ext/wght/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/greek-ext/wght/normal.woff2);unicode-range:U+1F00-1FFF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/vietnamese/wght/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:600;src:url(/cf-fonts/v/inter/5.2.8/greek/wght/normal.woff2);unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/cyrillic-ext/wght/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/cyrillic/wght/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/greek-ext/wght/normal.woff2);unicode-range:U+1F00-1FFF;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/vietnamese/wght/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Inter;font-style:normal;font-weight:700;src:url(/cf-fonts/v/inter/5.2.8/greek/wght/normal.woff2);unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;font-display:swap;}@font-face {font-family:Sora;font-style:normal;font-weight:600;src:url(/cf-fonts/v/sora/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Sora;font-style:normal;font-weight:600;src:url(/cf-fonts/v/sora/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Sora;font-style:normal;font-weight:700;src:url(/cf-fonts/v/sora/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Sora;font-style:normal;font-weight:700;src:url(/cf-fonts/v/sora/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Sora;font-style:normal;font-weight:800;src:url(/cf-fonts/v/sora/5.2.8/latin-ext/wght/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:Sora;font-style:normal;font-weight:800;src:url(/cf-fonts/v/sora/5.2.8/latin/wght/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}</style>
+  <style data-mbx>.mbx{--navy:#0B2545;--navy-2:#11315c;--navy-deep:#071a33;--blue:#1D4ED8;--blue-2:#3B82F6;--emerald:#10B981;--emerald-d:#047857;--teal:#4CD1A6;--ink:#0F172A;--body:#334155;--muted:#64748B;--line:#E2E8F0;--line-2:#EAEFF6;--surf:#F7F9FC;--surf-2:#EEF3FB;--white:#fff;--r:14px;--r-sm:10px;--r-lg:18px;--sh:0 10px 30px rgba(15,23,42,.06);--sh-lg:0 24px 60px rgba(15,23,42,.10);--wrap:1120px;--read:700px;margin:0;font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;color:var(--body);line-height:1.7;background:var(--surf);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}.mbx *,.mbx *::before,.mbx *::after{box-sizing:border-box}.mbx h1,.mbx h2,.mbx h3,.mbx h4{font-family:'Sora',Inter,sans-serif;color:var(--ink);line-height:1.16;margin:0;letter-spacing:-.02em}.mbx p{margin:0 0 1rem}.mbx a{color:var(--blue);text-decoration:none}.mbx a:hover{text-decoration:underline}.mbx img{max-width:100%;height:auto}.mbx strong{color:var(--ink)}.mbx .wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}.mbx .col{max-width:var(--read);margin-inline:auto}.mbx .num{font-variant-numeric:tabular-nums}.mbx .eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}.mbx .eyebrow i{font-size:1rem}.mbx .site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line-2)}.mbx .header-inner{max-width:var(--wrap);margin:0 auto;padding:0 24px;height:68px;display:flex;align-items:center;justify-content:space-between;gap:1rem}.mbx .header-inner .logo{display:inline-flex;align-items:center}.mbx .header-inner .logo img{height:34px;width:auto;display:block}.mbx .header-nav{display:flex;align-items:center;gap:1.5rem;font-size:.95rem;font-weight:500}.mbx .header-nav a{color:var(--body)}.mbx .header-nav a:hover{color:var(--ink);text-decoration:none}.mbx .btn-header{background:var(--surf-2);color:var(--blue);border:1px solid #dbe6fb;border-radius:11px;padding:.55rem 1.05rem;font-weight:600}.mbx .btn-header:hover{background:#e2ecfb;text-decoration:none}.mbx .menu-toggle{display:none;background:none;border:0;font-size:1.5rem;color:var(--ink);cursor:pointer;line-height:1;padding:4px 8px}.mbx .breadcrumb{margin-bottom:26px;font-size:.82rem}.mbx .breadcrumb ol{list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin:0;padding:0;color:#9fb6d6}.mbx .breadcrumb li{display:flex;align-items:center;gap:.5rem}.mbx .breadcrumb li+li::before{content:"\203A";color:#5f7da6;font-size:1.1em;line-height:1}.mbx .breadcrumb a{color:#9fb6d6}.mbx .breadcrumb a:hover{color:#fff;text-decoration:none}.mbx .breadcrumb [aria-current="page"] span{color:#dbe7f7;font-weight:600}.mbx .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:600;border-radius:11px;padding:.75rem 1.25rem;font-size:.97rem;cursor:pointer;border:1px solid transparent;transition:.18s;text-decoration:none;line-height:1.2}.mbx .btn:hover{text-decoration:none}.mbx .btn-primary{background:var(--navy);color:#fff}.mbx .btn-primary:hover{background:var(--blue);color:#fff}.mbx .btn-ghost{background:var(--surf-2);color:var(--blue);border-color:#dbe6fb}.mbx .btn-ghost:hover{background:#e2ecfb}.mbx .hero{position:relative;overflow:hidden;color:#dbe7f7;background:radial-gradient(1200px 500px at 80% -10%,#16407a 0%,transparent 60%),linear-gradient(160deg,#0B2545 0%,#11315c 100%)}.mbx .hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(700px 300px at 15% 110%,rgba(76,209,166,.18),transparent 60%)}.mbx .hero .wrap{position:relative;z-index:2;padding:40px 24px 92px}.mbx .hero .eyebrow{color:#7fd9bd}.mbx .hero h1{color:#fff;font-size:clamp(34px,5vw,54px);font-weight:800;margin:18px 0 0;max-width:20ch}.mbx .hero .lead{font-size:1.18rem;color:#c3d4ea;max-width:60ch;margin:18px 0 22px}.mbx .hero .byline{font-size:.85rem;color:#9fb6d6;margin:0 0 26px}.mbx .hero .byline strong{color:#fff;font-weight:600}.mbx .hero-cta{display:flex;gap:.8rem;flex-wrap:wrap}.mbx .hero .btn-primary{background:#fff;color:var(--navy)}.mbx .hero .btn-primary:hover{background:var(--teal);color:var(--navy)}.mbx .hero .btn-ghost{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.22)}.mbx .hero .btn-ghost:hover{background:rgba(255,255,255,.16)}.mbx .signals{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:46px}.mbx .signal{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:18px 20px}.mbx .signal strong{display:block;font-family:'Sora';font-size:1.7rem;font-weight:800;color:#fff}.mbx .signal.up strong{color:#7fe7c4}.mbx .signal span{font-size:.9rem;color:#aec5e2}.mbx .band{padding:68px 0}.mbx .band--alt{background:var(--white)}.mbx .kicker{margin-bottom:28px}.mbx .kicker h2{font-size:clamp(26px,3.4vw,36px);font-weight:800;margin:10px 0 8px}.mbx .kicker p{font-size:1.08rem;color:var(--body);max-width:64ch}.mbx .lead-p{font-size:1.12rem;max-width:72ch}.mbx .body-p{max-width:72ch}.mbx .band h3{font-size:1.15rem;margin:18px 0 8px}.mbx .answer{display:flex;gap:18px;align-items:flex-start;background:linear-gradient(135deg,#f4f8fd,#eaf1fb);border:1px solid #d7e3f2;border-left:4px solid var(--blue);border-radius:0 var(--r) var(--r) 0;padding:24px 26px;max-width:var(--read)}.mbx .answer .ic{flex:0 0 auto;width:44px;height:44px;border-radius:12px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:1.4rem}.mbx .answer p{margin:0;font-size:1.08rem}.mbx .answer b{color:var(--navy)}.mbx .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:26px}.mbx .card{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:24px;box-shadow:var(--sh);transition:.2s}.mbx .card:hover{transform:translateY(-3px);box-shadow:var(--sh-lg);border-color:#cfe0f5}.mbx .card .ic{width:46px;height:46px;border-radius:12px;background:var(--surf-2);color:var(--blue);display:grid;place-items:center;font-size:1.45rem;margin-bottom:14px}.mbx .card h3{font-size:1.12rem;margin:0 0 6px}.mbx .card p{margin:0;font-size:.98rem;color:var(--muted)}.mbx .steps{list-style:none;counter-reset:step;margin:26px auto 0;padding:0;display:grid;gap:14px;max-width:var(--read)}.mbx .steps li{counter-increment:step;display:flex;gap:16px;background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;box-shadow:var(--sh)}.mbx .steps li::before{content:counter(step);flex:0 0 auto;width:34px;height:34px;border-radius:9px;background:var(--navy);color:#fff;font-family:'Sora';font-weight:800;display:grid;place-items:center;font-size:1rem}.mbx .steps b{display:block;color:var(--ink);font-family:'Sora';font-size:1.02rem;margin-bottom:2px}.mbx .steps span{color:var(--muted);font-size:.96rem}.mbx .data{background:var(--navy);color:#cdddf0;border-radius:var(--r-lg);padding:38px;position:relative;overflow:hidden}.mbx .data::after{content:"";position:absolute;right:-80px;top:-80px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(76,209,166,.16),transparent 70%);pointer-events:none}.mbx .data .eyebrow{color:#7fe7c4}.mbx .data h2{color:#fff;font-size:1.7rem;margin:10px 0 6px;position:relative}.mbx .data>p{color:#a9c1de;max-width:62ch;position:relative}.mbx .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:26px 0 28px;position:relative}.mbx .tile{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:18px}.mbx .tile strong{display:block;font-family:'Sora';font-size:1.55rem;font-weight:800;color:#fff}.mbx .tile.up strong{color:#7fe7c4}.mbx .tile span{font-size:.82rem;color:#9fb8d6}.mbx .bars{position:relative;display:grid;gap:15px}.mbx .bar-h{display:flex;justify-content:space-between;align-items:baseline;font-size:.95rem;margin-bottom:6px}.mbx .bar-h b{color:#fff;font-weight:600}.mbx .bar-h em{color:#7fe7c4;font-style:normal;font-weight:800}.mbx .bar-h small{color:#90a8c6;margin-left:8px;font-weight:400}.mbx .track{height:7px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden}.mbx .fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#4cd1a6,#74a4ef)}.mbx .data .grow{color:#a9c1de;margin:24px 0 0;position:relative;font-size:.98rem}.mbx .data .grow b{color:#fff}.mbx .infographic{margin:26px 0 0;text-align:center}.mbx .infographic svg,.mbx .infographic img{width:100%;max-width:720px;height:auto;border-radius:var(--r);box-shadow:var(--sh)}.mbx .infographic figcaption{font-size:.85rem;color:var(--muted);max-width:64ch;margin:14px auto 0}.mbx .embed{max-width:640px;margin:14px auto 0;text-align:left}.mbx .embed summary{cursor:pointer;color:var(--blue);font-weight:600;font-size:.92rem}.mbx .embed textarea{width:100%;margin-top:10px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.78rem;line-height:1.5;border:1px solid var(--line);border-radius:var(--r-sm);padding:12px;background:var(--white);color:var(--body);resize:vertical}.mbx .table-wrap{margin-top:26px;overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--r)}.mbx .cmp-table{width:100%;min-width:560px;border-collapse:separate;border-spacing:0;background:var(--white);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);font-size:.96rem}.mbx .cmp-table caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);border:0}.mbx .cmp-table thead th{font-family:'Sora';font-weight:700;color:#fff;text-align:left;padding:15px 18px;font-size:1rem;vertical-align:middle}.mbx .cmp-table thead th i{margin-right:.4rem;vertical-align:-2px}.mbx .cmp-table thead th:first-child{background:#334155}.mbx .cmp-table thead .th-b2b{background:linear-gradient(120deg,var(--navy),var(--blue))}.mbx .cmp-table thead .th-b2c{background:linear-gradient(120deg,#475569,#64748b)}.mbx .cmp-table th[scope=row]{font-family:'Sora';font-weight:700;color:var(--ink);background:var(--surf);text-align:left;white-space:nowrap}.mbx .cmp-table td,.mbx .cmp-table th[scope=row]{padding:13px 18px;border-top:1px solid var(--line-2);vertical-align:top}.mbx .cmp-table tbody tr:first-child>*{border-top:0}.mbx .cmp-table td{color:var(--body)}.mbx .cmp-table td:nth-child(2){color:var(--ink)}.mbx .pc{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:26px}.mbx .pc-col{border-radius:var(--r);padding:24px;border:1px solid var(--line);background:var(--white)}.mbx .pc-col h3{display:flex;align-items:center;gap:.6rem;font-size:1.08rem;margin:0 0 14px}.mbx .tag{font-size:.68rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:.25rem .55rem;border-radius:7px}.mbx .pc-pos .tag{color:var(--emerald-d);background:#e7f6ee}.mbx .pc-neg .tag{color:#9a5b00;background:#fcf1df}.mbx .pc-col ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}.mbx .pc-col li{display:flex;gap:11px;font-size:.97rem}.mbx .pc-col li i{flex:0 0 auto;font-size:1.15rem}.mbx .pc-pos li i{color:var(--emerald)}.mbx .pc-neg li i{color:#c87f12}.mbx .pc-col li b{color:var(--ink)}.mbx .examples{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:26px}.mbx .ex{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;box-shadow:var(--sh)}.mbx .ex .k{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}.mbx .ex h3{font-size:1.1rem;margin:0 0 6px}.mbx .ex p{margin:0;font-size:.96rem;color:var(--muted)}.mbx .quote{margin:0;background:var(--navy);color:#fff;border-radius:var(--r-lg);padding:46px 52px;position:relative;overflow:hidden}.mbx .quote::before{content:"\201C";position:absolute;left:26px;top:-6px;font-family:Georgia,serif;font-size:130px;line-height:1;color:rgba(127,231,196,.18)}.mbx .quote p{font-family:'Sora';font-weight:700;font-size:1.55rem;line-height:1.4;margin:0;max-width:34ch;position:relative}.mbx .quote cite{display:block;margin-top:16px;font-style:normal;font-size:.92rem;color:#9fb8d6}.mbx .gloss{background:var(--surf-2);border:1px solid var(--line-2);border-radius:var(--r);padding:24px 26px;margin:26px 0 0;max-width:var(--read)}.mbx .gloss>strong{display:block;font-family:'Sora';color:var(--ink);font-size:1.05rem;margin-bottom:12px}.mbx .gloss dl{margin:0;display:grid;gap:10px}.mbx .gloss dt{font-weight:700;color:var(--ink);font-size:.96rem}.mbx .gloss dd{margin:2px 0 0;color:var(--muted);font-size:.94rem}.mbx .faq{display:grid;gap:12px;margin-top:26px;max-width:var(--read)}.mbx .faq details{background:var(--white);border:1px solid var(--line);border-radius:var(--r-sm);padding:2px 6px;transition:.2s}.mbx .faq details[open]{border-color:#cfe0f5;box-shadow:var(--sh)}.mbx .faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 18px;font-family:'Sora';font-weight:600;color:var(--ink);font-size:1.02rem}.mbx .faq summary::-webkit-details-marker{display:none}.mbx .faq summary i{transition:.2s;color:var(--blue);flex:0 0 auto}.mbx .faq details[open] summary i{transform:rotate(180deg)}.mbx .faq details p{margin:0;padding:0 18px 18px;color:var(--body);font-size:.98rem}.mbx .cta{background:linear-gradient(135deg,var(--navy),var(--blue));border-radius:var(--r-lg);padding:40px 44px;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}.mbx .cta>div{flex:1 1 320px}.mbx .cta h2{color:#fff;font-size:1.5rem;margin:0;max-width:24ch}.mbx .cta p{color:#c3d4ea;margin:8px 0 0;max-width:50ch}.mbx .cta .btn-primary{background:#fff;color:var(--navy)}.mbx .cta .btn-primary:hover{background:var(--teal);color:var(--navy)}.mbx .col + .cta,.mbx .steps + .cta{margin-top:44px}.mbx .sources{background:var(--surf-2);border-top:1px solid var(--line-2);padding:48px 0}.mbx .sources h2{font-size:1.2rem;margin-bottom:10px}.mbx .sources p{font-size:.92rem;color:var(--muted);max-width:84ch}.mbx .sources .links{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}.mbx .sources .links a{font-size:.85rem;background:var(--white);border:1px solid var(--line);border-radius:99px;padding:6px 14px;color:var(--blue)}.mbx .sources .links a:hover{border-color:#cfe0f5;text-decoration:none}.mbx .pre-footer{background:linear-gradient(160deg,#0B2545,#11315c);color:#fff;text-align:center;padding:64px 24px}.mbx .pre-footer-inner{max-width:680px;margin:0 auto}.mbx .pre-footer h2{color:#fff;font-size:1.7rem;margin-bottom:10px}.mbx .pre-footer p{color:#c3d4ea;margin:0 auto 22px;max-width:52ch}.mbx .btn-prefooter{display:inline-block;background:#fff;color:var(--navy);font-weight:600;border-radius:11px;padding:.85rem 1.6rem}.mbx .btn-prefooter:hover{background:var(--teal);text-decoration:none}.mbx .site-footer{background:var(--navy-deep);color:#9fb8d6;padding:34px 0;font-size:.9rem}.mbx .footer-inner{max-width:var(--wrap);margin:0 auto;padding:0 24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px}.mbx .footer-inner p{margin:0}.mbx .footer-inner a{color:#bcd2ec}.mbx .footer-inner strong{color:#fff}@media(max-width:860px){.mbx .header-nav{position:absolute;left:0;right:0;top:68px;flex-direction:column;align-items:stretch;gap:0;background:#fff;border-bottom:1px solid var(--line-2);box-shadow:var(--sh);padding:6px 0;display:none}.mbx .header-nav.open{display:flex}.mbx .header-nav a{padding:12px 24px}.mbx .btn-header{margin:8px 24px}.mbx .menu-toggle{display:block}.mbx .hero .wrap{padding:28px 24px 60px}.mbx .band{padding:50px 0}.mbx .signals,.mbx .tiles{grid-template-columns:1fr 1fr}.mbx .cards,.mbx .cmp,.mbx .pc,.mbx .examples{grid-template-columns:1fr}.mbx .data,.mbx .quote{padding:30px}.mbx .cta{padding:30px;flex-direction:column;align-items:flex-start}.mbx .quote p{font-size:1.3rem}}@media(max-width:480px){.mbx .signals,.mbx .tiles{grid-template-columns:1fr}.mbx .data{padding:24px}}.mbx svg.i{flex:0 0 auto;width:1.25em;height:1.25em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.18em}.mbx .card .ic svg.i,.mbx .answer .ic svg.i{width:1.5rem;height:1.5rem;vertical-align:0}.mbx .eyebrow svg.i{width:1rem;height:1rem}.mbx .faq summary svg.i{color:var(--blue);transition:transform .2s}.mbx .faq details[open] summary svg.i{transform:rotate(180deg)}.mbx .rich-table{width:100%;min-width:560px;border-collapse:separate;border-spacing:0;background:var(--white);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);font-size:.96rem}.mbx .rich-table caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);border:0}.mbx .rich-table thead th{background:var(--navy);color:#fff;font-family:'Sora';font-weight:700;text-align:left;padding:14px 18px;font-size:.95rem}.mbx .rich-table th[scope=row]{font-family:'Sora';font-weight:700;color:var(--ink);background:var(--surf);text-align:left;vertical-align:top;white-space:nowrap}.mbx .rich-table td,.mbx .rich-table th[scope=row]{padding:13px 18px;border-top:1px solid var(--line-2);vertical-align:top}.mbx .rich-table tbody tr:first-child>*{border-top:0}.mbx .rich-table td{color:var(--body)}.mbx .approach{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:26px}.mbx .approach .step{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;box-shadow:var(--sh)}.mbx .approach .step .lbl{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}.mbx .approach .step blockquote{margin:0 0 10px;padding:12px 16px;background:var(--surf-2);border-left:3px solid var(--blue);border-radius:0 var(--rsm) var(--rsm) 0;font-style:italic;color:var(--ink)}.mbx .approach .step p{margin:0;font-size:.94rem;color:var(--muted)}@media(max-width:860px){.mbx .approach{grid-template-columns:1fr}}</style>
+
+  
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": "https://paulo-leads.github.io/protocolo-hidra/como-importar-lista-de-empresas-no-pipedrive/#article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://paulo-leads.github.io/protocolo-hidra/como-importar-lista-de-empresas-no-pipedrive/"
+  },
+  "headline": "Como importar lista de empresas no Pipedrive: o passo a passo completo (2026)",
+  "description": "Guia prático de como importar uma lista de empresas B2B no Pipedrive: importar como Organizações usando o CNPJ como chave, mapear os campos, deduplicar e vincular as Pessoas, a partir de uma lista ProtocoloHidra no layout do Pipedrive.",
+  "url": "https://paulo-leads.github.io/protocolo-hidra/como-importar-lista-de-empresas-no-pipedrive/",
+  "inLanguage": "pt-BR",
+  "image": [
+    "https://paulo-leads.github.io/protocolo-hidra/assets/img/protocolo-hidra-painel-1200.png"
+  ],
+  "datePublished": "2026-05-28",
+  "dateModified": "2026-06-28",
+  "author": {
+    "@type": "Person",
+    "name": "Paulo C. P. Santos",
+    "jobTitle": "Arquiteto do Protocolo Hidra",
+    "url": "https://paulo-leads.github.io/protocolo-hidra/paulo-leads/",
+    "worksFor": {
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/#organization"
+    },
+    "knowsAbout": [
+      "importar lista no Pipedrive",
+      "Pipedrive",
+      "CRM",
+      "prospecção B2B",
+      "dados de CNPJ",
+      "importação de CSV"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://paulo-leads.github.io/protocolo-hidra/#organization",
+    "name": "ProtocoloHidra",
+    "alternateName": "ProtocoloHidra",
+    "url": "https://paulo-leads.github.io/protocolo-hidra/",
+    "logo": {
+      "@type": "ImageObject",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/#logo",
+      "url": "https://paulo-leads.github.io/protocolo-hidra/assets/img/protocolo-hidra-logo.png"
+    },
+    "sameAs": [
+      "https://www.instagram.com/protocolohidra/"
+    ]
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "importar lista de empresas no Pipedrive"
+    },
+    {
+      "@type": "Thing",
+      "name": "Pipedrive"
+    },
+    {
+      "@type": "Thing",
+      "name": "importação de CSV"
+    },
+    {
+      "@type": "Thing",
+      "name": "prospecção B2B"
+    }
+  ],
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": ["#resposta-rapida p", "#o-que-e p", ".mbx-answer p"]
+  },
+  "citation": {
+    "@type": "Dataset",
+    "@id": "https://paulo-leads.github.io/protocolo-hidra/como-importar-lista-de-empresas-no-pipedrive/#dataset"
+  }
+}
+</script>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","@id":"https://paulo-leads.github.io/protocolo-hidra/como-importar-lista-de-empresas-no-pipedrive/#dataset","name":"Lista de empresas B2B importável no Pipedrive — base ProtocoloHidra","description":"Lista de empresas ativas com CNPJ, razão social, CNAE, telefone, e-mail comercial e endereço, exportável no layout do Pipedrive para importação como Organizações e Pessoas, a partir da base própria da ProtocoloHidra, de fontes públicas oficiais.","creator":{"@id":"https://paulo-leads.github.io/protocolo-hidra/#organization"},"dateModified":"2026-06-28","inLanguage":"pt-BR","variableMeasured":["CNPJ","Razão social","Nome fantasia","CNAE principal","Telefone","E-mail comercial","Endereço","Cidade","UF","CEP","Porte","Capital social","Data de início de atividade"],"license":"https://paulo-leads.github.io/protocolo-hidra/politica-de-privacidade/"}</script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Início", "item": "https://paulo-leads.github.io/protocolo-hidra/"},
+      {"@type": "ListItem", "position": 2, "name": "Como importar lista de empresas no Pipedrive", "item": "https://paulo-leads.github.io/protocolo-hidra/como-importar-lista-de-empresas-no-pipedrive/"}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Como importar uma lista de empresas no Pipedrive",
+    "description": "Passo a passo para importar uma lista de empresas B2B no Pipedrive como Organizações, com o CNPJ como chave, mapeando os campos, deduplicando e vinculando as Pessoas.",
+    "step": [
+      {"@type": "HowToStep", "position": 1, "name": "Baixe a lista no layout do Pipedrive", "text": "Na ProtocoloHidra, filtre as empresas (por CNAE, porte, cidade) e baixe a lista já no layout do Pipedrive, em CSV ou Excel, com as colunas de Organização e Pessoa separadas."},
+      {"@type": "HowToStep", "position": 2, "name": "Abra a importação no Pipedrive", "text": "No Pipedrive, vá ao menu da conta (canto superior) > Ferramentas e aplicativos > Importar dados > Importar de planilha e clique em Começar."},
+      {"@type": "HowToStep", "position": 3, "name": "Suba o arquivo CSV ou Excel", "text": "Envie o arquivo CSV, XLS ou XLSX (até 50.000 linhas e 50 MB) e aguarde o Pipedrive carregar a prévia das colunas."},
+      {"@type": "HowToStep", "position": 4, "name": "Mapeie as colunas usando o CNPJ como chave", "text": "Associe cada coluna ao campo certo, agrupado por Organização ou Pessoa. Mapeie Razão social para Nome da organização e o CNPJ para um campo personalizado CNPJ na Organização, que servirá de chave."},
+      {"@type": "HowToStep", "position": 5, "name": "Importe Organizações e Pessoas vinculadas", "text": "Como o Pipedrive vincula tudo o que está na mesma linha, ao importar uma linha com Organização e Pessoa ele cria as duas e já as vincula automaticamente."},
+      {"@type": "HowToStep", "position": 6, "name": "Confira a deduplicação e o responsável", "text": "Ative a detecção de duplicatas para mesclar organizações repetidas, defina o responsável (owner) e rode a importação."}
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Devo importar empresa como Organização ou como contato no Pipedrive?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Importe cada empresa como Organização (Organization), não como Pessoa (Person) solta. No Pipedrive a Organização é a entidade que representa a empresa (CNPJ, razão social, endereço, CNAE), e as Pessoas são os contatos vinculados a ela. Importar uma empresa como contato solto bagunça o CRM e impede agrupar os contatos por empresa."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Como uso o CNPJ para evitar empresas duplicadas no Pipedrive?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Crie um campo personalizado CNPJ na Organização e mapeie a coluna de CNPJ da lista para ele na hora da importação. Use o CNPJ como chave única e padronize o formato (só números ou sempre com pontuação) antes de subir o arquivo. A deduplicação nativa do Pipedrive reconhece organizações repetidas casando por nome e endereço; use o CNPJ para conferir e mesclar manualmente as que escaparem, mantendo a base sem duplicatas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "A lista da ProtocoloHidra já vem no layout do Pipedrive?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sim. Na ProtocoloHidra você baixa a lista já no layout do Pipedrive, com as colunas separadas para Organização e Pessoa e os nomes alinhados aos campos do CRM, o que reduz o trabalho de mapeamento. Também há exportação em CSV e Excel genéricos, caso prefira mapear manualmente."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Preciso de um plano pago do Pipedrive para importar a lista?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A importação de planilhas (CSV, XLS, XLSX) está disponível nos planos do Pipedrive, inclusive durante o teste gratuito. O que muda entre os planos é o limite de campos personalizados, registros e recursos de automação. Para importar Organizações e Pessoas com o CNPJ como campo personalizado, qualquer plano que permita criar campos personalizados atende."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Qual é o limite de importação do Pipedrive?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cada arquivo de importação por planilha aceita até 50.000 linhas e 50 MB. Para listas maiores, divida em vários arquivos e importe em lotes. Comece sempre por um lote pequeno para validar o mapeamento e a deduplicação antes de subir a base inteira."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Como vincular as Pessoas às Organizações na importação?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "O Pipedrive vincula tudo que está na mesma linha da planilha. Se uma linha tiver o nome da Organização e o nome da Pessoa, ele cria as duas e já as vincula. Por isso, mantenha o contato e a empresa na mesma linha e mapeie a coluna do nome da empresa para o campo Organização da Pessoa, garantindo o vínculo automático."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "É legal e está dentro da LGPD usar essa lista no Pipedrive?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Os dados cadastrais de empresas (CNPJ, razão social, CNAE, endereço e contato comercial) vêm de fontes públicas oficiais e podem ser usados para prospecção B2B com finalidade comercial legítima. Trate os contatos com responsabilidade, respeite pedidos de descadastro e mantenha uma abordagem comercial pertinente ao negócio do destinatário."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/#website",
+      "name": "Protocolo Hidra",
+      "url": "https://paulo-leads.github.io/protocolo-hidra/",
+      "inLanguage": "pt-BR",
+      "description": "Protocolo Hidra — Metodologia de vendas B2B e soberania de dados.",
+      "publisher": {
+        "@id": "https://paulo-leads.github.io/protocolo-hidra/#organization"
+      },
+      "dateModified": "2026-07-08",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://paulo-leads.github.io/protocolo-hidra/busca?q={term}"
+        },
+        "query-input": "required name=term"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/#organization",
+      "name": "Protocolo Hidra",
+      "url": "https://paulo-leads.github.io/protocolo-hidra/",
+      "description": "Protocolo Hidra — Metodologia de soberania de dados e Zero Trust Sales.",
+      "founder": {
+        "@id": "https://paulo-leads.github.io/protocolo-hidra/#paulo-leads"
+      },
+      "foundingDate": "2025-01-01",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://paulo-leads.github.io/protocolo-hidra/assets/img/protocolo-hidra-logo.png"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+55-19-98264-2481",
+        "contactType": "sales",
+        "email": "contato@pauloleads.com.br"
+      },
+      "sameAs": [
+        "https://www.instagram.com/protocolohidra/"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/#paulo-leads",
+      "name": "Paulo C. P. Santos",
+      "alternateName": "Paulo Leads",
+      "url": "https://paulo-leads.github.io/protocolo-hidra/paulo-leads/",
+      "jobTitle": "Arquiteto do Protocolo Hidra",
+      "email": "mailto:contato@pauloleads.com.br",
+      "telephone": "+55-19-98264-2481",
+      "affiliation": {
+        "@id": "https://paulo-leads.github.io/protocolo-hidra/#organization"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/como-importar-lista-de-empresas-no-pipedrive#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Início",
+          "item": "https://paulo-leads.github.io/protocolo-hidra/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Como importar lista de empresas no Pipedrive: passo a passo (2026)",
+          "item": "https://paulo-leads.github.io/protocolo-hidra/como-importar-lista-de-empresas-no-pipedrive"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/como-importar-lista-de-empresas-no-pipedrive#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "O que é Como importar lista de empresas no Pipedrive: passo a passo (2026)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Guia 2026 de como importar uma lista de empresas no Pipedrive: baixe o CSV no layout do Pipedrive na ProtocoloHidra, importe como Organizações usando o CNPJ como chave, mapeie os campos, deduplique e vincule as Pessoas. Inclui mapeamento de campos pronto e os erros comuns. Pague por lista, sem mensa..."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "DefinedTermSet",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/glossario.json#set",
+      "name": "Glossário Protocolo Hidra",
+      "description": "Ontologia oficial do Protocolo Hidra com definições canônicas.",
+      "url": "https://paulo-leads.github.io/protocolo-hidra/glossario.json",
+      "publisher": {
+        "@id": "https://paulo-leads.github.io/protocolo-hidra/#organization"
+      },
+      "version": "5.0.0-wkgs",
+      "dateModified": "2026-07-08",
+      "hasDefinedTerm": [
+        {
+          "@id": "https://paulo-leads.github.io/protocolo-hidra/def/comprar-leads"
+        },
+        {
+          "@id": "https://paulo-leads.github.io/protocolo-hidra/def/generative-lead-spoofing"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://paulo-leads.github.io/protocolo-hidra/como-importar-lista-de-empresas-no-pipedrive#howto",
+      "name": "Como utilizar Como importar lista de empresas no Pipedrive: passo a passo (2026)",
+      "description": "Guia prático para aproveitar ao máximo este conteúdo do Protocolo Hidra.",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Leia e entenda",
+          "text": "Leia o conteúdo completo para compreender os fundamentos."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Aplique no seu contexto",
+          "text": "Adapte as recomendações ao seu ICP e processo comercial."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Meça e otimize",
+          "text": "Acompanhe métricas e refine a abordagem continuamente."
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="mbx">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-arrow-down" viewBox="0 0 24 24"> <path d="M12 5l0 14" /> <path d="M18 13l-6 6" /> <path d="M6 13l6 6" /> </symbol>
+<symbol id="i-bolt" viewBox="0 0 24 24"> <path d="M13 3l0 7l6 0l-8 11l0 -7l-6 0l8 -11" /> </symbol>
+<symbol id="i-building" viewBox="0 0 24 24"> <path d="M3 21l18 0" /> <path d="M9 8l1 0" /> <path d="M9 12l1 0" /> <path d="M9 16l1 0" /> <path d="M14 8l1 0" /> <path d="M14 12l1 0" /> <path d="M14 16l1 0" /> <path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16" /> </symbol>
+<symbol id="i-building-skyscraper" viewBox="0 0 24 24"> <path d="M3 21l18 0" /> <path d="M5 21v-14l8 -4v18" /> <path d="M19 21v-10l-6 -4" /> <path d="M9 9l0 .01" /> <path d="M9 12l0 .01" /> <path d="M9 15l0 .01" /> <path d="M9 18l0 .01" /> </symbol>
+<symbol id="i-bulb" viewBox="0 0 24 24"> <path d="M3 12h1m8 -9v1m8 8h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7" /> <path d="M9 16a5 5 0 1 1 6 0a3.5 3.5 0 0 0 -1 3a2 2 0 0 1 -4 0a3.5 3.5 0 0 0 -1 -3" /> <path d="M9.7 17l4.6 0" /> </symbol>
+<symbol id="i-chart-bar" viewBox="0 0 24 24"> <path d="M3 13a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /> <path d="M15 9a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /> <path d="M9 5a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" /> <path d="M4 20h14" /> </symbol>
+<symbol id="i-check" viewBox="0 0 24 24"> <path d="M5 12l5 5l10 -10" /> </symbol>
+<symbol id="i-chevron-down" viewBox="0 0 24 24"> <path d="M6 9l6 6l6 -6" /> </symbol>
+<symbol id="i-database" viewBox="0 0 24 24"> <path d="M12 6m-8 0a8 3 0 1 0 16 0a8 3 0 1 0 -16 0" /> <path d="M4 6v6a8 3 0 0 0 16 0v-6" /> <path d="M4 12v6a8 3 0 0 0 16 0v-6" /> </symbol>
+<symbol id="i-download" viewBox="0 0 24 24"> <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" /> <path d="M7 11l5 5l5 -5" /> <path d="M12 4l0 12" /> </symbol>
+<symbol id="i-filter" viewBox="0 0 24 24"> <path d="M4 4h16v2.172a2 2 0 0 1 -.586 1.414l-4.414 4.414v7l-6 2v-8.5l-4.48 -4.928a2 2 0 0 1 -.52 -1.345v-2.241z" /> </symbol>
+<symbol id="i-flag" viewBox="0 0 24 24"> <path d="M5 5a5 5 0 0 1 7 0a5 5 0 0 0 7 0v9a5 5 0 0 1 -7 0a5 5 0 0 0 -7 0v-9z" /> <path d="M5 21v-7" /> </symbol>
+<symbol id="i-help-circle" viewBox="0 0 24 24"> <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /> <path d="M12 16v.01" /> <path d="M12 13a2 2 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483" /> </symbol>
+<symbol id="i-map-pin" viewBox="0 0 24 24"> <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /> <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" /> </symbol>
+<symbol id="i-message-question" viewBox="0 0 24 24"> <path d="M8 9h8" /> <path d="M8 13h6" /> <path d="M14 18h-1l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v4.5" /> <path d="M19 22v.01" /> <path d="M19 19a2.003 2.003 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483" /> </symbol>
+<symbol id="i-rocket" viewBox="0 0 24 24"> <path d="M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3" /> <path d="M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3" /> <path d="M15 9m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> </symbol>
+<symbol id="i-shield-check" viewBox="0 0 24 24"> <path d="M11.46 20.846a12 12 0 0 1 -7.96 -14.846a12 12 0 0 0 8.5 -3a12 12 0 0 0 8.5 3a12 12 0 0 1 -.09 7.06" /> <path d="M15 19l2 2l4 -4" /> </symbol>
+<symbol id="i-stack-2" viewBox="0 0 24 24"> <path d="M12 4l-8 4l8 4l8 -4l-8 -4" /> <path d="M4 12l8 4l8 -4" /> <path d="M4 16l8 4l8 -4" /> </symbol>
+<symbol id="i-target" viewBox="0 0 24 24"> <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /> <path d="M12 12m-5 0a5 5 0 1 0 10 0a5 5 0 1 0 -10 0" /> <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /> </symbol>
+<symbol id="i-trending-up" viewBox="0 0 24 24"> <path d="M3 17l6 -6l4 4l8 -8" /> <path d="M14 7l7 0l0 7" /> </symbol>
+<symbol id="i-users" viewBox="0 0 24 24"> <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /> <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /> <path d="M16 3.13a4 4 0 0 1 0 7.75" /> <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" /> </symbol>
+</defs></svg>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/protocolo-hidra/" class="logo"><img src="/protocolo-hidra/assets/img/protocolo-hidra-logo.png" alt="ProtocoloHidra" width="140" height="40"></a>
+    <button class="menu-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Abrir menu"><span aria-hidden="true">☰</span></button>
+    <nav class="header-nav" id="primary-nav" aria-label="Principal">
+      <a href="https://paulo-leads.github.io/protocolo-hidra/#video">Como funciona</a>
+      <a href="https://paulo-leads.github.io/protocolo-hidra/#quem-utiliza">Casos de Uso</a>
+      <a href="https://paulo-leads.github.io/protocolo-hidra/#premium">Planos</a>
+      <a href="https://paulo-leads.github.io/protocolo-hidra/#duvidas">Dúvidas</a>
+      <a href="/protocolo-hidra/teste-gratis-lista-de-empresas/" class="btn-header">Testar grátis</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="page-title">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="https://paulo-leads.github.io/protocolo-hidra/">Início</a></li><li aria-current="page"><span>Como importar lista de empresas no Pipedrive</span></li></ol></nav>
+      <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-download"/></svg> Integração Pipedrive · 2026</span>
+      <h1 id="page-title">Como importar lista de empresas no Pipedrive: o passo a passo completo</h1>
+      <p class="lead">Este guia mostra o caminho certo: baixe a lista já no <strong style="color:#fff">layout do Pipedrive na ProtocoloHidra</strong>, importe cada empresa como <strong style="color:#fff">Organização</strong> usando o <strong style="color:#fff">CNPJ como chave</strong>, mapeie os campos, deduplique e vincule as <strong style="color:#fff">Pessoas</strong> — sem transformar o seu funil numa bagunça. Pague por lista, sem mensalidade.</p>
+      <p class="byline">Por <strong>Paulo C. P. Santos</strong> · Arquiteto do Protocolo Hidra · atualizado em 28 de junho de 2026</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="https://paulo-leads.github.io/protocolo-hidra/#premium"><svg class="i" aria-hidden="true"><use href="#i-download"/></svg> Baixar lista no layout do Pipedrive</a>
+        <a class="btn btn-ghost" href="#como-importar">Ver o passo a passo <svg class="i" aria-hidden="true"><use href="#i-arrow-down"/></svg></a>
+      </div>
+      <div class="signals">
+        <div class="signal"><strong class="num">5 passos</strong><span>do CSV ao Pipedrive</span></div>
+        <div class="signal up"><strong class="num">17 campos</strong><span>CNPJ, telefone, CNAE, porte...</span></div>
+        <div class="signal"><strong>Sem mensalidade</strong><span>você paga só pela lista</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap col" id="resposta-rapida">
+      <div class="answer mbx-answer">
+        <span class="ic" aria-hidden="true"><svg class="i"><use href="#i-bulb"/></svg></span>
+        <p><b>Para importar uma lista de empresas no Pipedrive, importe cada empresa como Organização (Organization), não como contato solto.</b> Baixe a lista no layout do Pipedrive na ProtocoloHidra, abra no Pipedrive o menu da conta &rsaquo; Ferramentas e aplicativos &rsaquo; Importar dados &rsaquo; Importar de planilha, suba o CSV e mapeie as colunas: Razão social para Nome da organização e o CNPJ para um campo personalizado &ldquo;CNPJ&rdquo;, que serve de chave para evitar duplicatas. Como o Pipedrive vincula tudo o que está na mesma linha, ao subir uma linha com a empresa e a Pessoa (Person) ele cria as duas já vinculadas. Ative a detecção de duplicatas e defina o responsável antes de rodar.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--alt" id="o-que-e">
+    <div class="wrap">
+      <div class="kicker col">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-help-circle"/></svg> O conceito que muda tudo</span>
+        <h2>Pipedrive: importe como empresa, não como contato solto</h2>
+      </div>
+      <div class="col">
+        <p class="lead-p">No Pipedrive, a entidade que representa uma empresa é a <strong>Organização (Organization)</strong> — é nela que ficam o CNPJ, a razão social, o endereço e o CNAE. As <strong>Pessoas (Persons)</strong> são os contatos (sócio, comprador, gerente) que ficam <em>vinculados</em> a uma Organização. Quem importa uma lista de empresas como se cada linha fosse só um contato perde essa estrutura: os dados da empresa se espalham, não dá para agrupar contatos por CNPJ e o funil vira uma lista solta de nomes.</p>
+        <p class="body-p">O jeito certo é importar cada empresa como Organização, usando o <strong>CNPJ como chave única</strong> (num campo personalizado), e deixar o Pipedrive criar e vincular as Pessoas a partir da mesma linha da planilha. Assim você mantém uma base limpa, com cada contato pendurado na empresa certa — pronta para segmentar, distribuir entre vendedores e abrir negócios (Deals). É exatamente esse layout que a lista da ProtocoloHidra já entrega.</p>
+      </div>
+      <div class="cards">
+        <article class="card"><span class="ic" aria-hidden="true"><svg class="i"><use href="#i-building"/></svg></span><h3>Empresa = Organização</h3><p>CNPJ, razão social, endereço e CNAE vivem na Organização (Organization).</p></article>
+        <article class="card"><span class="ic" aria-hidden="true"><svg class="i"><use href="#i-users"/></svg></span><h3>Contato = Pessoa</h3><p>Sócios e compradores entram como Pessoas (Persons) vinculadas à empresa.</p></article>
+        <article class="card"><span class="ic" aria-hidden="true"><svg class="i"><use href="#i-target"/></svg></span><h3>CNPJ como chave</h3><p>Um campo personalizado &ldquo;CNPJ&rdquo; vira a chave única contra duplicatas.</p></article>
+        <article class="card"><span class="ic" aria-hidden="true"><svg class="i"><use href="#i-shield-check"/></svg></span><h3>Base limpa</h3><p>Tudo da mesma linha é vinculado: empresa e contato entram juntos.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="dados">
+    <div class="wrap">
+      <div class="kicker col">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-database"/></svg> Campos prontos</span>
+        <h2>O que vem na lista e como mapear no Pipedrive</h2>
+        <p>No layout do Pipedrive, a lista vem com 17 campos por empresa (o CSV padrão completo traz 22). Abaixo, o de-para pronto: o que vem na lista, para qual campo do Pipedrive ele vai e o que observar no mapeamento. O Pipedrive importa Organizações e Pessoas de uma mesma planilha e vincula o que está na mesma linha.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="rich-table">
+          <caption>Mapeamento de campos: lista ProtocoloHidra para Pipedrive (Organizações e Pessoas)</caption>
+          <thead><tr><th scope="col">Campo na lista ProtocoloHidra</th><th scope="col">Organizações no Pipedrive</th><th scope="col">Observação</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Razão social</th><td>Nome da organização</td><td>Campo obrigatório da Organização; é o que identifica a empresa.</td></tr>
+            <tr><th scope="row">CNPJ</th><td>Campo personalizado &ldquo;CNPJ&rdquo;</td><td>Crie o campo antes; use como chave única para deduplicar.</td></tr>
+            <tr><th scope="row">Nome fantasia</th><td>Campo personalizado &ldquo;Nome fantasia&rdquo;</td><td>Opcional; útil para busca e para o vendedor reconhecer a marca.</td></tr>
+            <tr><th scope="row">Endereço, Cidade, UF, CEP</th><td>Endereço da organização</td><td>O Pipedrive aceita o endereço completo no campo Endereço da Organização.</td></tr>
+            <tr><th scope="row">CNAE principal (código + descrição)</th><td>Campo personalizado &ldquo;Setor&rdquo; / CNAE</td><td>Use a descrição do CNAE para segmentar; guarde o código num campo próprio.</td></tr>
+            <tr><th scope="row">Telefone (DDD + número)</th><td>Telefone (campo da Pessoa) ou personalizado na Organização</td><td>Mapeie para a Pessoa vinculada; rotule como Trabalho ou Celular.</td></tr>
+            <tr><th scope="row">E-mail comercial</th><td>E-mail (na Pessoa vinculada)</td><td>Fica melhor na Pessoa; se não houver contato, use personalizado na empresa.</td></tr>
+            <tr><th scope="row">Porte</th><td>Campo personalizado &ldquo;Porte&rdquo;</td><td>MEI, ME, EPP... ótimo para filtrar e priorizar no funil.</td></tr>
+            <tr><th scope="row">Capital social</th><td>Campo personalizado &ldquo;Capital social&rdquo;</td><td>Numérico; ajuda a qualificar e ordenar a base.</td></tr>
+            <tr><th scope="row">Data de início de atividade</th><td>Campo personalizado &ldquo;Abertura&rdquo; (data)</td><td>Útil para recortar empresas novas ou maduras.</td></tr>
+            <tr><th scope="row">Optante Simples ou MEI</th><td>Campos personalizados</td><td>Simples Nacional e MEI; ótimo para qualificar. A base já vem filtrada em empresas ativas.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col">
+        <p class="body-p" style="margin-top:22px">Campos no layout do Pipedrive: Organização (razão social); Nome fantasia; CNPJ; CNAE principal (código + descrição); Telefone; E-mail; Endereço; CEP; Cidade; UF; Porte; Capital social; Optante Simples/MEI; Data de abertura. Baixando no layout do Pipedrive, a maior parte do mapeamento já vem resolvida — você só confere e cria os campos personalizados de uma vez.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--alt" id="como-importar">
+    <div class="wrap">
+      <div class="kicker col">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-filter"/></svg> Passo a passo</span>
+        <h2>Como importar a lista no Pipedrive</h2>
+        <p>Seis passos do download ao funil — do CSV pronto à base de Organizações e Pessoas vinculadas, sem duplicatas.</p>
+      </div>
+      <ol class="steps">
+        <li><div><b>Baixe a lista no layout do Pipedrive</b><span>Na ProtocoloHidra, filtre as empresas por CNAE, porte e cidade e baixe a lista já no layout do Pipedrive, em CSV ou Excel, com as colunas de Organização e Pessoa separadas.</span></div></li>
+        <li><div><b>Abra a importação no Pipedrive</b><span>No Pipedrive, clique no menu da conta (canto superior direito) &rsaquo; Ferramentas e aplicativos &rsaquo; Importar dados &rsaquo; Importar de planilha e clique em &ldquo;Começar&rdquo;.</span></div></li>
+        <li><div><b>Suba o arquivo CSV ou Excel</b><span>Envie o arquivo (CSV, XLS ou XLSX, até 50.000 linhas e 50 MB) e aguarde o Pipedrive ler as colunas e abrir a tela de mapeamento.</span></div></li>
+        <li><div><b>Mapeie as colunas com o CNPJ como chave</b><span>Associe cada coluna ao campo certo, agrupado por Organização ou Pessoa: Razão social &rarr; Nome da organização e CNPJ &rarr; campo personalizado &ldquo;CNPJ&rdquo;. Se faltar um campo, crie o personalizado ali mesmo, sem reiniciar.</span></div></li>
+        <li><div><b>Importe Organizações e Pessoas vinculadas</b><span>Como o Pipedrive vincula tudo o que está na mesma linha, ao subir uma linha com a empresa e o contato ele cria a Organização e a Pessoa já vinculadas — sem etapa extra.</span></div></li>
+        <li><div><b>Deduplique e defina o responsável</b><span>Ative a detecção de duplicatas do Pipedrive (a mesclagem nativa casa organizações por nome e endereço; mantenha o CNPJ como chave de conferência), escolha o responsável (owner) dos registros e rode a importação. Comece por um lote pequeno para validar.</span></div></li>
+      </ol>
+      <div class="cta">
+        <div><h2>Baixe a lista já no layout do Pipedrive</h2><p>Filtre por CNAE, porte e cidade e baixe os contatos prontos para importar como Organizações e Pessoas.</p></div>
+        <a class="btn btn-primary" href="https://paulo-leads.github.io/protocolo-hidra/#premium"><svg class="i" aria-hidden="true"><use href="#i-download"/></svg> Baixar a lista</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="erros">
+    <div class="wrap">
+      <div class="kicker col">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-shield-check"/></svg> Não caia nessas</span>
+        <h2>Erros comuns ao importar (e como evitar)</h2>
+        <p>Os tropeços que transformam uma importação rápida em retrabalho — e o ajuste simples para cada um.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="rich-table">
+          <caption>Erros comuns ao importar uma lista de empresas no Pipedrive</caption>
+          <thead><tr><th scope="col">Erro comum</th><th scope="col">Como evitar</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Importar a empresa como contato solto</th><td>Mapeie a empresa como Organização (Organization) e os contatos como Pessoas (Persons) vinculadas, na mesma linha.</td></tr>
+            <tr><th scope="row">CNPJ sem padronizar gera duplicatas</th><td>Padronize o CNPJ (só números ou sempre com pontuação) e use-o como campo-chave; ative a detecção de duplicatas.</td></tr>
+            <tr><th scope="row">Acentuação trocada (codificação)</th><td>Salve o CSV em UTF-8. A lista ProtocoloHidra já vem em UTF-8, evitando &ldquo;caracteres estranhos&rdquo; em nomes.</td></tr>
+            <tr><th scope="row">Telefone em formato inválido</th><td>Use DDD + número e rótulo correto (Trabalho, Celular). A lista já traz o telefone separado e formatado.</td></tr>
+            <tr><th scope="row">Estourar o limite de linhas do arquivo</th><td>Cada arquivo aceita até 50.000 linhas; divida bases grandes em lotes e importe em partes.</td></tr>
+            <tr><th scope="row">Não vincular o contato à empresa</th><td>Mantenha empresa e contato na mesma linha e mapeie a coluna da empresa para o campo Organização da Pessoa.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cta">
+        <div><h2>Comece com uma lista limpa</h2><p>Layout do Pipedrive, UTF-8, telefone formatado e CNPJ como chave — pronta para importar sem retrabalho.</p></div>
+        <a class="btn btn-primary" href="https://paulo-leads.github.io/protocolo-hidra/#premium"><svg class="i" aria-hidden="true"><use href="#i-rocket"/></svg> Acessar os planos</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--alt" id="cnae">
+    <div class="wrap">
+      <div class="col">
+        <div class="kicker">
+          <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-filter"/></svg> Importe certo</span>
+          <h2>Importe só o recorte certo</h2>
+        </div>
+        <p class="body-p">A melhor importação começa antes do Pipedrive: <strong>segmente a lista na origem</strong>. Em vez de jogar 50 mil CNPJs genéricos no CRM e poluir o funil, recorte por CNAE, porte e cidade para subir só as empresas que são o seu cliente ideal. Um Pipedrive enxuto, com os contatos certos, rende muito mais que uma base inchada que ninguém trabalha.</p>
+        <p class="body-p">Defina o CNAE do seu ICP, escolha a praça e o porte, e baixe só esse lote. Veja como <a href="/protocolo-hidra/empresas-por-cnae/">filtrar empresas por CNAE</a> e como montar a <a href="/protocolo-hidra/lista-de-empresas-para-prospeccao/">lista de empresas para prospecção</a> antes de importar — assim cada registro que entra no Pipedrive já nasce qualificado.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="outros-crms">
+    <div class="wrap">
+      <div class="kicker col">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-stack-2"/></svg> Outros CRMs</span>
+        <h2>Importar em outros CRMs</h2>
+        <p>Usa outro CRM? A mesma lista ProtocoloHidra importa em qualquer um — veja o guia do seu.</p>
+      </div>
+      <div class="cards">
+        <article class="card"><span class="ic" aria-hidden="true"><svg class="i"><use href="#i-database"/></svg></span><h3>HubSpot</h3><p>Importe empresas e contatos no maior CRM de inbound: <a href="/protocolo-hidra/como-importar-lista-de-empresas-no-hubspot/">importar lista no HubSpot</a>.</p></article>
+        <article class="card"><span class="ic" aria-hidden="true"><svg class="i"><use href="#i-database"/></svg></span><h3>Zoho CRM</h3><p>Suba contas e contatos pelo importador do Zoho: <a href="/protocolo-hidra/como-importar-lista-de-empresas-no-zoho-crm/">importar lista no Zoho CRM</a>.</p></article>
+        <article class="card"><span class="ic" aria-hidden="true"><svg class="i"><use href="#i-download"/></svg></span><h3>Comprar leads</h3><p>Entenda quando vale <a href="/protocolo-hidra/comprar-leads/">comprar leads B2B</a> para abastecer o seu funil.</p></article>
+        <article class="card"><span class="ic" aria-hidden="true"><svg class="i"><use href="#i-map-pin"/></svg></span><h3>Por cidade</h3><p>Monte a lista por município no guia de <a href="/protocolo-hidra/lista-de-empresas-por-cidade/">empresas por cidade</a>.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--alt" id="perguntas-frequentes">
+    <div class="wrap col">
+      <div class="col">
+        <div class="kicker">
+          <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-message-question"/></svg> Dúvidas frequentes</span>
+          <h2>Perguntas frequentes sobre importar no Pipedrive</h2>
+        </div>
+        <div class="faq">
+          <details open><summary>Devo importar empresa como Organização ou como contato no Pipedrive? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Importe cada empresa como Organização (Organization), não como Pessoa (Person) solta. No Pipedrive a Organização é a entidade que representa a empresa (CNPJ, razão social, endereço, CNAE), e as Pessoas são os contatos vinculados a ela. Importar uma empresa como contato solto bagunça o CRM e impede agrupar os contatos por empresa.</p></details>
+          <details><summary>Como uso o CNPJ para evitar empresas duplicadas no Pipedrive? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Crie um campo personalizado &ldquo;CNPJ&rdquo; na Organização e mapeie a coluna de CNPJ da lista para ele na hora da importação. Use o CNPJ como chave única e padronize o formato (só números ou sempre com pontuação) antes de subir o arquivo. A deduplicação nativa do Pipedrive reconhece organizações repetidas casando por nome e endereço; use o CNPJ para conferir e mesclar manualmente as que escaparem, mantendo a base sem duplicatas.</p></details>
+          <details><summary>A lista da ProtocoloHidra já vem no layout do Pipedrive? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Sim. Na ProtocoloHidra você baixa a lista já no layout do Pipedrive, com as colunas separadas para Organização e Pessoa e os nomes alinhados aos campos do CRM, o que reduz o trabalho de mapeamento. Também há exportação em CSV e Excel genéricos, caso prefira mapear manualmente.</p></details>
+          <details><summary>Preciso de um plano pago do Pipedrive para importar a lista? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>A importação de planilhas (CSV, XLS, XLSX) está disponível nos planos do Pipedrive, inclusive durante o teste gratuito. O que muda entre os planos é o limite de campos personalizados, registros e recursos de automação. Para importar Organizações e Pessoas com o CNPJ como campo personalizado, qualquer plano que permita criar campos personalizados atende.</p></details>
+          <details><summary>Qual é o limite de importação do Pipedrive? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Cada arquivo de importação por planilha aceita até 50.000 linhas e 50 MB. Para listas maiores, divida em vários arquivos e importe em lotes. Comece sempre por um lote pequeno para validar o mapeamento e a deduplicação antes de subir a base inteira.</p></details>
+          <details><summary>Como vincular as Pessoas às Organizações na importação? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>O Pipedrive vincula tudo que está na mesma linha da planilha. Se uma linha tiver o nome da Organização e o nome da Pessoa, ele cria as duas e já as vincula. Por isso, mantenha o contato e a empresa na mesma linha e mapeie a coluna do nome da empresa para o campo Organização da Pessoa, garantindo o vínculo automático.</p></details>
+          <details><summary>É legal e está dentro da LGPD usar essa lista no Pipedrive? <svg class="i" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary><p>Os dados cadastrais de empresas (CNPJ, razão social, CNAE, endereço e contato comercial) vêm de fontes públicas oficiais e podem ser usados para prospecção B2B com finalidade comercial legítima. Trate os contatos com responsabilidade, respeite pedidos de descadastro e mantenha uma abordagem comercial pertinente ao negócio do destinatário.</p></details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="conclusao">
+    <div class="wrap">
+      <div class="col">
+        <div class="kicker">
+          <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="#i-flag"/></svg> Conclusão</span>
+          <h2>Conclusão</h2>
+        </div>
+        <p class="body-p">Importar uma lista de empresas no Pipedrive não é só &ldquo;subir um CSV&rdquo;: é montar uma base que o time vai conseguir trabalhar. A regra de ouro é importar cada empresa como Organização, com o CNPJ num campo personalizado servindo de chave, e deixar o Pipedrive vincular as Pessoas a partir da mesma linha. Com isso você ganha uma base limpa, sem duplicatas e pronta para abrir negócios.</p>
+        <p class="body-p">O atalho que poupa horas é começar com a lista já no formato certo. A ProtocoloHidra entrega o layout do Pipedrive, em UTF-8, com telefone formatado e 17 campos por empresa — você só confere o mapeamento, cria os campos personalizados e roda. E, antes de tudo, segmente: importe só o recorte do seu ICP para não inflar o funil.</p>
+        <p class="body-p">Para avançar, veja como montar a <a href="/protocolo-hidra/lista-de-empresas-para-prospeccao/">lista de empresas para prospecção</a>, segmente por <a href="/protocolo-hidra/empresas-por-cnae/">empresas por CNAE</a> e, se usar outro CRM, veja como <a href="/protocolo-hidra/como-importar-lista-de-empresas-no-hubspot/">importar a lista no HubSpot</a>.</p>
+      </div>
+      <div class="cta">
+        <div><h2>Baixe sua lista pronta para o Pipedrive</h2><p>Filtre empresas ativas por CNAE, porte e cidade e baixe os contatos no layout do Pipedrive — prontos para importar.</p></div>
+        <a class="btn btn-primary" href="https://paulo-leads.github.io/protocolo-hidra/#premium"><svg class="i" aria-hidden="true"><use href="#i-rocket"/></svg> Acessar os planos</a>
+      </div>
+    </div>
+  </section>
+
+  <aside class="sources">
+    <div class="wrap">
+      <h2>Fontes, dados e metodologia</h2>
+      <p><strong>Por <a href="/protocolo-hidra/paulo-leads/">Paulo C. P. Santos</a>, Arquiteto do Protocolo Hidra</strong>, com a Curadoria do Protocolo Hidra — responsável pela base de empresas ativas usada neste guia, compilada de fontes públicas oficiais e atualizada mensalmente pela própria ProtocoloHidra.</p>
+      <p>Este guia é baseado no fluxo atual de importação do Pipedrive (menu da conta &rsaquo; Ferramentas e aplicativos &rsaquo; Importar dados &rsaquo; Importar de planilha), edição de junho de 2026. Os campos citados referem-se à base ProtocoloHidra de empresas ativas, de fontes públicas oficiais. Os exemplos de CNPJ e contatos eventualmente mostrados são fictícios e mascarados, apenas ilustrativos. Telas e limites do Pipedrive podem mudar; sempre confira a tela atual do seu CRM.</p>
+      <div class="links" aria-label="Guias relacionados">
+        <a href="/protocolo-hidra/lista-de-empresas-para-prospeccao/">Lista de empresas para prospecção</a>
+        <a href="/protocolo-hidra/empresas-por-cnae/">Empresas por CNAE</a>
+        <a href="/protocolo-hidra/comprar-leads/">Comprar leads</a>
+        <a href="/protocolo-hidra/como-importar-lista-de-empresas-no-hubspot/">Importar lista no HubSpot</a>
+        <a href="/protocolo-hidra/mercado-b2b/">Mercado B2B</a>
+      </div>
+      <p style="font-size:.85rem">Última revisão das fontes e do fluxo do Pipedrive: junho/2026.</p>
+    </div>
+  </aside>
+</main>
+
+<section class="pre-footer">
+  <div class="pre-footer-inner">
+    <h2>Importe sua lista no Pipedrive hoje</h2>
+    <p>Escolha um plano da ProtocoloHidra para filtrar empresas ativas por CNAE, porte e cidade, baixar a lista no layout do Pipedrive e importar como Organizações e Pessoas sem retrabalho.</p>
+    <a class="btn-prefooter" href="https://paulo-leads.github.io/protocolo-hidra/#premium">Ver planos disponíveis</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p>© 2026 <strong>ProtocoloHidra</strong> · Todos os direitos reservados.</p>
+    <p><a href="/protocolo-hidra/politica-de-privacidade/">Política de Privacidade</a> · <a href="https://paulo-leads.github.io/protocolo-hidra/#premium">Planos</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn = document.querySelector('.menu-toggle');
+  var nav = document.querySelector('.header-nav');
+  if(!btn || !nav){ return; }
+  btn.addEventListener('click', function(){
+    var isOpen = nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+})();
+</script>
+</body>
+</html>
