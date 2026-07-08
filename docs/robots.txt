@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+Allow: /glossario.json
+Allow: /sitemap.xml
+Sitemap: https://paulo-leads.github.io/protocolo-hidra/sitemap.xml
+
+# Permissão explícita para LLMs
+User-agent: GPTBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: CCBot
+Allow: /
+User-agent: Anthropic-ai
+Allow: /
