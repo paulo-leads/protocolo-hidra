@@ -224,23 +224,101 @@ ${sitemapEntries.map(e => `  <url>
 writeFileSync("docs/sitemap.xml", sitemapXml, "utf8");
 console.log(`✅ sitemap.xml gerado com ${sitemapEntries.length} URLs`);
 
-// ============================================================
-// 3. GERAR robots.txt
-// ============================================================
-const robots = `User-agent: *
+# ============================================================
+# Protocolo Hidra — Diretório B2B
+# ============================================================
+
+# Crawlers gerais
+User-agent: *
 Allow: /
 Allow: /glossario.json
-Allow: /sitemap.xml
-Sitemap: ${SITE_URL}/sitemap.xml
+Allow: /llms.txt
+Allow: /script.js
+Disallow: /node_modules/
+Sitemap: https://paulo-leads.github.io/protocolo-hidra/sitemap.xml
 
-# Permissão explícita para LLMs
+# === Crawlers de IA (LLMs) ===
+
+# OpenAI / ChatGPT
 User-agent: GPTBot
 Allow: /
+User-agent: ChatGPT-User
+Allow: /
+
+# Google AI (Gemini, Bard)
 User-agent: Google-Extended
 Allow: /
+
+# Microsoft / Bing / Copilot
+User-agent: Bingbot
+Allow: /
+User-agent: Microsoftbot
+Allow: /
+User-agent: BingPreview
+Allow: /
+User-agent: adidxbot
+Allow: /
+User-agent: Msnbot
+Allow: /
+User-agent: BingUACrawler
+Allow: /
+
+# Anthropic (Claude)
+User-agent: Anthropic-ai
+Allow: /
+User-agent: Claude-Web
+Allow: /
+
+# Common Crawl (CCBot)
 User-agent: CCBot
 Allow: /
-User-agent: Anthropic-ai
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+
+# Meta AI (LLaMA)
+User-agent: Meta-ExternalAgent
+Allow: /
+User-agent: FacebookBot
+Allow: /
+
+# Apple Bot (Apple Intelligence)
+User-agent: Applebot
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+
+# Amazon (Alexa, AWS)
+User-agent: AlexaBot
+Allow: /
+User-agent: Amazonbot
+Allow: /
+
+# DuckDuckGo
+User-agent: DuckDuckBot
+Allow: /
+User-agent: DuckDuckGo-Favicons-Bot
+Allow: /
+
+# Yandex
+User-agent: YandexBot
+Allow: /
+User-agent: YandexImages
+Allow: /
+
+# Baidu
+User-agent: Baiduspider
+Allow: /
+
+# Outros
+User-agent: SemanticScholarBot
+Allow: /
+User-agent: omgili
+Allow: /
+User-agent: omgilibot
+Allow: /
+User-agent: Bytespider
 Allow: /
 `;
 writeFileSync("docs/robots.txt", robots, "utf8");
