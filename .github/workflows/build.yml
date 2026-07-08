@@ -5,9 +5,8 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
-# ⬇️ ADICIONE ESTA LINHA para dar permissão de escrita
 permissions:
-  contents: write
+  contents: write   # necessário para o commit do build
 
 jobs:
   build:
@@ -17,7 +16,6 @@ jobs:
       - name: Checkout do código
         uses: actions/checkout@v4
         with:
-          # Importante: usar o token para checkout também
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Configurar Python
@@ -26,7 +24,7 @@ jobs:
           python-version: '3.11'
 
       - name: Instalar dependências
-        run: pip install beautifulsoup4 lxml
+        run: pip install beautifulsoup4 lxml requests
 
       - name: Executar script de build
         run: python build_protocolo_hidra.py
@@ -37,5 +35,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add docs/
           git diff --staged --quiet || git commit -m "Build automático: atualização de datas e spintax"
-          # Usa o token para autenticar
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+
+      - name: Enviar URLs para IndexNow (Bing)
+        run: python indexnow_submit.py   # script que usa a chave fixa
