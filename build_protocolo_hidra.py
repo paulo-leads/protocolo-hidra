@@ -14,12 +14,12 @@ from bs4 import BeautifulSoup
 # ============================================================
 SITE_URL = "https://paulo-leads.github.io/protocolo-hidra"
 BASE_PATH = "/protocolo-hidra/"
-BUILD_TIMESTAMP = datetime.utcnow().isoformat()  # "2026-07-08T20:02:07.123Z"
-BUILD_DATE = BUILD_TIMESTAMP.split("T")[0]       # "2026-07-08"
-FULL_TIMESTAMP = BUILD_TIMESTAMP.replace("T", " ").split(".")[0]  # "2026-07-08 20:02:07"
+BUILD_TIMESTAMP = datetime.utcnow().isoformat()
+BUILD_DATE = BUILD_TIMESTAMP.split("T")[0]
+FULL_TIMESTAMP = BUILD_TIMESTAMP.replace("T", " ").split(".")[0]
 
 # ============================================================
-# SPINTAX (mesmo conteúdo)
+# SPINTAX
 # ============================================================
 SPINTAX = [
     "Segundo {Steve Jobs}, {a inovacao} {distingue um lider de um seguidor|e o que separa quem lidera de quem segue}.",
@@ -80,7 +80,7 @@ def categorize_link(link):
     return "Outros"
 
 # ============================================================
-# EXTRAÇÃO DE METADADOS (com BeautifulSoup + regex para JSON-LD)
+# EXTRAÇÃO DE METADADOS (VERSÃO ENRIQUECIDA)
 # ============================================================
 def extract_meta_from_html(html, link):
     soup = BeautifulSoup(html, "lxml")
@@ -109,87 +109,111 @@ def extract_meta_from_html(html, link):
         "tableData": [],
     }
 
-    # Título
+    # --- 1. Título e descrição ---
     title_tag = soup.find("title")
     if title_tag:
         meta["title"] = title_tag.get_text(strip=True)
 
-    # Description
     desc_tag = soup.find("meta", attrs={"name": "description"})
     if desc_tag and desc_tag.get("content"):
         meta["description"] = desc_tag["content"].strip()
 
-    # Datas (extraídas do JSON-LD)
+    # --- 2. Extrair todos os JSON-LD ---
     jsonld_scripts = soup.find_all("script", type="application/ld+json")
     for script in jsonld_scripts:
+        if not script.string:
+            continue
         try:
             data = json.loads(script.string)
-            # Se for um graph, percorremos
-            if isinstance(data, dict) and "@graph" in data:
-                for item in data["@graph"]:
-                    if "datePublished" in item:
-                        meta["datePublished"] = item["datePublished"]
-                    if "dateModified" in item:
-                        meta["dateModified"] = item["dateModified"]
-                    if "author" in item and isinstance(item["author"], dict):
-                        if "name" in item["author"]:
-                            meta["author"] = item["author"]["name"]
-                        if "url" in item["author"]:
-                            meta["authorUrl"] = item["author"]["url"]
-                    if "image" in item:
-                        meta["image"] = item["image"]
-                    if "sameAs" in item:
-                        meta["sameAs"] = item["sameAs"]
-                    if "keywords" in item:
-                        meta["keywords"] = item["keywords"]
-                    if "breadcrumbs" in item:
-                        meta["breadcrumbs"] = item["breadcrumbs"]
-                    if item.get("@type") == "FAQPage" and "mainEntity" in item:
-                        meta["faqCount"] = len(item["mainEntity"])
-                        for q in item["mainEntity"]:
-                            if q.get("@type") == "Question":
-                                meta["faqItems"].append({
-                                    "question": q.get("name", ""),
-                                    "answer": q.get("acceptedAnswer", {}).get("text", "")
-                                })
-                    if item.get("@type") == "HowTo" and "step" in item:
-                        for step in item["step"]:
-                            meta["howToSteps"].append({
-                                "position": step.get("position"),
-                                "name": step.get("name"),
-                                "text": step.get("text")
-                            })
-                    if item.get("@type") == "Dataset":
-                        meta["hasDataset"] = True
-                        if "variableMeasured" in item:
-                            meta["datasetVariables"] = item["variableMeasured"]
-            elif isinstance(data, dict):
-                # Objeto único
-                if "datePublished" in data:
-                    meta["datePublished"] = data["datePublished"]
-                if "dateModified" in data:
-                    meta["dateModified"] = data["dateModified"]
-                # ... etc (pode expandir se necessário)
         except:
-            pass
+            continue
 
-    # Fallback se não encontrou no JSON-LD: procurar no HTML com regex
+        # Se for um @graph, percorremos cada item
+        if isinstance(data, dict) and "@graph" in data:
+            items = data["@graph"]
+        elif isinstance(data, dict):
+            items = [data]
+        else:
+            continue
+
+        for item in items:
+            if not isinstance(item, dict):
+                continue
+
+            # --- Dados gerais ---
+            if "datePublished" in item and not meta["datePublished"]:
+                meta["datePublished"] = item["datePublished"]
+            if "dateModified" in item and not meta["dateModified"]:
+                meta["dateModified"] = item["dateModified"]
+
+            if "author" in item and isinstance(item["author"], dict):
+                if "name" in item["author"] and not meta["author"]:
+                    meta["author"] = item["author"]["name"]
+                if "url" in item["author"] and not meta["authorUrl"]:
+                    meta["authorUrl"] = item["author"]["url"]
+
+            if "image" in item and not meta["image"]:
+                if isinstance(item["image"], list) and item["image"]:
+                    meta["image"] = item["image"][0]
+                elif isinstance(item["image"], str):
+                    meta["image"] = item["image"]
+
+            if "sameAs" in item and isinstance(item["sameAs"], list):
+                meta["sameAs"].extend(item["sameAs"])
+
+            if "keywords" in item and isinstance(item["keywords"], list):
+                meta["keywords"].extend(item["keywords"])
+
+            # --- Breadcrumb ---
+            if item.get("@type") == "BreadcrumbList" and "itemListElement" in item:
+                for elem in item["itemListElement"]:
+                    if "name" in elem:
+                        meta["breadcrumbs"].append(elem["name"])
+
+            # --- FAQPage ---
+            if item.get("@type") == "FAQPage" and "mainEntity" in item:
+                for q in item["mainEntity"]:
+                    if q.get("@type") == "Question":
+                        answer = q.get("acceptedAnswer", {})
+                        meta["faqItems"].append({
+                            "question": q.get("name", ""),
+                            "answer": answer.get("text", "")
+                        })
+                meta["faqCount"] = len(meta["faqItems"])
+
+            # --- HowTo ---
+            if item.get("@type") == "HowTo" and "step" in item:
+                for step in item["step"]:
+                    meta["howToSteps"].append({
+                        "position": step.get("position"),
+                        "name": step.get("name"),
+                        "text": step.get("text")
+                    })
+
+            # --- Dataset ---
+            if item.get("@type") == "Dataset":
+                meta["hasDataset"] = True
+                if "variableMeasured" in item:
+                    if isinstance(item["variableMeasured"], list):
+                        meta["datasetVariables"] = item["variableMeasured"]
+                    elif isinstance(item["variableMeasured"], str):
+                        meta["datasetVariables"] = [item["variableMeasured"]]
+
+    # --- 3. Fallback com regex para dados que podem não estar no JSON-LD ---
     if not meta["datePublished"]:
-        dp_match = re.search(r'"datePublished":"([^"]+)"', html)
-        if dp_match:
-            meta["datePublished"] = dp_match.group(1)
+        dp = re.search(r'"datePublished":"([^"]+)"', html)
+        if dp:
+            meta["datePublished"] = dp.group(1)
     if not meta["dateModified"]:
-        dm_match = re.search(r'"dateModified":"([^"]+)"', html)
-        if dm_match:
-            meta["dateModified"] = dm_match.group(1)
+        dm = re.search(r'"dateModified":"([^"]+)"', html)
+        if dm:
+            meta["dateModified"] = dm.group(1)
 
-    # Autor via regex
     if not meta["author"]:
         author_match = re.search(r'"author"\s*:\s*\{[^}]*"name"\s*:\s*"([^"]+)"', html)
         if author_match:
             meta["author"] = author_match.group(1)
 
-    # Imagem
     if not meta["image"]:
         img_match = re.search(r'"image":"([^"]+)"', html)
         if img_match:
@@ -199,61 +223,90 @@ def extract_meta_from_html(html, link):
             if og_img and og_img.get("content"):
                 meta["image"] = og_img["content"]
 
-    # Keywords
     if not meta["keywords"]:
         kw_tag = soup.find("meta", attrs={"name": "keywords"})
         if kw_tag and kw_tag.get("content"):
             meta["keywords"] = [k.strip() for k in kw_tag["content"].split(",")]
 
-    # Breadcrumbs (extrair do JSON-LD ou do HTML)
-    # Já extraímos do JSON-LD, mas se não tiver, tenta do HTML
-    if not meta["breadcrumbs"]:
-        bc_items = re.findall(r'"item"\s*:\s*"[^"]*"\s*,\s*"name"\s*:\s*"([^"]+)"', html)
-        if bc_items:
-            meta["breadcrumbs"] = bc_items
+    # --- 4. Cidade e estado (do h1) ---
+    h1 = soup.find("h1")
+    if h1:
+        text = h1.get_text()
+        match = re.search(r'em\s+([A-Za-zÀ-ÿ\s]+)\s*\(([A-Z]{2})\)', text)
+        if match:
+            meta["cityName"] = match.group(1).strip()
+            meta["stateName"] = match.group(2).strip()
 
-    # FAQ Count
-    if meta["faqCount"] == 0:
-        meta["faqCount"] = len(re.findall(r'"@type":"Question"', html))
-
-    # Dataset
-    if not meta["hasDataset"]:
-        meta["hasDataset"] = '"@type":"Dataset"' in html
-
-    # Total de empresas
-    total_match = re.search(r'(\d{1,3}(?:\.\d{3})*)\s*empresas ativas', html)
+    # --- 5. Total de empresas (texto como "21,7 mi" ou "21.702.134") ---
+    body_text = soup.get_text()
+    # Padrão: número com pontos ou vírgula seguido de "milhões" ou "mi" ou "empresas"
+    total_match = re.search(r'(\d{1,3}(?:\.\d{3})*)\s*empresas ativas', body_text)
     if total_match:
         meta["totalCompanies"] = int(total_match.group(1).replace(".", ""))
+    else:
+        # Tenta capturar "21,7 mi" ou "21.7 mi"
+        total_match2 = re.search(r'(\d+[,.]\d+)\s*mi(?:lhões?)?', body_text)
+        if total_match2:
+            num_str = total_match2.group(1).replace(",", ".")
+            meta["totalCompanies"] = int(float(num_str) * 1_000_000)
 
-    # Cidade/Estado
-    city_match = re.search(r'<h1[^>]*>.*?em\s+([A-Za-zÀ-ÿ\s]+)\s*\(([A-Z]{2})\)', html, re.I)
-    if city_match:
-        meta["cityName"] = city_match.group(1).strip()
-        meta["stateName"] = city_match.group(2).strip()
+    # --- 6. Distribuição por setor (barras) ---
+    bars_div = soup.find("div", class_="bars")
+    if bars_div:
+        for bar in bars_div.find_all("div", recursive=False):
+            bar_h = bar.find("div", class_="bar-h")
+            if not bar_h:
+                continue
+            b_tag = bar_h.find("b")
+            em_tag = bar_h.find("em")
+            if b_tag and em_tag:
+                name = b_tag.get_text(strip=True)
+                perc_text = em_tag.get_text(strip=True).replace("%", "")
+                try:
+                    perc = int(perc_text)
+                except:
+                    perc = 0
+                small = b_tag.find("small")
+                count = 0
+                if small:
+                    count_text = small.get_text(strip=True).replace(".", "")
+                    try:
+                        count = int(count_text)
+                    except:
+                        pass
+                meta["sectorDistribution"][name] = {
+                    "count": count,
+                    "percentage": perc
+                }
 
-    # Distribuição por setor (ex: "Serviços 57%")
-    sector_matches = re.findall(r'<b>([^<]+)\s*<small[^>]*>([^<]+)<\/small><\/b>\s*<em>(\d+)%<\/em>', html)
-    for name, count, perc in sector_matches:
-        meta["sectorDistribution"][name.strip()] = {
-            "count": int(count.replace(".", "")),
-            "percentage": int(perc)
-        }
+    # --- 7. Dados de tabelas (ex: bairro, empresas, posição) ---
+    tables = soup.find_all("table", class_=re.compile(r"(rich-table|cmp-table)"))
+    for table in tables:
+        headers = [th.get_text(strip=True) for th in table.find_all("th")]
+        if "bairro" in " ".join(headers).lower() or "empresas" in " ".join(headers).lower():
+            for row in table.find_all("tr"):
+                cells = row.find_all(["th", "td"])
+                if len(cells) >= 3:
+                    row_data = [c.get_text(strip=True) for c in cells]
+                    bairro = row_data[0] if len(row_data) > 0 else ""
+                    empresas_text = row_data[1] if len(row_data) > 1 else "0"
+                    posicao = row_data[2] if len(row_data) > 2 else ""
+                    try:
+                        empresas = int(empresas_text.replace(".", ""))
+                    except:
+                        empresas = 0
+                    if bairro and empresas > 0:
+                        meta["tableData"].append({
+                            "bairro": bairro,
+                            "empresas": empresas,
+                            "posicao": posicao
+                        })
 
-    # Tabelas (ex: bairro, empresas, posição)
-    table_rows = re.findall(r'<tr><th[^>]*>([^<]+)<\/th><td[^>]*>([^<]+)<\/td><td[^>]*>([^<]+)<\/td><\/tr>', html)
-    for row in table_rows:
-        meta["tableData"].append({
-            "bairro": row[0],
-            "empresas": int(row[1].replace(".", "")),
-            "posicao": row[2]
-        })
-
-    # Conteúdo principal (texto do <main>)
+    # --- 8. Conteúdo principal e contagem de palavras ---
     main_tag = soup.find("main")
     if main_tag:
         meta["mainContent"] = main_tag.get_text(" ", strip=True)
 
-    # Contagem de palavras (todo o texto)
     text_content = soup.get_text(" ", strip=True)
     meta["wordCount"] = len(text_content.split())
 
@@ -265,7 +318,6 @@ def extract_meta_from_html(html, link):
 def scan_links(directory="docs"):
     links = []
     for root, dirs, files in os.walk(directory):
-        # Ignora pastas ocultas e node_modules
         dirs[:] = [d for d in dirs if not d.startswith(".") and d != "node_modules"]
         for file in files:
             if file == "index.html":
@@ -360,7 +412,6 @@ glossario = {
     "categoryBreakdown": {},
     "terms": terms
 }
-# Preencher breakdown
 for t in terms:
     cat = t["category"]
     glossario["categoryBreakdown"][cat] = glossario["categoryBreakdown"].get(cat, 0) + 1
@@ -370,7 +421,7 @@ with open("docs/glossario.json", "w", encoding="utf-8") as f:
 print(f"✅ glossario.json gerado com {len(terms)} termos")
 
 # ============================================================
-# GERAR SITEMAP (sem script.js)
+# GERAR SITEMAP
 # ============================================================
 sitemap_entries = []
 sitemap_entries.append({"url": f"{SITE_URL}/", "priority": "1.0", "changefreq": "daily", "lastmod": FULL_TIMESTAMP})
@@ -539,7 +590,6 @@ for link in all_links:
         with open(file_path, "r", encoding="utf-8") as f:
             html = f.read()
 
-        # Encontrar o termo correspondente
         term = next((t for t in terms if t["id"] == link_to_slug(link)), None)
         phrase = process_spintax(random_spintax())
         page_hash = term["contentHash"] if term else hashlib.sha256(html.encode()).hexdigest()[:16]
@@ -547,14 +597,12 @@ for link in all_links:
         # ---------- 1. REMOVER BLOCOS SPINTAX ANTIGOS ----------
         soup = BeautifulSoup(html, "lxml")
 
-        # Remover divs com classe protocolo-hidra-spintax ou data-wikivendas-spintax
         for div in soup.find_all("div", class_="protocolo-hidra-spintax"):
             div.decompose()
         for div in soup.find_all("div", attrs={"data-wikivendas-spintax": True}):
             div.decompose()
 
         # ---------- 2. REMOVER BYLINE ANTIGO ----------
-        # Procurar <p class="byline"> que contenha "atualizado em"
         for p in soup.find_all("p", class_="byline"):
             if p.string and "atualizado em" in p.get_text():
                 p.decompose()
@@ -583,7 +631,6 @@ for link in all_links:
         if hero_cta:
             hero_cta.insert_before(BeautifulSoup(novo_byline, "lxml"))
         else:
-            # Fallback: antes de signals ou após lead
             signals = soup.find("div", class_="signals")
             if signals:
                 signals.insert_before(BeautifulSoup(novo_byline, "lxml"))
@@ -591,16 +638,12 @@ for link in all_links:
                 lead = soup.find("p", class_="lead")
                 if lead:
                     lead.insert_after(BeautifulSoup(novo_byline, "lxml"))
-                else:
-                    # Inserir antes do fechamento de </main>? Melhor não.
-                    pass
 
         # ---------- 6. INSERIR NOVO RODAPÉ DENTRO DE <aside class="sources"> ----------
         aside = soup.find("aside", class_="sources")
         if aside:
             aside.append(BeautifulSoup(novo_rodape, "lxml"))
         else:
-            # Fallback: antes de </main>
             main_tag = soup.find("main")
             if main_tag:
                 main_tag.append(BeautifulSoup(novo_rodape, "lxml"))
@@ -624,7 +667,6 @@ for link in all_links:
                 main_tag.append(BeautifulSoup(spintax_html, "lxml"))
 
         # ---------- 8. ATUALIZAR JSON-LD (datePublished e dateModified) ----------
-        # Converter soup de volta para string para usar regex seguro
         new_html = str(soup)
         new_html = re.sub(r'"datePublished":"[^"]+"', f'"datePublished":"{BUILD_DATE}"', new_html)
         new_html = re.sub(r'"dateModified":"[^"]+"', f'"dateModified":"{FULL_TIMESTAMP}"', new_html)
