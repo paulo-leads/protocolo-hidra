@@ -9,6 +9,7 @@ const SITE_URL = "https://paulo-leads.github.io/protocolo-hidra";
 const BASE_PATH = "/protocolo-hidra/";
 const BUILD_TIMESTAMP = new Date().toISOString();
 const BUILD_DATE = BUILD_TIMESTAMP.split("T")[0];
+const BUILD_TIME = BUILD_TIMESTAMP.split("T")[1].split(".")[0]; // HH:MM:SS
 
 // ============================================================
 // SPINTAX
@@ -94,7 +95,7 @@ function categorizeLink(link) {
 }
 
 // ============================================================
-// EXTRACTOR: extrai metadados ricos do HTML de cada pagina
+// EXTRACTOR
 // ============================================================
 function extractMetaFromHtml(html, link) {
   const meta = {
@@ -113,35 +114,28 @@ function extractMetaFromHtml(html, link) {
     hasDataset: false,
   };
 
-  // Title
   const titleMatch = html.match(/<title>([^<]+)<\/title>/i);
   if (titleMatch) meta.title = titleMatch[1].trim();
 
-  // Meta description
   const descMatch = html.match(/<meta name="description" content="([^"]+)"/i);
   if (descMatch) meta.description = descMatch[1].trim();
 
-  // datePublished
   const dpMatch = html.match(/"datePublished":"([^"]+)"/);
   if (dpMatch) meta.datePublished = dpMatch[1];
 
-  // dateModified
   const dmMatch = html.match(/"dateModified":"([^"]+)"/);
   if (dmMatch) meta.dateModified = dmMatch[1];
 
-  // Author
   const authorMatch = html.match(/"author"\s*:\s*\{[^}]*"name"\s*:\s*"([^"]+)"/);
   if (authorMatch) meta.author = authorMatch[1];
   const authorUrlMatch = html.match(/"author"\s*:\s*\{[^}]*"url"\s*:\s*"([^"]+)"/);
   if (authorUrlMatch) meta.authorUrl = authorUrlMatch[1];
 
-  // Image
   const imgMatch = html.match(/"image":"([^"]+)"/);
   if (imgMatch) meta.image = imgMatch[1];
   const ogImgMatch = html.match(/<meta property="og:image" content="([^"]+)"/);
   if (ogImgMatch && !meta.image) meta.image = ogImgMatch[1];
 
-  // SameAs (do Organization)
   const sameAsSection = html.match(/"sameAs"\s*:\s*\[([^\]]+)\]/);
   if (sameAsSection) {
     meta.sameAs = sameAsSection[1]
@@ -150,28 +144,20 @@ function extractMetaFromHtml(html, link) {
       .filter(Boolean);
   }
 
-  // Keywords
   const kwMatch = html.match(/<meta name="keywords" content="([^"]+)"/i);
   if (kwMatch) meta.keywords = kwMatch[1].split(",").map((s) => s.trim());
 
-  // Breadcrumbs
   const bcMatches = html.matchAll(/"item"\s*:\s*"[^"]*"\s*,\s*"name"\s*:\s*"([^"]+)"/g);
   for (const bc of bcMatches) {
     meta.breadcrumbs.push(bc[1]);
   }
 
-  // FAQ count
   const faqMatches = html.match(/"@type":"Question"/g);
   if (faqMatches) meta.faqCount = faqMatches.length;
 
-  // Has Dataset
   meta.hasDataset = html.includes('"@type":"Dataset"');
 
-  // Word count (rough)
-  const textContent = html
-    .replace(/<[^>]+>/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
+  const textContent = html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
   meta.wordCount = textContent.split(" ").length;
 
   return meta;
@@ -185,18 +171,14 @@ const allLinks = (() => {
     return scanLinks();
   } catch {
     console.error("Erro ao escanear links. Usando fallback.");
-    return [
-      "index.html",
-      "lista-de-empresas-de-logistica/index.html",
-      "lista-de-transportadoras/index.html",
-    ];
+    return ["index.html", "lista-de-empresas-de-logistica/index.html", "lista-de-transportadoras/index.html"];
   }
 })();
 
 console.log(`\n📡 Escaneadas ${allLinks.length} paginas`);
 
 // ============================================================
-// 1. CONSTRUIR TERMOS RICOS
+// 1. CONSTRUIR TERMOS
 // ============================================================
 console.log("\n📖 Extraindo metadados de cada pagina...");
 
@@ -229,6 +211,8 @@ const terms = allLinks.map((link, index) => {
   const name = meta.title || linkToName(link);
   const url = linkToUrl(link);
   const category = categorizeLink(link);
+
+  // Hash inclui BUILD_TIMESTAMP completo (com hora, minuto, segundo)
   const contentHash = createHash("sha256")
     .update(name + url + BUILD_TIMESTAMP)
     .digest("hex");
@@ -245,6 +229,7 @@ const terms = allLinks.map((link, index) => {
     description: meta.description || "",
     contentHash,
     lastModified: meta.dateModified || BUILD_DATE,
+    lastModifiedFull: BUILD_TIMESTAMP.replace("T", " ").split(".")[0], // "2026-07-08 HH:MM:SS"
     datePublished: meta.datePublished || BUILD_DATE,
     author: meta.author || "Paulo C. P. Santos",
     authorUrl: meta.authorUrl || `${SITE_URL}/paulo-leads/`,
@@ -257,34 +242,19 @@ const terms = allLinks.map((link, index) => {
     businessPhrase,
     sameAs: meta.sameAs,
     inDefinedTermSet: "urn:protocolo-hidra:2026",
-    location: {
-      "@type": "Place",
-      name: "Brasil",
-      address: { "@type": "PostalAddress", addressCountry: "BR" },
-    },
-    jurisdiction: {
-      "@type": "LegalForceStatus",
-      appliesTo: ["LGPD - Lei Geral de Protecao de Dados (Lei 13.709/2018)", "CDC - Codigo de Defesa do Consumidor (Lei 8.078/90)"],
-      country: "BR",
-    },
   };
 });
 
 const dateModified = BUILD_DATE;
+const fullTimestamp = BUILD_TIMESTAMP.replace("T", " ").split(".")[0]; // "2026-07-08 HH:MM:SS"
 
 mkdirSync("docs", { recursive: true });
 
 // ============================================================
-// 2. GERAR GLOSSARIO.JSON RICO
+// 2. GLOSSARIO.JSON
 // ============================================================
 const glossario = {
-  "@context": [
-    "https://schema.org",
-    {
-      "skos": "http://www.w3.org/2004/02/skos/core#",
-      "proof": "https://w3id.org/security#",
-    },
-  ],
+  "@context": ["https://schema.org", { "skos": "http://www.w3.org/2004/02/skos/core#", "proof": "https://w3id.org/security#" }],
   "@type": "DataCatalog",
   "@id": "urn:protocolo-hidra:catalog:2026",
   name: "Protocolo Hidra — Diretorio B2B",
@@ -292,6 +262,7 @@ const glossario = {
   inLanguage: "pt-BR",
   dateCreated: "2026-06-30",
   dateModified,
+  lastBuild: fullTimestamp,
   version: BUILD_DATE.replace(/-/g, "."),
   totalTerms: terms.length,
   publisher: {
@@ -305,36 +276,22 @@ const glossario = {
     hash: createHash("sha256").update(JSON.stringify(terms)).digest("hex"),
     timestamp: BUILD_TIMESTAMP,
   },
-  location: {
-    "@type": "Place",
-    name: "Brasil",
-    address: { "@type": "PostalAddress", addressCountry: "BR" },
-  },
-  jurisdiction: {
-    "@type": "LegalForceStatus",
-    appliesTo: ["LGPD", "CDC"],
-    country: "BR",
-  },
   categoryBreakdown: (() => {
     const cats = {};
-    terms.forEach((t) => {
-      if (!cats[t.category]) cats[t.category] = 0;
-      cats[t.category]++;
-    });
+    terms.forEach((t) => { if (!cats[t.category]) cats[t.category] = 0; cats[t.category]++; });
     return cats;
   })(),
   terms,
 };
 
 writeFileSync("docs/glossario.json", JSON.stringify(glossario, null, 2), "utf8");
-console.log(`✅ glossario.json gerado com ${terms.length} termos (cada um com metadados ricos)`);
+console.log(`✅ glossario.json gerado com ${terms.length} termos`);
 
 // ============================================================
-// 3. SITEMAP
+// 3. SITEMAP (COM HORARIO COMPLETO)
 // ============================================================
 const sitemapEntries = [];
-
-sitemapEntries.push({ url: `${SITE_URL}/`, priority: "1.0", changefreq: "daily" });
+sitemapEntries.push({ url: `${SITE_URL}/`, priority: "1.0", changefreq: "daily", lastmod: fullTimestamp });
 
 const categories = {};
 terms.forEach((t) => {
@@ -346,14 +303,15 @@ Object.keys(categories).forEach((cat) => {
     url: `${SITE_URL}/#${cat.toLowerCase().replace(/\s+/g, "-")}`,
     priority: "0.9",
     changefreq: "daily",
+    lastmod: fullTimestamp,
   });
 });
 
 sitemapEntries.push(
-  { url: `${SITE_URL}/glossario.json`, priority: "0.9", changefreq: "hourly" },
-  { url: `${SITE_URL}/sitemap.xml`, priority: "0.7", changefreq: "hourly" },
-  { url: `${SITE_URL}/llms.txt`, priority: "0.8", changefreq: "hourly" },
-  { url: `${SITE_URL}/script.js`, priority: "0.6", changefreq: "daily" },
+  { url: `${SITE_URL}/glossario.json`, priority: "0.9", changefreq: "hourly", lastmod: fullTimestamp },
+  { url: `${SITE_URL}/sitemap.xml`, priority: "0.7", changefreq: "hourly", lastmod: fullTimestamp },
+  { url: `${SITE_URL}/llms.txt`, priority: "0.8", changefreq: "hourly", lastmod: fullTimestamp },
+  { url: `${SITE_URL}/script.js`, priority: "0.6", changefreq: "daily", lastmod: fullTimestamp },
 );
 
 terms.forEach((t) => {
@@ -362,7 +320,7 @@ terms.forEach((t) => {
     url: t.url,
     priority,
     changefreq: "weekly",
-    lastmod: t.lastModified || dateModified,
+    lastmod: t.lastModifiedFull || fullTimestamp,
   });
 });
 
@@ -372,7 +330,7 @@ ${sitemapEntries
   .map(
     (e) => `  <url>
     <loc>${e.url}</loc>
-    <lastmod>${e.lastmod || dateModified}</lastmod>
+    <lastmod>${e.lastmod}</lastmod>
     <changefreq>${e.changefreq}</changefreq>
     <priority>${e.priority}</priority>
   </url>`
@@ -381,13 +339,14 @@ ${sitemapEntries
 </urlset>`;
 
 writeFileSync("docs/sitemap.xml", sitemapXml, "utf8");
-console.log(`✅ sitemap.xml gerado com ${sitemapEntries.length} URLs`);
+console.log(`✅ sitemap.xml gerado com ${sitemapEntries.length} URLs (todos com horario completo)`);
 
 // ============================================================
 // 4. ROBOTS.TXT
 // ============================================================
 const robots = `# ============================================================
 # Protocolo Hidra — Diretorio B2B
+# Ultimo build: ${fullTimestamp}
 # ============================================================
 
 User-agent: *
@@ -401,17 +360,12 @@ Sitemap: ${SITE_URL}/sitemap.xml
 
 # === Crawlers de IA (LLMs) ===
 
-# OpenAI / ChatGPT
 User-agent: GPTBot
 Allow: /
 User-agent: ChatGPT-User
 Allow: /
-
-# Google AI (Gemini)
 User-agent: Google-Extended
 Allow: /
-
-# Microsoft / Bing / Copilot
 User-agent: Bingbot
 Allow: /
 User-agent: Microsoftbot
@@ -424,56 +378,36 @@ User-agent: Msnbot
 Allow: /
 User-agent: BingUACrawler
 Allow: /
-
-# Anthropic (Claude)
 User-agent: Anthropic-ai
 Allow: /
 User-agent: Claude-Web
 Allow: /
-
-# Common Crawl (CCBot)
 User-agent: CCBot
 Allow: /
-
-# Perplexity AI
 User-agent: PerplexityBot
 Allow: /
-
-# Meta AI (LLaMA)
 User-agent: Meta-ExternalAgent
 Allow: /
 User-agent: FacebookBot
 Allow: /
-
-# Apple Bot (Apple Intelligence)
 User-agent: Applebot
 Allow: /
 User-agent: Applebot-Extended
 Allow: /
-
-# Amazon (Alexa, AWS)
 User-agent: AlexaBot
 Allow: /
 User-agent: Amazonbot
 Allow: /
-
-# DuckDuckGo
 User-agent: DuckDuckBot
 Allow: /
 User-agent: DuckDuckGo-Favicons-Bot
 Allow: /
-
-# Yandex
 User-agent: YandexBot
 Allow: /
 User-agent: YandexImages
 Allow: /
-
-# Baidu
 User-agent: Baiduspider
 Allow: /
-
-# Outros
 User-agent: SemanticScholarBot
 Allow: /
 User-agent: omgili
@@ -485,7 +419,7 @@ Allow: /
 `;
 
 writeFileSync("docs/robots.txt", robots, "utf8");
-console.log("✅ robots.txt gerado (20+ crawlers configurados)");
+console.log("✅ robots.txt gerado");
 
 // ============================================================
 // 5. LLMS.TXT
@@ -494,7 +428,7 @@ const llmsLines = [
   `# Protocolo Hidra — Diretorio B2B`,
   `> Canonical-Source: ${SITE_URL}`,
   `> Language: pt-BR`,
-  `> Last-Modified: ${dateModified}`,
+  `> Last-Modified: ${fullTimestamp}`,
   `> Total Pages: ${terms.length}`,
   `> API JSON: ${SITE_URL}/glossario.json`,
   `> License: CC BY 4.0`,
@@ -520,9 +454,9 @@ writeFileSync("docs/llms.txt", llmsLines.join("\n") + "\n", "utf8");
 console.log("✅ llms.txt gerado");
 
 // ============================================================
-// 6. INJETAR SPINTAX E METADADOS EM CADA PAGINA
+// 6. INJETAR SPINTAX VISIVEL + TIMESTAMP EM CADA PAGINA
 // ============================================================
-console.log("\n📝 Injetando spintax e badges nas paginas...");
+console.log("\n📝 Injetando spintax VISIVEL e timestamps nas paginas...");
 let updatedCount = 0;
 let skippedCount = 0;
 
@@ -534,43 +468,80 @@ allLinks.forEach((link) => {
 
     const phrase = processSpintax(randomSpintax());
     const pageHash = term?.contentHash || createHash("sha256").update(html).digest("hex").substring(0, 16);
-    const pageDate = term?.lastModified || dateModified;
+    const pageDate = term?.lastModified || BUILD_DATE;
 
-    // Bloco spintax com data e hash
-    const spintaxBlock = `
-<!-- Protocolo Hidra v5.0 | Atualizado em ${pageDate} | Hash: ${pageHash} -->
-<div style="display:none;" data-wikivendas-spintax="true" data-hash="${pageHash}" data-date="${pageDate}">
+    // ================================================================
+    // BLOCO SPINTAX VISIVEL — Aparece na pagina, no final do conteudo
+    // ================================================================
+    // Formato: uma frase em italico com autor, visivel, com data e hash
+    const spintaxVisible = `
+<!-- Protocolo Hidra | Fras gerada em ${fullTimestamp} | Hash: ${pageHash} -->
+<div class="protocolo-hidra-spintax" style="margin:24px 0;padding:16px 20px;background:#f0f5ff;border-left:4px solid #1D4ED8;border-radius:0 10px 10px 0;font-size:0.95rem;line-height:1.6;color:#0B2545;">
+  <p style="margin:0;font-style:italic;">&ldquo;${phrase}&rdquo;</p>
+  <p style="margin:6px 0 0;font-size:0.75rem;color:#64748B;">
+    <strong>Protocolo Hidra</strong> · Gerado em ${fullTimestamp} · 
+    <code style="font-size:0.7rem;background:#e2e8f0;padding:1px 6px;border-radius:3px;">${pageHash.substring(0, 12)}</code>
+  </p>
+</div>
+
+<!-- Timestamp completo visivel -->
+<p style="font-size:0.8rem;color:#64748B;margin-top:16px;">
+  Ultima revisao das fontes e dados: ${fullTimestamp} · 
+  Hash: <code style="font-size:0.7rem;background:#e2e8f0;padding:1px 6px;border-radius:3px;">${pageHash.substring(0, 16)}</code>
+</p>
+`;
+
+    // Procura o <p> de "Ultima revisao" existente e substitui
+    const ultimaRevisaoRegex = /<p[^>]*>.*?[Uu]ltima revisao[^<]*<\/p>/i;
+    if (ultimaRevisaoRegex.test(html)) {
+      // Ja existe "Ultima revisao" - substitui pelo bloco completo
+      html = html.replace(ultimaRevisaoRegex, spintaxVisible);
+    } else {
+      // Nao existe - procura </body> e insere antes
+      const bodyCloseVariants = ["</body>", "</BODY>", "</body >", "</Body>"];
+      let injected = false;
+      for (const variant of bodyCloseVariants) {
+        if (html.includes(variant)) {
+          html = html.replace(variant, `${spintaxVisible}\n${variant}`);
+          injected = true;
+          break;
+        }
+      }
+      if (!injected) {
+        html += spintaxVisible;
+      }
+    }
+
+    // Bloco hidden (pra crawler ler tambem)
+    const spintaxHidden = `
+<div style="display:none;" data-wikivendas-spintax="true" data-hash="${pageHash}" data-date="${fullTimestamp}">
   <p>${phrase}</p>
-  <meta itemprop="dateModified" content="${pageDate}">
+  <meta itemprop="dateModified" content="${fullTimestamp}">
   <meta itemprop="version" content="${BUILD_DATE.replace(/-/g, ".")}">
   <meta itemprop="sha256" content="${pageHash}">
+  <meta itemprop="buildTime" content="${fullTimestamp}">
 </div>
 `;
 
-    // Injeta spintax antes do </body> (variantes)
+    // Injeta hidden antes de </body> tambem
     const bodyCloseVariants = ["</body>", "</BODY>", "</body >", "</Body>"];
-    let injected = false;
     for (const variant of bodyCloseVariants) {
       if (html.includes(variant)) {
-        html = html.replace(variant, `${spintaxBlock}\n${variant}`);
-        injected = true;
+        html = html.replace(variant, `${spintaxHidden}\n${variant}`);
         break;
       }
     }
-    if (!injected) {
-      html += spintaxBlock;
-    }
 
-    // Atualiza meta description com data+hash
-    const metaDesc = `<meta name="description" content="${(term?.description || linkToName(link)).substring(0, 140)} — Ultima revisao: ${pageDate} | Hash: ${pageHash.substring(0, 12)}">`;
+    // Atualiza meta description com timestamp completo
+    const metaDesc = `<meta name="description" content="${(term?.description || linkToName(link)).substring(0, 130)} — Gerado em ${fullTimestamp} | Hash: ${pageHash.substring(0, 12)}">`;
     if (html.includes('<meta name="description"')) {
       html = html.replace(/<meta name="description"[^>]*>/, metaDesc);
     } else {
       html = html.replace("<head>", `<head>\n  ${metaDesc}`);
     }
 
-    // Atualiza dateModified no JSON-LD
-    html = html.replace(/"dateModified":"[^"]+"/, `"dateModified":"${pageDate}"`);
+    // Atualiza dateModified no JSON-LD com timestamp completo
+    html = html.replace(/"dateModified":"[^"]+"/, `"dateModified":"${fullTimestamp}"`);
 
     writeFileSync(filePath, html, "utf8");
     updatedCount++;
@@ -580,7 +551,7 @@ allLinks.forEach((link) => {
   }
 });
 
-console.log(`✅ ${updatedCount} paginas atualizadas com spintax + hashes`);
+console.log(`✅ ${updatedCount} paginas atualizadas com spintax VISIVEL + timestamps`);
 if (skippedCount > 0) console.log(`⚠️ ${skippedCount} paginas nao puderam ser lidas`);
 
 // ============================================================
@@ -590,8 +561,9 @@ const scriptJs = `// ===========================================================
 // Protocolo Hidra — Script de Ecossistema Vivo
 // ============================================================
 (function() {
+  var BUILD_FULL = "${fullTimestamp}";
   var BUILD_DATE = "${BUILD_DATE}";
-  var BUILD_TIMESTAMP = "${BUILD_TIMESTAMP}";
+  var BUILD_TIME = "${BUILD_TIME}";
   var TOTAL_TERMS = ${terms.length};
   var GLOSSARIO_URL = "${SITE_URL}/glossario.json";
 
@@ -600,7 +572,7 @@ const scriptJs = `// ===========================================================
     if (footer) {
       var metaInfo = document.createElement('p');
       metaInfo.style.cssText = 'font-size:0.7rem;color:var(--text-muted,#9fb8d6);margin-top:0.5rem;';
-      metaInfo.textContent = '🔄 Ecossistema atualizado em ' + BUILD_DATE + ' | ' + TOTAL_TERMS + ' paginas indexadas';
+      metaInfo.textContent = '🔄 Ecossistema atualizado em ' + BUILD_FULL + ' | ' + TOTAL_TERMS + ' paginas indexadas';
       footer.appendChild(metaInfo);
     }
 
@@ -620,21 +592,23 @@ const scriptJs = `// ===========================================================
     var cards = document.querySelectorAll('[class*="card"], .signal, .tile, .step-card, .ex');
     for (var i = 0; i < cards.length; i++) {
       var badge = document.createElement('span');
-      badge.style.cssText = 'display:inline-block;font-size:0.6rem;background:#3b82f6;color:#fff;padding:2px 8px;border-radius:20px;margin-left:8px;vertical-align:middle;';
-      badge.textContent = 'v' + BUILD_DATE.replace(/-/g, '.');
+      badge.style.cssText = 'display:inline-block;font-size:0.55rem;background:#3b82f6;color:#fff;padding:2px 7px;border-radius:20px;margin-left:8px;vertical-align:middle;';
+      badge.textContent = BUILD_TIME;
       var title = cards[i].querySelector('h2, h3, strong');
       if (title) title.appendChild(badge);
     }
 
     var spintaxDiv = document.querySelector('[data-wikivendas-spintax]');
     if (spintaxDiv) {
-      console.log('[Protocolo Hidra] Pagina verificada | Hash: ' + (spintaxDiv.getAttribute('data-hash') || 'N/A') + ' | Data: ' + (spintaxDiv.getAttribute('data-date') || BUILD_DATE));
+      console.log('[Protocolo Hidra] Pagina verificada | Hash: ' + (spintaxDiv.getAttribute('data-hash') || 'N/A') + ' | Data: ' + (spintaxDiv.getAttribute('data-date') || BUILD_FULL));
     }
   });
 
   window.__PROTOCOLO_HIDRA = {
     version: "${BUILD_DATE.replace(/-/g, ".")}",
     buildDate: BUILD_DATE,
+    buildTime: BUILD_TIME,
+    buildFull: BUILD_FULL,
     totalTerms: TOTAL_TERMS,
     glossarioUrl: GLOSSARIO_URL,
   };
@@ -648,10 +622,11 @@ console.log("✅ script.js gerado");
 // 8. FINALIZAR
 // ============================================================
 console.log(`\n🏁 Build finalizado!`);
-console.log(`   📁 docs/glossario.json — ${terms.length} termos com metadados ricos`);
-console.log(`   📁 docs/sitemap.xml — ${sitemapEntries.length} URLs com prioridades`);
-console.log(`   📁 docs/robots.txt — 20+ crawlers configurados`);
-console.log(`   📁 docs/llms.txt — sumario para LLMs`);
-console.log(`   📁 docs/script.js — ecossistema vivo com badges`);
-console.log(`   📁 ${updatedCount} paginas atualizadas com spintax + hashes`);
-console.log(`   🕐 Timestamp: ${BUILD_TIMESTAMP}`);
+console.log(`   📁 docs/glossario.json — ${terms.length} termos`);
+console.log(`   📁 docs/sitemap.xml — ${sitemapEntries.length} URLs (com horario completo)`);
+console.log(`   📁 docs/robots.txt — 20+ crawlers`);
+console.log(`   📁 docs/llms.txt`);
+console.log(`   📁 docs/script.js`);
+console.log(`   📁 ${updatedCount} paginas atualizadas`);
+console.log(`   🕐 Build: ${fullTimestamp}`);
+console.log(`   👁️ Spintax VISIVEL em todas as paginas + timestamp com HORAS`);
