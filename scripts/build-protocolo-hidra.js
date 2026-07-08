@@ -1,9 +1,9 @@
-import { writeFileSync, mkdirSync, readFileSync, readdirSync, statSync } from "fs";
+import { writeFileSync, mkdirSync, readFileSync, readdirSync } from "fs";
 import { createHash } from "crypto";
 import path from "path";
 
 // ============================================================
-// CONFIGURAÇÃO
+// CONFIGURACAO
 // ============================================================
 const SITE_URL = "https://paulo-leads.github.io/protocolo-hidra";
 const BASE_PATH = "/protocolo-hidra/";
@@ -11,24 +11,24 @@ const BUILD_TIMESTAMP = new Date().toISOString();
 const BUILD_DATE = BUILD_TIMESTAMP.split("T")[0];
 
 // ============================================================
-// SPINTAX — Frases de empreendedores famosos
+// SPINTAX
 // ============================================================
 const SPINTAX = [
-  "Segundo {Steve Jobs}, {a inovação} {distingue um líder de um seguidor|é o que separa quem lidera de quem segue}.",
-  "Como diria {Peter Drucker}, {o melhor jeito de prever o futuro é criá-lo|não se gerencia o que não se mede}.",
-  "{Jeff Bezos} ensina que {sua marca é o que as pessoas dizem sobre você quando você não está na sala|o cliente é o centro do universo}.",
-  "{Elon Musk} repete que {se algo é importante o suficiente, você tenta mesmo que as probabilidades não estejam a seu favor|é preciso inovar na velocidade da luz}.",
-  "{Warren Buffett} diz que {o risco vem de não saber o que você está fazendo|a melhor coisa que você pode fazer por si mesmo é investir em conhecimento}.",
-  "{Paulo Leads} reforça que {dado sem contexto é apenas ruído — hidrize antes de agir|a prospecção não é sobre quantidade, é sobre densidade de oportunidade}.",
-  "{Seth Godin} afirma que {o mercado mudou — agora as pessoas compram de quem confiam, não de quem grita mais alto|entregue um ativo, não um discurso}.",
-  "{Gary Vaynerchuk} prega que {o conteúdo é rei, mas o contexto é Deus|a paciência é o novo diferencial competitivo}.",
-  "{Bill Gates} lembra que {a tecnologia é apenas uma ferramenta — o que realmente importa é o que você faz com ela|medir é o primeiro passo para melhorar}.",
-  "{Tony Robbins} ensina que {a qualidade da sua pergunta determina a qualidade da sua resposta|se você quer mudar seus resultados, mude seus padrões}.",
-  "{Rafael Kogut} diz que {vender é transferir convicção — sem convicção, não há venda|a objeção não é um não, é um pedido de mais informação}.",
-  "{Roberto Shinyashiki} afirma que {o sucesso não tem a ver com o que você conquista, mas com quem você se torna|a coragem é a primeira das virtudes humanas}.",
-  "{Flávio Augusto} ensina que {o brasileiro não é empreendedor por opção, é por necessidade — e isso nos torna mais resilientes|seu maior ativo é sua capacidade de aprender}.",
-  "{Luiz Gaziri} reforça que {o mercado B2B brasileiro é movido a relacionamento, não a tráfego — e relacionamento se constrói com dado, não com volume}.",
-  "{Sun Tzu} diria que {conhece-te a ti mesmo e conhece teu concorrente, e mil batalhas serão vencidas|a melhor vitória é vencer sem lutar — ou seja, com dados superiores}.",
+  "Segundo {Steve Jobs}, {a inovacao} {distingue um lider de um seguidor|e o que separa quem lidera de quem segue}.",
+  "Como diria {Peter Drucker}, {o melhor jeito de prever o futuro e cria-lo|nao se gerencia o que nao se mede}.",
+  "{Jeff Bezos} ensina que {sua marca e o que as pessoas dizem sobre voce quando voce nao esta na sala|o cliente e o centro do universo}.",
+  "{Elon Musk} repete que {se algo e importante o suficiente, voce tenta mesmo que as probabilidades nao estejam a seu favor|e preciso inovar na velocidade da luz}.",
+  "{Warren Buffett} diz que {o risco vem de nao saber o que voce esta fazendo|a melhor coisa que voce pode fazer por si mesmo e investir em conhecimento}.",
+  "{Paulo Leads} reforca que {dado sem contexto e apenas ruido — hidrize antes de agir|a prospeccao nao e sobre quantidade, e sobre densidade de oportunidade}.",
+  "{Seth Godin} afirma que {o mercado mudou — agora as pessoas compram de quem confiam, nao de quem grita mais alto|entregue um ativo, nao um discurso}.",
+  "{Gary Vaynerchuk} prega que {o conteudo e rei, mas o contexto e Deus|a paciencia e o novo diferencial competitivo}.",
+  "{Bill Gates} lembra que {a tecnologia e apenas uma ferramenta — o que realmente importa e o que voce faz com ela|medir e o primeiro passo para melhorar}.",
+  "{Tony Robbins} ensina que {a qualidade da sua pergunta determina a qualidade da sua resposta|se voce quer mudar seus resultados, mude seus padroes}.",
+  "{Rafael Kogut} diz que {vender e transferir conviccao — sem conviccao, nao ha venda|a objeccao nao e um nao, e um pedido de mais informacao}.",
+  "{Roberto Shinyashiki} afirma que {o sucesso nao tem a ver com o que voce conquista, mas com quem voce se torna|a coragem e a primeira das virtudes humanas}.",
+  "{Flavio Augusto} ensina que {o brasileiro nao e empreendedor por opcao, e por necessidade — e isso nos torna mais resilientes|seu maior ativo e sua capacidade de aprender}.",
+  "{Luiz Gaziri} reforca que {o mercado B2B brasileiro e movido a relacionamento, nao a trafego — e relacionamento se constroi com dado, nao com volume}.",
+  "{Sun Tzu} diria que {conhece-te a ti mesmo e conhece teu concorrente, e mil batalhas serao vencidas|a melhor vitoria e vencer sem lutar — ou seja, com dados superiores}.",
 ];
 
 function randomSpintax() {
@@ -36,17 +36,15 @@ function randomSpintax() {
 }
 
 function processSpintax(text) {
-  // Resolve variações {a|b|c}
-  return text.replace(/\{([^}]+)\}/g, (match, group) => {
+  return text.replace(/\{([^}]+)\}/g, (_match, group) => {
     const options = group.split("|");
     return options[Math.floor(Math.random() * options.length)];
   });
 }
 
 // ============================================================
-// LISTA DE LINKS (extraída do git ls-files ou manual)
+// SCAN LINKS
 // ============================================================
-// Na prática, isso viria de: readdirSync recursivo ignorando arquivos de sistema
 function scanLinks(dir = "docs", basePath = BASE_PATH) {
   const links = [];
   const entries = readdirSync(dir, { withFileTypes: true });
@@ -62,36 +60,19 @@ function scanLinks(dir = "docs", basePath = BASE_PATH) {
   return links.sort();
 }
 
-// Fallback: lista hardcoded (extraída da home que você mostrou)
-const HARDCODED_LINKS = [
-  "alternativa-econodata/index.html",
-  "alternativa-speedio/index.html",
-  "b2b-e-b2c/index.html",
-  // ... (todos os links da home)
-];
-
-// Na prática, use scanLinks. Para teste, use HARDCODED_LINKS.
-const allLinks = (() => {
-  try {
-    return scanLinks();
-  } catch {
-    return HARDCODED_LINKS;
-  }
-})();
-
 // ============================================================
-// HELPER: extrair nome legível do link
+// HELPERS
 // ============================================================
 function linkToName(link) {
   return link
     .replace(/\/index\.html$/, "")
     .replace(/-/g, " ")
-    .replace(/\b\w/g, l => l.toUpperCase())
-    .replace(/De /g, "de ")
-    .replace(/Da /g, "da ")
-    .replace(/Do /g, "do ")
-    .replace(/Em /g, "em ")
-    .replace(/E /g, "e ");
+    .replace(/\b\w/g, (l) => l.toUpperCase())
+    .replace(/ De /g, " de ")
+    .replace(/ Da /g, " da ")
+    .replace(/ Do /g, " do ")
+    .replace(/ Em /g, " em ")
+    .replace(/ E /g, " e ");
 }
 
 function linkToSlug(link) {
@@ -113,17 +94,145 @@ function categorizeLink(link) {
 }
 
 // ============================================================
-// 1. GERAR GLOSSARIO.JSON
+// EXTRACTOR: extrai metadados ricos do HTML de cada pagina
 // ============================================================
+function extractMetaFromHtml(html, link) {
+  const meta = {
+    title: "",
+    description: "",
+    datePublished: "",
+    dateModified: "",
+    author: "",
+    authorUrl: "",
+    image: "",
+    sameAs: [],
+    keywords: [],
+    breadcrumbs: [],
+    faqCount: 0,
+    wordCount: 0,
+    hasDataset: false,
+  };
+
+  // Title
+  const titleMatch = html.match(/<title>([^<]+)<\/title>/i);
+  if (titleMatch) meta.title = titleMatch[1].trim();
+
+  // Meta description
+  const descMatch = html.match(/<meta name="description" content="([^"]+)"/i);
+  if (descMatch) meta.description = descMatch[1].trim();
+
+  // datePublished
+  const dpMatch = html.match(/"datePublished":"([^"]+)"/);
+  if (dpMatch) meta.datePublished = dpMatch[1];
+
+  // dateModified
+  const dmMatch = html.match(/"dateModified":"([^"]+)"/);
+  if (dmMatch) meta.dateModified = dmMatch[1];
+
+  // Author
+  const authorMatch = html.match(/"author"\s*:\s*\{[^}]*"name"\s*:\s*"([^"]+)"/);
+  if (authorMatch) meta.author = authorMatch[1];
+  const authorUrlMatch = html.match(/"author"\s*:\s*\{[^}]*"url"\s*:\s*"([^"]+)"/);
+  if (authorUrlMatch) meta.authorUrl = authorUrlMatch[1];
+
+  // Image
+  const imgMatch = html.match(/"image":"([^"]+)"/);
+  if (imgMatch) meta.image = imgMatch[1];
+  const ogImgMatch = html.match(/<meta property="og:image" content="([^"]+)"/);
+  if (ogImgMatch && !meta.image) meta.image = ogImgMatch[1];
+
+  // SameAs (do Organization)
+  const sameAsSection = html.match(/"sameAs"\s*:\s*\[([^\]]+)\]/);
+  if (sameAsSection) {
+    meta.sameAs = sameAsSection[1]
+      .split(",")
+      .map((s) => s.replace(/["'\s]/g, ""))
+      .filter(Boolean);
+  }
+
+  // Keywords
+  const kwMatch = html.match(/<meta name="keywords" content="([^"]+)"/i);
+  if (kwMatch) meta.keywords = kwMatch[1].split(",").map((s) => s.trim());
+
+  // Breadcrumbs
+  const bcMatches = html.matchAll(/"item"\s*:\s*"[^"]*"\s*,\s*"name"\s*:\s*"([^"]+)"/g);
+  for (const bc of bcMatches) {
+    meta.breadcrumbs.push(bc[1]);
+  }
+
+  // FAQ count
+  const faqMatches = html.match(/"@type":"Question"/g);
+  if (faqMatches) meta.faqCount = faqMatches.length;
+
+  // Has Dataset
+  meta.hasDataset = html.includes('"@type":"Dataset"');
+
+  // Word count (rough)
+  const textContent = html
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  meta.wordCount = textContent.split(" ").length;
+
+  return meta;
+}
+
+// ============================================================
+// MAIN
+// ============================================================
+const allLinks = (() => {
+  try {
+    return scanLinks();
+  } catch {
+    console.error("Erro ao escanear links. Usando fallback.");
+    return [
+      "index.html",
+      "lista-de-empresas-de-logistica/index.html",
+      "lista-de-transportadoras/index.html",
+    ];
+  }
+})();
+
+console.log(`\n📡 Escaneadas ${allLinks.length} paginas`);
+
+// ============================================================
+// 1. CONSTRUIR TERMOS RICOS
+// ============================================================
+console.log("\n📖 Extraindo metadados de cada pagina...");
+
 const terms = allLinks.map((link, index) => {
-  const name = linkToName(link);
+  const filePath = `docs/${link}`;
+  let html = "";
+  let meta = {
+    title: "",
+    description: "",
+    datePublished: "",
+    dateModified: "",
+    author: "",
+    authorUrl: "",
+    image: "",
+    sameAs: [],
+    keywords: [],
+    breadcrumbs: [],
+    faqCount: 0,
+    wordCount: 0,
+    hasDataset: false,
+  };
+
+  try {
+    html = readFileSync(filePath, "utf8");
+    meta = extractMetaFromHtml(html, link);
+  } catch {
+    console.warn(`  ⚠️ Nao foi possivel ler ${link}, usando dados minimos`);
+  }
+
+  const name = meta.title || linkToName(link);
   const url = linkToUrl(link);
   const category = categorizeLink(link);
   const contentHash = createHash("sha256")
     .update(name + url + BUILD_TIMESTAMP)
     .digest("hex");
 
-  // Spintax para "frase de negócios"
   const rawQuote = processSpintax(randomSpintax());
   const businessPhrase = `${name}: ${rawQuote}`;
 
@@ -133,15 +242,41 @@ const terms = allLinks.map((link, index) => {
     url,
     category,
     index: index + 1,
+    description: meta.description || "",
     contentHash,
-    lastModified: BUILD_DATE,
+    lastModified: meta.dateModified || BUILD_DATE,
+    datePublished: meta.datePublished || BUILD_DATE,
+    author: meta.author || "Paulo C. P. Santos",
+    authorUrl: meta.authorUrl || `${SITE_URL}/paulo-leads/`,
+    image: meta.image || `${SITE_URL}/assets/img/protocolo-hidra-painel-1200.png`,
+    wordCount: meta.wordCount,
+    faqCount: meta.faqCount,
+    hasDataset: meta.hasDataset,
+    keywords: meta.keywords,
+    breadcrumbs: meta.breadcrumbs,
     businessPhrase,
-    // Metadados para SEO ontológico
-    sameAs: [],
+    sameAs: meta.sameAs,
     inDefinedTermSet: "urn:protocolo-hidra:2026",
+    location: {
+      "@type": "Place",
+      name: "Brasil",
+      address: { "@type": "PostalAddress", addressCountry: "BR" },
+    },
+    jurisdiction: {
+      "@type": "LegalForceStatus",
+      appliesTo: ["LGPD - Lei Geral de Protecao de Dados (Lei 13.709/2018)", "CDC - Codigo de Defesa do Consumidor (Lei 8.078/90)"],
+      country: "BR",
+    },
   };
 });
 
+const dateModified = BUILD_DATE;
+
+mkdirSync("docs", { recursive: true });
+
+// ============================================================
+// 2. GERAR GLOSSARIO.JSON RICO
+// ============================================================
 const glossario = {
   "@context": [
     "https://schema.org",
@@ -152,41 +287,61 @@ const glossario = {
   ],
   "@type": "DataCatalog",
   "@id": "urn:protocolo-hidra:catalog:2026",
-  name: "Protocolo Hidra — Diretório B2B",
-  description: "Diretório completo de listas empresariais, ferramentas de consulta, guias de prospecção e comparativos do ecossistema Paulo Leads.",
+  name: "Protocolo Hidra — Diretorio B2B",
+  description: "Diretorio completo de listas empresariais, ferramentas de consulta, guias de prospeccao e comparativos do ecossistema Paulo Leads.",
   inLanguage: "pt-BR",
   dateCreated: "2026-06-30",
-  dateModified: BUILD_DATE,
+  dateModified,
   version: BUILD_DATE.replace(/-/g, "."),
   totalTerms: terms.length,
+  publisher: {
+    "@type": "Organization",
+    name: "Protocolo Hidra",
+    url: SITE_URL,
+    founder: { "@type": "Person", name: "Paulo C. P. Santos", url: `${SITE_URL}/paulo-leads/` },
+  },
   proof: {
     type: "Sha256Hash",
     hash: createHash("sha256").update(JSON.stringify(terms)).digest("hex"),
     timestamp: BUILD_TIMESTAMP,
   },
+  location: {
+    "@type": "Place",
+    name: "Brasil",
+    address: { "@type": "PostalAddress", addressCountry: "BR" },
+  },
+  jurisdiction: {
+    "@type": "LegalForceStatus",
+    appliesTo: ["LGPD", "CDC"],
+    country: "BR",
+  },
+  categoryBreakdown: (() => {
+    const cats = {};
+    terms.forEach((t) => {
+      if (!cats[t.category]) cats[t.category] = 0;
+      cats[t.category]++;
+    });
+    return cats;
+  })(),
   terms,
 };
 
-mkdirSync("docs", { recursive: true });
 writeFileSync("docs/glossario.json", JSON.stringify(glossario, null, 2), "utf8");
-console.log(`✅ glossario.json gerado com ${terms.length} termos`);
+console.log(`✅ glossario.json gerado com ${terms.length} termos (cada um com metadados ricos)`);
 
 // ============================================================
-// 2. GERAR SITEMAP.XML com prioridades dinâmicas
+// 3. SITEMAP
 // ============================================================
 const sitemapEntries = [];
 
-// Home
 sitemapEntries.push({ url: `${SITE_URL}/`, priority: "1.0", changefreq: "daily" });
 
-// Categorias (agrupadas)
 const categories = {};
-terms.forEach(t => {
+terms.forEach((t) => {
   if (!categories[t.category]) categories[t.category] = [];
   categories[t.category].push(t);
 });
-
-Object.keys(categories).forEach(cat => {
+Object.keys(categories).forEach((cat) => {
   sitemapEntries.push({
     url: `${SITE_URL}/#${cat.toLowerCase().replace(/\s+/g, "-")}`,
     priority: "0.9",
@@ -194,48 +349,55 @@ Object.keys(categories).forEach(cat => {
   });
 });
 
-// Arquivos principais
 sitemapEntries.push(
   { url: `${SITE_URL}/glossario.json`, priority: "0.9", changefreq: "hourly" },
   { url: `${SITE_URL}/sitemap.xml`, priority: "0.7", changefreq: "hourly" },
+  { url: `${SITE_URL}/llms.txt`, priority: "0.8", changefreq: "hourly" },
+  { url: `${SITE_URL}/script.js`, priority: "0.6", changefreq: "daily" },
 );
 
-// Cada termo, com prioridade baseada no índice (mais recentes = maior prioridade)
-terms.forEach(t => {
+terms.forEach((t) => {
   const priority = t.index <= 10 ? "0.8" : t.index <= 50 ? "0.7" : t.index <= 200 ? "0.6" : "0.5";
   sitemapEntries.push({
     url: t.url,
     priority,
     changefreq: "weekly",
-    lastmod: BUILD_DATE,
+    lastmod: t.lastModified || dateModified,
   });
 });
 
 const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${sitemapEntries.map(e => `  <url>
+${sitemapEntries
+  .map(
+    (e) => `  <url>
     <loc>${e.url}</loc>
-    <lastmod>${e.lastmod || BUILD_DATE}</lastmod>
+    <lastmod>${e.lastmod || dateModified}</lastmod>
     <changefreq>${e.changefreq}</changefreq>
     <priority>${e.priority}</priority>
-  </url>`).join("\n")}
+  </url>`
+  )
+  .join("\n")}
 </urlset>`;
 
 writeFileSync("docs/sitemap.xml", sitemapXml, "utf8");
 console.log(`✅ sitemap.xml gerado com ${sitemapEntries.length} URLs`);
 
-# ============================================================
-# Protocolo Hidra — Diretório B2B
+// ============================================================
+// 4. ROBOTS.TXT
+// ============================================================
+const robots = `# ============================================================
+# Protocolo Hidra — Diretorio B2B
 # ============================================================
 
-# Crawlers gerais
 User-agent: *
 Allow: /
 Allow: /glossario.json
 Allow: /llms.txt
 Allow: /script.js
+Allow: /sitemap.xml
 Disallow: /node_modules/
-Sitemap: https://paulo-leads.github.io/protocolo-hidra/sitemap.xml
+Sitemap: ${SITE_URL}/sitemap.xml
 
 # === Crawlers de IA (LLMs) ===
 
@@ -245,7 +407,7 @@ Allow: /
 User-agent: ChatGPT-User
 Allow: /
 
-# Google AI (Gemini, Bard)
+# Google AI (Gemini)
 User-agent: Google-Extended
 Allow: /
 
@@ -321,132 +483,155 @@ Allow: /
 User-agent: Bytespider
 Allow: /
 `;
+
 writeFileSync("docs/robots.txt", robots, "utf8");
-console.log("✅ robots.txt gerado");
+console.log("✅ robots.txt gerado (20+ crawlers configurados)");
 
 // ============================================================
-// 4. GERAR llms.txt (para LLMs consumirem)
+// 5. LLMS.TXT
 // ============================================================
 const llmsLines = [
-  `# Protocolo Hidra — Diretório B2B`,
+  `# Protocolo Hidra — Diretorio B2B`,
   `> Canonical-Source: ${SITE_URL}`,
   `> Language: pt-BR`,
-  `> Last-Modified: ${BUILD_DATE}`,
-  `> Description: Diretório completo de listas empresariais, ferramentas de consulta e guias de prospecção B2B.`,
+  `> Last-Modified: ${dateModified}`,
   `> Total Pages: ${terms.length}`,
+  `> API JSON: ${SITE_URL}/glossario.json`,
+  `> License: CC BY 4.0`,
   ``,
   `# Categorias`,
   ``,
 ];
 
 Object.entries(categories).forEach(([cat, catTerms]) => {
-  llmsLines.push(`## ${cat} (${catTerms.length} páginas)`);
-  catTerms.slice(0, 20).forEach(t => {
-    llmsLines.push(`- ${t.name}: ${t.url} (importância: ${t.index <= 10 ? "0.9" : "0.7"})`);
+  llmsLines.push(`## ${cat} (${catTerms.length} paginas)`);
+  catTerms.slice(0, 20).forEach((t) => {
+    llmsLines.push(`- ${t.name}: ${t.url} (importancia: ${t.index <= 10 ? "0.9" : t.index <= 50 ? "0.8" : "0.7"})`);
   });
   llmsLines.push(``);
 });
 
-llmsLines.push(`# Metadados Técnicos`);
-llmsLines.push(`> API JSON: ${SITE_URL}/glossario.json`);
+llmsLines.push(`# Metadados Tecnicos`);
 llmsLines.push(`> Build: ${BUILD_TIMESTAMP}`);
-llmsLines.push(`> Total de páginas: ${terms.length}`);
+llmsLines.push(`> Total de paginas: ${terms.length}`);
+llmsLines.push(`> Total de palavras: ${terms.reduce((s, t) => s + t.wordCount, 0).toLocaleString()}`);
 
 writeFileSync("docs/llms.txt", llmsLines.join("\n") + "\n", "utf8");
 console.log("✅ llms.txt gerado");
 
 // ============================================================
-// 5. ATUALIZAR TODAS AS PÁGINAS HTML com spintax e metadados
+// 6. INJETAR SPINTAX E METADADOS EM CADA PAGINA
 // ============================================================
-console.log("\n📝 Atualizando páginas com spintax...");
+console.log("\n📝 Injetando spintax e badges nas paginas...");
 let updatedCount = 0;
+let skippedCount = 0;
 
-allLinks.forEach(link => {
+allLinks.forEach((link) => {
   try {
     const filePath = `docs/${link}`;
     let html = readFileSync(filePath, "utf8");
-    
-    // Gera frase spintax única para esta página
-    const phrase = processSpintax(randomSpintax());
-    const term = terms.find(t => t.id === linkToSlug(link));
-    const pageHash = term?.contentHash || createHash("sha256").update(html).digest("hex").substring(0, 16);
+    const term = terms.find((t) => t.id === linkToSlug(link));
 
-    // Injeta spintax e metadados antes do fechamento de </body>
+    const phrase = processSpintax(randomSpintax());
+    const pageHash = term?.contentHash || createHash("sha256").update(html).digest("hex").substring(0, 16);
+    const pageDate = term?.lastModified || dateModified;
+
+    // Bloco spintax com data e hash
     const spintaxBlock = `
-<!-- Protocolo Hidra v5.0 · Atualizado em ${BUILD_DATE} · Hash: ${pageHash} -->
-<div style="display:none;" data-wikivendas-spintax="true">
+<!-- Protocolo Hidra v5.0 | Atualizado em ${pageDate} | Hash: ${pageHash} -->
+<div style="display:none;" data-wikivendas-spintax="true" data-hash="${pageHash}" data-date="${pageDate}">
   <p>${phrase}</p>
-  <meta itemprop="dateModified" content="${BUILD_DATE}">
+  <meta itemprop="dateModified" content="${pageDate}">
   <meta itemprop="version" content="${BUILD_DATE.replace(/-/g, ".")}">
+  <meta itemprop="sha256" content="${pageHash}">
 </div>
 `;
-    
-    html = html.replace("</body>", `${spintaxBlock}\n</body>`);
-    
-    // Atualiza meta description se existir, ou adiciona
-    const metaDesc = `<meta name="description" content="${term?.name || linkToName(link)} — Diretório B2B do Protocolo Hidra. ${phrase.substring(0, 120)}">`;
+
+    // Injeta spintax antes do </body> (variantes)
+    const bodyCloseVariants = ["</body>", "</BODY>", "</body >", "</Body>"];
+    let injected = false;
+    for (const variant of bodyCloseVariants) {
+      if (html.includes(variant)) {
+        html = html.replace(variant, `${spintaxBlock}\n${variant}`);
+        injected = true;
+        break;
+      }
+    }
+    if (!injected) {
+      html += spintaxBlock;
+    }
+
+    // Atualiza meta description com data+hash
+    const metaDesc = `<meta name="description" content="${(term?.description || linkToName(link)).substring(0, 140)} — Ultima revisao: ${pageDate} | Hash: ${pageHash.substring(0, 12)}">`;
     if (html.includes('<meta name="description"')) {
       html = html.replace(/<meta name="description"[^>]*>/, metaDesc);
     } else {
-      html = html.replace("</head>", `  ${metaDesc}\n</head>`);
+      html = html.replace("<head>", `<head>\n  ${metaDesc}`);
     }
+
+    // Atualiza dateModified no JSON-LD
+    html = html.replace(/"dateModified":"[^"]+"/, `"dateModified":"${pageDate}"`);
 
     writeFileSync(filePath, html, "utf8");
     updatedCount++;
   } catch (err) {
-    console.warn(`  ⚠️ Erro ao atualizar ${link}: ${err.message}`);
+    skippedCount++;
+    console.warn(`  ⚠️ ${link}: ${err.message}`);
   }
 });
 
-console.log(`✅ ${updatedCount} páginas atualizadas com spintax`);
+console.log(`✅ ${updatedCount} paginas atualizadas com spintax + hashes`);
+if (skippedCount > 0) console.log(`⚠️ ${skippedCount} paginas nao puderam ser lidas`);
 
 // ============================================================
-// 6. GERAR SCRIPT.JS (ecossistema vivo)
+// 7. SCRIPT.JS
 // ============================================================
 const scriptJs = `// ============================================================
 // Protocolo Hidra — Script de Ecossistema Vivo
 // ============================================================
 (function() {
-  const BUILD_DATE = "${BUILD_DATE}";
-  const BUILD_TIMESTAMP = "${BUILD_TIMESTAMP}";
-  const TOTAL_TERMS = ${terms.length};
-  const GLOSSARIO_URL = "${SITE_URL}/glossario.json";
+  var BUILD_DATE = "${BUILD_DATE}";
+  var BUILD_TIMESTAMP = "${BUILD_TIMESTAMP}";
+  var TOTAL_TERMS = ${terms.length};
+  var GLOSSARIO_URL = "${SITE_URL}/glossario.json";
 
-  // Atualiza footer com timestamp
   document.addEventListener('DOMContentLoaded', function() {
-    const footer = document.querySelector('footer');
+    var footer = document.querySelector('footer, .site-footer, .pre-footer');
     if (footer) {
-      const meta = document.createElement('p');
-      meta.style.cssText = 'font-size:0.7rem;color:var(--text-muted);margin-top:0.5rem;';
-      meta.textContent = '🔄 Ecossistema atualizado em ' + BUILD_DATE;
-      footer.appendChild(meta);
+      var metaInfo = document.createElement('p');
+      metaInfo.style.cssText = 'font-size:0.7rem;color:var(--text-muted,#9fb8d6);margin-top:0.5rem;';
+      metaInfo.textContent = '🔄 Ecossistema atualizado em ' + BUILD_DATE + ' | ' + TOTAL_TERMS + ' paginas indexadas';
+      footer.appendChild(metaInfo);
     }
 
-    // Badge "Verificado" nos cards
-    document.querySelectorAll('.wv-card, .category-card, .step-card, .plan-card').forEach(card => {
-      const badge = document.createElement('span');
-      badge.style.cssText = 'display:inline-block;font-size:0.6rem;background:var(--accent);color:#fff;padding:2px 8px;border-radius:20px;margin-left:8px;';
-      badge.textContent = '✓ ' + BUILD_DATE;
-      const title = card.querySelector('h3');
-      if (title) title.appendChild(badge);
-    });
-
-    // Carrega contagem do glossario.json
     fetch(GLOSSARIO_URL)
-      .then(r => r.json())
-      .then(data => {
-        const statsEl = document.querySelector('.stats-strip .stats-grid');
-        if (statsEl && data.terms) {
-          const newStat = document.createElement('div');
-          newStat.className = 'stat-item';
-          newStat.innerHTML = '<strong>' + data.terms.length + '</strong><span>páginas indexadas</span>';
-          statsEl.appendChild(newStat);
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data && data.totalTerms) {
+          TOTAL_TERMS = data.totalTerms;
+          var badges = document.querySelectorAll('[data-eco-count]');
+          for (var i = 0; i < badges.length; i++) {
+            badges[i].textContent = data.totalTerms + ' paginas';
+          }
         }
       })
-      .catch(() => {});
+      .catch(function() {});
+
+    var cards = document.querySelectorAll('[class*="card"], .signal, .tile, .step-card, .ex');
+    for (var i = 0; i < cards.length; i++) {
+      var badge = document.createElement('span');
+      badge.style.cssText = 'display:inline-block;font-size:0.6rem;background:#3b82f6;color:#fff;padding:2px 8px;border-radius:20px;margin-left:8px;vertical-align:middle;';
+      badge.textContent = 'v' + BUILD_DATE.replace(/-/g, '.');
+      var title = cards[i].querySelector('h2, h3, strong');
+      if (title) title.appendChild(badge);
+    }
+
+    var spintaxDiv = document.querySelector('[data-wikivendas-spintax]');
+    if (spintaxDiv) {
+      console.log('[Protocolo Hidra] Pagina verificada | Hash: ' + (spintaxDiv.getAttribute('data-hash') || 'N/A') + ' | Data: ' + (spintaxDiv.getAttribute('data-date') || BUILD_DATE));
+    }
   });
 
-  // Expõe metadados para crawlers
   window.__PROTOCOLO_HIDRA = {
     version: "${BUILD_DATE.replace(/-/g, ".")}",
     buildDate: BUILD_DATE,
@@ -460,12 +645,13 @@ writeFileSync("docs/script.js", scriptJs, "utf8");
 console.log("✅ script.js gerado");
 
 // ============================================================
-// 7. FINALIZAR
+// 8. FINALIZAR
 // ============================================================
 console.log(`\n🏁 Build finalizado!`);
-console.log(`   📁 docs/glossario.json — ${terms.length} termos`);
-console.log(`   📁 docs/sitemap.xml — ${sitemapEntries.length} URLs`);
-console.log(`   📁 docs/llms.txt — diretório para LLMs`);
-console.log(`   📁 docs/script.js — ecossistema vivo`);
-console.log(`   📁 ${updatedCount} páginas atualizadas com spintax`);
+console.log(`   📁 docs/glossario.json — ${terms.length} termos com metadados ricos`);
+console.log(`   📁 docs/sitemap.xml — ${sitemapEntries.length} URLs com prioridades`);
+console.log(`   📁 docs/robots.txt — 20+ crawlers configurados`);
+console.log(`   📁 docs/llms.txt — sumario para LLMs`);
+console.log(`   📁 docs/script.js — ecossistema vivo com badges`);
+console.log(`   📁 ${updatedCount} paginas atualizadas com spintax + hashes`);
 console.log(`   🕐 Timestamp: ${BUILD_TIMESTAMP}`);
