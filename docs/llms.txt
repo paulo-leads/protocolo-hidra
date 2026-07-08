@@ -1,13 +1,14 @@
-# Protocolo Hidra — Diretorio B2B
+# Protocolo Hidra — Diretório B2B
 > Canonical-Source: https://paulo-leads.github.io/protocolo-hidra
 > Language: pt-BR
-> Last-Modified: 2026-07-08 21:38:23
+> Last-Modified: 2026-07-08 21:57:37
 > Total Pages: 672
 > API JSON: https://paulo-leads.github.io/protocolo-hidra/glossario.json
+> License: CC BY 4.0
 
 # Categorias
 
-## Guias e Playbooks (49 paginas)
+## Guias e Playbooks (49 páginas)
 - Alternativa ao Econodata: 6 opções sem mensalidade | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/alternativa-econodata/
 - Atlas Speedio: preços, avaliações e alternativa (2026): https://paulo-leads.github.io/protocolo-hidra/alternativa-speedio/
 - B2B e B2C: Diferenças, Exemplos e Como Escolher em 2026 | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/b2b-e-b2c/
@@ -29,7 +30,7 @@
 - Geração de leads B2B: o guia de estratégia inbound + outbound (2026) | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/geracao-de-leads-b2b/
 - Geração de leads: o que é, canais e como gerar (2026) | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/geracao-de-leads/
 
-## Ferramentas de Consulta (13 paginas)
+## Ferramentas de Consulta (13 páginas)
 - Cartão CNPJ: consulte grátis, emita e entenda cada campo: https://paulo-leads.github.io/protocolo-hidra/cartao-cnpj/
 - Certidão CNPJ: como emitir a negativa de débitos (CND): https://paulo-leads.github.io/protocolo-hidra/certidao-negativa-cnpj/
 - Consulta CNAE por CNPJ: atividade principal e secundárias: https://paulo-leads.github.io/protocolo-hidra/consulta-cnae-por-cnpj/
@@ -44,19 +45,20 @@
 - Redesim Consulta CNPJ: como usar o portal (Guia 2026): https://paulo-leads.github.io/protocolo-hidra/redesim-consulta-cnpj/
 - Situação Cadastral CNPJ: consulta grátis e o que significa: https://paulo-leads.github.io/protocolo-hidra/situacao-cadastral-cnpj/
 
-## Outros (4 paginas)
+## Outros (5 páginas)
 - Casa dos Dados CNPJ: como funciona, limites e preços (2026): https://paulo-leads.github.io/protocolo-hidra/casa-dos-dados/
 - Comprar Leads Qualificados B2B: O Que É e Como Comprar com Segurança (2026) | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/comprar-leads-qualificados/
 - Comprar Leads B2B: Quando Vale a Pena e Como Comprar com Segurança (2026) | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/comprar-leads/
 - Empresas por CNAE: Como Filtrar e Baixar a Lista por Atividade (2026) | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/empresas-por-cnae/
+- Wikivendas · Protocolo Hidra · Diretório B2B: https://paulo-leads.github.io/protocolo-hidra/index.html/
 
-## Comparativos (4 paginas)
+## Comparativos (4 páginas)
 - Comparativos: ferramentas de prospecção e dados B2B (2026) | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/comparativos/
 - ProtocoloHidra vs Casa dos Dados: Comparativo Honesto [2026] | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/leadjet-vs-casa-dos-dados/
 - ProtocoloHidra vs CNPJ.biz: Comparativo Honesto [2026] | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/leadjet-vs-cnpj-biz/
 - ProtocoloHidra vs Econodata: Comparativo Honesto B2B [2026] | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/leadjet-vs-econodata/
 
-## Listas por Cidade (311 paginas)
+## Listas por Cidade (311 páginas)
 - Empresas em Abaetetuba (PA): lista com CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/empresas-em-abaetetuba-pa/
 - Empresas em Açailândia (MA): lista com CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/empresas-em-acailandia-ma/
 - Empresas em Águas Lindas de Goiás (GO): lista com CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/empresas-em-aguas-lindas-de-goias-go/
@@ -78,7 +80,7 @@
 - Empresas em Araraquara (SP): lista com CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/empresas-em-araraquara-sp/
 - Empresas em Araras (SP): lista com CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/empresas-em-araras-sp/
 
-## Listas por Estado (16 paginas)
+## Listas por Estado (16 páginas)
 - Empresas na Bahia: lista com CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/empresas-na-bahia/
 - Empresas na Paraíba: lista com CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/empresas-na-paraiba/
 - Empresas no Acre: lista com CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/empresas-no-acre/
@@ -96,10 +98,7 @@
 - Empresas no Rio Grande do Sul: lista com CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/empresas-no-rio-grande-do-sul/
 - Empresas no Tocantins: lista com CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/empresas-no-tocantins/
 
-## Home (1 paginas)
-- Wikivendas · Protocolo Hidra · Diretório B2B: https://paulo-leads.github.io/protocolo-hidra/index.html/
-
-## Listas por Nicho / Segmento (274 paginas)
+## Listas por Nicho / Segmento (274 páginas)
 - Lista de academias de ginástica: empresas com CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/lista-de-academias/
 - Lista de advocacias: empresas com CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/lista-de-advocacias/
 - Lista de agências de publicidade: empresas com CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/lista-de-agencias-de-publicidade/
@@ -121,3 +120,7 @@
 - Lista de clínicas odontológicas em Guarulhos (SP): CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/lista-de-clinicas-odontologicas-em-guarulhos-sp/
 - Lista de clínicas odontológicas em Jaboatão dos Guararapes (PE): CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/lista-de-clinicas-odontologicas-em-jaboatao-dos-guararapes-pe/
 
+# Metadados Técnicos
+> Build: 2026-07-08T21:57:37.619Z
+> Total de páginas: 672
+> Total de palavras: 2,522,309
