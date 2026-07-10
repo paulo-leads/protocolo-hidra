@@ -1,14 +1,14 @@
 # Protocolo Hidra — Diretorio B2B
 > Canonical-Source: https://paulo-leads.github.io/protocolo-hidra
 > Language: pt-BR
-> Last-Modified: 2026-07-10 19:20:04
-> Total Pages: 672
+> Last-Modified: 2026-07-10 19:23:54
+> Total Pages: 679
 > API JSON: https://paulo-leads.github.io/protocolo-hidra/glossario.json
 > License: CC BY 4.0
 
 # Categorias
 
-## Guias e Playbooks (49 paginas)
+## Guias e Playbooks (51 paginas)
 - Alternativa ao Econodata: 6 opções sem mensalidade | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/alternativa-econodata/ (importancia: 0.9)
 - Atlas Speedio: preços, avaliações e alternativa (2026): https://paulo-leads.github.io/protocolo-hidra/alternativa-speedio/ (importancia: 0.9)
 - B2B e B2C: Diferenças, Exemplos e Como Escolher em 2026 | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/b2b-e-b2c/ (importancia: 0.9)
@@ -45,12 +45,16 @@
 - Redesim Consulta CNPJ: como usar o portal (Guia 2026): https://paulo-leads.github.io/protocolo-hidra/redesim-consulta-cnpj/ (importancia: 0.7)
 - Situação Cadastral CNPJ: consulta grátis e o que significa: https://paulo-leads.github.io/protocolo-hidra/situacao-cadastral-cnpj/ (importancia: 0.7)
 
-## Outros (5 paginas)
+## Outros (9 paginas)
 - Casa dos Dados CNPJ: como funciona, limites e preços (2026): https://paulo-leads.github.io/protocolo-hidra/casa-dos-dados/ (importancia: 0.9)
 - Comprar Leads Qualificados B2B: O Que É e Como Comprar com Segurança (2026) | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/comprar-leads-qualificados/ (importancia: 0.8)
 - Comprar Leads B2B: Quando Vale a Pena e Como Comprar com Segurança (2026) | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/comprar-leads/ (importancia: 0.8)
 - Empresas por CNAE: Como Filtrar e Baixar a Lista por Atividade (2026) | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/empresas-por-cnae/ (importancia: 0.7)
 - Wikivendas · Protocolo Hidra · Diretório B2B: https://paulo-leads.github.io/protocolo-hidra/index.html/ (importancia: 0.7)
+- Lista empresas com CNPJ e Telefone: como parar de queimar o dinheiro do seu CRM Blog Protocolo Hidra: https://paulo-leads.github.io/protocolo-hidra/lista-empresas-com-cnpj-e-telefone-como-parar-de-queimar-o-dinheiro-do-seu-crm/ (importancia: 0.7)
+- Cold call, tudo o que precisa saber Blog Protocolo Hidra: https://paulo-leads.github.io/protocolo-hidra/o-que-e-cold-call/ (importancia: 0.7)
+- TECNOLOGIA Blog Protocolo Hidra: https://paulo-leads.github.io/protocolo-hidra/tecnologia/ (importancia: 0.7)
+- VENDAS Blog Protocolo Hidra: https://paulo-leads.github.io/protocolo-hidra/vendas/ (importancia: 0.7)
 
 ## Comparativos (4 paginas)
 - Comparativos: ferramentas de prospecção e dados B2B (2026) | ProtocoloHidra: https://paulo-leads.github.io/protocolo-hidra/comparativos/ (importancia: 0.8)
@@ -98,7 +102,7 @@
 - Empresas no Rio Grande do Sul: lista com CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/empresas-no-rio-grande-do-sul/ (importancia: 0.7)
 - Empresas no Tocantins: lista com CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/empresas-no-tocantins/ (importancia: 0.7)
 
-## Listas por Nicho / Segmento (274 paginas)
+## Listas por Nicho / Segmento (275 paginas)
 - Lista de academias de ginástica: empresas com CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/lista-de-academias/ (importancia: 0.7)
 - Lista de advocacias: empresas com CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/lista-de-advocacias/ (importancia: 0.7)
 - Lista de agências de publicidade: empresas com CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/lista-de-agencias-de-publicidade/ (importancia: 0.7)
@@ -121,6 +125,6 @@
 - Lista de clínicas odontológicas em Jaboatão dos Guararapes (PE): CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/lista-de-clinicas-odontologicas-em-jaboatao-dos-guararapes-pe/ (importancia: 0.7)
 
 # Metadados Tecnicos
-> Build: 2026-07-10T19:20:04.872404
-> Total de paginas: 672
-> Total de palavras: 1,342,580
+> Build: 2026-07-10T19:23:54.984358
+> Total de paginas: 679
+> Total de palavras: 1,349,289
