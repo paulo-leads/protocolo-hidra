@@ -1,14 +1,14 @@
 # Protocolo Hidra — Diretorio B2B
 > Canonical-Source: https://paulo-leads.github.io/protocolo-hidra
 > Language: pt-BR
-> Last-Modified: 2026-07-11 00:43:51
-> Total Pages: 1479
+> Last-Modified: 2026-07-11 01:00:30
+> Total Pages: 1478
 > API JSON: https://paulo-leads.github.io/protocolo-hidra/glossario.json
 > License: CC BY 4.0
 
 # Categorias
 
-## Outros (682 paginas)
+## Outros (681 paginas)
 - Conheça 10 cargos de vendas, principais funções e salários Blog Protocolo Hidra: https://paulo-leads.github.io/protocolo-hidra/10-cargos-de-vendas-funcoes-e-salarios/ (importancia: 0.9)
 - 10 dicas para vendedores que vão começar a vender no B2B Blog Protocolo Hidra: https://paulo-leads.github.io/protocolo-hidra/10-dicas-para-vendedores-em-vendas-b2b/ (importancia: 0.9)
 - 10 modelos de pesquisa de satisfação Blog Protocolo Hidra: https://paulo-leads.github.io/protocolo-hidra/10-modelos-de-pesquisa-de-satisfacao/ (importancia: 0.9)
@@ -136,6 +136,6 @@
 - Lista de clínicas odontológicas em Jaboatão dos Guararapes (PE): CNPJ e telefone: https://paulo-leads.github.io/protocolo-hidra/lista-de-clinicas-odontologicas-em-jaboatao-dos-guararapes-pe/ (importancia: 0.7)
 
 # Metadados Tecnicos
-> Build: 2026-07-11T00:43:51.360908
-> Total de paginas: 1479
-> Total de palavras: 2,430,216
+> Build: 2026-07-11T01:00:30.973895
+> Total de paginas: 1478
+> Total de palavras: 2,430,309
