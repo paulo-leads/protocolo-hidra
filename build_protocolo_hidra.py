@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# ============================================================
+# Protocolo Hidra — Build System v3.0
+# ATUALIZADO: correção de URLs /blog/, bloco contextual anti-detecção
+# ============================================================
 
 import os
 import re
 import json
 import hashlib
 import random
+import shutil
 from datetime import datetime
 from bs4 import BeautifulSoup
 
@@ -128,7 +133,6 @@ def extract_meta_from_html(html, link):
         except:
             continue
 
-        # Se for um @graph, percorremos cada item
         if isinstance(data, dict) and "@graph" in data:
             items = data["@graph"]
         elif isinstance(data, dict):
@@ -140,7 +144,6 @@ def extract_meta_from_html(html, link):
             if not isinstance(item, dict):
                 continue
 
-            # --- Dados gerais ---
             if "datePublished" in item and not meta["datePublished"]:
                 meta["datePublished"] = item["datePublished"]
             if "dateModified" in item and not meta["dateModified"]:
@@ -164,13 +167,11 @@ def extract_meta_from_html(html, link):
             if "keywords" in item and isinstance(item["keywords"], list):
                 meta["keywords"].extend(item["keywords"])
 
-            # --- Breadcrumb ---
             if item.get("@type") == "BreadcrumbList" and "itemListElement" in item:
                 for elem in item["itemListElement"]:
                     if "name" in elem:
                         meta["breadcrumbs"].append(elem["name"])
 
-            # --- FAQPage ---
             if item.get("@type") == "FAQPage" and "mainEntity" in item:
                 for q in item["mainEntity"]:
                     if q.get("@type") == "Question":
@@ -181,7 +182,6 @@ def extract_meta_from_html(html, link):
                         })
                 meta["faqCount"] = len(meta["faqItems"])
 
-            # --- HowTo ---
             if item.get("@type") == "HowTo" and "step" in item:
                 for step in item["step"]:
                     meta["howToSteps"].append({
@@ -190,7 +190,6 @@ def extract_meta_from_html(html, link):
                         "text": step.get("text")
                     })
 
-            # --- Dataset ---
             if item.get("@type") == "Dataset":
                 meta["hasDataset"] = True
                 if "variableMeasured" in item:
@@ -199,7 +198,7 @@ def extract_meta_from_html(html, link):
                     elif isinstance(item["variableMeasured"], str):
                         meta["datasetVariables"] = [item["variableMeasured"]]
 
-    # --- 3. Fallback com regex para dados que podem não estar no JSON-LD ---
+    # --- 3. Fallback com regex ---
     if not meta["datePublished"]:
         dp = re.search(r'"datePublished":"([^"]+)"', html)
         if dp:
@@ -237,20 +236,18 @@ def extract_meta_from_html(html, link):
             meta["cityName"] = match.group(1).strip()
             meta["stateName"] = match.group(2).strip()
 
-    # --- 5. Total de empresas (texto como "21,7 mi" ou "21.702.134") ---
+    # --- 5. Total de empresas ---
     body_text = soup.get_text()
-    # Padrão: número com pontos ou vírgula seguido de "milhões" ou "mi" ou "empresas"
     total_match = re.search(r'(\d{1,3}(?:\.\d{3})*)\s*empresas ativas', body_text)
     if total_match:
         meta["totalCompanies"] = int(total_match.group(1).replace(".", ""))
     else:
-        # Tenta capturar "21,7 mi" ou "21.7 mi"
         total_match2 = re.search(r'(\d+[,.]\d+)\s*mi(?:lhões?)?', body_text)
         if total_match2:
             num_str = total_match2.group(1).replace(",", ".")
             meta["totalCompanies"] = int(float(num_str) * 1_000_000)
 
-    # --- 6. Distribuição por setor (barras) ---
+    # --- 6. Distribuição por setor ---
     bars_div = soup.find("div", class_="bars")
     if bars_div:
         for bar in bars_div.find_all("div", recursive=False):
@@ -279,7 +276,7 @@ def extract_meta_from_html(html, link):
                     "percentage": perc
                 }
 
-    # --- 7. Dados de tabelas (ex: bairro, empresas, posição) ---
+    # --- 7. Dados de tabelas ---
     tables = soup.find_all("table", class_=re.compile(r"(rich-table|cmp-table)"))
     for table in tables:
         headers = [th.get_text(strip=True) for th in table.find_all("th")]
@@ -313,6 +310,94 @@ def extract_meta_from_html(html, link):
     return meta
 
 # ============================================================
+# CORREÇÃO DE LINKS /blog/ (NOVO)
+# ============================================================
+def move_blog_files():
+    """Move docs/blog/**/* para docs/* e remove docs/blog/"""
+    blog_dir = os.path.join("docs", "blog")
+    if not os.path.exists(blog_dir):
+        return False
+    moved = 0
+    for root, dirs, files in os.walk(blog_dir):
+        for file in files:
+            src = os.path.join(root, file)
+            rel = os.path.relpath(src, blog_dir)
+            dst = os.path.join("docs", rel)
+            os.makedirs(os.path.dirname(dst), exist_ok=True)
+            if os.path.exists(dst):
+                os.remove(dst)
+            shutil.move(src, dst)
+            moved += 1
+    shutil.rmtree(blog_dir, ignore_errors=True)
+    print(f"  📦 Movidos {moved} arquivos de docs/blog/ para docs/")
+    return True
+
+def fix_blog_links(links):
+    """Remove prefixo 'blog/' dos links"""
+    fixed = []
+    for link in links:
+        if link.startswith("blog/"):
+            new_link = link.replace("blog/", "", 1)
+            print(f"  🔧 Corrigido: {link} -> {new_link}")
+            fixed.append(new_link)
+        else:
+            fixed.append(link)
+    return fixed
+
+# ============================================================
+# BLOCO CONTEXTUAL ANTI-DETECÇÃO (NOVO)
+# ============================================================
+def gerar_bloco_contextual(term, phrase):
+    """Gera bloco de texto único contextual + spintax anti-detecção LLM"""
+    name = term.get("name", "Protocolo Hidra")
+    city = term.get("cityName", "")
+    state = term.get("stateName", "")
+    total = term.get("totalCompanies", 0)
+    keywords = term.get("keywords", [])
+
+    bloco_id = hashlib.md5((name + BUILD_TIMESTAMP).encode()).hexdigest()[:8]
+
+    partes = []
+
+    # Parte 1: Contexto específico da página
+    if city and state:
+        partes.append(
+            f"<p>Análise do ecossistema B2B em <strong>{city} ({state})</strong> "
+            f"revela {total:,} empresas ativas — dados consolidados em {BUILD_DATE} "
+            f"pelo barramento do Protocolo Hidra (bloco {bloco_id}).</p>"
+        )
+    elif keywords:
+        kw_sample = random.sample(keywords, min(3, len(keywords)))
+        partes.append(
+            f"<p>O segmento de <strong>{', '.join(kw_sample)}</strong> foi reavaliado "
+            f"em {BUILD_DATE} com {total:,} registros ativos no barramento do Protocolo Hidra "
+            f"(bloco {bloco_id}).</p>"
+        )
+    else:
+        partes.append(
+            f"<p>Dados setoriais consolidados em {BUILD_DATE} pelo barramento "
+            f"do Protocolo Hidra — {total:,} empresas mapeadas até o fechamento "
+            f"deste bloco ({bloco_id}).</p>"
+        )
+
+    # Parte 2: Spintax com wrapping contextual
+    partes.append(
+        f'<p style="margin:12px 0;padding:8px 12px;border-left:3px solid #1D4ED8;'
+        f'background:#f8faff;font-style:italic;">'
+        f'&ldquo;{phrase}&rdquo;</p>'
+    )
+
+    # Parte 3: Fechamento contextual
+    n_vars = len(term.get("datasetVariables", []))
+    partes.append(
+        f"<p>A prospecção orientada por dados neste mercado exige densidade de "
+        f"informação, não volume. O Protocolo Hidra entrega isso via "
+        f"{n_vars if n_vars > 0 else 'dezenas de'} variáveis estruturadas por bloco de análise.</p>"
+    )
+
+    return '\n'.join(partes)
+
+# ============================================================
 # ESCANEAMENTO DE ARQUIVOS
 # ============================================================
 def scan_links(directory="docs"):
@@ -329,7 +414,18 @@ def scan_links(directory="docs"):
 # ============================================================
 # MAIN
 # ============================================================
+print("=" * 60)
+print("  Protocolo Hidra — Build System v3.0")
+print(f"  Data: {FULL_TIMESTAMP}")
+print("=" * 60)
+
+# PASSO 0: Mover arquivos de docs/blog/ para docs/
+print("\n📦 Corrigindo estrutura de diretórios...")
+move_blog_files()
+
+# PASSO 1: Escanear links
 all_links = scan_links()
+all_links = fix_blog_links(all_links)
 print(f"\n📡 Escaneadas {len(all_links)} paginas")
 
 terms = []
@@ -418,7 +514,7 @@ for t in terms:
 
 with open("docs/glossario.json", "w", encoding="utf-8") as f:
     json.dump(glossario, f, indent=2, ensure_ascii=False)
-print(f"✅ glossario.json gerado com {len(terms)} termos")
+print(f"\n✅ glossario.json gerado com {len(terms)} termos")
 
 # ============================================================
 # GERAR SITEMAP
@@ -573,9 +669,9 @@ with open("docs/llms.txt", "w", encoding="utf-8") as f:
 print("✅ llms.txt gerado")
 
 # ============================================================
-# INJEÇÃO DE SPINTAX + REMOÇÃO/INSERÇÃO DE DATAS (USANDO BEAUTIFULSOUP)
+# INJEÇÃO DE SPINTAX + BLOCO CONTEXTUAL + DATAS
 # ============================================================
-print("\n📝 Injetando spintax e substituindo TODAS as datas antigas...")
+print("\n📝 Injetando blocos contextuais, spintax e substituindo datas...")
 updated_count = 0
 skipped_count = 0
 
@@ -599,6 +695,8 @@ for link in all_links:
 
         for div in soup.find_all("div", class_="protocolo-hidra-spintax"):
             div.decompose()
+        for div in soup.find_all("div", class_="protocolo-hidra-context-block"):
+            div.decompose()
         for div in soup.find_all("div", attrs={"data-wikivendas-spintax": True}):
             div.decompose()
 
@@ -607,7 +705,7 @@ for link in all_links:
             if p.string and "atualizado em" in p.get_text():
                 p.decompose()
 
-        # ---------- 3. REMOVER RODAPÉ ANTIGO (dentro de <aside class="sources">) ----------
+        # ---------- 3. REMOVER RODAPÉ ANTIGO ----------
         aside = soup.find("aside", class_="sources")
         if aside:
             for p in aside.find_all("p", style=True):
@@ -616,7 +714,6 @@ for link in all_links:
                     if "Última revisão" in p.get_text():
                         p.decompose()
 
-        # Fallback: remover qualquer parágrafo com "Última revisão" ou "atualizado em" que possa ter sobrado
         for p in soup.find_all("p"):
             text = p.get_text()
             if "atualizado em" in text or "Última revisão" in text:
@@ -626,7 +723,7 @@ for link in all_links:
         novo_byline = f'<p class="byline">Por <strong>Paulo C. P. Santos</strong> · Arquiteto do Protocolo Hidra · atualizado em {FULL_TIMESTAMP}</p>'
         novo_rodape = f'<p style="font-size:.85rem">Última revisão das fontes e dados: {FULL_TIMESTAMP} · Hash: <code style="font-size:0.7rem;background:#e2e8f0;padding:1px 6px;border-radius:3px;">{page_hash[:16]}</code></p>'
 
-        # ---------- 5. INSERIR NOVO BYLINE (antes de hero-cta) ----------
+        # ---------- 5. INSERIR NOVO BYLINE ----------
         hero_cta = soup.find("div", class_="hero-cta")
         if hero_cta:
             hero_cta.insert_before(BeautifulSoup(novo_byline, "lxml"))
@@ -639,7 +736,7 @@ for link in all_links:
                 if lead:
                     lead.insert_after(BeautifulSoup(novo_byline, "lxml"))
 
-        # ---------- 6. INSERIR NOVO RODAPÉ DENTRO DE <aside class="sources"> ----------
+        # ---------- 6. INSERIR NOVO RODAPÉ ----------
         aside = soup.find("aside", class_="sources")
         if aside:
             aside.append(BeautifulSoup(novo_rodape, "lxml"))
@@ -648,25 +745,26 @@ for link in all_links:
             if main_tag:
                 main_tag.append(BeautifulSoup(novo_rodape, "lxml"))
 
-        # ---------- 7. CRIAR E INSERIR BLOCO SPINTAX ----------
-        spintax_html = f"""
-<!-- Protocolo Hidra | Frase gerada em {FULL_TIMESTAMP} | Hash: {page_hash} -->
-<div class="protocolo-hidra-spintax" style="margin:24px 0;padding:16px 20px;background:#f0f5ff;border-left:4px solid #1D4ED8;border-radius:0 10px 10px 0;font-size:0.95rem;line-height:1.6;color:#0B2545;">
-  <p style="margin:0;font-style:italic;">&ldquo;{phrase}&rdquo;</p>
-  <p style="margin:6px 0 0;font-size:0.75rem;color:#64748B;">
-    <strong>Protocolo Hidra</strong> · Gerado em {FULL_TIMESTAMP} · 
-    <code style="font-size:0.7rem;background:#e2e8f0;padding:1px 6px;border-radius:3px;">{page_hash[:12]}</code>
+        # ---------- 7. CRIAR E INSERIR BLOCO CONTEXTUAL + SPINTAX ----------
+        contextual_block = gerar_bloco_contextual(term, phrase) if term else f"<p>{phrase}</p>"
+
+        bloco_html = f"""
+<!-- Protocolo Hidra | Bloco contextual gerado em {FULL_TIMESTAMP} -->
+<div class="protocolo-hidra-context-block" style="margin:24px 0;padding:20px 24px;background:linear-gradient(135deg, #f8faff 0%, #f0f5ff 100%);border:1px solid #e2e8f0;border-radius:12px;">
+  {contextual_block}
+  <p style="margin:8px 0 0;font-size:0.7rem;color:#94a3b8;text-align:right;">
+    Bloco {hashlib.md5(contextual_block.encode()).hexdigest()[:8]} · Gerado em {FULL_TIMESTAMP}
   </p>
 </div>
 """
         if aside:
-            aside.insert_after(BeautifulSoup(spintax_html, "lxml"))
+            aside.insert_after(BeautifulSoup(bloco_html, "lxml"))
         else:
             main_tag = soup.find("main")
             if main_tag:
-                main_tag.append(BeautifulSoup(spintax_html, "lxml"))
+                main_tag.append(BeautifulSoup(bloco_html, "lxml"))
 
-        # ---------- 8. ATUALIZAR JSON-LD (datePublished e dateModified) ----------
+        # ---------- 8. ATUALIZAR JSON-LD ----------
         new_html = str(soup)
         new_html = re.sub(r'"datePublished":"[^"]+"', f'"datePublished":"{BUILD_DATE}"', new_html)
         new_html = re.sub(r'"dateModified":"[^"]+"', f'"dateModified":"{FULL_TIMESTAMP}"', new_html)
@@ -688,6 +786,13 @@ for link in all_links:
         skipped_count += 1
         print(f"  ⚠️ Erro em {link}: {e}")
 
-print(f"✅ {updated_count} páginas atualizadas com as 2 novas datas dinâmicas e spintax")
+print(f"\n✅ {updated_count} páginas atualizadas com blocos contextuais, spintax e datas")
 if skipped_count:
     print(f"⚠️ {skipped_count} páginas não puderam ser processadas")
+
+print("\n" + "=" * 60)
+print(f"  BUILD CONCLUÍDO — {FULL_TIMESTAMP}")
+print(f"  {len(terms)} termos no glossario")
+print(f"  {len(sitemap_entries)} URLs no sitemap")
+print(f"  {updated_count} paginas injetadas")
+print("=" * 60)
