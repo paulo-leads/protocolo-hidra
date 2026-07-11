@@ -1,17 +1,14 @@
 # ============================================================
-# Protocolo Hidra — Build Automático
-# Agenda: Diário às 06:00 UTC (03:00 BRT)
-# Acionamento: Manual (workflow_dispatch) para testes
+# Protocolo Hidra — Build Diário v2
+# Correção: sem requirements.txt, compatível com Node 24
 # ============================================================
 
 name: Protocolo Hidra — Build Diário
 
 on:
   schedule:
-    # 06:00 UTC = 03:00 BRT — todo dia
     - cron: '0 6 * * *'
   workflow_dispatch:
-    # Permite rodar manualmente pelo botão no GitHub
 
 permissions:
   contents: write
@@ -23,41 +20,39 @@ jobs:
     timeout-minutes: 15
 
     steps:
-      # PASSO 1: Checkout do repositório
       - name: ⬇️ Checkout do repositório
         uses: actions/checkout@v4
         with:
           ref: main
           fetch-depth: 1
 
-      # PASSO 2: Setup do Python
-      - name: 🐍 Setup Python 3.11
+      - name: 🐍 Setup Python 3.12
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
-          cache: 'pip'
+          python-version: '3.12'
 
-      # PASSO 3: Instalar dependências
       - name: 📦 Instalar dependências
         run: |
           python -m pip install --upgrade pip
           pip install beautifulsoup4 lxml
 
-      # PASSO 4: Rodar o script de build
+      - name: 📝 Verificar se build.py existe
+        run: |
+          if [ ! -f build.py ]; then
+            echo "❌ build.py não encontrado na raiz do repositório!"
+            echo "📌 Certifique-se de que o script está em:"
+            echo "   https://github.com/paulo-leads/protocolo-hidra/blob/main/build.py"
+            exit 1
+          fi
+          echo "✅ build.py encontrado"
+
       - name: 🏗️ Executar build
         run: python build.py
 
-      # PASSO 5: Commit e push automático
-      - name: 📤 Commit e push das alterações
+      - name: 📊 Resumo das alterações
         run: |
-          git config --global user.name "Protocolo Hidra Bot"
-          git config --global user.email "bot@protocolo-hidra.local"
-          git add -A
-          # Só faz commit se houver mudanças
-          if git diff --cached --quiet; then
-            echo "ℹ️ Nenhuma alteração detectada — pulando commit"
-          else
-            git commit -m "Build automático: $(date '+%Y-%m-%d %H:%M UTC') — freshness + spintax + blocos contextuais"
-            git push
-            echo "✅ Build comitado e enviado com sucesso"
-          fi
+          echo "=== ARQUIVOS MODIFICADOS ==="
+          git diff --stat -- ':!node_modules/'
+          echo ""
+          echo "=== TOTAL DE MUDANÇAS ==="
+          git diff --shortstat -- ':!node_modules/'
