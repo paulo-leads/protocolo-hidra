@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # ============================================================
-# Protocolo Hidra — Build System v3.0
-# ATUALIZADO: correção de URLs /blog/, bloco contextual anti-detecção
+# Protocolo Hidra — Build System v3.1
+# ATUALIZADO: 404.html com redirect + correção robusta de /blog/
 # ============================================================
 
 import os
@@ -310,27 +310,44 @@ def extract_meta_from_html(html, link):
     return meta
 
 # ============================================================
-# CORREÇÃO DE LINKS /blog/ (NOVO)
+# CORREÇÃO DE LINKS /blog/ (CORRIGIDO)
 # ============================================================
 def move_blog_files():
-    """Move docs/blog/**/* para docs/* e remove docs/blog/"""
+    """Move docs/blog/**/* para docs/* e remove docs/blog/
+    CORRIGIDO: agora também move subpastas aninhadas"""
     blog_dir = os.path.join("docs", "blog")
     if not os.path.exists(blog_dir):
+        print("  ℹ️ Diretório docs/blog/ não existe — nada a mover")
         return False
+    
     moved = 0
+    # Lista todos os index.html dentro de docs/blog/ recursivamente
     for root, dirs, files in os.walk(blog_dir):
         for file in files:
-            src = os.path.join(root, file)
-            rel = os.path.relpath(src, blog_dir)
-            dst = os.path.join("docs", rel)
-            os.makedirs(os.path.dirname(dst), exist_ok=True)
-            if os.path.exists(dst):
-                os.remove(dst)
-            shutil.move(src, dst)
-            moved += 1
+            if file == "index.html":
+                src = os.path.join(root, file)
+                # Pega o caminho relativo dentro de docs/blog/
+                rel = os.path.relpath(src, blog_dir)
+                # Destino: docs/<rel> (sem o blog/)
+                dst = os.path.join("docs", rel)
+                os.makedirs(os.path.dirname(dst), exist_ok=True)
+                # Remove destino se já existir (sobrescreve)
+                if os.path.exists(dst):
+                    os.remove(dst)
+                shutil.move(src, dst)
+                moved += 1
+                print(f"  📦 Movido: {rel} -> docs/{rel}")
+    
+    # Remove docs/blog/ e todo seu conteúdo residual
     shutil.rmtree(blog_dir, ignore_errors=True)
-    print(f"  📦 Movidos {moved} arquivos de docs/blog/ para docs/")
-    return True
+    
+    # Verifica se sobraram pastas vazias
+    blog_dir_parent = os.path.join("docs", "blog")
+    if os.path.exists(blog_dir_parent):
+        shutil.rmtree(blog_dir_parent, ignore_errors=True)
+    
+    print(f"  📦 Total: {moved} arquivos movidos de docs/blog/ para docs/")
+    return moved > 0
 
 def fix_blog_links(links):
     """Remove prefixo 'blog/' dos links"""
@@ -338,14 +355,14 @@ def fix_blog_links(links):
     for link in links:
         if link.startswith("blog/"):
             new_link = link.replace("blog/", "", 1)
-            print(f"  🔧 Corrigido: {link} -> {new_link}")
+            print(f"  🔧 Corrigido link: {link} -> {new_link}")
             fixed.append(new_link)
         else:
             fixed.append(link)
     return fixed
 
 # ============================================================
-# BLOCO CONTEXTUAL ANTI-DETECÇÃO (NOVO)
+# BLOCO CONTEXTUAL ANTI-DETECÇÃO
 # ============================================================
 def gerar_bloco_contextual(term, phrase):
     """Gera bloco de texto único contextual + spintax anti-detecção LLM"""
@@ -398,6 +415,71 @@ def gerar_bloco_contextual(term, phrase):
     return '\n'.join(partes)
 
 # ============================================================
+# GERAR 404.HTML COM REDIRECT (NOVO)
+# ============================================================
+def gerar_404_html():
+    """Gera 404.html que redireciona URLs com /blog/ para a versão correta"""
+    html = """<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src data:; connect-src 'self'">
+  <title>Redirecionando...</title>
+  <style>
+    body {
+      background-color: #f1f1f1;
+      margin: 0;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container { margin: 50px auto 40px auto; width: 600px; text-align: center; }
+    h1 { letter-spacing: -1px; line-height: 60px; font-size: 60px; font-weight: 100; margin: 0px 0 50px 0; text-shadow: 0 1px 0 #fff; }
+    p { color: rgba(0, 0, 0, 0.5); margin: 20px 0; line-height: 1.6; }
+    a { color: #4183c4; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .redirect-msg { margin-top: 30px; padding: 16px; background: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; color: #856404; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>404</h1>
+    <p><strong>Página não encontrada</strong></p>
+    <p>O endereço que você digitou pode estar desatualizado.</p>
+    <div class="redirect-msg">
+      🔄 Se você não for redirecionado automaticamente,
+      <a href="/protocolo-hidra/">clique aqui para ir para a página inicial</a>.
+    </div>
+    <p style="margin-top: 40px; font-size: 0.85rem; color: #999;">
+      Protocolo Hidra · <a href="/protocolo-hidra/">Página Inicial</a>
+    </p>
+  </div>
+
+  <script>
+    // Redireciona URLs com /blog/ para a versão correta
+    (function() {
+      var path = window.location.pathname;
+      // Se a URL contém /blog/, tenta redirecionar
+      if (path.indexOf('/blog/') !== -1) {
+        var newPath = path.replace('/blog/', '/');
+        window.location.replace(newPath);
+      }
+      // Se a URL termina com /blog ou /blog/ sem nada depois, vai pra home
+      if (path === '/protocolo-hidra/blog' || path === '/protocolo-hidra/blog/') {
+        window.location.replace('/protocolo-hidra/');
+      }
+    })();
+  </script>
+</body>
+</html>"""
+    
+    with open("docs/404.html", "w", encoding="utf-8") as f:
+        f.write(html)
+    print("✅ docs/404.html gerado com redirect de /blog/")
+
+# ============================================================
 # ESCANEAMENTO DE ARQUIVOS
 # ============================================================
 def scan_links(directory="docs"):
@@ -415,15 +497,19 @@ def scan_links(directory="docs"):
 # MAIN
 # ============================================================
 print("=" * 60)
-print("  Protocolo Hidra — Build System v3.0")
+print("  Protocolo Hidra — Build System v3.1")
 print(f"  Data: {FULL_TIMESTAMP}")
 print("=" * 60)
 
-# PASSO 0: Mover arquivos de docs/blog/ para docs/
+# PASSO 0: GERAR 404.HTML PRIMEIRO (antes de qualquer movimentação)
+print("\n📄 Gerando 404.html com redirect de /blog/...")
+gerar_404_html()
+
+# PASSO 1: Mover arquivos de docs/blog/ para docs/
 print("\n📦 Corrigindo estrutura de diretórios...")
 move_blog_files()
 
-# PASSO 1: Escanear links
+# PASSO 2: Escanear links
 all_links = scan_links()
 all_links = fix_blog_links(all_links)
 print(f"\n📡 Escaneadas {len(all_links)} paginas")
