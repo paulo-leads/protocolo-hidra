@@ -1,41 +1,63 @@
-name: Build Protocolo Hidra
+# ============================================================
+# Protocolo Hidra — Build Automático
+# Agenda: Diário às 06:00 UTC (03:00 BRT)
+# Acionamento: Manual (workflow_dispatch) para testes
+# ============================================================
+
+name: Protocolo Hidra — Build Diário
 
 on:
-  push:
-    branches: [ main ]
+  schedule:
+    # 06:00 UTC = 03:00 BRT — todo dia
+    - cron: '0 6 * * *'
   workflow_dispatch:
+    # Permite rodar manualmente pelo botão no GitHub
 
 permissions:
-  contents: write   # necessário para o commit do build
+  contents: write
 
 jobs:
   build:
+    name: Gerar glossário, sitemap, llms.txt e injetar freshness
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
-      - name: Checkout do código
+      # PASSO 1: Checkout do repositório
+      - name: ⬇️ Checkout do repositório
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: main
+          fetch-depth: 1
 
-      - name: Configurar Python
+      # PASSO 2: Setup do Python
+      - name: 🐍 Setup Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: 'pip'
 
-      - name: Instalar dependências
-        run: pip install beautifulsoup4 lxml requests
-
-      - name: Executar script de build
-        run: python build_protocolo_hidra.py
-
-      - name: Commit e push das alterações
+      # PASSO 3: Instalar dependências
+      - name: 📦 Instalar dependências
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/
-          git diff --staged --quiet || git commit -m "Build automático: atualização de datas e spintax"
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+          python -m pip install --upgrade pip
+          pip install beautifulsoup4 lxml
 
-      - name: Enviar URLs para IndexNow (Bing)
-        run: python indexnow_submit.py   # script que usa a chave fixa
+      # PASSO 4: Rodar o script de build
+      - name: 🏗️ Executar build
+        run: python build.py
+
+      # PASSO 5: Commit e push automático
+      - name: 📤 Commit e push das alterações
+        run: |
+          git config --global user.name "Protocolo Hidra Bot"
+          git config --global user.email "bot@protocolo-hidra.local"
+          git add -A
+          # Só faz commit se houver mudanças
+          if git diff --cached --quiet; then
+            echo "ℹ️ Nenhuma alteração detectada — pulando commit"
+          else
+            git commit -m "Build automático: $(date '+%Y-%m-%d %H:%M UTC') — freshness + spintax + blocos contextuais"
+            git push
+            echo "✅ Build comitado e enviado com sucesso"
+          fi
